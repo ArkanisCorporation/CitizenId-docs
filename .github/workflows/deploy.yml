@@ -36,7 +36,7 @@ jobs:
         uses: ncipollo/release-action@v1.14.0
         with:
           allowUpdates: true
-          draft: false
+          draft: true
           makeLatest: true
           name: ${{ github.ref_name }}
           body: ${{ steps.changelog.outputs.changes }}
@@ -54,4 +54,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/.vitepress/dist
-          # cname: example.com # if wanna deploy to custom domain
+          cname: docs.citizenid.space
