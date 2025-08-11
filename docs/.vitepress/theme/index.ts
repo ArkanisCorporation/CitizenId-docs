@@ -12,7 +12,6 @@ import 'uno.css'
 export default {
   ...DefaultTheme,
   enhanceApp({ app }: { app: App }) {
-    app.component('Feature', Feature)
     app.component('Posts', Posts)
     app.component('Post', Post)
     app.component('PostDetail', PostDetail)

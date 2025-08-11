@@ -3,8 +3,9 @@ import { defineConfig } from 'vitepress'
 import { version } from '../../package.json'
 
 export default defineConfig({
-  base: '/vitepress-blog-starter/',
-  description: 'Blog included. Built on top of VitePress and UnoCSS.',
+  base: '/',
+  title: 'Citizen iD — Documentation',
+  description: 'An official user and developer documentation for the Citizen iD project.',
   markdown: {
     headers: {
       level: [0, 0],
@@ -12,31 +13,32 @@ export default defineConfig({
   },
   themeConfig: {
     footer: {
-      message: 'VitePress Blog Starter',
-      copyright: 'Copyright © 2023 SFXCode',
+      message: 'Citizen iD — User and Developer Documentation',
+      copyright: 'Copyright © 2025 Citizen iD',
     },
     search: {
       provider: 'local',
     },
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/sfxcode/vitepress-blog-starter' },
+      { icon: 'github', link: 'https://github.com/ArkanisCorporation/CitizenId-docs' },
     ],
     editLink: {
-      pattern: 'https://github.com/sfxcode/vitepress-blog-starter/edit/main/docs/:path',
+      pattern: 'https://github.com/ArkanisCorporation/CitizenId-docs/edit/main/docs/:path',
       text: 'Edit this page on GitHub',
     },
     nav: nav(),
     sidebar: {
-      '/guide/': sidebarGuide(),
-      '/config/': sidebarConfig(),
+      '/user-guide/': sidebarUserGuide(),
+      '/developer-guide/': sidebarDeveloperGuid(),
     },
     blog: {
-      title: 'My Blog',
-      description: 'Some articles for sample Blog',
+      title: 'Developer Blog',
+      description: 'Articles from the Developer\'s Blog',
     },
-
   },
-  title: 'VitePress Blog Starter',
+  sitemap: {
+    hostname: 'https://docs.citizenid.space'
+  },
   vite: {
     plugins: [
       Unocss({
@@ -48,8 +50,8 @@ export default defineConfig({
 
 function nav() {
   return [
-    { text: 'Guide', link: '/guide/', activeMatch: '/guide/' },
-    { text: 'Configs', link: '/config/', activeMatch: '/config/' },
+    { text: 'User Guide', link: '/user-guide/', activeMatch: '/user-guide/' },
+    { text: 'Developer Guide', link: '/developer-guide/', activeMatch: '/developer-guide/' },
     { text: 'Blog', link: '/blog/', activeMatch: '/blog/' },
     {
       text: 'External Docs',
@@ -69,40 +71,34 @@ function nav() {
       items: [
         {
           text: 'Changelog',
-          link: 'https://github.com/sfxcode/vitepress-blog-starter/blob/main/CHANGELOG.md',
+          link: 'https://github.com/ArkanisCorporation/CitizenId-docs/blob/main/CHANGELOG.md',
         },
       ],
     },
   ]
 }
 
-function sidebarGuide() {
+function sidebarUserGuide() {
   return [
     {
       text: 'Introduction',
       collapsible: true,
       items: [
-        { text: 'What is this?', link: '/guide/' },
+        { text: 'What is this?', link: '/user-guide/' },
       ],
-    },
-    {
-      text: 'Features',
-      collapsible: true,
-      items: [
-        { text: 'UnoCSS', link: '/guide/features/unocss' },
-      ],
-    },
+    }
   ]
 }
 
-function sidebarConfig() {
+function sidebarDeveloperGuid() {
   return [
     {
-      text: 'Config',
+      text: 'Introduction',
+      collapsible: true,
       items: [
-        { text: 'Introduction', link: '/config/' },
-        { text: 'UnoCSS', link: '/config/unocss' },
+        { text: 'What is this?', link: '/developer-guide/' },
+        { text: 'Getting started', link: '/developer-guide/getting-started' },
       ],
-    },
+    }
   ]
 }

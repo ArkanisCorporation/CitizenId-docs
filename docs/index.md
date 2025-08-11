@@ -7,13 +7,13 @@ hero:
   tagline: Blog included. Built on top of UnoCSS and Anu.
   actions:
     - theme: brand
-      text: Guide
-      link: /guide/
+      text: User Guide
+      link: /user-guide/
+    - theme: brand
+      text: Developer Guide
+      link: /developer-guide/
     - theme: alt
-      text: Configs
-      link: /config/
-    - theme: alt
-      text: Blog Demo
+      text: Developer Blog
       link: /blog/
 
 features:
