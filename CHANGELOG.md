@@ -1,3 +1,8 @@
+## [v0.1.0] - 2025-08-11
+### :recycle: Refactors
+- [`8f6eb89`](https://github.com/ArkanisCorporation/CitizenId-docs/commit/8f6eb89ee5f8f9b5a8126342835116a6a7641cf5) - initial clean up *(commit by [@dolejska-daniel](https://github.com/dolejska-daniel))*
+
+
 ## [v1.0.3] - 2025-02-08
 ### :wrench: Chores
 - [`625331f`](https://github.com/sfxcode/vitepress-blog-starter/commit/625331f5d930c35a3c4192ef8bd5ed6f43904c01) - **Dependencies**: New VitePress Version 1.6.3 *(commit by [@sfxcode](https://github.com/sfxcode))*
@@ -249,3 +254,4 @@
 [v0.10.0]: https://github.com/sfxcode/vitepress-blog-starter/compare/v0.9.2...v0.10.0
 [v1.0.2]: https://github.com/sfxcode/vitepress-blog-starter/compare/v1.0.1...v1.0.2
 [v1.0.3]: https://github.com/sfxcode/vitepress-blog-starter/compare/v1.0.2...v1.0.3
+[v0.1.0]: https://github.com/ArkanisCorporation/CitizenId-docs/compare/v0.0.1...v0.1.0
