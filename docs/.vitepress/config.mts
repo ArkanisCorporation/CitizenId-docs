@@ -92,10 +92,43 @@ function nav() {
 function sidebarUserGuide() {
   return [
     {
-      text: 'Introduction',
+      text: 'Getting Started',
+      collapsed: false,
       collapsible: true,
       items: [
-        { text: 'What is this?', link: '/user-guide/' },
+        { text: 'What is Citizen iD?', link: '/user-guide/' },
+        { text: 'Creating Your Account', link: '/user-guide/signing-up' },
+        { text: 'RSI Account Verification', link: '/user-guide/rsi-verification' },
+        { text: 'RSI Verification Withdrawal', link: '/user-guide/rsi-verification-withdrawal' },
+      ],
+    },
+    {
+      text: 'Using Citizen iD with Community Tools',
+      collapsed: false,
+      collapsible: true,
+      items: [
+        { text: 'Signing In with Citizen iD', link: '/user-guide/usage/signing-in' },
+        { text: 'Understanding Authorisations', link: '/user-guide/usage/oauth2-authorisations' },
+        { text: 'Revoking Authorization', link: '/user-guide/usage/oauth2-revocation' },
+      ],
+    },
+    {
+      text: 'Discord Features',
+      collapsed: false,
+      collapsible: true,
+      items: [
+        { text: 'Linked Roles', link: '/user-guide/discord/linked-roles' },
+        { text: 'Role Revocation', link: '/user-guide/discord/role-revocation' },
+      ],
+    },
+    {
+      text: 'Troubleshooting & FAQ',
+      collapsed: false,
+      collapsible: true,
+      items: [
+        { text: 'Common Issues', link: '/user-guide/support/common-issues' },
+        { text: 'Frequently Asked Questions', link: '/user-guide/support/faq' },
+        { text: 'Contact & Support', link: '/user-guide/support/contact' },
       ],
     },
   ]

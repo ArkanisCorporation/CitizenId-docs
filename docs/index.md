@@ -2,9 +2,12 @@
 layout: home
 
 hero:
-  name: VitePress
-  text: Starter Template
-  tagline: Blog included. Built on top of UnoCSS and Anu.
+  name: Citizen iD
+  text: User and Developer Documentation
+  tagline: A unified Star Citizen&reg; Identity Platform provided by an Arkanis Corporation subsidiary.
+#  image:
+#    src: /logo.png
+#    alt: Citizen iD
   actions:
     - theme: brand
       text: User Guide
@@ -17,10 +20,21 @@ hero:
       link: /blog/
 
 features:
-- title: "VitePress: Designed to be simplicity first"
-  details: With Markdown-centered content, it's built to help you focus on writing and deployed with minimum configuration.
-- title: "UnoCSS: The instant on-demand Atomic CSS engine"
-  details: UnoCSS is an atomic-CSS engine instead of a framework. Everything is designed with flexibility and performance in mind.
-- title: "Blog Demo included"
-  details: Posts and Authors as sample predefinded. Composables for accessing data included.
+  - icon: 📐
+    title: "Powerful and Flexible API"
+    details: |
+        An API designed for identity-first workflows (identity resolution, player profiles, organisation lookup and more).
+        Supports pagination and bulk endpoints, returns machine-readable JSON, and is extensible to integrate with third-party tools and pipelines.
+  - icon: 🔐
+    title: "Standardized and Secure Protocol"
+    details: |
+        Built on OAuth2 with fine-grained scopes and refreshable tokens to provide least-privilege access and user consent.
+        Production-grade security practices (TLS, token revocation, PKCE for public clients) protect accounts and allow safe delegation to community apps.
+  - icon: 💬
+    title: "Powerful Discord Integrations"
+    details: |
+        First-class Discord support including OAuth2 identity linking, linked-role support and guild-global naming enforcement.
+        Enables secure, verifiable mapping between in-game identities and Discord accounts for automation, moderation and community workflows.
 ---
+
+[//]: # (<Posts/>)
