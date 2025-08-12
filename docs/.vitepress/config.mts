@@ -14,7 +14,7 @@ export default defineConfig({
   themeConfig: {
     footer: {
       message: 'Citizen iD — User and Developer Documentation',
-      copyright: 'Copyright © 2025 Citizen iD',
+      copyright: 'Copyright &copy; 2955 Citizen iD',
     },
     search: {
       provider: 'local',
@@ -37,7 +37,7 @@ export default defineConfig({
     },
   },
   sitemap: {
-    hostname: 'https://docs.citizenid.space'
+    hostname: 'https://docs.citizenid.space',
   },
   vite: {
     plugins: [
@@ -50,30 +50,41 @@ export default defineConfig({
 
 function nav() {
   return [
-    { text: 'User Guide', link: '/user-guide/', activeMatch: '/user-guide/' },
-    { text: 'Developer Guide', link: '/developer-guide/', activeMatch: '/developer-guide/' },
-    { text: 'Blog', link: '/blog/', activeMatch: '/blog/' },
     {
-      text: 'External Docs',
+      text: 'User Guide',
+      link: '/user-guide/',
+      activeMatch: '/user-guide/',
+    },
+    {
+      text: 'Developer Guide',
+      link: '/developer-guide/',
+      activeMatch: '/developer-guide/',
+    },
+    {
+      text: 'Blog',
+      link: '/blog/',
+      activeMatch: '/blog/',
+    },
+    {
+      text: 'External Links',
       items: [
         {
-          text: 'Vitepress',
-          link: 'https://vitepress.vuejs.org',
+          text: 'Citizen iD',
+          link: 'https://citizenid.space',
         },
         {
-          text: 'UnoCSS',
-          link: 'https://uno.antfu.me',
+          text: 'Community Discord',
+          link: 'https://discord.gg/kzF3Vbn5Kg',
+        },
+        {
+          text: 'Arkanis Corporation',
+          link: 'https://arkanis.cc',
         },
       ],
     },
     {
       text: version,
-      items: [
-        {
-          text: 'Changelog',
-          link: 'https://github.com/ArkanisCorporation/CitizenId-docs/blob/main/CHANGELOG.md',
-        },
-      ],
+      link: '#',
     },
   ]
 }
@@ -86,7 +97,7 @@ function sidebarUserGuide() {
       items: [
         { text: 'What is this?', link: '/user-guide/' },
       ],
-    }
+    },
   ]
 }
 
@@ -99,6 +110,6 @@ function sidebarDeveloperGuid() {
         { text: 'What is this?', link: '/developer-guide/' },
         { text: 'Getting started', link: '/developer-guide/getting-started' },
       ],
-    }
+    },
   ]
 }

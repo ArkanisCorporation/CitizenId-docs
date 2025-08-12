@@ -6,7 +6,6 @@ import PostAuthor from './components/blog/PostAuthor.vue'
 import PostDetail from './components/blog/PostDetail.vue'
 import PostIcon from './components/blog/PostIcon.vue'
 import Posts from './components/blog/Posts.vue'
-import Feature from './components/uno/Feature.vue'
 import 'uno.css'
 
 export default {
