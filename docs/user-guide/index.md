@@ -10,10 +10,10 @@ If you change your mind, you can revoke access at any time from your dashboard.
 
 The system is designed for both convenience and security.
 It uses modern authentication standards such as OAuth 2.0 to protect your information, while also streamlining community integration.
-Many Citizen projects require RSI verification, and Citizen iD ensures you only need to complete it once.
+Many Star Citizen projects require RSI verification, and Citizen iD ensures you only need to complete it once.
 
 In practice, Citizen iD saves time and effort.
-For example, when you join a new Citizen community Discord server, you no longer need to provide screenshots or manually confirm your RSI status.
+For example, when you join a new Star Citizen community Discord server, you no longer need to provide screenshots or manually confirm your RSI status.
 Instead, you authorise the server through Citizen iD, and your roles are assigned automatically within seconds.
 
 tl;dr with Citizen iD, you can:
@@ -38,7 +38,7 @@ tl;dr with Citizen iD, you can:
 ## How it Works
 
 1. **Create your Citizen iD account** (see [Creating Your Account](./signing-up)).
-2. **Link your RSI account** to confirm your identity within the Citizen community.
+2. **Link your RSI account** to confirm your identity within the Star Citizen community.
 3. **Sign in** to participating community tools using the "Sign in with Citizen iD" button.
 4. **Manage authorisations** and linked accounts directly from your Citizen iD dashboard.
 
