@@ -5,9 +5,13 @@ hero:
   name: Citizen iD
   text: User and Developer Documentation
   tagline: A unified Star Citizen&reg; Identity Platform provided by an Arkanis Corporation subsidiary.
-#  image:
-#    src: /logo.png
-#    alt: Citizen iD
+  image:
+    light:
+      src: /citizenid-logo.svg
+      alt: Citizen iD
+    dark:
+      src: /citizenid-logo-white.svg
+      alt: Citizen iD
   actions:
     - theme: brand
       text: User Guide
