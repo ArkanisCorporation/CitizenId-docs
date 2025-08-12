@@ -103,6 +103,15 @@ function sidebarUserGuide() {
       ],
     },
     {
+      text: 'Discord Features',
+      collapsed: false,
+      collapsible: true,
+      items: [
+        { text: 'Linked Roles', link: '/user-guide/discord/linked-roles' },
+        { text: 'Role Revocation', link: '/user-guide/discord/role-revocation' },
+      ],
+    },
+    {
       text: 'Using Citizen iD with Community Tools',
       collapsed: false,
       collapsible: true,
@@ -110,15 +119,6 @@ function sidebarUserGuide() {
         { text: 'Signing In with Citizen iD', link: '/user-guide/usage/signing-in' },
         { text: 'Understanding Authorisations', link: '/user-guide/usage/oauth2-authorisations' },
         { text: 'Revoking Authorization', link: '/user-guide/usage/oauth2-revocation' },
-      ],
-    },
-    {
-      text: 'Discord Features',
-      collapsed: false,
-      collapsible: true,
-      items: [
-        { text: 'Linked Roles', link: '/user-guide/discord/linked-roles' },
-        { text: 'Role Revocation', link: '/user-guide/discord/role-revocation' },
       ],
     },
     {
