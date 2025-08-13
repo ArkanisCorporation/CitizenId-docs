@@ -1,6 +1,6 @@
 # What is Citizen iD?
 
-Citizen iD is a secure, centralised authentication system built for the Citizen community.
+Citizen iD is a secure, centralised authentication system built for the Star Citizen community.
 It provides you with a single, verified identity that works across participating community tools, Discord servers, and partner services.
 By verifying your RSI account once, you can reuse that verification wherever it’s needed, without repeating the process for each new service.
 
