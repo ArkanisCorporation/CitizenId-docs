@@ -17,8 +17,8 @@ hero:
       text: User Guide
       link: /user-guide/
     - theme: brand
-      text: Developer Guide
-      link: /developer-guide/
+      text: Integrator Guide
+      link: /integrator-guide/
     - theme: alt
       text: Developer Blog
       link: /blog/

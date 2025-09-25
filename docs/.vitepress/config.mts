@@ -29,7 +29,7 @@ export default defineConfig({
     nav: nav(),
     sidebar: {
       '/user-guide/': sidebarUserGuide(),
-      '/developer-guide/': sidebarDeveloperGuid(),
+      '/integrator-guide/': sidebarIntegratorGuide(),
     },
     blog: {
       title: 'Developer Blog',
@@ -56,9 +56,9 @@ function nav() {
       activeMatch: '/user-guide/',
     },
     {
-      text: 'Developer Guide',
-      link: '/developer-guide/',
-      activeMatch: '/developer-guide/',
+      text: 'Integrator Guide',
+      link: '/Integrator-guide/',
+      activeMatch: '/Integrator-guide/',
     },
     {
       text: 'Blog',
@@ -134,14 +134,24 @@ function sidebarUserGuide() {
   ]
 }
 
-function sidebarDeveloperGuid() {
+function sidebarIntegratorGuide() {
   return [
     {
-      text: 'Introduction',
+      text: 'Getting Started',
       collapsible: true,
       items: [
-        { text: 'What is this?', link: '/developer-guide/' },
-        { text: 'Getting started', link: '/developer-guide/getting-started' },
+        { text: 'What is this?', link: '/integrator-guide/' },
+      ],
+    },
+    {
+      text: 'Discord Integrations',
+      collapsed: false,
+      collapsible: true,
+      items: [
+        { text: 'Getting Started', link: '/integrator-guide/discord/' },
+        { text: 'Linked Roles', link: '/integrator-guide/discord/linked-roles' },
+        // { text: 'Nickname Management', link: '/integrator-guide/discord/role-management' },
+        // { text: 'Nickname Management', link: '/integrator-guide/discord/nickname-management' },
       ],
     },
   ]
