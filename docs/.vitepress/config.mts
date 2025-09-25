@@ -57,8 +57,8 @@ function nav() {
     },
     {
       text: 'Integrator Guide',
-      link: '/Integrator-guide/',
-      activeMatch: '/Integrator-guide/',
+      link: '/integrator-guide/',
+      activeMatch: '/integrator-guide/',
     },
     {
       text: 'Blog',
