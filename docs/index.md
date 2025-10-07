@@ -7,10 +7,10 @@ hero:
   tagline: A unified Star Citizen&reg; Identity Platform provided by an Arkanis Corporation subsidiary.
   image:
     light:
-      src: /citizenid-logo.svg
+      src: /citizenid-logo-dark.png
       alt: Citizen iD
     dark:
-      src: /citizenid-logo-white.svg
+      src: /citizenid-logo-light.png
       alt: Citizen iD
   actions:
     - theme: brand
