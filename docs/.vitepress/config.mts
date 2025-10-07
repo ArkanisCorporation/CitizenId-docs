@@ -150,8 +150,8 @@ function sidebarIntegratorGuide() {
       items: [
         { text: 'Getting Started', link: '/integrator-guide/discord/' },
         { text: 'Linked Roles', link: '/integrator-guide/discord/linked-roles' },
-        // { text: 'Nickname Management', link: '/integrator-guide/discord/role-management' },
-        // { text: 'Nickname Management', link: '/integrator-guide/discord/nickname-management' },
+        { text: 'Role Management', link: '/integrator-guide/discord/role-management' },
+        { text: 'Nickname Management', link: '/integrator-guide/discord/nickname-management' },
       ],
     },
   ]
