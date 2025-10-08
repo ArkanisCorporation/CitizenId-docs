@@ -3,6 +3,19 @@
 Citizen iD supports OpenID Connect (OIDC) as an identity provider, allowing you to integrate secure authentication and user information retrieval into your applications in a standardised and well-supported manner.
 This guide provides an overview of how to set up and use Citizen iD as an OIDC provider.
 
+## Configuration
+
+To configure your application to use Citizen iD as an OIDC provider, you will need the following information:
+
+| Parameter      | Value                                                      | Description                                                                       |
+|----------------|------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| OIDC Discovery | `https://citizenid.space/.well-known/openid-configuration` | The OIDC discovery document URL for Citizen iD.                                   |
+| `Issuer`       | `https://citizenid.space`                                  | The issuer identifier for Citizen iD, used to validate tokens.                    |
+| `Authority`    | `https://citizenid.space`                                  | The base URL of the Citizen iD OIDC provider.                                     |
+| `Audiences`    | `ClientId` (yours), `https://citizenid.space`              | The valid audiences of tokens issued by Citizen iD.                               |
+| `ClientId`     | Your application's client ID                               | The client ID of your registered application.                                     |
+| `ClientSecret` | Your application's client secret                           | The client secret of your registered application (only for confidential clients). |
+
 ## Examples
 
 The following examples demonstrate how to integrate Citizen iD as an OpenID Connect (OIDC) provider using various libraries and frameworks.
