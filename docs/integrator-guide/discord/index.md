@@ -18,7 +18,7 @@ After adding the bot to your server, navigate to the Roles section in your Serve
 Ensure that the Citizen iD bot's role is positioned **<u>above</u> any roles it will manage**.
 _This is crucial for the bot to have the necessary permissions to manage roles and nicknames correctly._
 
-![discord-bot-server-roles.png](/images/discord-bot-server-roles.png)
+![Discord Server Role Ordering Priority](/images/discord-bot-server-roles.png)
 
 ---
 

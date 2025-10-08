@@ -7,11 +7,11 @@ This allows communities to securely grant access, enforce membership rules, or u
 
 Open the Server Settings in Discord and navigate to the "People" > "Roles" section.
 Here, create a new role and add Citizen iD as a connected app under "Links" tab using the "Add requirement" button.
-![img.png](/images/discord-bot-server-role-links.png)
+![Discord Server Role Link Add](/images/discord-bot-server-role-links.png)
 
 Click the Citizen iD connection under "Apps".
 This establishes the link between Discord's role system and Citizen iD accounts of your members.
-![img_1.png](/images/discord-bot-server-role-add-link.png)
+![Discord Server Role Link Connection Dialog](/images/discord-bot-server-role-add-link.png)
 
 ## Step 2 — Configure Role Conditions
 
@@ -19,7 +19,7 @@ When setting up the corresponding linked role, define the conditions under which
 For example, you may require that a user has a verified RSI account linked or that their RSI account has existed for a minimum number of days.
 These checks are performed automatically by Citizen iD.
 
-![img_2.png](/images/discord-bot-server-role-configure-link.png)
+![Discord Server Role Link Connection Requirements](/images/discord-bot-server-role-configure-link.png)
 
 ## Step 3 — Inform Your Users
 
