@@ -154,5 +154,20 @@ function sidebarIntegratorGuide() {
         { text: 'Nickname Management', link: '/integrator-guide/discord/nickname-management' },
       ],
     },
+    {
+      text: 'OAuth2 Integration',
+      collapsed: false,
+      collapsible: true,
+      items: [
+        { text: 'Getting Started', link: '/integrator-guide/oauth2/' },
+        { text: 'Flows', link: '/integrator-guide/oauth2/flows' },
+        { text: 'Token Types', link: '/integrator-guide/oauth2/tokens' },
+        { text: 'Scopes and Claims', link: '/integrator-guide/oauth2/scopes-claims' },
+        { text: 'User Roles', link: '/integrator-guide/oauth2/roles' },
+        { text: 'Credential Delegation', link: '/integrator-guide/oauth2/delegation' },
+        { text: 'Credential Revocation', link: '/integrator-guide/oauth2/revocation' },
+        { text: 'OpenID Connect (OIDC)', link: '/integrator-guide/oauth2/oidc' },
+      ],
+    },
   ]
 }
