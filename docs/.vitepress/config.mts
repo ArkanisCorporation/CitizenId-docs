@@ -169,5 +169,15 @@ function sidebarIntegratorGuide() {
         { text: 'OpenID Connect (OIDC)', link: '/integrator-guide/oauth2/oidc' },
       ],
     },
+    {
+      text: 'Citizen iD API',
+      collapsed: false,
+      collapsible: true,
+      items: [
+        { text: 'Getting Started', link: '/integrator-guide/api/' },
+        { text: 'Authentication', link: '/integrator-guide/api/auth' },
+        { text: 'Documentation', link: '/integrator-guide/api/docs' },
+      ],
+    },
   ]
 }
