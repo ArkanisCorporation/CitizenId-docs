@@ -161,7 +161,7 @@ function sidebarIntegratorGuide() {
       items: [
         { text: 'Getting Started', link: '/integrator-guide/oauth2/' },
         { text: 'Flows & Grants', link: '/integrator-guide/oauth2/flows-grants' },
-        { text: 'Token Types', link: '/integrator-guide/oauth2/tokens' },
+        { text: 'Token Reference', link: '/integrator-guide/oauth2/tokens' },
         { text: 'Scopes and Claims', link: '/integrator-guide/oauth2/scopes-claims' },
         { text: 'User Roles', link: '/integrator-guide/oauth2/roles' },
         { text: 'Credential Delegation', link: '/integrator-guide/oauth2/delegation' },
