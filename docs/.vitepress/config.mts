@@ -74,7 +74,7 @@ function nav() {
         },
         {
           text: 'Community Discord',
-          link: 'https://discord.gg/kzF3Vbn5Kg',
+          link: 'https://discord.citizenid.space',
         },
         {
           text: 'Arkanis Corporation',
