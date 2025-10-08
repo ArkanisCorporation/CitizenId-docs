@@ -19,3 +19,7 @@ Ensure that the Citizen iD bot's role is positioned **<u>above</u> any roles it 
 _This is crucial for the bot to have the necessary permissions to manage roles and nicknames correctly._
 
 ![discord-bot-server-roles.png](/images/discord-bot-server-roles.png)
+
+---
+
+*Last updated: September 2025*

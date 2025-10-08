@@ -38,3 +38,7 @@ Once they select the role, Discord will display a prompt to connect their Citize
 
 After authorizing, Discord will verify that the user's account meets the role requirements and in case they do, it allows the users to finally claim the role.
 ![Discord Server Linked Role Claim Dialog](/images/discord-linkedroles-claim.png)
+
+---
+
+*Last updated: September 2025*
