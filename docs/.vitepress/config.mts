@@ -160,7 +160,7 @@ function sidebarIntegratorGuide() {
       collapsible: true,
       items: [
         { text: 'Getting Started', link: '/integrator-guide/oauth2/' },
-        { text: 'Flows', link: '/integrator-guide/oauth2/flows' },
+        { text: 'Flows & Grants', link: '/integrator-guide/oauth2/flows-grants' },
         { text: 'Token Types', link: '/integrator-guide/oauth2/tokens' },
         { text: 'Scopes and Claims', link: '/integrator-guide/oauth2/scopes-claims' },
         { text: 'User Roles', link: '/integrator-guide/oauth2/roles' },

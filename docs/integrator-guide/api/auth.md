@@ -10,11 +10,11 @@ _TBD_
 
 _TBD_
 
-### User Tokens
+### Users
 
 _TBD_
 
-### Application Tokens
+### Applications
 
 _TBD_
 
