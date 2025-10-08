@@ -21,7 +21,45 @@ To configure your application to use Citizen iD as an OIDC provider, you will ne
 The following examples demonstrate how to integrate Citizen iD as an OpenID Connect (OIDC) provider using various libraries and frameworks.
 If you have a working example you'd like to contribute, please open a pull request on our GitHub repository (follow the link at the bottom of this page).
 
-### ASP.NET Core
+### ASP.NET Core APIs
+
+You can use the `Microsoft.AspNetCore.Authentication.JwtBearer` package to validate JWT access tokens issued by Citizen iD.
+
+Required NuGet packages:
+- [`Microsoft.AspNetCore.Authentication.JwtBearer`](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.JwtBearer)
+
+```csharp
+// Program.cs
+// ...
+
+const string CitizenIdAuthority = "https://citizenid.space";
+const string CitizenIdClientId = "<YOUR_CLIENT_ID>";
+
+var builder = WebApplication.CreateBuilder(args);
+
+services.AddAuthentication()
+    .AddJwtBearer(ConfigureCitizenIdOidc);
+                
+void ConfigureCitizenIdJwt(JwtBearerOptions options)
+{
+    options.Authority = "https://citizenid.space";
+    options.Audience = CitizenIdClientId; // ensure the token is intended for this client!
+
+    options.RequireHttpsMetadata = !environment.IsDevelopment();
+
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        NameClaimType = JwtRegisteredClaimNames.PreferredUsername,
+    };
+}
+
+// ...
+
+var app = builder.Build();
+app.Run();
+```
+
+### ASP.NET Core Identity
 
 Using the `Microsoft.AspNetCore.Authentication.OpenIdConnect` to integrate with ASP.NET Core is straightforward.
 Below is an example configuration for integrating Citizen iD as an OIDC provider.
@@ -31,6 +69,7 @@ Required NuGet packages:
 
 ```csharp
 // Program.cs
+// ...
 
 const string CitizenIdAuthority = "https://citizenid.space";
 const string CitizenIdClientId = "<YOUR_CLIENT_ID>";
@@ -62,7 +101,9 @@ void ConfigureCitizenIdOidc(OpenIdConnectOptions options)
     options.Scope.Add("rsi.profile"); // if you need RSI profile data
     // ...
 
-    // Require verified RSI account link for a valid sign-in
+    options.RequireHttpsMetadata = !environment.IsDevelopment();;
+
+    // if you wish to require a verified RSI account link for a valid sign-in
     options.Events.OnTicketReceived = context =>
     {
         if (context.Principal?.IsInRole("CitizenId.Status.Verified") is not true)
@@ -73,10 +114,8 @@ void ConfigureCitizenIdOidc(OpenIdConnectOptions options)
         return Task.CompletedTask;
     };
 
-    // ensure the token is intended for this client
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidAudience = CitizenIdClientId,
         NameClaimType = JwtRegisteredClaimNames.PreferredUsername,
     };
 }
