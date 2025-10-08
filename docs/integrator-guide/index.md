@@ -6,13 +6,13 @@ This guide is designed to help developers, service integrators and community man
 
 Currently, there are multiple points of integration available.
 For more information on each, please refer to the relevant sections below:
-1. [OAuth2 authentication](/integrator-guide/oauth2)
-2. [Discord integrations](/integrator-guide/discord)
+1. [OAuth2 authentication](/integrator-guide/oauth2/)
+2. [Discord integrations](/integrator-guide/discord/)
    - Linked Roles
    - Bot-based features:
      - _Role Management_
      - _Nickname Management_
-3. [API access](/integrator-guide/api)
+3. [API access](/integrator-guide/api/)
 
 ---
 
