@@ -32,7 +32,7 @@ https://citizenid.space/assets/prod/citizenid-logo-light.png
 
 ### Example Usage
 
-![dev.citizenid.space_.png](/images/sign-in-with-cid-example.png)
+![Sign in with Citizen iD Button Example](/images/sign-in-with-cid-example.png)
 
 ## Icons
 
@@ -69,13 +69,13 @@ https://citizenid.space/assets/prod/citizenid-icon-light.png
         For circular placements
       </div>
     </template>
-    <img src="https://citizenid.space/assets/prod/citizenid-discord-icon.png" alt="Icon with Background for Circular Embeds" style="border-radius: 50%"/>
+    <img src="https://citizenid.space/assets/prod/citizenid-discord-icon.jpg" alt="Icon with Background for Circular Embeds" style="border-radius: 50%"/>
   </GridItem>
 </FlexGrid>
 
 ```
 https://citizenid.space/assets/prod/citizenid-bg-icon.jpg
-https://citizenid.space/assets/prod/citizenid-discord-icon.png
+https://citizenid.space/assets/prod/citizenid-discord-icon.jpg
 ```
 
 ## Social Cards
@@ -143,13 +143,13 @@ https://dev.citizenid.space/assets/dev/citizenid-icon-light.png
         For circular placements
       </div>
     </template>
-    <img src="https://citizenid.space/assets/prod/citizenid-discord-icon.png" alt="Icon with Background for Circular Embeds" style="border-radius: 50%"/>
+    <img src="https://citizenid.space/assets/prod/citizenid-discord-icon.jpg" alt="Icon with Background for Circular Embeds" style="border-radius: 50%"/>
   </GridItem>
 </FlexGrid>
 
 ```
 https://dev.citizenid.space/assets/dev/citizenid-bg-icon.jpg
-https://dev.citizenid.space/assets/dev/citizenid-discord-icon.png
+https://dev.citizenid.space/assets/dev/citizenid-discord-icon.jpg
 ```
 
 ### Social Cards
