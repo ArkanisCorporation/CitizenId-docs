@@ -28,8 +28,7 @@ You can use the `Microsoft.AspNetCore.Authentication.JwtBearer` package to valid
 Required NuGet packages:
 - [`Microsoft.AspNetCore.Authentication.JwtBearer`](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.JwtBearer)
 
-```csharp
-// Program.cs
+```csharp [Program.cs]
 // ...
 
 const string CitizenIdAuthority = "https://citizenid.space";
@@ -67,8 +66,7 @@ Below is an example configuration for integrating Citizen iD as an OIDC provider
 Required NuGet packages:
 - [`Microsoft.AspNetCore.Authentication.OpenIdConnect`](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.OpenIdConnect)
 
-```csharp
-// Program.cs
+```csharp [Program.cs]
 // ...
 
 const string CitizenIdAuthority = "https://citizenid.space";
