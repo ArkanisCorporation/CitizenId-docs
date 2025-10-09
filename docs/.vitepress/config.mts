@@ -179,5 +179,13 @@ function sidebarIntegratorGuide() {
         { text: 'Documentation', link: '/integrator-guide/api/docs' },
       ],
     },
+    {
+      text: 'Other Considerations',
+      collapsed: false,
+      collapsible: true,
+      items: [
+        { text: 'Brand Guidelines', link: '/integrator-guide/other/brand-guidelines' },
+      ],
+    },
   ]
 }

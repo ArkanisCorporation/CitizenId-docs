@@ -6,6 +6,8 @@ import PostAuthor from './components/blog/PostAuthor.vue'
 import PostDetail from './components/blog/PostDetail.vue'
 import PostIcon from './components/blog/PostIcon.vue'
 import Posts from './components/blog/Posts.vue'
+import FlexGrid from './components/FlexGrid.vue'
+import GridItem from './components/GridItem.vue'
 import 'uno.css'
 
 export default {
@@ -17,5 +19,7 @@ export default {
     app.component('PostIcon', PostIcon)
     app.component('PostAuthor', PostAuthor)
     app.component('AuthorDetail', AuthorDetail)
+    app.component('FlexGrid', FlexGrid)
+    app.component('GridItem', GridItem)
   },
 }
