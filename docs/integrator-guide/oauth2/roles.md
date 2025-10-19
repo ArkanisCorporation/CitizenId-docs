@@ -15,22 +15,22 @@ They are typically used to manage user access and permissions across the entire 
 
 | Claim Value                 | Description                                    |
 |-----------------------------|------------------------------------------------|
-| `CitizenId.Status.Verified` | Account has been linked with RSI and verified. |
-| `CitizenId.Status.Banned`   | Account has been suspended.                    |
+| `CitizenId/Status/Verified` | Account has been linked with RSI and verified. |
+| `CitizenId/Status/Banned`   | Account has been suspended.                    |
 
 ### Account Types
 
 | Claim Value                          | Description                                          |
 |--------------------------------------|------------------------------------------------------|
-| `CitizenId.AccountType.Organization` | _Currently unused._ Registered organization account. |
-| `CitizenId.AccountType.Citizen`      | Individual user account.                             |
+| `CitizenId/AccountType/Organization` | _Currently unused._ Registered organization account. |
+| `CitizenId/AccountType/Citizen`      | Individual user account.                             |
 
 ### Privileged Roles
 
-| Claim Value            | Description                                         |
-|------------------------|-----------------------------------------------------|
-| `CitizenId.Partner`    | Represents a trusted external partner organization. |
-| `CitizenId.Integrator` | Entity integrating with the Citizen iD platform.    |
+| Claim Value                        | Description                                         |
+|------------------------------------|-----------------------------------------------------|
+| `CitizenId/AccountRole/Partner`    | Represents a trusted external partner organization. |
+| `CitizenId/AccountRole/Integrator` | Entity integrating with the Citizen iD platform.    |
 
 ### Internal Roles
 
@@ -39,12 +39,12 @@ You should not use these roles for anything in your own applications.
 
 | Claim Value                         | Description                             |
 |-------------------------------------|-----------------------------------------|
-| `CitizenId.Internal.InternalSystem` | System-level operations and automation. |
-| `CitizenId.Internal.SuperAdmin`     | Highest administrative privileges.      |
-| `CitizenId.Internal.Admin`          | Standard administrative privileges.     |
-| `CitizenId.Internal.Moderator`      | Content moderation and user management. |
+| `CitizenId/Internal/InternalSystem` | System-level operations and automation. |
+| `CitizenId/Internal/SuperAdmin`     | Highest administrative privileges.      |
+| `CitizenId/Internal/Admin`          | Standard administrative privileges.     |
+| `CitizenId/Internal/Moderator`      | Content moderation and user management. |
 
-## Group Roles
+## Application/Group Roles
 
 > [!WARNING] Not Yet Available
 > This feature is not yet available. It is planned for a future release.
