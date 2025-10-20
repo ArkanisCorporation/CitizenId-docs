@@ -167,6 +167,7 @@ function sidebarIntegratorGuide() {
         { text: 'Credential Delegation', link: '/integrator-guide/oauth2/delegation' },
         { text: 'Credential Revocation', link: '/integrator-guide/oauth2/revocation' },
         { text: 'OpenID Connect (OIDC)', link: '/integrator-guide/oauth2/oidc' },
+        { text: 'SDKs', link: '/integrator-guide/oauth2/sdks' },
       ],
     },
     {
