@@ -135,7 +135,7 @@ https://dev.citizenid.space/assets/dev/citizenid-icon-light.png
         For square placements
       </div>
     </template>
-    <img src="https://citizenid.space/assets/prod/citizenid-bg-icon.jpg" alt="Icon with Background"/>
+    <img src="https://dev.citizenid.space/assets/dev/citizenid-bg-icon.jpg" alt="Icon with Background"/>
   </GridItem>
   <GridItem style="width: 40%">
     <template #bot>
@@ -143,7 +143,7 @@ https://dev.citizenid.space/assets/dev/citizenid-icon-light.png
         For circular placements
       </div>
     </template>
-    <img src="https://citizenid.space/assets/prod/citizenid-discord-icon.jpg" alt="Icon with Background for Circular Embeds" style="border-radius: 50%"/>
+    <img src="https://dev.citizenid.space/assets/dev/citizenid-discord-icon.jpg" alt="Icon with Background for Circular Embeds" style="border-radius: 50%"/>
   </GridItem>
 </FlexGrid>
 
