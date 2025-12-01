@@ -4,6 +4,8 @@ Welcome to the Citizen iD integrator Guide!
 
 This guide is designed to help developers, service integrators and community managers understand how to effectively use the Citizen iD platform, its API and existing external integrations.
 
+[Learn more about becoming an integrator here](/integrator-guide/registration).
+
 Currently, there are multiple points of integration available.
 For more information on each, please refer to the relevant sections below:
 1. [OAuth2 authentication](/integrator-guide/oauth2/)
@@ -16,4 +18,4 @@ For more information on each, please refer to the relevant sections below:
 
 ---
 
-*Last updated: September 2025*
+*Last updated: November 2025*

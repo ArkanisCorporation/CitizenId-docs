@@ -141,6 +141,7 @@ function sidebarIntegratorGuide() {
       collapsible: true,
       items: [
         { text: 'What is this?', link: '/integrator-guide/' },
+        { text: 'Registration', link: '/integrator-guide/registration' },
       ],
     },
     {
