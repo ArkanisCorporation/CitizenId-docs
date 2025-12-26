@@ -29,7 +29,7 @@ For trying out the authorization code flow, we recommend using [OAuth 2.0 Debugg
 GET {{authority}}/connect/authorize
     ?client_id={{client_id}}
     &redirect_uri={{redirect_uri}}
-    &scope=openid profile roles% email offline_access
+    &scope=openid profile roles email offline_access
     &response_type=code
     &response_mode=form_post
     &state={{$random.alphanumeric(10)}}
