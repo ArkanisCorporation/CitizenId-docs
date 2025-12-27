@@ -29,7 +29,7 @@ For trying out the authorization code flow, we recommend using [OAuth 2.0 Debugg
 GET {{authority}}/connect/authorize
     ?client_id={{client_id}}
     &redirect_uri={{redirect_uri}}
-    &scope=openid profile roles% email offline_access
+    &scope=openid profile roles email offline_access
     &response_type=code
     &response_mode=form_post
     &state={{$random.alphanumeric(10)}}
@@ -46,6 +46,7 @@ To exchange the authorization code for tokens, make a POST request to the token 
 ```http request
 @authority=https://citizenid.space
 @client_id=a3a5953f-8ab0-4d39-a407-d3f0cc9f94da
+@client_secret=835af38b-3fd2-4eb6-993d-59218f828f85
 @redirect_uri=https://oauthdebugger.com/debug
 @authorization_code=nJPLq63gEszvyPspMO9HFx-MMh9C5r5RxsKT_GbFz7c
 
@@ -55,6 +56,7 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=authorization_code
     &code={{authorization_code}}
     &client_id={{client_id}}
+    &client_secret={{client_secret}}
     &redirect_uri={{redirect_uri}}
 ```
 
