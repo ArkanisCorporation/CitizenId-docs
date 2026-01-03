@@ -81,6 +81,7 @@ This token has a much longer lifetime than access tokens and can be used to obta
 ```http request
 @authority=https://citizenid.space
 @client_id=a3a5953f-8ab0-4d39-a407-d3f0cc9f94da
+@client_secret=a67ff0d8-6a4e-417a-a6c1-f686669bea20
 @refresh_token=XdLfCEFkNZBoydqlcsQHIRvdm4cWMmNrb0Y6Wte0Z8I
 
 POST {{authority}}/connect/token
@@ -89,6 +90,7 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=refresh_token
     &refresh_token={{refresh_token}}
     &client_id={{client_id}}
+    &client_secret={{client_secret}}
 ```
 
 Response to the refresh token request will be similar to the one when exchanging an authorization code for tokens:
@@ -221,21 +223,25 @@ If a client that is not authorized to use this flow attempts to do so, they will
 Tokens can be individually revoked by the client applications:
 
 ```http request
+@authority=https://citizenid.space
 @client_id=a3a5953f-8ab0-4d39-a407-d3f0cc9f94da
+@client_secret=a67ff0d8-6a4e-417a-a6c1-f686669bea20
 
-POST http://localhost:5085/connect/revoke
+POST {{authority}}/connect/revoke
 Content-Type: application/x-www-form-urlencoded
 
 token=3xW07XE_5HXUOHoCNRBCoK-GyeJu9og8bYARixaSE30
     &token_type_hint=refresh_token
     &client_id={{client_id}}
+    &client_secret={{client_secret}}
 ```
 
 ```http request
+@authority=https://citizenid.space
 @client_id=2c7ec27a-4609-4ad3-a361-22a41f18be6b
 @client_secret=a67ff0d8-6a4e-417a-a6c1-f686669bea20
 
-POST http://localhost:5085/connect/revoke
+POST {{authority}}/connect/revoke
 Content-Type: application/x-www-form-urlencoded
 
 token=eyJhbGciOiJSUzI1NiIsImtpZCI6IkE0MTc2ODhGOUQ4NDgwOTIzQTNDQjRBMTVGNkMzQjJCQTg0MTdDNDIiLCJ4NXQiOiJwQmRvajUyRWdKSTZQTFNoWDJ3N0s2aEJmRUkiLCJ0eXAiOiJhdCtqd3QifQ.eyJpc3MiOiJodHRwczovL2NpdGl6ZW5pZC5zcGFjZS8iLCJleHAiOjE3NTk5NDAzMDMsImlhdCI6MTc1OTkyNTkwMywianRpIjoiNWIyYzkyZGQtYjBiNS00ZGFmLTk0ZGYtMTMzZGE3MTkzODA1Iiwic3ViIjoiMmM3ZWMyN2EtNDYwOS00YWQzLWEzNjEtMjJhNDFmMThiZTZiIiwib2lfcHJzdCI6IjJjN2VjMjdhLTQ2MDktNGFkMy1hMzYxLTIyYTQxZjE4YmU2YiIsImNsaWVudF9pZCI6IjJjN2VjMjdhLTQ2MDktNGFkMy1hMzYxLTIyYTQxZjE4YmU2YiIsIm9pX3Rrbl9pZCI6IjAxOTljM2MyLTIyN2QtNzBiMy1hMzBiLWI2NGI0MDM2ZmI5YiJ9.jiH2fVV7oU-kq59waPtkMRNRccBsw3oOV0aiUl8MHXzRbgf41xqfsmksxXwfWgzJmYAQIZOr7rHDyLY7_7sbkxECHLO_Wu6kVC8SwAbDRiixoEO0RPLfMasWsywtz0YvLBUIZCrujJ3gbiwIJkrDOWNjfmfOJSHBay_32pGLwY7TffP1fjV2l4icjKhHWV2j7DVkqrAs5iygnbtFDCwvKgTd2kqyydxPjXJD769H38kHNKe0XzIZzDUDHVnzxNxnG8zgFUGUtjtfiLBqW4dlIuaB7_z3p8PVYttXazBc6xc1GP9KV8pq5k2OmQJtcQWnM-Y6Ongfcj-QePnoPIs1sw
