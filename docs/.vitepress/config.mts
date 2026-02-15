@@ -178,7 +178,6 @@ function sidebarIntegratorGuide() {
       items: [
         { text: 'Getting Started', link: '/integrator-guide/api/' },
         { text: 'Authentication', link: '/integrator-guide/api/auth' },
-        { text: 'Documentation', link: '/integrator-guide/api/docs' },
       ],
     },
     {

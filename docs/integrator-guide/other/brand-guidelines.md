@@ -167,3 +167,8 @@ https://dev.citizenid.space/assets/dev/citizenid-discord-icon.jpg
 https://dev.citizenid.space/assets/dev/citizenid-social-card.jpg
 https://dev.citizenid.space/assets/dev/citizenid-discord-banner.jpg
 ```
+
+---
+
+*Last updated: February 2026*
+

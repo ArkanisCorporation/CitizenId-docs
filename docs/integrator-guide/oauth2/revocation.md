@@ -1,7 +1,19 @@
 # OAuth2 Credentials Revocation
 
-_TBD_
+OAuth2 token revocation allows clients to invalidate access tokens and refresh tokens that are no longer needed or have been compromised.
+This helps maintain the security of the ecosystem by ensuring that tokens do not remain valid indefinitely if they are no longer in use.
+
+## Revoking Tokens
+
+To revoke a token, your application must make a request to the revocation endpoint.
+Review the [Token Revocation section in Flows & Grants](./flows-grants.md#token-revocation) for the exact API specification.
+
+### When to Revoke
+
+- **User Logout**: When a user logs out of your application, you should revoke their access and refresh tokens.
+- **Security Breach**: If you suspect a token has been leaked, revoke it immediately.
+- **App Uninstallation**: If a user disconnects your integration, revoke any stored tokens.
 
 ---
 
-*Last updated: October 2025*
+*Last updated: February 2026*

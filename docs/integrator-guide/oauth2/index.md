@@ -1,7 +1,7 @@
 # OAuth2 Integration Guide
 
 Citizen iD has been designed from the ground up to be a secure and flexible identity provider, built on the widely adopted [OAuth2][rfc6749] and OpenID Connect (OIDC) standards.
-This guide provides an overview of how to set up and use Citizen iD as an OAuth2
+This guide provides an overview of how to set up and use Citizen iD as an OAuth2 provider.
 
 ## Becoming an Integrator
 
@@ -32,7 +32,7 @@ Application secret can be reset at any time from the developer dashboard.
 
 ---
 
-*Last updated: October 2025*
+*Last updated: February 2026*
 
 [cid-dev-dashboard]: <https://citizenid.space/developer> "Citizen iD Developer Dashboard"
 [discord]: <https://discord.citizenid.space> "Citizen iD Official Discord Server"

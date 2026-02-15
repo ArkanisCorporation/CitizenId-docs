@@ -25,12 +25,14 @@ The following scopes provide access to common user information.
 
 The following scopes provide access to additional user information specific to Citizen iD.
 
-| Scope             | Available Claims                                                                                                                           |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| `google.profile`  | `urn:user:google:avatar:url`<br>`urn:user:google:email`<br>`urn:user:google:name`<br>`urn:user:google:accountId`                           |
-| `twitch.profile`  | `urn:user:twitch:avatar:url`<br>`urn:user:twitch:email`<br>`urn:user:twitch:username`<br>`urn:user:twitch:accountId`                       |
-| `discord.profile` | `urn:user:discord:avatar:url`<br>`urn:user:discord:username`<br>`urn:user:discord:accountId`<br>`urn:user:discord:scopes`                  |
-| `rsi.profile`     | `urn:user:rsi:avatar:url`<br>`urn:user:rsi:username`<br>`urn:user:rsi:enlistedAt`<br>`urn:user:rsi:citizenId`<br>`urn:user:rsi:spectrumId` |
+| Scope             | Available Claims                                                                                                                                                         |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `google.profile`  | `urn:user:google:avatar:url`<br>`urn:user:google:email`<br>`urn:user:google:name`<br>`urn:user:google:accountId`                                                         |
+| `twitch.profile`  | `urn:user:twitch:avatar:url`<br>`urn:user:twitch:email`<br>`urn:user:twitch:username`<br>`urn:user:twitch:accountId`                                                     |
+| `discord.profile` | `urn:user:discord:avatar:url`<br>`urn:user:discord:username`<br>`urn:user:discord:accountId`<br>`urn:user:discord:scopes`                                                |
+| `rsi.profile`     | `urn:user:rsi:avatar:url`<br>`urn:user:rsi:username`<br>`urn:user:rsi:displayName`<br>`urn:user:rsi:enlistedAt`<br>`urn:user:rsi:citizenId`<br>`urn:user:rsi:spectrumId` |
+| `rsi.orgs.primary`| `urn:user:rsi:orgs:primary`                                                                                                                                              |
+| `rsi.orgs.public` | `urn:user:rsi:orgs:public`                                                                                                                                               |
 
 ### Claim Availability
 
@@ -58,4 +60,4 @@ The following scopes provide access to additional user information specific to C
 
 ---
 
-*Last updated: October 2025*
+*Last updated: February 2026*
