@@ -17,7 +17,12 @@ Once verified, click **Finish** to complete the process.
 ![Discord linked roles claim screen](/images/discord_full-linkedroles-claim.png)
 
 When the link is successful, the corresponding role will be immediately to your Discord account for that server.
-Read more about [the possible role revocation process](./role-revocation) in the section.
+
+## Role Removal
+
+You can remove a linked role manually by following a similar "unclaim" process within the **Linked Roles** menu, or by deauthorizing the Citizen iD application from your **Authorized Apps** in Discord settings. 
+
+Additionally, roles may be removed automatically if your account status changes and no longer meets the requirements defined by the server administrators.
 
 ---
 

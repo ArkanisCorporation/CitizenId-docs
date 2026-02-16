@@ -108,7 +108,7 @@ function sidebarUserGuide() {
       collapsible: true,
       items: [
         { text: 'Linked Roles', link: '/user-guide/discord/linked-roles' },
-        { text: 'Role Revocation', link: '/user-guide/discord/role-revocation' },
+        { text: 'Bot Commands', link: '/user-guide/discord/bot-commands' },
       ],
     },
     {
