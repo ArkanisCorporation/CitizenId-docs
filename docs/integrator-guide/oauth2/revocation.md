@@ -8,12 +8,6 @@ This helps maintain the security of the ecosystem by ensuring that tokens do not
 To revoke a token, your application must make a request to the revocation endpoint.
 Review the [Token Revocation section in Flows & Grants](./flows-grants.md#token-revocation) for the exact API specification.
 
-### When to Revoke
-
-- **User Logout**: When a user logs out of your application, you should revoke their access and refresh tokens.
-- **Security Breach**: If you suspect a token has been leaked, revoke it immediately.
-- **App Uninstallation**: If a user disconnects your integration, revoke any stored tokens.
-
 ---
 
 *Last updated: February 2026*

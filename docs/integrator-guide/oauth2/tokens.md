@@ -41,27 +41,31 @@ eyJhbGciOiJSUzI1NiIsImtpZCI6IkM5OEI3OEZFNzU1MTFFMkZGRjc0RTc4QkVBOEM5MEY0MUVBMEZF
 
 ```json
 {
-  "iss": "https://dev.citizenid.space/",
-  "exp": 1759951315,
-  "iat": 1759936915,
-  "scope": "openid profile roles discord.profile rsi.profile offline_access",
-  "jti": "99cce09d-aec0-4e04-9c6d-3424088f3802",
-  "oi_prst": "48e73cfc-871c-4e47-b649-5fb4c3bd110b",
-  "oi_au_id": "0199c469-fc74-7215-bc12-98189711d337",
+  "iss": "https://citizenid.dev/",
+  "exp": 1771182668,
+  "iat": 1771168268,
+  "aud": "https://citizenid.dev",
+  "scope": "openid profile rsi.profile rsi.orgs.public rsi.orgs.primary offline_access roles",
+  "jti": "7ff4e7c4-3fe5-4bd3-8cb3-39b4b5fc3a21",
+  "oi_au_id": "019c61da-e2ab-7a85-81e5-0f366273f39a",
   "sub": "0198d919-82fc-7dc1-ac39-8632924813c6",
-  "name": "thekronny",
+  "sub_type": "user",
+  "name": "TheKronnY",
   "preferred_username": "thekronny",
-  "role": [
-    "CitizenId.AccountType.Citizen",
-    "CitizenId.Internal.SuperAdmin",
-    "CitizenId.Status.Verified"
-  ],
-  "urn:user:discord:accountId": "224580858432978944",
   "urn:user:rsi:spectrumId": "955019",
   "urn:user:rsi:username": "KronnY",
   "urn:user:rsi:citizenId": "607633",
-  "client_id": "48e73cfc-871c-4e47-b649-5fb4c3bd110b",
-  "oi_tkn_id": "0199c46a-2708-74f8-9988-ad854bb03c30"
+  "role": [
+    "CitizenId/Internal/SuperAdmin",
+    "CitizenId/AccountType/Citizen",
+    "CitizenId/Status/Verified",
+    "arkaniscorp/member/employee",
+    "arkaniscorp/sub/t1",
+    "arkaniscorp/director"
+  ],
+  "oi_prst": "arkaniscorp-overlay",
+  "client_id": "arkaniscorp-overlay",
+  "oi_tkn_id": "019c61da-fee3-7167-b3e2-5f7caf16f376"
 }
 ```
 
@@ -83,7 +87,7 @@ They are issued as part of OpenID Connect (OIDC) flows.
 <div class="jwt">
 
 ```
-eyJhbGciOiJSUzI1NiIsImtpZCI6IkE3QTRDRDIzNENBNjRGMDBDN0IzNkUzODVDMUE4QTdEM0I1RUVGNDYiLCJ4NXQiOiJwNlROSTB5bVR3REhzMjQ0WEJxS2ZUdGU3MFkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2Rldi5jaXRpemVuaWQuc3BhY2UvIiwiZXhwIjoxNzU5OTUxMzE1LCJpYXQiOjE3NTk5MzY5MTUsImF1ZCI6IjQ4ZTczY2ZjLTg3MWMtNGU0Ny1iNjQ5LTVmYjRjM2JkMTEwYiIsIm9pX2F1X2lkIjoiMDE5OWM0NjktZmM3NC03MjE1LWJjMTItOTgxODk3MTFkMzM3Iiwic3ViIjoiMDE5OGQ5MTktODJmYy03ZGMxLWFjMzktODYzMjkyNDgxM2M2IiwibmFtZSI6InRoZWtyb25ueSIsInByZWZlcnJlZF91c2VybmFtZSI6InRoZWtyb25ueSIsInJvbGUiOlsiQ2l0aXplbklkLkFjY291bnRUeXBlLkNpdGl6ZW4iLCJDaXRpemVuSWQuSW50ZXJuYWwuU3VwZXJBZG1pbiIsIkNpdGl6ZW5JZC5TdGF0dXMuVmVyaWZpZWQiXSwidXJuOnVzZXI6ZGlzY29yZDphY2NvdW50SWQiOiIyMjQ1ODA4NTg0MzI5Nzg5NDQiLCJ1cm46dXNlcjpkaXNjb3JkOnVzZXJuYW1lIjoidGhla3Jvbm55IiwidXJuOnVzZXI6ZGlzY29yZDphdmF0YXI6dXJsIjoiaHR0cHM6Ly9jZG4uZGlzY29yZGFwcC5jb20vYXZhdGFycy8yMjQ1ODA4NTg0MzI5Nzg5NDQvYV80MDk4Y2RkYTdhOGExYTRhZjVmYzdkMTE2ODM5YjU2Mi5naWYiLCJ1cm46dXNlcjpyc2k6c3BlY3RydW1JZCI6Ijk1NTAxOSIsInVybjp1c2VyOnJzaTp1c2VybmFtZSI6Iktyb25uWSIsInVybjp1c2VyOnJzaTplbmxpc3RlZEF0IjoiMjAxNC0xMC0wMSIsInVybjp1c2VyOnJzaTphdmF0YXI6dXJsIjoiaHR0cHM6Ly9yb2JlcnRzc3BhY2VpbmR1c3RyaWVzLmNvbS9tZWRpYS92aWszeWY2bW14NjR0ci9oZWFwX2luZm9ib3gvN2M2MDMxZTAtMWY2Ni00N2MwLUExNDctQzgwMTE2OGUxYzA5LmpwZyIsInVybjp1c2VyOnJzaTpjaXRpemVuSWQiOiI2MDc2MzMiLCJhenAiOiI0OGU3M2NmYy04NzFjLTRlNDctYjY0OS01ZmI0YzNiZDExMGIiLCJub25jZSI6IkVUZGEwY0t0U3MiLCJhdF9oYXNoIjoiNk1kMXRYT2xCUGhqOG9sYTRhZnp0USIsIm9pX3Rrbl9pZCI6IjAxOTljNDZhLTI3MjktNzYyMS1hNGQ5LWQ3MTYzMjA0MDk0ZCJ9.XdZRrLSehUY1BV-Mwps9HfOPbToUfq4EusoniPRukCxN3vsD5Z6JEsJPkU0Gwq54ZEthPE9QIH_ymLcYStH9y3jhaIx0ApoySVLFNTLhkyd3UxfsY274C6OdIiLM1sgnvG51rR3Jxy2bkUjfZGRE8l20yraZfLWyLq9xbRPBN9T4tU2kfKZ_Lu9u0-MDaMJ3XXbr312_6cqSqqo92T7Q_64M---LxL5YZlumdQH_X2T_wXaA0hj-e0Hoi_SLZDbEeQZtbF5m1rMvWIlbLkxvIhEeldZL7OQxwkUuVpdgttUY5w0rQevk1g5O5HAfm_xfQoSZQ4BD8jG2OjkHwzyZHA
+eyJhbGciOiJSUzI1NiIsImtpZCI6IkM5OEI3OEZFNzU1MTFFMkZGRjc0RTc4QkVBOEM5MEY0MUVBMEZFNjgiLCJ4NXQiOiJ5WXQ0X25WUkhpX19kT2VMNm95UTlCNmdfbWciLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2NpdGl6ZW5pZC5kZXYvIiwiZXhwIjoxNzcxMTgyNjY4LCJpYXQiOjE3NzExNjgyNjgsImF1ZCI6ImFya2FuaXNjb3JwLW92ZXJsYXkiLCJvaV9hdV9pZCI6IjAxOWM2MWRhLWUyYWItN2E4NS04MWU1LTBmMzY2MjczZjM5YSIsInN1YiI6IjAxOThkOTE5LTgyZmMtN2RjMS1hYzM5LTg2MzI5MjQ4MTNjNiIsInN1Yl90eXBlIjoidXNlciIsIm5hbWUiOiJUaGVLcm9ublkiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0aGVrcm9ubnkiLCJ1cm46dXNlcjpyc2k6c3BlY3RydW1JZCI6Ijk1NTAxOSIsInVybjp1c2VyOnJzaTp1c2VybmFtZSI6Iktyb25uWSIsInVybjp1c2VyOnJzaTpkaXNwbGF5TmFtZSI6IltBcmthbmlzXSBLcm9ublkiLCJ1cm46dXNlcjpyc2k6ZW5saXN0ZWRBdCI6IjIwMTQtMTAtMDEiLCJ1cm46dXNlcjpyc2k6YXZhdGFyOnVybCI6Imh0dHBzOi8vcm9iZXJ0c3NwYWNlaW5kdXN0cmllcy5jb20vbWVkaWEvdmlrM3lmNm1teDY0dHIvaGVhcF9pbmZvYm94LzdjNjAzMWUwLTFmNjYtNDdjMC1BMTQ3LUM4MDExNjhlMWMwOS5qcGciLCJ1cm46dXNlcjpyc2k6Y2l0aXplbklkIjoiNjA3NjMzIiwidXJuOnVzZXI6cnNpOm9yZ3M6cHVibGljIjpbIkFSS0FOSVMiLCJNRURSVU5ORVIiLCJVRVhDT1JQIiwiQ1pTSyJdLCJ1cm46dXNlcjpyc2k6b3JnczpwcmltYXJ5IjoiQVJLQU5JUyIsInJvbGUiOlsiQ2l0aXplbklkL0ludGVybmFsL1N1cGVyQWRtaW4iLCJDaXRpemVuSWQvQWNjb3VudFR5cGUvQ2l0aXplbiIsIkNpdGl6ZW5JZC9TdGF0dXMvVmVyaWZpZWQiLCJhcmthbmlzY29ycC9tZW1iZXIvZW1wbG95ZWUiLCJhcmthbmlzY29ycC9zdWIvdDEiLCJhcmthbmlzY29ycC9kaXJlY3RvciJdLCJhenAiOiJhcmthbmlzY29ycC1vdmVybGF5IiwiYXRfaGFzaCI6IlVNb1k1N01qeTgtWVBHN0F6Q3RnMEEiLCJvaV90a25faWQiOiIwMTljNjFkYS1mZWYzLTdmYTMtYmRiMi1iMzYwOWJhYzAyMzAifQ.X2pmjoRfIQN4GigBaucfDyGIe66u5AoD4ynQ6k3QiN_1T6kQXOA494C-EwBdbqwZ7lVe7RuKvkC9zWYW0DHLi1l_c0qOYQdviSm-wo4QGoPmllXKmFF7IlcWMr_FtuegJxPVE120QfMCgP1Vz74sdQASBvg4rORTrs9yN7xzUsRlfZCVBYK4ziEKpydQVvODLLBsFzBzfbR14wmpXRxa2h9vZKi3774ry74bDIiyMlIGICR31ci7A3WXke8Pvdzusdsh0QjsoUxwiyY8xw61mPB6yNHChgkME71kyLdhTuXC0ZS9_L37CYOb75NnSxUVQKIJiGv5zpS21VdUhVKw7w
 ```
 
 </div>
@@ -93,31 +97,39 @@ eyJhbGciOiJSUzI1NiIsImtpZCI6IkE3QTRDRDIzNENBNjRGMDBDN0IzNkUzODVDMUE4QTdEM0I1RUVG
 
 ```json
 {
-  "iss": "https://dev.citizenid.space/",
-  "exp": 1759951315,
-  "iat": 1759936915,
-  "aud": "48e73cfc-871c-4e47-b649-5fb4c3bd110b",
-  "oi_au_id": "0199c469-fc74-7215-bc12-98189711d337",
+  "iss": "https://citizenid.dev/",
+  "exp": 1771182668,
+  "iat": 1771168268,
+  "aud": "arkaniscorp-overlay",
+  "oi_au_id": "019c61da-e2ab-7a85-81e5-0f366273f39a",
   "sub": "0198d919-82fc-7dc1-ac39-8632924813c6",
-  "name": "thekronny",
+  "sub_type": "user",
+  "name": "TheKronnY",
   "preferred_username": "thekronny",
-  "role": [
-    "CitizenId.AccountType.Citizen",
-    "CitizenId.Internal.SuperAdmin",
-    "CitizenId.Status.Verified"
-  ],
-  "urn:user:discord:accountId": "224580858432978944",
-  "urn:user:discord:username": "thekronny",
-  "urn:user:discord:avatar:url": "https://cdn.discordapp.com/avatars/224580858432978944/a_4098cdda7a8a1a4af5fc7d116839b562.gif",
   "urn:user:rsi:spectrumId": "955019",
   "urn:user:rsi:username": "KronnY",
+  "urn:user:rsi:displayName": "[Arkanis] KronnY",
   "urn:user:rsi:enlistedAt": "2014-10-01",
   "urn:user:rsi:avatar:url": "https://robertsspaceindustries.com/media/vik3yf6mmx64tr/heap_infobox/7c6031e0-1f66-47c0-A147-C801168e1c09.jpg",
   "urn:user:rsi:citizenId": "607633",
-  "azp": "48e73cfc-871c-4e47-b649-5fb4c3bd110b",
-  "nonce": "ETda0cKtSs",
-  "at_hash": "6Md1tXOlBPhj8ola4afztQ",
-  "oi_tkn_id": "0199c46a-2729-7621-a4d9-d7163204094d"
+  "urn:user:rsi:orgs:public": [
+    "ARKANIS",
+    "MEDRUNNER",
+    "UEXCORP",
+    "CZSK"
+  ],
+  "urn:user:rsi:orgs:primary": "ARKANIS",
+  "role": [
+    "CitizenId/Internal/SuperAdmin",
+    "CitizenId/AccountType/Citizen",
+    "CitizenId/Status/Verified",
+    "arkaniscorp/member/employee",
+    "arkaniscorp/sub/t1",
+    "arkaniscorp/director"
+  ],
+  "azp": "arkaniscorp-overlay",
+  "at_hash": "UMoY57Mjy8-YPG7AzCtg0A",
+  "oi_tkn_id": "019c61da-fef3-7fa3-bdb2-b3609bac0230"
 }
 ```
 
