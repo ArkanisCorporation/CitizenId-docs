@@ -28,7 +28,7 @@ Once you fill out the required information and create the application, you will 
 Application secret can be reset at any time from the developer dashboard.
 
 > [!WARNING]
-> Make sure to store these credentials securely, as they authenticate your application with Citizen iD and authorize it to access and change relevant data.
+> Make sure to store these credentials securely, as they authenticate your application with Citizen iD and authorise it to access and change relevant data.
 
 ---
 

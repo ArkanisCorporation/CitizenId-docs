@@ -5,7 +5,7 @@ This section provides an overview of the supported flows and how to implement th
 
 > [!WARNING] OAuth2 and OpenID Connect (OIDC)
 > Citizen iD implements both the OAuth2 framework and the OpenID Connect (OIDC) identity layer on top of OAuth2.
-> Make sure to **utilize existing OIDC libraries and frameworks** when integrating with Citizen iD,
+> Make sure to **utilise existing OIDC libraries and frameworks** when integrating with Citizen iD,
 > as they handle many security aspects and best practices for you.
 > 
 > There typically is no need to implement most of the following OAuth2 flows manually.
@@ -14,7 +14,7 @@ For more information on tokens themselves, please refer to the [Token Reference]
 
 ## Authorization Code Flow
 
-For trying out the authorization code flow, we recommend using [OAuth 2.0 Debugger][oauth-debugger].
+For trying out the authorisation code flow, we recommend using [OAuth 2.0 Debugger][oauth-debugger].
 `https://citizenid.space/connect/authorize` should be used as a value for the `Authorize URI` parameter.
 
 > [!TIP] PKCE Support
@@ -36,12 +36,12 @@ GET {{authority}}/connect/authorize
     &nonce={{$random.alphanumeric(10)}}
 ```
 
-After the user successfully authenticates and consents to the requested scopes, they will be redirected to the specified redirect URI with an authorization code.
+After the user successfully authenticates and consents to the requested scopes, they will be redirected to the specified redirect URI with an authorisation code.
 For example `nJPLq63gEszvyPspMO9HFx-MMh9C5r5RxsKT_GbFz7c`.
 
 ### Claiming an Authorization Code
 
-To exchange the authorization code for tokens, make a POST request to the token endpoint `https://citizenid.space/connect/token` with the following parameters:
+To exchange the authorisation code for tokens, make a POST request to the token endpoint `https://citizenid.space/connect/token` with the following parameters:
 
 ```http request
 @authority=https://citizenid.space
@@ -75,7 +75,7 @@ The response will include an access token, its type, ID token, granted scopes, o
 
 ## Refresh Token Flow
 
-If the `offline_access` scope was requested during the authorization process, a refresh token will be included in the token response.
+If the `offline_access` scope was requested during the authorisation process, a refresh token will be included in the token response.
 This token has a much longer lifetime than access tokens and can be used to obtain new access tokens without requiring the user to re-authenticate.
 
 ```http request
@@ -93,7 +93,7 @@ grant_type=refresh_token
     &client_secret={{client_secret}}
 ```
 
-Response to the refresh token request will be similar to the one when exchanging an authorization code for tokens:
+Response to the refresh token request will be similar to the one when exchanging an authorisation code for tokens:
 
 ```json
 {
@@ -114,7 +114,7 @@ Response to the refresh token request will be similar to the one when exchanging
 ## Client Credentials
 
 The Client Credentials flow is used for machine-to-machine (M2M) communication where no user is involved.
-This flow is suitable for backend services or applications that need to authenticate and authorize themselves to access resources.
+This flow is suitable for backend services or applications that need to authenticate and authorise themselves to access resources.
 
 > [!WARNING] Confidential Clients Only
 > The Client Credentials Flow can only be used by confidential clients that can securely store and use a client secret.
@@ -208,7 +208,7 @@ The response will include a new access token, its type, and its expiration time 
 > A `refresh_token` may also be included in the response if the `offline_access` scope was requested and was granted to the provided subject token.
 
 Not all clients are allowed to use the Token Exchange flow out of the box.
-If a client that is not authorized to use this flow attempts to do so, they will receive the following error response:
+If a client that is not authorised to use this flow attempts to do so, they will receive the following error response:
 
 ```json
 {
