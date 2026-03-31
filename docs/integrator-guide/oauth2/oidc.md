@@ -16,6 +16,9 @@ To configure your application to use Citizen iD as an OIDC provider, you will ne
 | `ClientId`     | Your application's client ID                               | The client ID of your registered application.                                     |
 | `ClientSecret` | Your application's client secret                           | The client secret of your registered application (only for confidential clients). |
 
+> [!WARNING]
+> When testing against the staging environment, make sure you use the correct domain (`https://citizenid.dev`) and client credentials registered for that environment.
+
 ## Examples
 
 The following examples demonstrate how to integrate Citizen iD as an OpenID Connect (OIDC) provider using various libraries and frameworks.
@@ -100,7 +103,7 @@ void ConfigureCitizenIdOidc(OpenIdConnectOptions options)
     options.Scope.Add(CitizenIdScopes.RsiProfile); // if you need RSI profile data
     // ...
 
-    options.RequireHttpsMetadata = !environment.IsDevelopment();;
+    options.RequireHttpsMetadata = !environment.IsDevelopment();
 
     // if you wish to require a verified RSI account link for a valid sign-in
     options.Events.OnTicketReceived = context =>
@@ -127,4 +130,4 @@ app.Run();
 
 ---
 
-*Last updated: February 2026*
+*Last updated: March 2026*
