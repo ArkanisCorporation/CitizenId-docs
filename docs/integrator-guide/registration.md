@@ -6,8 +6,8 @@ To get your Citizen iD OAuth2 credentials:
    - Make sure to verify and link your Discord account before proceeding
 2. Contact the Citizen iD staff via the [official community Discord](https://discord.citizenid.space)
    - Use the [`#support-and-contact`](https://discord.com/channels/1401938319843004416/1401942231707029505) channel on the server
-3. After a short dialog and on-boarding you'll receive access to the developer portal
-   - Initially on the [staging environment](https://dev.citizenid.space/developer),
+3. After a short dialogue and on-boarding you'll receive access to the developer portal
+   - Initially on the [staging environment](https://citizenid.dev/developer),
    - and after an internal review of your application, the [production one](https://citizenid.space/developer).
 
 ---

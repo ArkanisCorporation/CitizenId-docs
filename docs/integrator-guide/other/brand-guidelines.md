@@ -100,32 +100,32 @@ https://citizenid.space/assets/prod/citizenid-discord-banner.jpg
 
 <FlexGrid style="margin-top: 8px">
   <GridItem>
-    <img src="https://dev.citizenid.space/assets/dev/citizenid-logo-dark.png" alt="Dark Logo for Light Themes"/>
+    <img src="https://citizenid.dev/assets/dev/citizenid-logo-dark.png" alt="Dark Logo for Light Themes"/>
   </GridItem>
   <GridItem isDark>
-    <img src="https://dev.citizenid.space/assets/dev/citizenid-logo-light.png" alt="Light Logo for Dark Themes"/>
+    <img src="https://citizenid.dev/assets/dev/citizenid-logo-light.png" alt="Light Logo for Dark Themes"/>
   </GridItem>
 </FlexGrid>
 
 ```
-https://dev.citizenid.space/assets/dev/citizenid-logo-dark.png
-https://dev.citizenid.space/assets/dev/citizenid-logo-light.png
+https://citizenid.dev/assets/dev/citizenid-logo-dark.png
+https://citizenid.dev/assets/dev/citizenid-logo-light.png
 ```
 
 ### Icons
 
 <FlexGrid style="margin-top: 8px">
   <GridItem style="width: 40%">
-    <img src="https://dev.citizenid.space/assets/dev/citizenid-icon-dark.png" alt="Dark Icon for Light Themes"/>
+    <img src="https://citizenid.dev/assets/dev/citizenid-icon-dark.png" alt="Dark Icon for Light Themes"/>
   </GridItem>
   <GridItem style="width: 40%" isDark>
-    <img src="https://dev.citizenid.space/assets/dev/citizenid-icon-light.png" alt="Light Icon for Dark Themes"/>
+    <img src="https://citizenid.dev/assets/dev/citizenid-icon-light.png" alt="Light Icon for Dark Themes"/>
   </GridItem>
 </FlexGrid>
 
 ```
-https://dev.citizenid.space/assets/dev/citizenid-icon-dark.png
-https://dev.citizenid.space/assets/dev/citizenid-icon-light.png
+https://citizenid.dev/assets/dev/citizenid-icon-dark.png
+https://citizenid.dev/assets/dev/citizenid-icon-light.png
 ```
 
 <FlexGrid style="margin-top: 16px">
@@ -135,7 +135,7 @@ https://dev.citizenid.space/assets/dev/citizenid-icon-light.png
         For square placements
       </div>
     </template>
-    <img src="https://dev.citizenid.space/assets/dev/citizenid-bg-icon.jpg" alt="Icon with Background"/>
+    <img src="https://citizenid.dev/assets/dev/citizenid-bg-icon.jpg" alt="Icon with Background"/>
   </GridItem>
   <GridItem style="width: 40%">
     <template #bot>
@@ -143,29 +143,29 @@ https://dev.citizenid.space/assets/dev/citizenid-icon-light.png
         For circular placements
       </div>
     </template>
-    <img src="https://dev.citizenid.space/assets/dev/citizenid-discord-icon.jpg" alt="Icon with Background for Circular Embeds" style="border-radius: 50%"/>
+    <img src="https://citizenid.dev/assets/dev/citizenid-discord-icon.jpg" alt="Icon with Background for Circular Embeds" style="border-radius: 50%"/>
   </GridItem>
 </FlexGrid>
 
 ```
-https://dev.citizenid.space/assets/dev/citizenid-bg-icon.jpg
-https://dev.citizenid.space/assets/dev/citizenid-discord-icon.jpg
+https://citizenid.dev/assets/dev/citizenid-bg-icon.jpg
+https://citizenid.dev/assets/dev/citizenid-discord-icon.jpg
 ```
 
 ### Social Cards
 
 <FlexGrid style="margin-top: 8px">
   <GridItem style="width: 80%">
-    <img src="https://dev.citizenid.space/assets/dev/citizenid-social-card.jpg" alt="Icon with Background"/>
+    <img src="https://citizenid.dev/assets/dev/citizenid-social-card.jpg" alt="Icon with Background"/>
   </GridItem>
   <GridItem style="width: 80%">
-    <img src="https://dev.citizenid.space/assets/dev/citizenid-discord-banner.jpg" alt="Icon with Background"/>
+    <img src="https://citizenid.dev/assets/dev/citizenid-discord-banner.jpg" alt="Icon with Background"/>
   </GridItem>
 </FlexGrid>
 
 ```
-https://dev.citizenid.space/assets/dev/citizenid-social-card.jpg
-https://dev.citizenid.space/assets/dev/citizenid-discord-banner.jpg
+https://citizenid.dev/assets/dev/citizenid-social-card.jpg
+https://citizenid.dev/assets/dev/citizenid-discord-banner.jpg
 ```
 
 ---
