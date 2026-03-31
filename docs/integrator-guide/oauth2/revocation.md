@@ -6,7 +6,7 @@ This helps maintain the security of the ecosystem by ensuring that tokens do not
 ## Revoking Tokens
 
 To revoke a token, your application must make a request to the revocation endpoint.
-Review the [Token Revocation section in Flows & Grants](./flows-grants.md#token-revocation) for the exact API specification.
+Review the [Token Revocation section in Flows & Grants](flows-grants.md#token-revocation) for the exact API specification.
 
 ---
 

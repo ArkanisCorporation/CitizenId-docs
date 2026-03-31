@@ -7,7 +7,8 @@ This guide provides an overview of how to set up and use Citizen iD as an OAuth2
 
 To integrate your application with Citizen iD, you first need to register as an integrator.
 This process involves granting your account an integrator role and access and agreeing to the terms of service for integrators.
-To apply, please contact us via the ticket system on [our official Discord server][discord].
+
+To register, please follow the instructions in the [integrator registration guide](/integrator-guide/registration.md).
 
 ## Managing Client Applications
 
@@ -30,10 +31,24 @@ Application secret can be reset at any time from the developer dashboard.
 > [!WARNING]
 > Make sure to store these credentials securely, as they authenticate your application with Citizen iD and authorise it to access and change relevant data.
 
+### Citizen iD Environments
+
+The Citizen iD platform has two separate environments for development and production:
+- **Staging environment** [`https://citizenid.dev`][cid-dev]
+  <br/>Here you can safely develop and test your integration without affecting real user data.
+- **Production environment** [`https://citizenid.space`][cid-prod]
+  <br/>This is the live environment where real user data is stored and accessed.
+
+> [!TIP]
+> Once you have thoroughly tested your integration in the staging environment and are ready to go live, you can request approval and access to the production environment.
+> Citizen iD staff will review your application and integration to ensure it meets our standards and guidelines before granting access.
+
 ---
 
-*Last updated: February 2026*
+*Last updated: March 2026*
 
 [cid-dev-dashboard]: <https://citizenid.space/developer> "Citizen iD Developer Dashboard"
+[cid-dev]: <https://citizenid.dev> "Citizen iD Staging Environment"
+[cid-prod]: <https://citizenid.space> "Citizen iD Production Environment"
 [discord]: <https://discord.citizenid.space> "Citizen iD Official Discord Server"
 [rfc6749]: <https://datatracker.ietf.org/doc/html/rfc6749> "RFC6749: OAuth 2.0 Authorization Framework"

@@ -6,7 +6,7 @@ This guide provides an overview of how to delegate, look up, and revoke OAuth2 c
 
 ## Delegating Credentials
 
-To delegate credentials to another application, use the [Token Exchange flow](./flows-grants#token-exchange).
+To delegate credentials to another application, use the [Token Exchange flow](flows-grants#token-exchange).
 This allows your application to exchange an existing access token for a new one that is scoped to a different client application, optionally with a reduced set of scopes.
 
 The resulting token will include an `act` (actor) claim identifying the application that the credentials were delegated to.
@@ -23,7 +23,7 @@ These APIs also support revoking delegated tokens directly, offering an alternat
 
 ## Revoking Delegated Credentials
 
-Delegated tokens can be revoked using the standard [Token Revocation](./flows-grants#token-revocation) endpoint.
+Delegated tokens can be revoked using the standard [Token Revocation](flows-grants#token-revocation) endpoint.
 Both the original application and the delegate can revoke the token.
 When revoked, the token is immediately invalidated and can no longer be used.
 

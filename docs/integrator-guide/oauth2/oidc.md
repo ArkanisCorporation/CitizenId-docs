@@ -24,6 +24,13 @@ To configure your application to use Citizen iD as an OIDC provider, you will ne
 The following examples demonstrate how to integrate Citizen iD as an OpenID Connect (OIDC) provider using various libraries and frameworks.
 If you have a working example you'd like to contribute, please open a pull request on our GitHub repository (follow the link at the bottom of this page).
 
+<Tabs :tabs="[
+{ key: 'dotnet', title: '.NET' },
+{ key: 'passport-js', title: 'Passport.js' }
+]">
+
+<template #dotnet>
+
 ### ASP.NET Core APIs
 
 You can use the `Microsoft.AspNetCore.Authentication.JwtBearer` package to validate JWT access tokens issued by Citizen iD.
@@ -67,6 +74,7 @@ Using the `Microsoft.AspNetCore.Authentication.OpenIdConnect` to integrate with 
 Below is an example configuration for integrating Citizen iD as an OIDC provider.
 
 Required NuGet packages:
+
 - [`CitizenId.Domain.Shared`](https://www.nuget.org/packages/CitizenId.Domain.Shared)
 - [`Microsoft.AspNetCore.Authentication.OpenIdConnect`](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.OpenIdConnect)
 
@@ -127,6 +135,40 @@ void ConfigureCitizenIdOidc(OpenIdConnectOptions options)
 var app = builder.Build();
 app.Run();
 ```
+
+</template>
+
+<template #passport-js>
+
+### Passport.js
+
+You can use the [`passport-citizenid`](https://www.npmjs.com/package/@citizenid/passport-citizenid) strategy to integrate Citizen iD with Passport.js in JavaScript/TypeScript applications.
+Read more about Passport.js strategies and usage in the [official documentation](https://www.passportjs.org/docs/).
+
+```typescript
+const {Strategy: CitizenIDStrategy, Scopes} = require('passport-citizenid');
+
+const endpoints = getEndpoints(Endpoints.DEVELOPMENT.AUTHORITY);
+// const endpoints = getEndpoints(Endpoints.PRODUCTION.AUTHORITY);
+
+passport.use(new CitizenIDStrategy({
+    clientID: CITIZENID_CLIENT_ID,
+    clientSecret: CITIZENID_CLIENT_SECRET, // Optional for public clients with PKCE
+    callbackURL: "http://localhost:3000/auth/citizenid/callback",
+    authorizationURL: endpoints.AUTHORIZATION,
+    tokenURL: endpoints.TOKEN,
+    userInfoURL: endpoints.USERINFO,
+    scope: [Scopes.OPENID, Scopes.PROFILE, Scopes.EMAIL, Scopes.ROLES]
+  },
+  function (accessToken, refreshToken, profile, done) {
+    // In a real application, you would save the user to your database
+    return done(null, profile);
+  }
+));
+```
+
+</template>
+</Tabs>
 
 ---
 

@@ -37,7 +37,7 @@ tl;dr with Citizen iD, you can:
 
 ## How it Works
 
-1. **Create your Citizen iD account** (see [Creating Your Account](./signing-up)).
+1. **Create your Citizen iD account** (see [Creating Your Account](signing-up)).
 2. **Link your RSI account** to confirm your identity within the Star Citizen community.
 3. **Sign in** to participating community tools using the "Sign in with Citizen iD" button.
 4. **Manage authorisations** and linked accounts directly from your Citizen iD dashboard.

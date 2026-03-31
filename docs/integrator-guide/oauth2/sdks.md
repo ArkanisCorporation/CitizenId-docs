@@ -9,9 +9,10 @@ At this time, Citizen iD offers a single official SDK containing constants (supp
 
 ## Available SDKs
 
-| Platform          | Package Name              | Links                                                            |
-|-------------------|---------------------------|------------------------------------------------------------------|
-| C#/.NET           | `CitizenId.Domain.Shared` | [NuGet](https://www.nuget.org/packages/CitizenId.Domain.Shared)  |
+| Platform            | Package Name                    | Links                                                              |
+|---------------------|---------------------------------|--------------------------------------------------------------------|
+| C#/.NET             | `CitizenId.Domain.Shared`       | [NuGet](https://www.nuget.org/packages/CitizenId.Domain.Shared)    |
+| JS/TS (Passport.js) | `@citizenid/passport-citizenid` | [npm](https://www.npmjs.com/package/@citizenid/passport-citizenid) |
 
 ---
 

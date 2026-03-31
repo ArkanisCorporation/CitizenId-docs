@@ -11,7 +11,7 @@ Once confirmed, your RSI account link will be removed immediately.
 Any connected services that relied on your verified status—such as Discord Linked Roles—will automatically revoke the associated roles or permissions.
 This ensures that verification-sensitive features remain secure and up to date.
 
-You can reverify at any time by repeating the original [RSI Account Verification](./rsi-verification.md) process.
+You can reverify at any time by repeating the original [RSI Account Verification](rsi-verification.md) process.
 
 ## Automated Withdrawal When Changing Your RSI Handle
 

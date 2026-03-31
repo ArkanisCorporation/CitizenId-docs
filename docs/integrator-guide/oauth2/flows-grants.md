@@ -1,21 +1,23 @@
 # Supported OAuth2 Flows and Grant Types
 
 Citizen iD supports several OAuth2 flows and grant types to accommodate different types of applications and use cases.
-This section provides an overview of the supported flows and how to implement them.;
+This section provides an overview of the supported flows and how to implement them.
 
-> [!WARNING] OAuth2 and OpenID Connect (OIDC)
+> [!WARNING] BEFORE YOU START
 > Citizen iD implements both the OAuth2 framework and the OpenID Connect (OIDC) identity layer on top of OAuth2.
-> Make sure to **utilise existing OIDC libraries and frameworks** when integrating with Citizen iD,
+> Make sure to <u>utilise existing OIDC libraries and frameworks</u> when integrating with Citizen iD,
 > as they handle many security aspects and best practices for you.
 > 
-> There typically is no need to implement most of the following OAuth2 flows manually.
+> **There typically is <u>no need</u> to implement any of the following OAuth2 flows <u>manually</u>.**
 
-For more information on tokens themselves, please refer to the [Token Reference](./tokens).
+For more information on tokens themselves, please refer to the [Token Reference](tokens.md).
 
 ## Authorization Code Flow
 
 For trying out the authorisation code flow, we recommend using [OAuth 2.0 Debugger][oauth-debugger].
-`https://citizenid.space/connect/authorize` should be used as a value for the `Authorize URI` parameter.
+The `/connect/authorize` endpoint with appropriate environment domain should be used as a value for the `Authorize URI` parameter:
+- `https://citizenid.dev/connect/authorize` for the staging environment
+- `https://citizenid.space/connect/authorize` for the production environment
 
 > [!TIP] PKCE Support
 > Citizen iD supports the [Proof Key for Code Exchange (PKCE)][rfc7636] extension to OAuth2.
@@ -23,6 +25,7 @@ For trying out the authorisation code flow, we recommend using [OAuth 2.0 Debugg
 
 ```http request
 @authority=https://citizenid.space
+# @authority=https://citizenid.dev
 @client_id=a3a5953f-8ab0-4d39-a407-d3f0cc9f94da
 @redirect_uri=https://oauthdebugger.com/debug
 
@@ -41,10 +44,11 @@ For example `nJPLq63gEszvyPspMO9HFx-MMh9C5r5RxsKT_GbFz7c`.
 
 ### Claiming an Authorization Code
 
-To exchange the authorisation code for tokens, make a POST request to the token endpoint `https://citizenid.space/connect/token` with the following parameters:
+To exchange the authorisation code for tokens, make a POST request to the token endpoint `/connect/token` with the following parameters:
 
 ```http request
 @authority=https://citizenid.space
+# @authority=https://citizenid.dev
 @client_id=a3a5953f-8ab0-4d39-a407-d3f0cc9f94da
 @client_secret=835af38b-3fd2-4eb6-993d-59218f828f85
 @redirect_uri=https://oauthdebugger.com/debug
@@ -80,6 +84,7 @@ This token has a much longer lifetime than access tokens and can be used to obta
 
 ```http request
 @authority=https://citizenid.space
+# @authority=https://citizenid.dev
 @client_id=a3a5953f-8ab0-4d39-a407-d3f0cc9f94da
 @client_secret=a67ff0d8-6a4e-417a-a6c1-f686669bea20
 @refresh_token=XdLfCEFkNZBoydqlcsQHIRvdm4cWMmNrb0Y6Wte0Z8I
@@ -114,13 +119,14 @@ Response to the refresh token request will be similar to the one when exchanging
 ## Client Credentials
 
 The Client Credentials flow is used for machine-to-machine (M2M) communication where no user is involved.
-This flow is suitable for backend services or applications that need to authenticate and authorise themselves to access resources.
+This flow is suitable for backend services or applications that need to authenticate and authorise themselves to access protected Citizen iD resources (API).
 
 > [!WARNING] Confidential Clients Only
 > The Client Credentials Flow can only be used by confidential clients that can securely store and use a client secret.
 
 ```http request
 @authority=https://citizenid.space
+# @authority=https://citizenid.dev
 @client_id=2c7ec27a-4609-4ad3-a361-22a41f18be6b
 @client_secret=a67ff0d8-6a4e-417a-a6c1-f686669bea20
 
@@ -178,6 +184,7 @@ The actor claim value is going to be based on:
 
 ```http request
 @authority=https://citizenid.space
+# @authority=https://citizenid.dev
 @client_id=a3a5953f-8ab0-4d39-a407-d3f0cc9f94da
 @actor_client_id=2c7ec27a-4609-4ad3-a361-22a41f18be6b
 
@@ -224,6 +231,7 @@ Tokens can be individually revoked by the client applications:
 
 ```http request
 @authority=https://citizenid.space
+# @authority=https://citizenid.dev
 @client_id=a3a5953f-8ab0-4d39-a407-d3f0cc9f94da
 @client_secret=a67ff0d8-6a4e-417a-a6c1-f686669bea20
 
@@ -238,6 +246,7 @@ token=3xW07XE_5HXUOHoCNRBCoK-GyeJu9og8bYARixaSE30
 
 ```http request
 @authority=https://citizenid.space
+# @authority=https://citizenid.dev
 @client_id=2c7ec27a-4609-4ad3-a361-22a41f18be6b
 @client_secret=a67ff0d8-6a4e-417a-a6c1-f686669bea20
 
@@ -256,5 +265,5 @@ There will be no content in the response body, and a `200 OK` status code will i
 
 *Last updated: October 2025*
 
-[oauth-debugger]: <https://oauthdebugger.com/debug> "OAuth 2.0 Debugger"
+[oauth-debugger]: <https://oauthdebugger.com> "OAuth 2.0 Debugger"
 [rfc7636]: <https://datatracker.ietf.org/doc/html/rfc7636> "RFC 7636: Proof Key for Code Exchange by OAuth Public Clients"

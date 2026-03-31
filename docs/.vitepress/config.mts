@@ -161,14 +161,14 @@ function sidebarIntegratorGuide() {
       collapsible: true,
       items: [
         { text: 'Getting Started', link: '/integrator-guide/oauth2/' },
-        { text: 'Flows & Grants', link: '/integrator-guide/oauth2/flows-grants' },
-        { text: 'Token Reference', link: '/integrator-guide/oauth2/tokens' },
         { text: 'Scopes and Claims', link: '/integrator-guide/oauth2/scopes-claims' },
         { text: 'User Roles', link: '/integrator-guide/oauth2/roles' },
-        { text: 'Credential Delegation', link: '/integrator-guide/oauth2/delegation' },
-        { text: 'Credential Revocation', link: '/integrator-guide/oauth2/revocation' },
         { text: 'OpenID Connect (OIDC)', link: '/integrator-guide/oauth2/oidc' },
         { text: 'SDKs', link: '/integrator-guide/oauth2/sdks' },
+        { text: 'Flows & Grants', link: '/integrator-guide/oauth2/flows-grants' },
+        { text: 'Token Reference', link: '/integrator-guide/oauth2/tokens' },
+        { text: 'Credential Delegation', link: '/integrator-guide/oauth2/delegation' },
+        { text: 'Credential Revocation', link: '/integrator-guide/oauth2/revocation' },
       ],
     },
     {
