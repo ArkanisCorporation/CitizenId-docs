@@ -1,29 +1,37 @@
-# VitePress Blog Starter
+# Citizen iD Docs
 
-Starter Project for VitePress (1.5.x) with Blog Sample included.
-Searched for some VitePress Blog demo code without success - decided to make a sample project by my own.
-Hopefully it will be usefull for someone else ...
+Public documentation for Citizen iD players, community admins, and community developers.
 
-## Features
+The site is built with VitePress and published through GitHub Pages.
 
-* [UnoCSS](https://github.com/unocss/unocss) for Styling
-* Blog Demo with Posts and Authors
-* Blog functions by Composables
-* Local Search by vitepress
+## Audience Tracks
 
-## Useage with pnpm
+- Players use Citizen iD to sign in, verify RSI identity, claim Discord roles, and manage account privacy.
+- Community admins configure Discord bot features, role assignments, nickname automation, branding, maintenance, and support workflows.
+- Community developers request the Integrator product role and build community tools with OAuth 2.0, OpenID Connect, and Citizen iD APIs.
+
+## Development
 
 ### Install
+
 ```shell
 pnpm i
 ```
 
 ### Develop
+
 ```shell
 pnpm dev
 ```
 
 ### Build
+
 ```shell
 pnpm build
+```
+
+### Preview
+
+```shell
+pnpm serve
 ```

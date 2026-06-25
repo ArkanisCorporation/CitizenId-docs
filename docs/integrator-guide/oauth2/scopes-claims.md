@@ -13,13 +13,13 @@ The scopes featured in this section are available to all integrators and can be 
 
 The following scopes provide access to common user information.
 
-| Scope             | Available Claims               | Note                                     | 
-|-------------------|--------------------------------|------------------------------------------| 
-| `openid`          | -                              | **REQUIRED.**                            | 
-| `profile`         | `name`<br>`preferred_username` |                                          | 
-| `roles`           | `roles`                        |                                          | 
-| `email`           | `email`                        | Not every user has got an email address. | 
-| `offline_access`  | -                              | Grants access to refresh tokens.         | 
+| Scope             | Available Claims               | Note                                     |
+|-------------------|--------------------------------|------------------------------------------|
+| `openid`          | -                              | **REQUIRED.**                            |
+| `profile`         | `name`<br>`preferred_username` |                                          |
+| `roles`           | `roles`                        |                                          |
+| `email`           | `email`                        | Not every user has got an email address. |
+| `offline_access`  | -                              | Grants access to refresh tokens.         |
 
 ### Citizen iD Specific Scopes
 

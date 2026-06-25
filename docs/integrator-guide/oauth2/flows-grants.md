@@ -7,7 +7,7 @@ This section provides an overview of the supported flows and how to implement th
 > Citizen iD implements both the OAuth2 framework and the OpenID Connect (OIDC) identity layer on top of OAuth2.
 > Make sure to <u>utilise existing OIDC libraries and frameworks</u> when integrating with Citizen iD,
 > as they handle many security aspects and best practices for you.
-> 
+>
 > **There typically is <u>no need</u> to implement any of the following OAuth2 flows <u>manually</u>.**
 
 For more information on tokens themselves, please refer to the [Token Reference](tokens.md).
@@ -204,10 +204,10 @@ The response will include a new access token, its type, and its expiration time 
 
 ```json
 {
-    "access_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkE0MTc2ODhGOUQ4NDgwOTIzQTNDQjRBMTVGNkMzQjJCQTg0MTdDNDIiLCJ4NXQiOiJwQmRvajUyRWdKSTZQTFNoWDJ3N0s2aEJmRUkiLCJ0eXAiOiJhdCtqd3QifQ.eyJpc3MiOiJodHRwczovL2NpdGl6ZW5pZC5zcGFjZS8iLCJleHAiOjE3NTk5NDIwNzAsImlhdCI6MTc1OTkyNzY3MCwiYXVkIjoiYTNhNTk1M2YtOGFiMC00ZDM5LWE0MDctZDNmMGNjOWY5NGRhIiwic2NvcGUiOiJwcm9maWxlIiwianRpIjoiZmUxMDExNjMtODNmOC00MjU0LTg3MWYtMjUyOGE0MTM4MjZjIiwib2lfcHJzdCI6ImEzYTU5NTNmLThhYjAtNGQzOS1hNDA3LWQzZjBjYzlmOTRkYSIsIm9pX2F1X2lkIjoiMDE5OWEzZGYtNmMxYS03MGU4LWFjZjgtZGI3MmZkMDBhMGZmIiwic3ViIjoiMDE5OWExMDktMzY2Mi03ZjgzLWIxNTUtNWJjNTNkYjdiZjI2IiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGhla3Jvbm55IiwiYWN0Ijp7InN1YiI6IjJjN2VjMjdhLTQ2MDktNGFkMy1hMzYxLTIyYTQxZjE4YmU2YiIsInN1Yl90eXBlIjoiYXBwIiwibmFtZSI6IlRlc3QhIn0sImNsaWVudF9pZCI6ImEzYTU5NTNmLThhYjAtNGQzOS1hNDA3LWQzZjBjYzlmOTRkYSIsIm9pX3Rrbl9pZCI6IjAxOTljM2RkLTE3MjYtNzNkNC1iMTg5LWYzNmMyOTRmYmQzYSJ9.q7TI6g2LaOwbXPoYQhfsXQGMEBTcLtyN79bZbjldgkrhUoxKwWMMnufVb8kBt6vx0yIWOrRUpWtg_LfdxxxTuYO2_UHPNZXekRE-d3xhLNE1ldMruWxN1qintHHMaKgYDlph_hSJXqEeXjRxgW9hpHKlFditNeS5ybewZoR0H1JBsII2u6mMp-OayxZnBs4mjD6FYCeXrTjg_CIfJvsiUwN_4OVAoMwD9NN5Mro9gqUKX04jSevwLPZnd4JaNgqVu0wITdPJvitM_EaJVIzFy7KbFvS6_bBr8-isVFaETNspFcspIS1qqLr6bmYKJ8Avm6hmcvu5Slx0zdLOV5G-BQ",
-    "issued_token_type": "urn:ietf:params:oauth:token-type:access_token",
-    "token_type": "Bearer",
-    "expires_in": 14399
+  "access_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkE0MTc2ODhGOUQ4NDgwOTIzQTNDQjRBMTVGNkMzQjJCQTg0MTdDNDIiLCJ4NXQiOiJwQmRvajUyRWdKSTZQTFNoWDJ3N0s2aEJmRUkiLCJ0eXAiOiJhdCtqd3QifQ.eyJpc3MiOiJodHRwczovL2NpdGl6ZW5pZC5zcGFjZS8iLCJleHAiOjE3NTk5NDIwNzAsImlhdCI6MTc1OTkyNzY3MCwiYXVkIjoiYTNhNTk1M2YtOGFiMC00ZDM5LWE0MDctZDNmMGNjOWY5NGRhIiwic2NvcGUiOiJwcm9maWxlIiwianRpIjoiZmUxMDExNjMtODNmOC00MjU0LTg3MWYtMjUyOGE0MTM4MjZjIiwib2lfcHJzdCI6ImEzYTU5NTNmLThhYjAtNGQzOS1hNDA3LWQzZjBjYzlmOTRkYSIsIm9pX2F1X2lkIjoiMDE5OWEzZGYtNmMxYS03MGU4LWFjZjgtZGI3MmZkMDBhMGZmIiwic3ViIjoiMDE5OWExMDktMzY2Mi03ZjgzLWIxNTUtNWJjNTNkYjdiZjI2IiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGhla3Jvbm55IiwiYWN0Ijp7InN1YiI6IjJjN2VjMjdhLTQ2MDktNGFkMy1hMzYxLTIyYTQxZjE4YmU2YiIsInN1Yl90eXBlIjoiYXBwIiwibmFtZSI6IlRlc3QhIn0sImNsaWVudF9pZCI6ImEzYTU5NTNmLThhYjAtNGQzOS1hNDA3LWQzZjBjYzlmOTRkYSIsIm9pX3Rrbl9pZCI6IjAxOTljM2RkLTE3MjYtNzNkNC1iMTg5LWYzNmMyOTRmYmQzYSJ9.q7TI6g2LaOwbXPoYQhfsXQGMEBTcLtyN79bZbjldgkrhUoxKwWMMnufVb8kBt6vx0yIWOrRUpWtg_LfdxxxTuYO2_UHPNZXekRE-d3xhLNE1ldMruWxN1qintHHMaKgYDlph_hSJXqEeXjRxgW9hpHKlFditNeS5ybewZoR0H1JBsII2u6mMp-OayxZnBs4mjD6FYCeXrTjg_CIfJvsiUwN_4OVAoMwD9NN5Mro9gqUKX04jSevwLPZnd4JaNgqVu0wITdPJvitM_EaJVIzFy7KbFvS6_bBr8-isVFaETNspFcspIS1qqLr6bmYKJ8Avm6hmcvu5Slx0zdLOV5G-BQ",
+  "issued_token_type": "urn:ietf:params:oauth:token-type:access_token",
+  "token_type": "Bearer",
+  "expires_in": 14399
 }
 ```
 
@@ -219,9 +219,9 @@ If a client that is not authorised to use this flow attempts to do so, they will
 
 ```json
 {
-    "error": "unauthorized_client",
-    "error_description": "This client application is not allowed to use the specified grant type.",
-    "error_uri": "https://documentation.openiddict.com/errors/ID2064"
+  "error": "unauthorized_client",
+  "error_description": "This client application is not allowed to use the specified grant type.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2064"
 }
 ```
 

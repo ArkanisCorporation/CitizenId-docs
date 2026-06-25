@@ -14,7 +14,6 @@ A scope is a specific permission category. Common scopes include:
 - **Offline Access**: The ability to access your data even when you are not actively using the application (background sync),
 - _and more_.
 
-
 ## Viewing Your Authorisations
 
 You can view all applications you have authorised in your [Citizen iD Authorized Apps](https://citizenid.space/account/apps).

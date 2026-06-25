@@ -1,20 +1,24 @@
+import { fileURLToPath } from 'node:url'
 import Unocss from 'unocss/vite'
 import { defineConfig } from 'vitepress'
-import { version } from '../../package.json'
 
 export default defineConfig({
   base: '/',
-  title: 'Citizen iD — Documentation',
-  description: 'An official user and developer documentation for the Citizen iD project.',
+  title: 'Citizen iD Documentation',
+  description: 'Public documentation for Citizen iD players, community admins, and community developers.',
+  lastUpdated: true,
   markdown: {
     headers: {
-      level: [0, 0],
+      level: [2, 3],
     },
   },
   themeConfig: {
     footer: {
-      message: 'Citizen iD — User and Developer Documentation',
+      message: 'Citizen iD public documentation',
       copyright: 'Copyright &copy; 2955 Citizen iD',
+    },
+    outline: {
+      level: [2, 3],
     },
     search: {
       provider: 'local',
@@ -28,12 +32,12 @@ export default defineConfig({
     },
     nav: nav(),
     sidebar: {
-      '/user-guide/': sidebarUserGuide(),
-      '/integrator-guide/': sidebarIntegratorGuide(),
-    },
-    blog: {
-      title: 'Developer Blog',
-      description: 'Articles from the Developer\'s Blog',
+      '/players/': sidebarPlayers(),
+      '/community-admins/': sidebarCommunityAdmins(),
+      '/community-developers/': sidebarCommunityDevelopers(),
+      '/reference/': sidebarReference(),
+      '/user-guide/': sidebarPlayers(),
+      '/integrator-guide/': sidebarCommunityDevelopers(),
     },
   },
   sitemap: {
@@ -42,7 +46,7 @@ export default defineConfig({
   vite: {
     plugins: [
       Unocss({
-        configFile: '../../unocss.config.ts',
+        configFile: fileURLToPath(new URL('../uno.config.ts', import.meta.url)),
       }),
     ],
   },
@@ -51,19 +55,24 @@ export default defineConfig({
 function nav() {
   return [
     {
-      text: 'User Guide',
-      link: '/user-guide/',
-      activeMatch: '/user-guide/',
+      text: 'Players',
+      link: '/players/',
+      activeMatch: '/players/',
     },
     {
-      text: 'Integrator Guide',
-      link: '/integrator-guide/',
-      activeMatch: '/integrator-guide/',
+      text: 'Community Admins',
+      link: '/community-admins/',
+      activeMatch: '/community-admins/',
     },
     {
-      text: 'Blog',
-      link: '/blog/',
-      activeMatch: '/blog/',
+      text: 'Community Developers',
+      link: '/community-developers/',
+      activeMatch: '/community-developers/',
+    },
+    {
+      text: 'Reference',
+      link: '/reference/',
+      activeMatch: '/reference/',
     },
     {
       text: 'External Links',
@@ -80,112 +89,110 @@ function nav() {
           text: 'Arkanis Corporation',
           link: 'https://arkanis.cc',
         },
-      ],
-    },
-    {
-      text: version,
-      link: '#',
-    },
-  ]
-}
-
-function sidebarUserGuide() {
-  return [
-    {
-      text: 'Getting Started',
-      collapsed: false,
-      collapsible: true,
-      items: [
-        { text: 'What is Citizen iD?', link: '/user-guide/' },
-        { text: 'Creating Your Account', link: '/user-guide/signing-up' },
-        { text: 'RSI Account Verification', link: '/user-guide/rsi-verification' },
-        { text: 'RSI Verification Withdrawal', link: '/user-guide/rsi-verification-withdrawal' },
-      ],
-    },
-    {
-      text: 'Discord Features',
-      collapsed: false,
-      collapsible: true,
-      items: [
-        { text: 'Linked Roles', link: '/user-guide/discord/linked-roles' },
-        { text: 'Bot Commands', link: '/user-guide/discord/bot-commands' },
-      ],
-    },
-    {
-      text: 'Using Citizen iD with Community Tools',
-      collapsed: false,
-      collapsible: true,
-      items: [
-        { text: 'Signing In with Citizen iD', link: '/user-guide/usage/signing-in' },
-        { text: 'Understanding Authorisations', link: '/user-guide/usage/oauth2-authorisations' },
-        { text: 'Revoking Authorization', link: '/user-guide/usage/oauth2-revocation' },
-      ],
-    },
-    {
-      text: 'Troubleshooting & FAQ',
-      collapsed: false,
-      collapsible: true,
-      items: [
-        { text: 'Common Issues', link: '/user-guide/support/common-issues' },
-        { text: 'Frequently Asked Questions', link: '/user-guide/support/faq' },
-        { text: 'Contact & Support', link: '/user-guide/support/contact' },
+        {
+          text: 'Citizen iD Docs Source',
+          link: 'https://github.com/ArkanisCorporation/CitizenId-docs',
+        },
       ],
     },
   ]
 }
 
-function sidebarIntegratorGuide() {
+function sidebarPlayers() {
   return [
     {
       text: 'Getting Started',
-      collapsible: true,
+      collapsed: false,
       items: [
-        { text: 'What is this?', link: '/integrator-guide/' },
-        { text: 'Registration', link: '/integrator-guide/registration' },
+        { text: 'Player Guide', link: '/players/' },
+        { text: 'Account Sign-Up And Sign-In', link: '/players/account-and-sign-in' },
+        { text: 'RSI Verification', link: '/players/rsi-verification' },
+        { text: 'Discord Linked Roles', link: '/players/discord-linked-roles' },
       ],
     },
     {
-      text: 'Discord Integrations',
+      text: 'Control And Privacy',
       collapsed: false,
-      collapsible: true,
       items: [
-        { text: 'Getting Started', link: '/integrator-guide/discord/' },
-        { text: 'Linked Roles', link: '/integrator-guide/discord/linked-roles' },
-        { text: 'Role Management', link: '/integrator-guide/discord/role-management' },
-        { text: 'Nickname Management', link: '/integrator-guide/discord/nickname-management' },
+        { text: 'Authorized Apps', link: '/players/authorized-apps' },
+        { text: 'Privacy And Data', link: '/players/privacy-and-data' },
       ],
     },
     {
-      text: 'OAuth2 Integration',
+      text: 'Support',
       collapsed: false,
-      collapsible: true,
       items: [
-        { text: 'Getting Started', link: '/integrator-guide/oauth2/' },
-        { text: 'Scopes and Claims', link: '/integrator-guide/oauth2/scopes-claims' },
-        { text: 'User Roles', link: '/integrator-guide/oauth2/roles' },
-        { text: 'OpenID Connect (OIDC)', link: '/integrator-guide/oauth2/oidc' },
-        { text: 'SDKs', link: '/integrator-guide/oauth2/sdks' },
-        { text: 'Flows & Grants', link: '/integrator-guide/oauth2/flows-grants' },
-        { text: 'Token Reference', link: '/integrator-guide/oauth2/tokens' },
-        { text: 'Credential Delegation', link: '/integrator-guide/oauth2/delegation' },
-        { text: 'Credential Revocation', link: '/integrator-guide/oauth2/revocation' },
+        { text: 'Troubleshooting', link: '/players/troubleshooting' },
+      ],
+    },
+  ]
+}
+
+function sidebarCommunityAdmins() {
+  return [
+    {
+      text: 'Getting Started',
+      collapsed: false,
+      items: [
+        { text: 'Community Admin Guide', link: '/community-admins/' },
+        { text: 'Community Setup', link: '/community-admins/community-setup' },
+        { text: 'Discord Bot', link: '/community-admins/discord-bot' },
       ],
     },
     {
-      text: 'Citizen iD API',
+      text: 'Automation',
       collapsed: false,
-      collapsible: true,
       items: [
-        { text: 'Getting Started', link: '/integrator-guide/api/' },
-        { text: 'Authentication', link: '/integrator-guide/api/auth' },
+        { text: 'Role Assignments', link: '/community-admins/role-assignments' },
+        { text: 'Nickname Management', link: '/community-admins/nickname-management' },
       ],
     },
     {
-      text: 'Other Considerations',
+      text: 'Operations',
       collapsed: false,
-      collapsible: true,
       items: [
-        { text: 'Brand Guidelines', link: '/integrator-guide/other/brand-guidelines' },
+        { text: 'Branding Assets', link: '/community-admins/branding-assets' },
+        { text: 'Maintenance And Support', link: '/community-admins/maintenance-and-support' },
+      ],
+    },
+  ]
+}
+
+function sidebarCommunityDevelopers() {
+  return [
+    {
+      text: 'Getting Started',
+      collapsed: false,
+      items: [
+        { text: 'Community Developer Guide', link: '/community-developers/' },
+        { text: 'Request Integrator Access', link: '/community-developers/request-integrator-access' },
+        { text: 'Applications', link: '/community-developers/applications' },
+      ],
+    },
+    {
+      text: 'OAuth And API',
+      collapsed: false,
+      items: [
+        { text: 'OAuth And OIDC', link: '/community-developers/oauth-and-oidc' },
+        { text: 'Scopes And Claims', link: '/community-developers/scopes-and-claims' },
+        { text: 'Tokens And Revocation', link: '/community-developers/tokens-and-revocation' },
+        { text: 'API Reference', link: '/community-developers/api-reference' },
+      ],
+    },
+  ]
+}
+
+function sidebarReference() {
+  return [
+    {
+      text: 'Reference',
+      collapsed: false,
+      items: [
+        { text: 'Reference Overview', link: '/reference/' },
+        { text: 'Brand Guidelines', link: '/reference/brand-guidelines' },
+        { text: 'Legal And Privacy', link: '/reference/legal-and-privacy' },
+        { text: 'Support Evidence', link: '/reference/support-evidence' },
+        { text: 'Operations Notes', link: '/reference/operations-notes' },
       ],
     },
   ]

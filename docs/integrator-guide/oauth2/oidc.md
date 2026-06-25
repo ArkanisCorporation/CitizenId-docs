@@ -48,7 +48,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 services.AddAuthentication()
     .AddJwtBearer(ConfigureCitizenIdJwt);
-                
+
 void ConfigureCitizenIdJwt(JwtBearerOptions options)
 {
     options.Authority = CitizenIdDeployments.Production.Authority;
@@ -130,7 +130,7 @@ void ConfigureCitizenIdOidc(OpenIdConnectOptions options)
     };
 }
 
-// ... 
+// ...
 
 var app = builder.Build();
 app.Run();
@@ -146,25 +146,23 @@ You can use the [`passport-citizenid`](https://www.npmjs.com/package/@citizenid/
 Read more about Passport.js strategies and usage in the [official documentation](https://www.passportjs.org/docs/).
 
 ```typescript
-const {Strategy: CitizenIDStrategy, Scopes} = require('passport-citizenid');
+const { Strategy: CitizenIDStrategy, Scopes } = require('passport-citizenid')
 
-const endpoints = getEndpoints(Endpoints.DEVELOPMENT.AUTHORITY);
+const endpoints = getEndpoints(Endpoints.DEVELOPMENT.AUTHORITY)
 // const endpoints = getEndpoints(Endpoints.PRODUCTION.AUTHORITY);
 
 passport.use(new CitizenIDStrategy({
-    clientID: CITIZENID_CLIENT_ID,
-    clientSecret: CITIZENID_CLIENT_SECRET, // Optional for public clients with PKCE
-    callbackURL: "http://localhost:3000/auth/citizenid/callback",
-    authorizationURL: endpoints.AUTHORIZATION,
-    tokenURL: endpoints.TOKEN,
-    userInfoURL: endpoints.USERINFO,
-    scope: [Scopes.OPENID, Scopes.PROFILE, Scopes.EMAIL, Scopes.ROLES]
-  },
-  function (accessToken, refreshToken, profile, done) {
-    // In a real application, you would save the user to your database
-    return done(null, profile);
-  }
-));
+  clientID: CITIZENID_CLIENT_ID,
+  clientSecret: CITIZENID_CLIENT_SECRET, // Optional for public clients with PKCE
+  callbackURL: 'http://localhost:3000/auth/citizenid/callback',
+  authorizationURL: endpoints.AUTHORIZATION,
+  tokenURL: endpoints.TOKEN,
+  userInfoURL: endpoints.USERINFO,
+  scope: [Scopes.OPENID, Scopes.PROFILE, Scopes.EMAIL, Scopes.ROLES]
+}, (accessToken, refreshToken, profile, done) => {
+  // In a real application, you would save the user to your database
+  return done(null, profile)
+}))
 ```
 
 </template>

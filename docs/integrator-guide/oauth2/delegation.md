@@ -30,4 +30,3 @@ When revoked, the token is immediately invalidated and can no longer be used.
 ---
 
 *Last updated: February 2026*
-
