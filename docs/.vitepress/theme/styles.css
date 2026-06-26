@@ -143,7 +143,31 @@
 
 .vp-doc .cid-mermaid a,
 .vp-doc .cid-mermaid .clickable {
+  color: var(--cid-mermaid-text) !important;
   cursor: pointer;
+  text-decoration-color: currentColor !important;
+}
+
+.vp-doc .cid-mermaid a *,
+.vp-doc .cid-mermaid .clickable * {
+  text-decoration-color: currentColor !important;
+}
+
+.vp-doc .cid-mermaid a .label-container,
+.vp-doc .cid-mermaid .clickable .label-container {
+  transition: filter 0.15s ease;
+}
+
+.vp-doc .cid-mermaid a:hover .label-container,
+.vp-doc .cid-mermaid a:focus-visible .label-container,
+.vp-doc .cid-mermaid .clickable:hover .label-container,
+.vp-doc .cid-mermaid .clickable:focus-visible .label-container {
+  filter: drop-shadow(0 0 0.22rem color-mix(in srgb, var(--vp-c-brand-1), transparent 35%));
+}
+
+.vp-doc .cid-mermaid a:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 4px;
 }
 
 .vp-doc .cid-mermaid .node.actor .label-container,

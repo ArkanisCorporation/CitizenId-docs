@@ -1,7 +1,7 @@
 import type { App } from 'vue'
-import { useRoute } from 'vitepress'
+import { useRoute, useRouter } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import { defineComponent, h, nextTick, onMounted, watch } from 'vue'
+import { defineComponent, h, nextTick, onMounted, onUnmounted, watch } from 'vue'
 import DiagramLegend from './components/DiagramLegend.vue'
 import FlexGrid from './components/FlexGrid.vue'
 import GridItem from './components/GridItem.vue'
@@ -34,12 +34,60 @@ function scheduleMermaidCentering() {
   })
 }
 
+function createMermaidLinkHandler(router: ReturnType<typeof useRouter>) {
+  return (event: MouseEvent) => {
+    if (
+      event.defaultPrevented
+      || event.button !== 0
+      || event.ctrlKey
+      || event.shiftKey
+      || event.altKey
+      || event.metaKey
+      || !(event.target instanceof Element)
+    ) {
+      return
+    }
+
+    const link = event.target.closest<HTMLAnchorElement | SVGAElement>('.cid-mermaid a')
+
+    if (!link || link.hasAttribute('download'))
+      return
+
+    const target = link.getAttribute('target')
+
+    if (target && target !== '_self')
+      return
+
+    const linkHref = link.getAttribute('href') ?? link.getAttribute('xlink:href')
+
+    if (!linkHref)
+      return
+
+    const targetUrl = new URL(linkHref, link.baseURI)
+    const currentUrl = new URL(window.location.href)
+
+    if (targetUrl.origin !== currentUrl.origin)
+      return
+
+    event.preventDefault()
+    router.go(`${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`)
+  }
+}
+
 const MermaidAwareLayout = defineComponent({
   name: 'MermaidAwareLayout',
   setup() {
     const route = useRoute()
+    const router = useRouter()
+    const handleMermaidLinkClick = createMermaidLinkHandler(router)
 
-    onMounted(scheduleMermaidCentering)
+    onMounted(() => {
+      scheduleMermaidCentering()
+      window.addEventListener('click', handleMermaidLinkClick, { capture: true })
+    })
+    onUnmounted(() => {
+      window.removeEventListener('click', handleMermaidLinkClick, { capture: true })
+    })
     watch(() => route.path, scheduleMermaidCentering)
 
     return () => h(DefaultTheme.Layout!)

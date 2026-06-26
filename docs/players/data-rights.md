@@ -36,6 +36,10 @@ flowchart TD
   class zip,included,contents data;
   class outside caution;
   class thirdParties actor;
+
+  click cid "/players/website-basics" "Open Website Basics" _self
+  click outside "/players/external-apps" "Open External Apps" _self
+  click thirdParties "/players/external-apps" "Open External Apps" _self
 ```
 
 Read the first branch as the practical export boundary.

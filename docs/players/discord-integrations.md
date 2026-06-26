@@ -45,6 +45,11 @@ flowchart TD
   class cid service;
   class server context;
   class linked,roles,nick,commands action;
+
+  click admins "/community-admins/" "Open Community Admin Guide" _self
+  click server "/community-admins/discord-bot" "Open Discord Bot" _self
+  click roles "/community-admins/role-assignments" "Open Role Assignments" _self
+  click nick "/community-admins/nickname-management" "Open Nickname Management" _self
 ```
 
 Read the three server branches as optional features.

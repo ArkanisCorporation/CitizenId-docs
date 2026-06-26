@@ -51,6 +51,12 @@ flowchart TD
   class approved data;
   class denied blocked;
   class revoke,future,stored caution;
+
+  click cid "/players/website-basics" "Open Website Basics" _self
+  click approved "/players/privacy-controls" "Open Privacy Controls" _self
+  click revoke "/players/privacy-controls" "Open Privacy Controls" _self
+  click stored "/players/data-rights" "Open Data Rights" _self
+  click operator "/players/data-rights" "Open Data Rights" _self
 ```
 
 Read the approval and rejection branches as the decision point in the consent screen.

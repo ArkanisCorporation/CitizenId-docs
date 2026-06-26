@@ -21,7 +21,8 @@ flowchart TD
   rsi[["RSI Verification<br/>Prove account control"]]
   discord["Discord Integrations<br/>Servers, roles, nicknames"]
   apps["External Apps<br/>Consent and claims"]
-  privacy[/"Privacy and Data<br/>Discovery, consent, export"/]
+  privacy[/"Privacy Controls<br/>Discovery and consent"/]
+  dataRights[/Data Rights<br/>Export and deletion/]
   support>Getting Help<br/>Troubleshoot safely]
 
   website ==>|Start here| accounts
@@ -30,13 +31,23 @@ flowchart TD
   rsi -->|"Community tools"| apps
   discord -->|"Review effects"| privacy
   apps -->|"Review sharing"| privacy
-  privacy -. "When stuck" .-> support
+  privacy -->|"Export or deletion"| dataRights
+  dataRights -. "When stuck" .-> support
 
   class website,discord,apps context;
   class accounts action;
   class rsi service;
-  class privacy data;
+  class privacy,dataRights data;
   class support caution;
+
+  click website "/players/website-basics" "Open Website Basics" _self
+  click accounts "/players/linked-accounts" "Open Linked Accounts" _self
+  click rsi "/players/rsi-verification" "Open RSI Verification" _self
+  click discord "/players/discord-integrations" "Open Discord Integrations" _self
+  click apps "/players/external-apps" "Open External Apps" _self
+  click privacy "/players/privacy-controls" "Open Privacy Controls" _self
+  click dataRights "/players/data-rights" "Open Data Rights" _self
+  click support "/players/getting-help" "Open Getting Help" _self
 ```
 
 ## Start Here

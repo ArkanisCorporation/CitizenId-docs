@@ -44,6 +44,8 @@ flowchart TD
   class discovery,public data;
   class analytics,local context;
   class authorized caution;
+
+  click authorized "/players/external-apps" "Open External Apps" _self
 ```
 
 Read the three branches as separate privacy questions.
