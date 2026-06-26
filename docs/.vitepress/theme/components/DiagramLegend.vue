@@ -12,10 +12,10 @@
     >
       <section class="cid-diagram-legend__section">
         <h4>Node meanings</h4>
-        <div class="cid-diagram-legend__node-columns">
-          <div class="cid-diagram-legend__node-column">
-            <div class="cid-diagram-legend__node-group">
-              <h5>People and surfaces</h5>
+        <div class="cid-diagram-legend__node-groups">
+          <div class="cid-diagram-legend__node-group">
+            <h5>People and surfaces</h5>
+            <div class="cid-diagram-legend__node-items">
               <div class="cid-legend-node cid-legend-node--actor">
                 <span>Actor</span>
               </div>
@@ -23,9 +23,23 @@
                 <span>Context</span>
               </div>
             </div>
+          </div>
 
-            <div class="cid-diagram-legend__node-group">
-              <h5>Flow</h5>
+          <div class="cid-diagram-legend__node-group">
+            <h5>Data</h5>
+            <div class="cid-diagram-legend__node-items">
+              <div class="cid-legend-node cid-legend-node--data">
+                <span>Data</span>
+              </div>
+              <div class="cid-legend-node cid-legend-node--storage">
+                <span>Stored data</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cid-diagram-legend__node-group">
+            <h5>Flow</h5>
+            <div class="cid-diagram-legend__node-items">
               <div class="cid-legend-node cid-legend-node--service">
                 <span>Citizen iD service</span>
               </div>
@@ -41,16 +55,9 @@
             </div>
           </div>
 
-          <div class="cid-diagram-legend__node-column">
-            <div class="cid-diagram-legend__node-group">
-              <h5>Data</h5>
-              <div class="cid-legend-node cid-legend-node--data">
-                <span>Data</span>
-              </div>
-            </div>
-
-            <div class="cid-diagram-legend__node-group">
-              <h5>Outcomes</h5>
+          <div class="cid-diagram-legend__node-group">
+            <h5>Outcomes</h5>
+            <div class="cid-diagram-legend__node-items">
               <div class="cid-legend-node cid-legend-node--success">
                 <span>Success</span>
               </div>
