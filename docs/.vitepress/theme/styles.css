@@ -246,6 +246,8 @@
 }
 
 .vp-doc .cid-diagram-legend__panel {
+  --cid-diagram-legend-outset: 0px;
+
   display: flex;
   flex-wrap: wrap;
   gap: 0.9rem;
@@ -258,8 +260,17 @@
   background: var(--vp-c-bg-soft);
 }
 
+.vp-doc .details.custom-block .cid-diagram-legend__panel {
+  --cid-details-custom-block-inline-offset: 17px;
+
+  margin-left: calc(-1 * (var(--cid-diagram-legend-outset) + var(--cid-details-custom-block-inline-offset)));
+  margin-right: calc(-1 * (var(--cid-diagram-legend-outset) + var(--cid-details-custom-block-inline-offset)));
+}
+
 @media (min-width: 768px) {
   .vp-doc .cid-diagram-legend__panel {
+    --cid-diagram-legend-outset: 24px;
+
     margin-left: -24px;
     margin-right: -24px;
   }
@@ -267,6 +278,8 @@
 
 @media (min-width: 960px) {
   .vp-doc .cid-diagram-legend__panel {
+    --cid-diagram-legend-outset: 48px;
+
     margin-left: -48px;
     margin-right: -48px;
   }
@@ -632,6 +645,18 @@
 .vp-doc figure.cid-illustration p {
   margin: 0.35rem 0 0;
   color: var(--vp-c-text-2);
+}
+
+.vp-doc :where(p, li) {
+  text-wrap: pretty;
+}
+
+.vp-doc .cid-mermaid :where(p, li) {
+  text-wrap: nowrap;
+}
+
+.dark .vp-doc :where(h1, h2, h3, h4, h5, h6, strong, b) {
+  color: #edede8;
 }
 
 .vp-doc strong,

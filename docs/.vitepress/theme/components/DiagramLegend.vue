@@ -2,7 +2,7 @@
   <details class="details custom-block cid-diagram-legend">
     <summary>Diagram legend details</summary>
     <p>
-      Citizen iD diagrams use the same shapes, colors, and edge styles across the documentation.
+      The diagrams use the same shapes, colors, and edge styles across the documentation.
     </p>
 
     <div
@@ -90,9 +90,5 @@
         </div>
       </section>
     </div>
-
-    <p>
-      Invisible Mermaid links may be used only for layout and are not shown in the rendered diagram.
-    </p>
   </details>
 </template>
