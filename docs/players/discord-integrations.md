@@ -41,10 +41,6 @@ flowchart TD
   player -->|"Runs command"| commands
   commands -. "Preference update" .-> cid
 
-  classDef actor fill:#eff6ff,stroke:#3b82f6,color:#20242c,stroke-width:2px;
-  classDef service fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
-  classDef context fill:#eef2ff,stroke:#6366f1,color:#20242c,stroke-width:1.5px;
-  classDef action fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
   class player,admins actor;
   class cid service;
   class server context;

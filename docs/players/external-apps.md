@@ -45,12 +45,6 @@ flowchart TD
   future -. "Not deletion" .-> stored
   stored -. "Deletion request" .-> operator
 
-  classDef actor fill:#eff6ff,stroke:#3b82f6,color:#20242c,stroke-width:2px;
-  classDef service fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
-  classDef decision fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:2px;
-  classDef data fill:#ecfdf5,stroke:#10b981,color:#20242c,stroke-width:1.5px;
-  classDef caution fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:1.5px;
-  classDef blocked fill:#fef2f2,stroke:#dc2626,color:#20242c,stroke-width:1.5px;
   class app,operator actor;
   class cid service;
   class choice decision;

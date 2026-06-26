@@ -39,6 +39,23 @@
   --cid-mermaid-label-bg: #fff8ec;
   --cid-mermaid-label-text: #20242c;
   --cid-mermaid-edge: #b96f06;
+  --cid-mermaid-text: #20242c;
+  --cid-mermaid-actor-fill: #eff6ff;
+  --cid-mermaid-actor-stroke: #3b82f6;
+  --cid-mermaid-service-fill: #fff8ec;
+  --cid-mermaid-service-stroke: #f39c12;
+  --cid-mermaid-context-fill: #eef2ff;
+  --cid-mermaid-context-stroke: #6366f1;
+  --cid-mermaid-action-fill: #ffffff;
+  --cid-mermaid-action-stroke: #aeb7c4;
+  --cid-mermaid-data-fill: #ecfdf5;
+  --cid-mermaid-data-stroke: #10b981;
+  --cid-mermaid-decision-fill: #fff4dd;
+  --cid-mermaid-decision-stroke: #d8890f;
+  --cid-mermaid-caution-fill: #fff4dd;
+  --cid-mermaid-caution-stroke: #d8890f;
+  --cid-mermaid-blocked-fill: #fef2f2;
+  --cid-mermaid-blocked-stroke: #dc2626;
 
   margin: 1.5rem 0 2rem;
   padding: 1.15rem;
@@ -107,6 +124,14 @@
   stroke: var(--cid-mermaid-edge) !important;
 }
 
+.vp-doc .cid-mermaid .edge-thickness-thick.flowchart-link {
+  stroke-width: 3px !important;
+}
+
+.vp-doc .cid-mermaid .edge-pattern-dotted.flowchart-link {
+  stroke-dasharray: 4 4 !important;
+}
+
 .vp-doc .cid-mermaid marker path {
   fill: var(--cid-mermaid-edge) !important;
   stroke: var(--cid-mermaid-edge) !important;
@@ -115,7 +140,68 @@
 .vp-doc .cid-mermaid .nodeLabel,
 .vp-doc .cid-mermaid .label,
 .vp-doc .cid-mermaid .cluster-label {
-  color: #20242c !important;
+  color: var(--cid-mermaid-text) !important;
+}
+
+.vp-doc .cid-mermaid a,
+.vp-doc .cid-mermaid .clickable {
+  cursor: pointer;
+}
+
+.vp-doc .cid-mermaid .node.actor .label-container,
+.vp-doc .cid-mermaid .node.actor .label-container * {
+  fill: var(--cid-mermaid-actor-fill) !important;
+  stroke: var(--cid-mermaid-actor-stroke) !important;
+  stroke-width: 2px !important;
+}
+
+.vp-doc .cid-mermaid .node.service .label-container,
+.vp-doc .cid-mermaid .node.service .label-container * {
+  fill: var(--cid-mermaid-service-fill) !important;
+  stroke: var(--cid-mermaid-service-stroke) !important;
+  stroke-width: 2px !important;
+}
+
+.vp-doc .cid-mermaid .node.context .label-container,
+.vp-doc .cid-mermaid .node.context .label-container * {
+  fill: var(--cid-mermaid-context-fill) !important;
+  stroke: var(--cid-mermaid-context-stroke) !important;
+  stroke-width: 1.5px !important;
+}
+
+.vp-doc .cid-mermaid .node.action .label-container,
+.vp-doc .cid-mermaid .node.action .label-container * {
+  fill: var(--cid-mermaid-action-fill) !important;
+  stroke: var(--cid-mermaid-action-stroke) !important;
+  stroke-width: 1.5px !important;
+}
+
+.vp-doc .cid-mermaid .node.data .label-container,
+.vp-doc .cid-mermaid .node.data .label-container * {
+  fill: var(--cid-mermaid-data-fill) !important;
+  stroke: var(--cid-mermaid-data-stroke) !important;
+  stroke-width: 1.5px !important;
+}
+
+.vp-doc .cid-mermaid .node.decision .label-container,
+.vp-doc .cid-mermaid .node.decision .label-container * {
+  fill: var(--cid-mermaid-decision-fill) !important;
+  stroke: var(--cid-mermaid-decision-stroke) !important;
+  stroke-width: 2px !important;
+}
+
+.vp-doc .cid-mermaid .node.caution .label-container,
+.vp-doc .cid-mermaid .node.caution .label-container * {
+  fill: var(--cid-mermaid-caution-fill) !important;
+  stroke: var(--cid-mermaid-caution-stroke) !important;
+  stroke-width: 1.5px !important;
+}
+
+.vp-doc .cid-mermaid .node.blocked .label-container,
+.vp-doc .cid-mermaid .node.blocked .label-container * {
+  fill: var(--cid-mermaid-blocked-fill) !important;
+  stroke: var(--cid-mermaid-blocked-stroke) !important;
+  stroke-width: 1.5px !important;
 }
 
 @media (max-width: 720px) {

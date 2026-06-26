@@ -31,11 +31,6 @@ flowchart TD
   boundary -. "Third-party control" .-> outside
   outside -. "Separate controller" .-> thirdParties
 
-  classDef service fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
-  classDef decision fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:2px;
-  classDef data fill:#ecfdf5,stroke:#10b981,color:#20242c,stroke-width:1.5px;
-  classDef caution fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:1.5px;
-  classDef actor fill:#eff6ff,stroke:#3b82f6,color:#20242c,stroke-width:2px;
   class cid service;
   class boundary decision;
   class zip,included,contents data;

@@ -29,11 +29,6 @@ flowchart TD
   useful -->|"Evidence?"| safe
   report -. "Remove secrets" .-> private
 
-  classDef service fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
-  classDef decision fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:2px;
-  classDef action fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
-  classDef data fill:#ecfdf5,stroke:#10b981,color:#20242c,stroke-width:1.5px;
-  classDef blocked fill:#fef2f2,stroke:#dc2626,color:#20242c,stroke-width:1.5px;
   class report service;
   class useful decision;
   class context,outcome action;

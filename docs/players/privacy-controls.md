@@ -40,10 +40,6 @@ flowchart TD
   consent -->|"Per app"| authorized
   analytics -->|"Local browser"| local
 
-  classDef decision fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:2px;
-  classDef data fill:#ecfdf5,stroke:#10b981,color:#20242c,stroke-width:1.5px;
-  classDef context fill:#eef2ff,stroke:#6366f1,color:#20242c,stroke-width:1.5px;
-  classDef caution fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:1.5px;
   class start,consent decision;
   class discovery,public data;
   class analytics,local context;
