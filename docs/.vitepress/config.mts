@@ -1,12 +1,18 @@
-import type { HeadConfig, PageData } from 'vitepress'
+import type { HeadConfig, PageData, UserConfig } from 'vitepress'
 import { fileURLToPath } from 'node:url'
 import Unocss from 'unocss/vite'
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 
 const siteUrl = 'https://docs.citizenid.space'
 const siteTitle = 'Citizen iD Docs'
 const siteDescription = 'Public documentation for Citizen iD players, community admins, and community developers.'
 const socialImage = `${siteUrl}/citizenid-logo-dark.png`
+const dayjsEsm = fileURLToPath(new URL('../../node_modules/dayjs/esm/index.js', import.meta.url))
+const dayjsAdvancedFormat = fileURLToPath(new URL('../../node_modules/dayjs/esm/plugin/advancedFormat/index.js', import.meta.url))
+const dayjsCustomParseFormat = fileURLToPath(new URL('../../node_modules/dayjs/esm/plugin/customParseFormat/index.js', import.meta.url))
+const dayjsDuration = fileURLToPath(new URL('../../node_modules/dayjs/esm/plugin/duration/index.js', import.meta.url))
+const dayjsIsoWeek = fileURLToPath(new URL('../../node_modules/dayjs/esm/plugin/isoWeek/index.js', import.meta.url))
 const quackbackWidgetScript = `(function(w,d){if(w.Quackback)return;w.Quackback=function(){
   (w.Quackback.q=w.Quackback.q||[]).push(arguments)};
   var s=d.createElement("script");s.async=true;
@@ -15,7 +21,7 @@ const quackbackWidgetScript = `(function(w,d){if(w.Quackback)return;w.Quackback=
 
   Quackback("init");`
 
-export default defineConfig({
+export default withPatchedMermaid(defineConfig({
   base: '/',
   lang: 'en-US',
   title: siteTitle,
@@ -41,6 +47,43 @@ export default defineConfig({
     headers: {
       level: [2, 3],
     },
+  },
+  mermaid: {
+    theme: 'base',
+    flowchart: {
+      useMaxWidth: false,
+      htmlLabels: true,
+      curve: 'basis',
+      diagramPadding: 12,
+      nodeSpacing: 36,
+      rankSpacing: 38,
+    },
+    themeVariables: {
+      background: 'transparent',
+      primaryColor: '#fff8ec',
+      primaryTextColor: '#20242c',
+      primaryBorderColor: '#f39c12',
+      secondaryColor: '#ffffff',
+      secondaryTextColor: '#20242c',
+      secondaryBorderColor: '#aeb7c4',
+      tertiaryColor: '#ffffff',
+      tertiaryTextColor: '#20242c',
+      tertiaryBorderColor: '#aeb7c4',
+      lineColor: '#b96f06',
+      textColor: '#20242c',
+      mainBkg: '#fff8ec',
+      nodeBorder: '#f39c12',
+      edgeLabelBackground: '#fff8ec',
+      labelTextColor: '#20242c',
+      labelBoxBkgColor: '#fff8ec',
+      labelBoxBorderColor: '#f39c12',
+      clusterBkg: '#ffffff',
+      clusterBorder: '#aeb7c4',
+      fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif',
+    },
+  },
+  mermaidPlugin: {
+    class: 'cid-mermaid',
   },
   themeConfig: {
     footer: {
@@ -139,7 +182,30 @@ export default defineConfig({
       }),
     ],
   },
-})
+}))
+
+function withPatchedMermaid(config: UserConfig): UserConfig {
+  const mermaidConfig = withMermaid(config)
+  mermaidConfig.vite ??= {}
+  mermaidConfig.vite.resolve ??= {}
+  const existingAlias = mermaidConfig.vite.resolve.alias
+  const otherAliases = Array.isArray(existingAlias)
+    ? existingAlias.filter(alias => typeof alias.find !== 'string' || !alias.find.startsWith('dayjs'))
+    : Object.entries(existingAlias ?? {})
+        .filter(([find]) => !find.startsWith('dayjs'))
+        .map(([find, replacement]) => ({ find, replacement }))
+
+  mermaidConfig.vite.resolve.alias = [
+    { find: /^dayjs$/, replacement: dayjsEsm },
+    { find: 'dayjs/plugin/advancedFormat.js', replacement: dayjsAdvancedFormat },
+    { find: 'dayjs/plugin/customParseFormat.js', replacement: dayjsCustomParseFormat },
+    { find: 'dayjs/plugin/duration.js', replacement: dayjsDuration },
+    { find: 'dayjs/plugin/isoWeek.js', replacement: dayjsIsoWeek },
+    ...otherAliases,
+  ]
+
+  return mermaidConfig
+}
 
 function createPageHead(title: string, description: string, url: string): HeadConfig[] {
   return [

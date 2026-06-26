@@ -20,11 +20,42 @@ The external application is still operated by its own community or developer.
 
 That distinction matters because Citizen iD can control what it sends going forward, but it does not control every database where an application stores data after receiving it.
 
-<figure class="cid-illustration">
-  <figcaption><strong>Illustration plan:</strong> OAuth consent flow diagram.</figcaption>
-  <p>The diagram should show the external application redirecting the player to Citizen iD, Citizen iD showing sign-in and consent, Citizen iD returning to the application, and the application using approved claims.</p>
-  <p>A second panel should show revocation stopping future Citizen iD access while already-exported application data remains with the application operator.</p>
-</figure>
+**Diagram: App sign-in and consent.**
+The important player choice happens at the consent screen before CiD sends approved information back to the application.
+
+```mermaid
+flowchart TD
+  app["Community app"]
+  cid["CiD<br/>Sign in and consent"]
+  choice{"Do you approve<br/>the requested access?"}
+  approved["Approved facts<br/>sent to app"]
+  denied["No access<br/>is granted"]
+  revoke["Revoke access"]
+  future["Future access stops"]
+  stored["Old stored copies<br/>remain with the app"]
+  operator["App operator handles<br/>stored-copy deletion"]
+
+  app -->|"Sign in"| cid
+  cid -->|"Consent request"| choice
+  choice -->|"Approve"| approved
+  choice -->|"Reject"| denied
+  approved -->|"Return"| app
+  app -->|"Revoke later"| revoke
+  revoke --> future
+  future -. "Not deletion" .-> stored
+  stored --> operator
+
+  classDef cidNode fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
+  classDef appNode fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
+  classDef warning fill:#fff4dd,stroke:#d8890f,color:#20242c;
+  class cid cidNode;
+  class app,approved,denied,future appNode;
+  class choice,revoke,stored,operator warning;
+```
+
+Read the approval and rejection branches as the decision point in the consent screen.
+Approval lets CiD send only the approved facts back to the app, while rejection ends the authorization without granting access.
+The later revocation branch explains a different action: it stops future CiD access, but it does not erase copies an app already stored.
 
 ## Sign In Flow
 

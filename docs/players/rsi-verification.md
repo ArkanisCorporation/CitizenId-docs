@@ -13,6 +13,27 @@ Verification is useful for Discord roles, external application claims, community
 It is still only a Star Citizen account-control check.
 It is <em>not</em> real-world identity verification, age verification, reputation scoring, payment verification, or proof that a player is trustworthy.
 
+**Diagram: RSI verification at a glance.**
+CiD gives you a temporary string, you place it on your public RSI profile, and CiD checks that public profile before marking the account verified.
+
+```mermaid
+flowchart TD
+  cid["CiD gives you<br/>a verification string"]
+  rsi["You paste it into<br/>RSI Short Bio"]
+  save["You save<br/>the RSI profile"]
+  check["CiD checks<br/>the public profile"]
+  verified["Verified status<br/>can be used by communities"]
+
+  cid --> rsi --> save --> check --> verified
+
+  classDef cidNode fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
+  classDef step fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
+  classDef success fill:#ffffff,stroke:#F39C12,color:#20242c,stroke-width:2px;
+  class cid cidNode;
+  class rsi,save,check step;
+  class verified success;
+```
+
 <figure class="cid-illustration">
   <figcaption><strong>Illustration plan:</strong> RSI verification three-step screenshot sequence.</figcaption>
   <p>The page should show three screenshots side by side: the RSI account dashboard where the username is found, the RSI profile settings page with the Short Bio field highlighted, and the Citizen iD success state after verification.</p>

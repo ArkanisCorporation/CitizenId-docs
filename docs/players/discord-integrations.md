@@ -18,11 +18,44 @@ For example:
 - Another server may update your server nickname based on Citizen iD and RSI data.
 - Another community may pair Discord automation with an external application that requests Citizen iD claims.
 
-<figure class="cid-illustration">
-  <figcaption><strong>Illustration plan:</strong> Discord integration map.</figcaption>
-  <p>The diagram should show a player Discord account, Citizen iD, and a community Discord server.</p>
-  <p>Separate arrows should represent linked roles, role assignments, nickname management, and player slash commands so users can see that these are related but different features.</p>
-</figure>
+**Diagram: Discord integration map.**
+CiD connects your Discord account to the server features a community chooses to enable.
+
+```mermaid
+flowchart TD
+  player["You<br/>Discord account"]
+  cid["CiD<br/>Account and verification"]
+  server["Community Discord server"]
+  linked["Linked role checks"]
+  roles["Role assignment rules"]
+  nick["Nickname template"]
+  commands["Player commands"]
+  admins["Community admins"]
+
+  player -->|"Link Discord"| cid
+  cid -->|"Eligible facts"| server
+  admins -->|"Enable features"| server
+  server -->|"Linked roles"| linked
+  server -->|"Role automation"| roles
+  server -->|"Nicknames"| nick
+  player -->|"Commands"| commands
+  commands -->|"Preferences"| cid
+
+  classDef person fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
+  classDef cidNode fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
+  classDef serverNode fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
+  classDef feature fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
+  classDef admin fill:#fff4dd,stroke:#d8890f,color:#20242c;
+  class player person;
+  class cid cidNode;
+  class server serverNode;
+  class linked,roles,nick,commands feature;
+  class admins admin;
+```
+
+Read the three server branches as optional features.
+A community can enable one feature, several features, or none of those features.
+The player-command path is separate because commands are actions you trigger, while linked roles, role assignments, and nickname templates are server features configured by admins.
 
 ## Shared Data
 

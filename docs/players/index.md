@@ -11,11 +11,22 @@ The most important idea is that Citizen iD is not one single feature.
 It is a set of connected flows: <strong>website account management</strong>, <strong>RSI verification</strong>, <strong>Discord integrations</strong>, <strong>external application consent</strong>, and <strong>privacy and data controls</strong>.
 This guide follows that same shape so you can start with the thing you are trying to do instead of learning the entire platform first.
 
-<figure class="cid-illustration">
-  <figcaption><strong>Illustration plan:</strong> Player journey map.</figcaption>
-  <p>The page should show a simple left-to-right diagram with five stations: sign in, link accounts, verify RSI, use Discord/community tools, and manage privacy/data.</p>
-  <p>Each station should link visually to the matching guide page so a new player can understand where to go next.</p>
-</figure>
+**Diagram: Player journey map.**
+Each station points to the guide page that explains that part of the player experience.
+
+```mermaid
+flowchart TD
+  website["Website Basics<br/>Sign in or sign up"]
+  accounts["Linked Accounts<br/>Add Discord, Google, Twitch, or RSI"]
+  rsi["RSI Verification<br/>Prove control of your RSI account"]
+  use["Discord and Apps<br/>Use community servers and tools"]
+  privacy["Privacy and Data<br/>Control discovery, consent, and exports"]
+
+  website --> accounts --> rsi --> use --> privacy
+
+  classDef cid fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
+  class website,accounts,rsi,use,privacy cid;
+```
 
 ## Start Here
 

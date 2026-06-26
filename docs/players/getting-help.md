@@ -11,11 +11,35 @@ This page helps you collect that evidence before asking for help.
 
 Never post access tokens, refresh tokens, authorization codes, client secrets, password reset links, private account exports, or full private screenshots in public channels.
 
-<figure class="cid-illustration">
-  <figcaption><strong>Illustration plan:</strong> Support evidence checklist card.</figcaption>
-  <p>The page should show a compact checklist graphic with request ID, UTC time, affected page, provider, community/server, and safe screenshot guidance.</p>
-  <p>The graphic should be reusable from other troubleshooting pages.</p>
-</figure>
+**Diagram: Safe support report.**
+Collect facts that help support reproduce the issue, and remove anything private before sharing.
+
+```mermaid
+flowchart TD
+  report["Safe support report"]
+  useful["Useful facts"]
+  context["Where, when,<br/>ID, provider"]
+  outcome["Expected<br/>vs actual"]
+  safe["Error or cropped<br/>screenshot"]
+  private["Secrets, tokens,<br/>codes, exports"]
+
+  report -->|"Include"| useful
+  useful -->|"Where and when?"| context
+  useful -->|"What changed?"| outcome
+  useful -->|"What can support inspect?"| safe
+  report -. "Remove before sharing" .-> private
+
+  classDef root fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
+  classDef detail fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
+  classDef warning fill:#fff4dd,stroke:#d8890f,color:#20242c;
+  class report root;
+  class useful,context,outcome,safe detail;
+  class private warning;
+```
+
+Read the branches as the four parts of a safe report.
+The first three branches are information support can use.
+The warning branch is information to remove before sharing, especially in public channels.
 
 ## Basic Evidence
 

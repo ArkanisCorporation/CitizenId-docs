@@ -11,11 +11,39 @@ They do not automatically control data held only by Discord, RSI/Spectrum, Googl
 
 Use this page when you need a GDPR-style overview of what you can download, what you can request to remove, and what may remain for legal, security, or integrity reasons.
 
-<figure class="cid-illustration">
-  <figcaption><strong>Illustration plan:</strong> Data export contents diagram.</figcaption>
-  <p>The diagram should show a ZIP archive in the center with folders or files for account data, linked accounts, community data, RSI profile data, OAuth data, Discord nickname data, and export metadata.</p>
-  <p>A side note should explain that third-party systems have their own data stores outside the Citizen iD export.</p>
-</figure>
+**Diagram: Data export boundary.**
+The export contains data controlled by CiD, while third-party systems have their own records outside the ZIP.
+
+```mermaid
+flowchart TD
+  cid["CiD"]
+  zip["Your data export ZIP"]
+  boundary{"Who controls<br/>the data?"}
+  included["CiD-controlled records<br/>included when present"]
+  outside["Third-party records<br/>outside this export"]
+  contents["Examples:<br/>account, links, RSI, apps, metadata"]
+  thirdParties["Examples:<br/>Discord, app databases, providers"]
+
+  cid --> boundary
+  boundary -->|"Controlled by CiD"| zip
+  zip --> included
+  included -->|"May include"| contents
+  boundary -. "Controlled by third parties" .-> outside
+  outside -. "May exist in" .-> thirdParties
+
+  classDef cidNode fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
+  classDef exportNode fill:#ffffff,stroke:#F39C12,color:#20242c,stroke-width:2px;
+  classDef includedNode fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
+  classDef outsideNode fill:#fff4dd,stroke:#d8890f,color:#20242c;
+  class cid cidNode;
+  class zip,included exportNode;
+  class contents includedNode;
+  class outside,thirdParties outsideNode;
+```
+
+Read the first branch as the practical export boundary.
+CiD-controlled records can appear in the generated ZIP when they exist on your account.
+Third-party-controlled records stay outside that ZIP, even when those systems originally learned something through a CiD-powered flow.
 
 ## Download Data
 

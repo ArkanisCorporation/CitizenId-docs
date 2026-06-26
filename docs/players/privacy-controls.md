@@ -20,11 +20,35 @@ Each layer answers a different question.
   <dd>Controls whether analytics can run in your browser for the Citizen iD website.</dd>
 </dl>
 
-<figure class="cid-illustration">
-  <figcaption><strong>Illustration plan:</strong> Privacy controls decision tree.</figcaption>
-  <p>The diagram should ask three questions: can people find my Citizen iD profile, can apps receive approved claims, and can analytics run in my browser.</p>
-  <p>The answer path should point to public discovery switches, authorized apps, and analytics consent respectively.</p>
-</figure>
+**Diagram: Privacy control layers.**
+Each layer answers a different privacy question and points you to the matching control.
+
+```mermaid
+flowchart TD
+  start["What are you trying to control?"]
+  discovery["Public discovery"]
+  consent["Application consent"]
+  analytics["Analytics consent"]
+  public["Profile discovery switches"]
+  authorized["Authorized apps<br/>and revocation"]
+  local["Browser consent<br/>or Do Not Track"]
+
+  start -->|"Findability"| discovery
+  start -->|"App access"| consent
+  start -->|"Browser analytics"| analytics
+  discovery --> public
+  consent --> authorized
+  analytics --> local
+
+  classDef question fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
+  classDef answer fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
+  class start,discovery,consent,analytics question;
+  class public,authorized,local answer;
+```
+
+Read the three branches as separate privacy questions.
+Turning off discovery does not revoke application access, and revoking an application does not change analytics consent.
+Choose the branch that matches the thing you are trying to control.
 
 ## Discovery Options
 

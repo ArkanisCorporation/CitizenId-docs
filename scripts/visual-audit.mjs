@@ -45,6 +45,11 @@ try {
       const targetUrl = `${baseUrl}${pageInfo.path}`
       await page.goto(targetUrl, { waitUntil: 'networkidle' })
       await page.evaluate(() => document.fonts?.ready)
+      await page.waitForFunction(() => {
+        const diagrams = [...document.querySelectorAll('.cid-mermaid')]
+
+        return diagrams.every(element => element.querySelector('svg'))
+      }, { timeout: 10000 }).catch(() => {})
 
       const screenshotPath = path.join(outputDir, `${viewport.name}-${pageInfo.slug}.png`)
       await page.screenshot({ path: screenshotPath, fullPage: true })
@@ -77,6 +82,15 @@ try {
           }
         })
 
+        const diagrams = [...document.querySelectorAll('.cid-mermaid')].map((element) => {
+          const rect = element.getBoundingClientRect()
+          return {
+            width: Math.round(rect.width),
+            hasSvg: Boolean(element.querySelector('svg')),
+            text: (element.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 140),
+          }
+        })
+
         const paragraphs = [...document.querySelectorAll('main p')]
           .map(element => (element.textContent || '').trim().replace(/\s+/g, ' '))
           .filter(Boolean)
@@ -89,6 +103,9 @@ try {
           offenders,
           figureCount: figures.length,
           figures,
+          diagramCount: diagrams.length,
+          unrenderedDiagramCount: diagrams.filter(diagram => !diagram.hasSvg).length,
+          diagrams,
           h2s: [...document.querySelectorAll('h2')].map(element => element.textContent.trim()),
           detailsCount: document.querySelectorAll('details').length,
           paragraphCount: paragraphs.length,
