@@ -47,6 +47,20 @@ export default withPatchedMermaid(defineConfig({
     headers: {
       level: [2, 3],
     },
+    config(md) {
+      const renderFence = md.renderer.rules.fence?.bind(md.renderer.rules)
+
+      md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+        const renderedFence = renderFence?.(tokens, idx, options, env, self)
+          ?? self.renderToken(tokens, idx, options)
+        const info = tokens[idx]?.info.trim().split(/\s+/)[0]
+
+        if (info !== 'mermaid')
+          return renderedFence
+
+        return `${renderedFence}\n<DiagramLegend />`
+      }
+    },
   },
   mermaid: {
     theme: 'base',

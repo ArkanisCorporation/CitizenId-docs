@@ -2,6 +2,7 @@ import type { App } from 'vue'
 import { useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { defineComponent, h, nextTick, onMounted, watch } from 'vue'
+import DiagramLegend from './components/DiagramLegend.vue'
 import FlexGrid from './components/FlexGrid.vue'
 import GridItem from './components/GridItem.vue'
 import Tabs from './components/Tabs.vue'
@@ -49,6 +50,7 @@ export default {
   ...DefaultTheme,
   Layout: MermaidAwareLayout,
   enhanceApp({ app }: { app: App }) {
+    app.component('DiagramLegend', DiagramLegend)
     app.component('FlexGrid', FlexGrid)
     app.component('GridItem', GridItem)
     app.component('Tabs', Tabs)

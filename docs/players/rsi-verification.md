@@ -35,7 +35,7 @@ flowchart TD
   class cid,check service;
   class rsi context;
   class save action;
-  class verified data;
+  class verified success;
   class retry caution;
 ```
 
