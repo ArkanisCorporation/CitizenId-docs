@@ -18,20 +18,30 @@ CiD gives you a temporary string, you place it on your public RSI profile, and C
 
 ```mermaid
 flowchart TD
-  cid["CiD gives you<br/>a verification string"]
-  rsi["You paste it into<br/>RSI Short Bio"]
+  cid[["CiD<br/>creates a verification string"]]
+  rsi[/"RSI Short Bio<br/>public profile field"/]
   save["You save<br/>the RSI profile"]
-  check["CiD checks<br/>the public profile"]
-  verified["Verified status<br/>can be used by communities"]
+  check[["CiD<br/>checks the public profile"]]
+  verified((Verified status))
+  retry>Fix Short Bio<br/>and try again]
 
-  cid --> rsi --> save --> check --> verified
+  cid ==>|Copy string| rsi
+  rsi ==>|Save publicly| save
+  save ==>|Ask CiD to check| check
+  check -->|"String found"| verified
+  check -. "Missing or changed" .-> retry
+  retry -. "Retry" .-> rsi
 
-  classDef cidNode fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
-  classDef step fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
-  classDef success fill:#ffffff,stroke:#F39C12,color:#20242c,stroke-width:2px;
-  class cid cidNode;
-  class rsi,save,check step;
-  class verified success;
+  classDef service fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
+  classDef context fill:#eef2ff,stroke:#6366f1,color:#20242c,stroke-width:1.5px;
+  classDef action fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
+  classDef data fill:#ecfdf5,stroke:#10b981,color:#20242c,stroke-width:1.5px;
+  classDef caution fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:1.5px;
+  class cid,check service;
+  class rsi context;
+  class save action;
+  class verified data;
+  class retry caution;
 ```
 
 <figure class="cid-illustration">

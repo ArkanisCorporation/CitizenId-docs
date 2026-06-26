@@ -26,24 +26,28 @@ Each layer answers a different privacy question and points you to the matching c
 ```mermaid
 flowchart TD
   start["What are you trying to control?"]
-  discovery["Public discovery"]
-  consent["Application consent"]
-  analytics["Analytics consent"]
+  discovery[/Public discovery/]
+  consent{"Application consent"}
+  analytics(["Analytics consent"])
   public["Profile discovery switches"]
-  authorized["Authorized apps<br/>and revocation"]
+  authorized>Authorized apps<br/>and revocation]
   local["Browser consent<br/>or Do Not Track"]
 
   start -->|"Findability"| discovery
   start -->|"App access"| consent
   start -->|"Browser analytics"| analytics
-  discovery --> public
-  consent --> authorized
-  analytics --> local
+  discovery -->|"Profile lookup"| public
+  consent -->|"Per app"| authorized
+  analytics -->|"Local browser"| local
 
-  classDef question fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
-  classDef answer fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
-  class start,discovery,consent,analytics question;
-  class public,authorized,local answer;
+  classDef decision fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:2px;
+  classDef data fill:#ecfdf5,stroke:#10b981,color:#20242c,stroke-width:1.5px;
+  classDef context fill:#eef2ff,stroke:#6366f1,color:#20242c,stroke-width:1.5px;
+  classDef caution fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:1.5px;
+  class start,consent decision;
+  class discovery,public data;
+  class analytics,local context;
+  class authorized caution;
 ```
 
 Read the three branches as separate privacy questions.

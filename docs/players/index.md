@@ -16,16 +16,32 @@ Each station points to the guide page that explains that part of the player expe
 
 ```mermaid
 flowchart TD
-  website["Website Basics<br/>Sign in or sign up"]
-  accounts["Linked Accounts<br/>Add Discord, Google, Twitch, or RSI"]
-  rsi["RSI Verification<br/>Prove control of your RSI account"]
-  use["Discord and Apps<br/>Use community servers and tools"]
-  privacy["Privacy and Data<br/>Control discovery, consent, and exports"]
+  website(["Website Basics<br/>Sign in or sign up"])
+  accounts["Linked Accounts<br/>Providers and RSI links"]
+  rsi[["RSI Verification<br/>Prove account control"]]
+  discord["Discord Integrations<br/>Servers, roles, nicknames"]
+  apps["External Apps<br/>Consent and claims"]
+  privacy[/"Privacy and Data<br/>Discovery, consent, export"/]
+  support>Getting Help<br/>Troubleshoot safely]
 
-  website --> accounts --> rsi --> use --> privacy
+  website ==>|Start here| accounts
+  accounts ==>|If required| rsi
+  rsi -->|"Community servers"| discord
+  rsi -->|"Community tools"| apps
+  discord -->|"Review effects"| privacy
+  apps -->|"Review sharing"| privacy
+  privacy -. "When stuck" .-> support
 
-  classDef cid fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
-  class website,accounts,rsi,use,privacy cid;
+  classDef context fill:#eef2ff,stroke:#6366f1,color:#20242c,stroke-width:1.5px;
+  classDef action fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
+  classDef service fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
+  classDef data fill:#ecfdf5,stroke:#10b981,color:#20242c,stroke-width:1.5px;
+  classDef caution fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:1.5px;
+  class website,discord,apps context;
+  class accounts action;
+  class rsi service;
+  class privacy data;
+  class support caution;
 ```
 
 ## Start Here

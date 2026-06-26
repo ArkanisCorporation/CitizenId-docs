@@ -16,29 +16,31 @@ The export contains data controlled by CiD, while third-party systems have their
 
 ```mermaid
 flowchart TD
-  cid["CiD"]
-  zip["Your data export ZIP"]
+  cid[["CiD"]]
+  zip[/Your data export ZIP/]
   boundary{"Who controls<br/>the data?"}
-  included["CiD-controlled records<br/>included when present"]
-  outside["Third-party records<br/>outside this export"]
-  contents["Examples:<br/>account, links, RSI, apps, metadata"]
-  thirdParties["Examples:<br/>Discord, app databases, providers"]
+  included[(CiD-controlled records<br/>included when present)]
+  outside[(Third-party records<br/>outside export)]
+  contents[["Examples:<br/>account, links, RSI, apps, metadata"]]
+  thirdParties(["Examples:<br/>Discord, apps,<br/>providers"])
 
-  cid --> boundary
-  boundary -->|"Controlled by CiD"| zip
+  cid ==>|Request export| boundary
+  boundary ==>|CiD controls| zip
   zip --> included
-  included -->|"May include"| contents
-  boundary -. "Controlled by third parties" .-> outside
-  outside -. "May exist in" .-> thirdParties
+  included -->|"Examples"| contents
+  boundary -. "Third-party control" .-> outside
+  outside -. "Separate controller" .-> thirdParties
 
-  classDef cidNode fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
-  classDef exportNode fill:#ffffff,stroke:#F39C12,color:#20242c,stroke-width:2px;
-  classDef includedNode fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
-  classDef outsideNode fill:#fff4dd,stroke:#d8890f,color:#20242c;
-  class cid cidNode;
-  class zip,included exportNode;
-  class contents includedNode;
-  class outside,thirdParties outsideNode;
+  classDef service fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
+  classDef decision fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:2px;
+  classDef data fill:#ecfdf5,stroke:#10b981,color:#20242c,stroke-width:1.5px;
+  classDef caution fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:1.5px;
+  classDef actor fill:#eff6ff,stroke:#3b82f6,color:#20242c,stroke-width:2px;
+  class cid service;
+  class boundary decision;
+  class zip,included,contents data;
+  class outside caution;
+  class thirdParties actor;
 ```
 
 Read the first branch as the practical export boundary.

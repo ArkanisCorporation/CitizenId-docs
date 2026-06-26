@@ -23,34 +23,32 @@ CiD connects your Discord account to the server features a community chooses to 
 
 ```mermaid
 flowchart TD
-  player["You<br/>Discord account"]
-  cid["CiD<br/>Account and verification"]
+  player(["Player<br/>Discord account"])
+  cid[["CiD<br/>Account and verification"]]
   server["Community Discord server"]
-  linked["Linked role checks"]
+  linked[/"Linked roles"/]
   roles["Role assignment rules"]
   nick["Nickname template"]
-  commands["Player commands"]
-  admins["Community admins"]
+  commands[["Player commands"]]
+  admins(["Community admins"])
 
-  player -->|"Link Discord"| cid
-  cid -->|"Eligible facts"| server
-  admins -->|"Enable features"| server
-  server -->|"Linked roles"| linked
-  server -->|"Role automation"| roles
-  server -->|"Nicknames"| nick
-  player -->|"Commands"| commands
-  commands -->|"Preferences"| cid
+  player ==>|Link Discord| cid
+  cid ==>|Eligible facts| server
+  admins ==>|Configure server| server
+  server -. "Optional feature" .-> linked
+  server -. "Optional feature" .-> roles
+  server -. "Optional feature" .-> nick
+  player -->|"Runs command"| commands
+  commands -. "Preference update" .-> cid
 
-  classDef person fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
-  classDef cidNode fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
-  classDef serverNode fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
-  classDef feature fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
-  classDef admin fill:#fff4dd,stroke:#d8890f,color:#20242c;
-  class player person;
-  class cid cidNode;
-  class server serverNode;
-  class linked,roles,nick,commands feature;
-  class admins admin;
+  classDef actor fill:#eff6ff,stroke:#3b82f6,color:#20242c,stroke-width:2px;
+  classDef service fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
+  classDef context fill:#eef2ff,stroke:#6366f1,color:#20242c,stroke-width:1.5px;
+  classDef action fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
+  class player,admins actor;
+  class cid service;
+  class server context;
+  class linked,roles,nick,commands action;
 ```
 
 Read the three server branches as optional features.

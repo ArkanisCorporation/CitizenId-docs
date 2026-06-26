@@ -25,32 +25,38 @@ The important player choice happens at the consent screen before CiD sends appro
 
 ```mermaid
 flowchart TD
-  app["Community app"]
-  cid["CiD<br/>Sign in and consent"]
+  app(["Community app"])
+  cid[["CiD<br/>Sign in and consent"]]
   choice{"Do you approve<br/>the requested access?"}
-  approved["Approved facts<br/>sent to app"]
-  denied["No access<br/>is granted"]
-  revoke["Revoke access"]
+  approved[/Approved facts<br/>sent to app/]
+  denied((No access))
+  revoke>Revoke access]
   future["Future access stops"]
-  stored["Old stored copies<br/>remain with the app"]
-  operator["App operator handles<br/>stored-copy deletion"]
+  stored[(Old stored copies<br/>remain with the app)]
+  operator(["App operator<br/>handles stored-copy deletion"])
 
-  app -->|"Sign in"| cid
-  cid -->|"Consent request"| choice
+  app ==>|Sign in| cid
+  cid ==>|Consent request| choice
   choice -->|"Approve"| approved
   choice -->|"Reject"| denied
-  approved -->|"Return"| app
-  app -->|"Revoke later"| revoke
+  approved ==>|Return| app
+  app -. "Later" .-> revoke
   revoke --> future
   future -. "Not deletion" .-> stored
-  stored --> operator
+  stored -. "Deletion request" .-> operator
 
-  classDef cidNode fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
-  classDef appNode fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
-  classDef warning fill:#fff4dd,stroke:#d8890f,color:#20242c;
-  class cid cidNode;
-  class app,approved,denied,future appNode;
-  class choice,revoke,stored,operator warning;
+  classDef actor fill:#eff6ff,stroke:#3b82f6,color:#20242c,stroke-width:2px;
+  classDef service fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
+  classDef decision fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:2px;
+  classDef data fill:#ecfdf5,stroke:#10b981,color:#20242c,stroke-width:1.5px;
+  classDef caution fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:1.5px;
+  classDef blocked fill:#fef2f2,stroke:#dc2626,color:#20242c,stroke-width:1.5px;
+  class app,operator actor;
+  class cid service;
+  class choice decision;
+  class approved data;
+  class denied blocked;
+  class revoke,future,stored caution;
 ```
 
 Read the approval and rejection branches as the decision point in the consent screen.

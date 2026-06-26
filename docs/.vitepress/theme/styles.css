@@ -56,6 +56,20 @@
   --cid-mermaid-edge: #f39c12;
 }
 
+@media (min-width: 768px) {
+  .vp-doc .cid-mermaid {
+    margin-left: -24px;
+    margin-right: -24px;
+  }
+}
+
+@media (min-width: 960px) {
+  .vp-doc .cid-mermaid {
+    margin-left: -48px;
+    margin-right: -48px;
+  }
+}
+
 .vp-doc .cid-mermaid svg {
   display: block;
   width: auto;
@@ -108,7 +122,6 @@
   .vp-doc .cid-mermaid {
     padding: 0.85rem;
   }
-
 }
 
 .vp-doc figure.cid-illustration figcaption {

@@ -16,25 +16,29 @@ Collect facts that help support reproduce the issue, and remove anything private
 
 ```mermaid
 flowchart TD
-  report["Safe support report"]
-  useful["Useful facts"]
-  context["Where, when,<br/>ID, provider"]
-  outcome["Expected<br/>vs actual"]
-  safe["Error or cropped<br/>screenshot"]
-  private["Secrets, tokens,<br/>codes, exports"]
+  report[["Safe support report"]]
+  useful{"Useful facts"}
+  context["Where and when<br/>ID and provider"]
+  outcome["Expected result<br/>Actual result"]
+  safe[/Error or cropped<br/>screenshot/]
+  private>Secrets, tokens,<br/>codes, exports]
 
-  report -->|"Include"| useful
-  useful -->|"Where and when?"| context
+  report ==>|Include| useful
+  useful -->|"Where?"| context
   useful -->|"What changed?"| outcome
-  useful -->|"What can support inspect?"| safe
-  report -. "Remove before sharing" .-> private
+  useful -->|"Evidence?"| safe
+  report -. "Remove secrets" .-> private
 
-  classDef root fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
-  classDef detail fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
-  classDef warning fill:#fff4dd,stroke:#d8890f,color:#20242c;
-  class report root;
-  class useful,context,outcome,safe detail;
-  class private warning;
+  classDef service fill:#fff8ec,stroke:#F39C12,color:#20242c,stroke-width:2px;
+  classDef decision fill:#fff4dd,stroke:#d8890f,color:#20242c,stroke-width:2px;
+  classDef action fill:#ffffff,stroke:#aeb7c4,color:#20242c,stroke-width:1.5px;
+  classDef data fill:#ecfdf5,stroke:#10b981,color:#20242c,stroke-width:1.5px;
+  classDef blocked fill:#fef2f2,stroke:#dc2626,color:#20242c,stroke-width:1.5px;
+  class report service;
+  class useful decision;
+  class context,outcome action;
+  class safe data;
+  class private blocked;
 ```
 
 Read the branches as the four parts of a safe report.
