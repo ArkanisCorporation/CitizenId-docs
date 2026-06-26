@@ -2,13 +2,13 @@
   <details class="details custom-block cid-diagram-legend">
     <summary>Diagram legend details</summary>
     <p>
-      CiD diagrams use the same shapes, colors, and edge styles across the documentation.
+      Citizen iD diagrams use the same shapes, colors, and edge styles across the documentation.
     </p>
 
     <div
       class="cid-diagram-legend__panel"
       role="img"
-      aria-label="Diagram legend showing the shared node types and edge types used in CiD documentation diagrams."
+      aria-label="Diagram legend showing the shared node types and edge types used in Citizen iD documentation diagrams."
     >
       <section class="cid-diagram-legend__section">
         <h4>Node meanings</h4>
@@ -27,7 +27,7 @@
             <div class="cid-diagram-legend__node-group">
               <h5>Flow</h5>
               <div class="cid-legend-node cid-legend-node--service">
-                <span>CiD service</span>
+                <span>Citizen iD service</span>
               </div>
               <div class="cid-legend-node cid-legend-node--action">
                 <span>Action</span>

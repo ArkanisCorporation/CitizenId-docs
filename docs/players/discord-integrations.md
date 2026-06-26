@@ -19,12 +19,12 @@ For example:
 - Another community may pair Discord automation with an external application that requests Citizen iD claims.
 
 **Diagram: Discord integration map.**
-CiD connects your Discord account to the server features a community chooses to enable.
+Citizen iD connects your Discord account to the server features a community chooses to enable.
 
 ```mermaid
 flowchart TD
   player(["Player<br/>Discord account"])
-  cid[["CiD<br/>Account and verification"]]
+  cid[["Citizen iD<br/>Account and verification"]]
   server["Community Discord server"]
   linked[/"Linked roles"/]
   roles["Role assignment rules"]

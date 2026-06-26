@@ -12,20 +12,20 @@ They do not automatically control data held only by Discord, RSI/Spectrum, Googl
 Use this page when you need a GDPR-style overview of what you can download, what you can request to remove, and what may remain for legal, security, or integrity reasons.
 
 **Diagram: Data export boundary.**
-The export contains data controlled by CiD, while third-party systems have their own records outside the ZIP.
+The export contains data controlled by Citizen iD, while third-party systems have their own records outside the ZIP.
 
 ```mermaid
 flowchart TD
-  cid[["CiD"]]
+  cid[["Citizen iD"]]
   zip[/Your data export ZIP/]
   boundary{"Who controls<br/>the data?"}
-  included[(CiD-controlled records<br/>included when present)]
+  included[(Citizen iD-controlled records<br/>included when present)]
   outside[(Third-party records<br/>outside export)]
   contents[["Examples:<br/>account, links, RSI, apps, metadata"]]
   thirdParties(["Examples:<br/>Discord, apps,<br/>providers"])
 
   cid ==>|Request export| boundary
-  boundary ==>|CiD controls| zip
+  boundary ==>|Citizen iD controls| zip
   zip --> included
   included -->|"Examples"| contents
   boundary -. "Third-party control" .-> outside
@@ -43,8 +43,8 @@ flowchart TD
 ```
 
 Read the first branch as the practical export boundary.
-CiD-controlled records can appear in the generated ZIP when they exist on your account.
-Third-party-controlled records stay outside that ZIP, even when those systems originally learned something through a CiD-powered flow.
+Citizen iD-controlled records can appear in the generated ZIP when they exist on your account.
+Third-party-controlled records stay outside that ZIP, even when those systems originally learned something through a Citizen iD-powered flow.
 
 ## Download Data
 

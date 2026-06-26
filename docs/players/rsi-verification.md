@@ -14,20 +14,20 @@ It is still only a Star Citizen account-control check.
 It is <em>not</em> real-world identity verification, age verification, reputation scoring, payment verification, or proof that a player is trustworthy.
 
 **Diagram: RSI verification at a glance.**
-CiD gives you a temporary string, you place it on your public RSI profile, and CiD checks that public profile before marking the account verified.
+Citizen iD gives you a temporary string, you place it on your public RSI profile, and Citizen iD checks that public profile before marking the account verified.
 
 ```mermaid
 flowchart TD
-  cid[["CiD<br/>creates a verification string"]]
+  cid[["Citizen iD<br/>creates a verification string"]]
   rsi[/"RSI Short Bio<br/>public profile field"/]
   save["You save<br/>the RSI profile"]
-  check[["CiD<br/>checks the public profile"]]
+  check[["Citizen iD<br/>checks the public profile"]]
   verified((Verified status))
   retry>Fix Short Bio<br/>and try again]
 
   cid ==>|Copy string| rsi
   rsi ==>|Save publicly| save
-  save ==>|Ask CiD to check| check
+  save ==>|Ask Citizen iD to check| check
   check -->|"String found"| verified
   check -. "Missing or changed" .-> retry
   retry -. "Retry" .-> rsi

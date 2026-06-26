@@ -21,12 +21,12 @@ The external application is still operated by its own community or developer.
 That distinction matters because Citizen iD can control what it sends going forward, but it does not control every database where an application stores data after receiving it.
 
 **Diagram: App sign-in and consent.**
-The important player choice happens at the consent screen before CiD sends approved information back to the application.
+The important player choice happens at the consent screen before Citizen iD sends approved information back to the application.
 
 ```mermaid
 flowchart TD
   app(["Community app"])
-  cid[["CiD<br/>Sign in and consent"]]
+  cid[["Citizen iD<br/>Sign in and consent"]]
   choice{"Do you approve<br/>the requested access?"}
   approved[/Approved facts<br/>sent to app/]
   denied((No access))
@@ -60,8 +60,8 @@ flowchart TD
 ```
 
 Read the approval and rejection branches as the decision point in the consent screen.
-Approval lets CiD send only the approved facts back to the app, while rejection ends the authorization without granting access.
-The later revocation branch explains a different action: it stops future CiD access, but it does not erase copies an app already stored.
+Approval lets Citizen iD send only the approved facts back to the app, while rejection ends the authorization without granting access.
+The later revocation branch explains a different action: it stops future Citizen iD access, but it does not erase copies an app already stored.
 
 ## Sign In Flow
 
