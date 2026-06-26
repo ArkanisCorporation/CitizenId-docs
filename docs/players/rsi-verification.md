@@ -7,43 +7,42 @@ description: Prove control of an RSI account and understand what verified status
 
 RSI verification connects your Citizen iD account to your Star Citizen identity.
 It proves that you control a specific RSI account by asking you to place a Citizen iD verification string in a public RSI profile field.
-Communities can then rely on Citizen iD verified status instead of asking every player to repeat manual screenshot checks.
-Verification is useful for Discord roles, external application claims, community access rules, and player profile context.
-
-It is still only a Star Citizen account-control check.
-It is <em>not</em> real-world identity verification, age verification, reputation scoring, payment verification, or proof that a player is trustworthy.
+Communities and third-party applications can then rely on Citizen iD verified status instead of making every player repeat a separate RSI bio-change verification for each server, site, or tool.
+After verification succeeds, Citizen iD can keep public RSI account details up-to-date, including later handle changes.
 
 **Diagram: RSI verification at a glance.**
-Citizen iD gives you a temporary string, you place it on your public RSI profile, and Citizen iD checks that public profile before marking the account verified.
+You get a verification code from Citizen iD, save it in the public RSI Short Bio, and then receive verified status.
+The check and refresh paths explain why you normally only need to do this once.
 
 ```mermaid
 flowchart TD
-  cid[["Citizen iD<br/>creates a verification string"]]
-  rsi[/"RSI Short Bio<br/>public profile field"/]
-  save["You save<br/>the RSI profile"]
-  check[["Citizen iD<br/>checks the public profile"]]
-  verified((Verified status))
-  retry>Fix Short Bio<br/>and try again]
+  you(["You"])
+  scheduler(["Scheduler"])
+  cid1[["Get verification code"]]
+  bio[/"RSI Short Bio"/]
+  cid2[["Load public profile"]]
+  contains{"Contains<br/>the code?"}
+  store[(Store RSI Details)]
+  verified((Account<br/>Verified))
+  refresh[["Load public profile"]]
 
-  cid ==>|Copy string| rsi
-  rsi ==>|Save publicly| save
-  save ==>|Ask Citizen iD to check| check
-  check -->|"String found"| verified
-  check -. "Missing or changed" .-> retry
-  retry -. "Retry" .-> rsi
+  you ==>|Start verification| cid1
+  cid1 ==>|Copy whole code| bio
+  bio ==>|Continue| cid2
+  cid2 ==> contains
+  contains ==>|Yes| store
+  contains -. "No" .-> cid1
+  store ==>|Account link saved| verified
+  scheduler -. "Once per day" .-> refresh
+  refresh -. "Updates the profile" .-> store
 
-  class cid,check service;
-  class rsi context;
-  class save action;
+  class you,scheduler actor;
+  class cid1,refresh service;
+  class bio context;
+  class contains decision;
+  class store data;
   class verified success;
-  class retry caution;
 ```
-
-<figure class="cid-illustration">
-  <figcaption><strong>Illustration plan:</strong> RSI verification three-step screenshot sequence.</figcaption>
-  <p>The page should show three screenshots side by side: the RSI account dashboard where the username is found, the RSI profile settings page with the Short Bio field highlighted, and the Citizen iD success state after verification.</p>
-  <p>A short video variant could show copying the verification string, opening RSI profile settings, saving the short bio, and returning to Citizen iD.</p>
-</figure>
 
 ## Before Starting
 
@@ -53,33 +52,39 @@ This rule protects communities from duplicate verification, impersonation, and b
 
 Before you begin, check these boundaries:
 
-- Do not try to verify an account owned by another person, even if that person gave you temporary access.
-- Do not verify a shared organization account unless Citizen iD explicitly supports that use case in the future.
-- Do not create a second Citizen iD account to work around a verification problem.
+- Do not verify another person's RSI account.
+- Do not verify shared organization accounts.
+- Do not create a second Citizen iD account as a workaround.
 
-::: warning One RSI account
+::: danger One RSI account
 RSI verification is intentionally more sensitive than ordinary provider linking.
-Unlinking or changing a verified RSI account may require support or operator review because the link is part of the trust model.
+After an RSI account is verified, it cannot be unlinked or replaced with a different RSI account.
+If the verified RSI account is wrong, the Citizen iD account must be closed as a whole.
+This is intentional because communities and third-party applications rely on the verified RSI link as a stable account-control signal.
 :::
 
 ## Verification Steps
 
-Follow the verification flow in order.
-Skipping steps or editing the token usually causes the check to fail.
+Verification is a short handoff between Citizen iD and your public RSI profile.
+Citizen iD gives you a generated string, you place that whole string somewhere in the RSI <strong>Short Bio</strong> field, and Citizen iD checks the public profile for the exact same string.
 
-1. Open the RSI account dashboard.
-2. Find your RSI username near your avatar.
-3. Copy the username after the `@` symbol.
-4. Enter that username into Citizen iD.
-5. Wait while Citizen iD checks whether the RSI profile exists and whether it is already linked to another Citizen iD account.
-6. Copy the verification string generated by Citizen iD.
-7. Open RSI profile settings.
-8. Find the <strong>Short Bio</strong> field.
-9. Paste the verification string exactly.
-10. Save the RSI profile.
-11. Return to Citizen iD and click the verification button.
-12. Wait for Citizen iD to read the public RSI profile.
-13. Remove the temporary string from your RSI profile only after Citizen iD confirms success.
+The surrounding text in your bio can stay as it is, but the generated string itself must not be shortened, retyped, split, or reformatted before Citizen iD confirms success.
+
+Use these steps as the practical checklist:
+
+1. Enter the RSI username for your account.
+2. Confirm the profile is available and not already linked.
+3. Copy the Citizen iD verification string.
+4. Paste the whole string into RSI <strong>Short Bio</strong>.
+5. Save the RSI profile.
+6. Return to Citizen iD and run verification.
+7. Remove the string after Citizen iD confirms success.
+
+<figure class="cid-illustration">
+  <figcaption><strong>Illustration plan:</strong> RSI verification three-step screenshot sequence.</figcaption>
+  <p>The page should show three screenshots side by side: the RSI account dashboard where the username is found, the RSI profile settings page with the Short Bio field highlighted, and the Citizen iD success state after verification.</p>
+  <p>A short video variant could show copying the verification string, opening RSI profile settings, saving the short bio, and returning to Citizen iD.</p>
+</figure>
 
 ## Failed Checks
 
@@ -90,25 +95,28 @@ Common causes include:
 - The RSI profile is temporarily unavailable.
 - The profile is already linked to another Citizen iD account.
 - The verification string is missing.
-- The verification string was changed, wrapped in extra text, or placed in the wrong field.
+- The verification string was changed or placed in the wrong field.
 - The RSI profile was not saved publicly yet.
 
 If verification fails:
 
 1. Return to the profile settings step.
-2. Compare the verification string exactly.
-3. Remove punctuation, spaces, Markdown, or extra text that was added around the string.
-4. Confirm that the string is still in the Short Bio field.
-5. Wait briefly if RSI needs time to update the public profile.
-6. Try verification again after the public profile is updated.
+2. Confirm the string is still in public Short Bio.
+3. Make sure the generated string is unchanged.
+4. Leave surrounding text in place if you want.
+5. Wait briefly for the public profile to update.
+6. Try verification again.
+
+Extra text around the verification string is fine.
+Citizen iD only needs to find the exact generated string somewhere in the public Short Bio content.
 
 ## Verified Status
 
 Verified status tells Citizen iD and approved integrations that your account has passed the RSI account-control check.
-A community can use verified status for several kinds of access decisions:
+A community or third-party application can use verified status for several kinds of access decisions:
 
 - Granting Discord roles.
-- Allowing external application access.
+- Allowing community website or external application access.
 - Displaying verified profile context.
 - Requiring verified claims in a community tool.
 
@@ -120,17 +128,18 @@ Other features can be blocked until verification is complete because the communi
 Some flows let you skip verification and continue.
 The skip option means:
 
-- You can continue when verification is not required for the action you are doing right now.
 - You do not receive verified status.
-- A Discord role, community rule, or external application can still block access until verification is complete.
+- You can continue when verification is not required for the action you are doing right now.
+- Community role/nickname rules, or external applications can block access until verified.
 
 ## Refresh Behavior
 
-After verification, Citizen iD can refresh public RSI profile data when needed.
+After verification, Citizen iD refreshes all public RSI profile details once per day.
 This matters if your RSI handle, display data, or public organization data changes.
+Those changes can update in Citizen iD without making you repeat the original verification proof.
 
 Refresh behavior does not mean Citizen iD controls RSI.
-It means Citizen iD can re-read supported public RSI/Spectrum data and update the Citizen iD account state or claims that depend on it.
+It means Citizen iD re-reads supported public RSI profile details and updates the Citizen iD account state or claims that depend on them.
 
 ::: details Details for support and account changes
 
