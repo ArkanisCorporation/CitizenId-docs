@@ -1,0 +1,106 @@
+.vp-doc figure.cid-illustration {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+}
+
+.vp-doc figure.cid-illustration figcaption {
+  margin: 0 0 0.55rem;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+.vp-doc figure.cid-illustration p {
+  margin: 0.35rem 0 0;
+  color: var(--vp-c-text-2);
+}
+
+.vp-doc strong,
+.vp-doc b {
+  color: var(--vp-c-text-1);
+  font-weight: 750;
+}
+
+.vp-doc ul,
+.vp-doc ol {
+  padding-left: 1.35rem;
+}
+
+.vp-doc ol {
+  list-style: none;
+  counter-reset: cid-step;
+  padding-left: 0;
+}
+
+.vp-doc li + li {
+  margin-top: 0.35rem;
+}
+
+.vp-doc ol > li {
+  position: relative;
+  min-height: 1.55rem;
+  padding-left: 2rem;
+  counter-increment: cid-step;
+}
+
+.vp-doc ol > li::before {
+  position: absolute;
+  top: 0.08rem;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 999px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  content: counter(cid-step);
+}
+
+.vp-doc li > p {
+  margin: 0.25rem 0;
+}
+
+.vp-doc ul > li::marker {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+.vp-doc .custom-block ul,
+.vp-doc .custom-block ol {
+  margin: 0.55rem 0 0;
+}
+
+.vp-doc .custom-block li + li {
+  margin-top: 0.3rem;
+}
+
+.vp-doc dl {
+  display: grid;
+  gap: 0.35rem 0.75rem;
+  margin: 1rem 0 1.5rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--vp-c-border);
+  border-left: 3px solid var(--vp-c-brand-1);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+}
+
+.vp-doc dt {
+  color: var(--vp-c-text-1);
+}
+
+.vp-doc dd {
+  margin: 0 0 0.7rem;
+  color: var(--vp-c-text-2);
+}
+
+.vp-doc dd:last-child {
+  margin-bottom: 0;
+}

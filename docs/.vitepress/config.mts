@@ -101,28 +101,36 @@ function nav() {
 function sidebarPlayers() {
   return [
     {
-      text: 'Getting Started',
+      text: 'Website',
       collapsed: false,
       items: [
         { text: 'Player Guide', link: '/players/' },
-        { text: 'Account Sign-Up And Sign-In', link: '/players/account-and-sign-in' },
+        { text: 'Website Basics', link: '/players/website-basics' },
         { text: 'RSI Verification', link: '/players/rsi-verification' },
-        { text: 'Discord Linked Roles', link: '/players/discord-linked-roles' },
+        { text: 'Linked Accounts', link: '/players/linked-accounts' },
       ],
     },
     {
-      text: 'Control And Privacy',
+      text: 'Integrations',
       collapsed: false,
       items: [
-        { text: 'Authorized Apps', link: '/players/authorized-apps' },
-        { text: 'Privacy And Data', link: '/players/privacy-and-data' },
+        { text: 'Discord Integrations', link: '/players/discord-integrations' },
+        { text: 'External Apps', link: '/players/external-apps' },
+      ],
+    },
+    {
+      text: 'Privacy',
+      collapsed: false,
+      items: [
+        { text: 'Privacy Controls', link: '/players/privacy-controls' },
+        { text: 'Data Rights', link: '/players/data-rights' },
       ],
     },
     {
       text: 'Support',
       collapsed: false,
       items: [
-        { text: 'Troubleshooting', link: '/players/troubleshooting' },
+        { text: 'Getting Help', link: '/players/getting-help' },
       ],
     },
   ]

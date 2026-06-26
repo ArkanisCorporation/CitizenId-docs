@@ -13,7 +13,7 @@ They include terms of service, privacy policy, cookie notice, provider list, dev
 
 Players should understand public discovery, external-account discovery, analytics consent, data export, and account deletion status.
 
-See [Privacy And Data](/players/privacy-and-data).
+See [Privacy Controls](/players/privacy-controls) and [Data Rights](/players/data-rights).
 
 ## Developer Terms
 

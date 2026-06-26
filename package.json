@@ -7,13 +7,14 @@
   "author": "Daniel Dolejska",
   "main": "index.js",
   "scripts": {
-    "dev": "vitepress dev docs",
+    "dev": "node --max-http-header-size=32768 ./node_modules/vitepress/bin/vitepress.js dev docs",
     "build": "vitepress build docs",
     "serve": "vitepress serve docs",
     "init": "npx pnpm install --store=node_modules/.pnpm-store",
     "update": "npx pnpm update --store=node_modules/.pnpm-store",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
+    "visual:audit": "node scripts/visual-audit.mjs",
     "release": "pnpm lint && pnpm build && changelogen --patch --release && git push --follow-tags"
   },
   "devDependencies": {
@@ -27,6 +28,7 @@
     "@unocss/preset-uno": "65.4.3",
     "changelogen": "^0.5.7",
     "eslint": "^9.33.0",
+    "playwright": "^1.61.1",
     "typescript": "^5.9.2",
     "unocss": "65.4.3",
     "vitepress": "^1.6.4",

@@ -1,0 +1,115 @@
+import fs from 'node:fs'
+import os from 'node:os'
+import path from 'node:path'
+import process from 'node:process'
+import { chromium } from 'playwright'
+
+const baseUrl = process.env.VISUAL_AUDIT_BASE_URL ?? 'http://127.0.0.1:5174'
+const outputDir = process.env.VISUAL_AUDIT_OUTPUT_DIR
+  ?? path.join(os.tmpdir(), 'citizenid-docs-visual-audit')
+
+const pages = [
+  { slug: 'players-index', path: '/players/' },
+  { slug: 'website-basics', path: '/players/website-basics' },
+  { slug: 'rsi-verification', path: '/players/rsi-verification' },
+  { slug: 'linked-accounts', path: '/players/linked-accounts' },
+  { slug: 'discord-integrations', path: '/players/discord-integrations' },
+  { slug: 'external-apps', path: '/players/external-apps' },
+  { slug: 'privacy-controls', path: '/players/privacy-controls' },
+  { slug: 'data-rights', path: '/players/data-rights' },
+  { slug: 'getting-help', path: '/players/getting-help' },
+]
+
+const viewports = [
+  { name: 'desktop', width: 1440, height: 1000, isMobile: false },
+  { name: 'mobile', width: 390, height: 844, isMobile: true },
+]
+
+fs.mkdirSync(outputDir, { recursive: true })
+
+const browser = await chromium.launch({ headless: true })
+const auditResults = []
+
+try {
+  for (const viewport of viewports) {
+    const context = await browser.newContext({
+      viewport: { width: viewport.width, height: viewport.height },
+      isMobile: viewport.isMobile,
+    })
+
+    for (const pageInfo of pages) {
+      const page = await context.newPage()
+      const targetUrl = `${baseUrl}${pageInfo.path}`
+      await page.goto(targetUrl, { waitUntil: 'networkidle' })
+      await page.evaluate(() => document.fonts?.ready)
+
+      const screenshotPath = path.join(outputDir, `${viewport.name}-${pageInfo.slug}.png`)
+      await page.screenshot({ path: screenshotPath, fullPage: true })
+
+      const metrics = await page.evaluate(() => {
+        const doc = document.documentElement
+        const viewportWidth = doc.clientWidth
+        const offenders = [...document.body.querySelectorAll('*')]
+          .map((element) => {
+            const rect = element.getBoundingClientRect()
+            const className = element.className?.toString?.() || ''
+            return {
+              tag: element.tagName.toLowerCase(),
+              className,
+              isExpectedOffCanvas: Boolean(element.closest('.VPSidebar, .VPNavScreen')),
+              text: (element.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 100),
+              left: Math.round(rect.left),
+              right: Math.round(rect.right),
+              width: Math.round(rect.width),
+            }
+          })
+          .filter(item => !item.isExpectedOffCanvas && item.width > 0 && (item.left < -2 || item.right > viewportWidth + 2))
+          .slice(0, 20)
+
+        const figures = [...document.querySelectorAll('figure')].map((element) => {
+          const rect = element.getBoundingClientRect()
+          return {
+            width: Math.round(rect.width),
+            text: (element.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 140),
+          }
+        })
+
+        const paragraphs = [...document.querySelectorAll('main p')]
+          .map(element => (element.textContent || '').trim().replace(/\s+/g, ' '))
+          .filter(Boolean)
+
+        return {
+          title: document.title,
+          scrollWidth: doc.scrollWidth,
+          clientWidth: doc.clientWidth,
+          hasHorizontalOverflow: doc.scrollWidth > doc.clientWidth + 1,
+          offenders,
+          figureCount: figures.length,
+          figures,
+          h2s: [...document.querySelectorAll('h2')].map(element => element.textContent.trim()),
+          detailsCount: document.querySelectorAll('details').length,
+          paragraphCount: paragraphs.length,
+          shortParagraphCount: paragraphs.filter(text => text.length < 55).length,
+          shortParagraphSamples: paragraphs.filter(text => text.length < 55).slice(0, 10),
+        }
+      })
+
+      auditResults.push({
+        viewport: viewport.name,
+        page: pageInfo.slug,
+        path: pageInfo.path,
+        screenshotPath,
+        metrics,
+      })
+
+      await page.close()
+    }
+
+    await context.close()
+  }
+}
+finally {
+  await browser.close()
+}
+
+console.log(JSON.stringify({ baseUrl, outputDir, auditResults }, null, 2))

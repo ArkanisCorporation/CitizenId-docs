@@ -3,6 +3,7 @@ import DefaultTheme from 'vitepress/theme'
 import FlexGrid from './components/FlexGrid.vue'
 import GridItem from './components/GridItem.vue'
 import Tabs from './components/Tabs.vue'
+import './styles.css'
 import 'uno.css'
 
 export default {
