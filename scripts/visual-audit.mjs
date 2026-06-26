@@ -9,6 +9,7 @@ const outputDir = process.env.VISUAL_AUDIT_OUTPUT_DIR
   ?? path.join(os.tmpdir(), 'citizenid-docs-visual-audit')
 
 const pages = [
+  { slug: 'home', path: '/' },
   { slug: 'players-index', path: '/players/' },
   { slug: 'website-basics', path: '/players/website-basics' },
   { slug: 'rsi-verification', path: '/players/rsi-verification' },
@@ -21,8 +22,9 @@ const pages = [
 ]
 
 const viewports = [
-  { name: 'desktop', width: 1440, height: 1000, isMobile: false },
-  { name: 'mobile', width: 390, height: 844, isMobile: true },
+  { name: 'desktop', width: 1440, height: 1000, isMobile: false, colorScheme: 'light' },
+  { name: 'desktop-dark', width: 1440, height: 1000, isMobile: false, colorScheme: 'dark' },
+  { name: 'mobile', width: 390, height: 844, isMobile: true, colorScheme: 'light' },
 ]
 
 fs.mkdirSync(outputDir, { recursive: true })
@@ -35,6 +37,7 @@ try {
     const context = await browser.newContext({
       viewport: { width: viewport.width, height: viewport.height },
       isMobile: viewport.isMobile,
+      colorScheme: viewport.colorScheme,
     })
 
     for (const pageInfo of pages) {

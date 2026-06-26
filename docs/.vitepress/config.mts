@@ -1,12 +1,42 @@
+import type { HeadConfig, PageData } from 'vitepress'
 import { fileURLToPath } from 'node:url'
 import Unocss from 'unocss/vite'
 import { defineConfig } from 'vitepress'
 
+const siteUrl = 'https://docs.citizenid.space'
+const siteTitle = 'Citizen iD Docs'
+const siteDescription = 'Public documentation for Citizen iD players, community admins, and community developers.'
+const socialImage = `${siteUrl}/citizenid-logo-dark.png`
+const quackbackWidgetScript = `(function(w,d){if(w.Quackback)return;w.Quackback=function(){
+  (w.Quackback.q=w.Quackback.q||[]).push(arguments)};
+  var s=d.createElement("script");s.async=true;
+  s.src="https://feedback.citizenid.dev/api/widget/sdk.js";
+  d.head.appendChild(s)})(window,document);
+
+  Quackback("init");`
+
 export default defineConfig({
   base: '/',
-  title: 'Citizen iD Documentation',
-  description: 'Public documentation for Citizen iD players, community admins, and community developers.',
+  lang: 'en-US',
+  title: siteTitle,
+  description: siteDescription,
+  cleanUrls: true,
+  metaChunk: true,
+  appearance: true,
   lastUpdated: true,
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.ico', sizes: 'any' }],
+    ['link', { rel: 'icon', type: 'image/png', href: '/citizenid-icon-dark.png', media: '(prefers-color-scheme: light)' }],
+    ['link', { rel: 'icon', type: 'image/png', href: '/citizenid-icon-light.png', media: '(prefers-color-scheme: dark)' }],
+    ['meta', { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' }],
+    ['meta', { name: 'theme-color', content: '#101114', media: '(prefers-color-scheme: dark)' }],
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:site_name', content: siteTitle }],
+    ['meta', { property: 'og:image', content: socialImage }],
+    ['meta', { name: 'twitter:card', content: 'summary' }],
+    ['meta', { name: 'twitter:image', content: socialImage }],
+    ['script', { id: 'quackback-widget' }, quackbackWidgetScript],
+  ],
   markdown: {
     headers: {
       level: [2, 3],
@@ -17,19 +47,66 @@ export default defineConfig({
       message: 'Citizen iD public documentation',
       copyright: 'Copyright &copy; 2955 Citizen iD',
     },
+    logo: {
+      light: '/citizenid-icon-dark.png',
+      dark: '/citizenid-icon-light.png',
+      alt: 'Citizen iD',
+    },
+    logoLink: '/',
+    siteTitle,
     outline: {
       level: [2, 3],
+      label: 'On this page',
     },
     search: {
       provider: 'local',
+      options: {
+        detailedView: 'auto',
+        translations: {
+          button: {
+            buttonText: 'Search docs',
+            buttonAriaLabel: 'Search Citizen iD documentation',
+          },
+          modal: {
+            displayDetails: 'Display detailed result',
+            resetButtonTitle: 'Reset search',
+            backButtonTitle: 'Close search',
+            noResultsText: 'No documentation results found',
+            footer: {
+              selectText: 'to select',
+              navigateText: 'to navigate',
+              closeText: 'to close',
+            },
+          },
+        },
+      },
     },
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/ArkanisCorporation/CitizenId-docs' },
+      { icon: 'github', link: 'https://github.com/ArkanisCorporation/CitizenId-docs', ariaLabel: 'Citizen iD documentation source on GitHub' },
     ],
     editLink: {
       pattern: 'https://github.com/ArkanisCorporation/CitizenId-docs/edit/main/docs/:path',
       text: 'Edit this page on GitHub',
     },
+    lastUpdated: {
+      text: 'Updated',
+      formatOptions: {
+        dateStyle: 'medium',
+        timeStyle: 'short',
+        forceLocale: true,
+      },
+    },
+    docFooter: {
+      prev: 'Previous page',
+      next: 'Next page',
+    },
+    darkModeSwitchLabel: 'Theme',
+    lightModeSwitchTitle: 'Switch to light theme',
+    darkModeSwitchTitle: 'Switch to dark theme',
+    sidebarMenuLabel: 'Documentation menu',
+    returnToTopLabel: 'Return to top',
+    skipToContentLabel: 'Skip to documentation content',
+    externalLinkIcon: true,
     nav: nav(),
     sidebar: {
       '/players/': sidebarPlayers(),
@@ -41,7 +118,19 @@ export default defineConfig({
     },
   },
   sitemap: {
-    hostname: 'https://docs.citizenid.space',
+    hostname: siteUrl,
+  },
+  transformPageData(pageData) {
+    if (pageData.relativePath === '404.md') {
+      return
+    }
+
+    const pageTitle = resolvePageTitle(pageData)
+    const pageDescription = pageData.description || siteDescription
+    const canonicalUrl = resolveCanonicalUrl(pageData.relativePath)
+    const head = pageData.frontmatter.head ??= []
+
+    head.push(...createPageHead(pageTitle, pageDescription, canonicalUrl))
   },
   vite: {
     plugins: [
@@ -51,6 +140,31 @@ export default defineConfig({
     ],
   },
 })
+
+function createPageHead(title: string, description: string, url: string): HeadConfig[] {
+  return [
+    ['link', { rel: 'canonical', href: url }],
+    ['meta', { property: 'og:title', content: title }],
+    ['meta', { property: 'og:description', content: description }],
+    ['meta', { property: 'og:url', content: url }],
+    ['meta', { name: 'twitter:title', content: title }],
+    ['meta', { name: 'twitter:description', content: description }],
+  ]
+}
+
+function resolvePageTitle(pageData: PageData): string {
+  const title = pageData.title || siteTitle
+
+  return title === siteTitle ? siteTitle : `${title} | ${siteTitle}`
+}
+
+function resolveCanonicalUrl(relativePath: string): string {
+  const routePath = relativePath
+    .replace(/(^|\/)index\.md$/, '$1')
+    .replace(/\.md$/, '')
+
+  return new URL(routePath ? `/${routePath}` : '/', siteUrl).href
+}
 
 function nav() {
   return [
