@@ -22,11 +22,15 @@ The common provider roles are:
   <dd>Can support contact and recovery where the product flow offers it.</dd>
 </dl>
 
-<figure class="cid-illustration">
-  <figcaption><strong>Illustration plan:</strong> Linked accounts management screenshot.</figcaption>
-  <p>The screenshot should show the linked accounts page with provider cards for Discord, Google, Twitch, email, and RSI-style special links.</p>
-  <p>The illustration should highlight where to add a provider, where to unlink a provider, and where the last-external-provider warning appears.</p>
-</figure>
+<ImageFigure
+  src="/images/citizenid-discord-auth.png"
+  alt="Old Discord authorization screen asking the player to authorize Citizen iD access."
+  title="Provider authorization"
+  caption="Shows the provider-side authorization step that can appear while adding or using a linked Discord account."
+  description="Citizen iD sends you to the provider when it needs that provider to confirm who you are or approve a new link."
+  note="This image is a placeholder from an older Discord provider flow and should be replaced with the current linked accounts management page when available."
+  missing="The ideal image should show provider cards for Discord, Google, Twitch, email, and RSI-style special links, plus the add, unlink, and last-sign-in-provider warning states."
+/>
 
 ## Link Accounts
 

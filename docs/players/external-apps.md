@@ -20,6 +20,15 @@ The external application is still operated by its own community or developer.
 
 That distinction matters because Citizen iD can control what it sends going forward, but it does not control every database where an application stores data after receiving it.
 
+<ImageFigure
+  src="/images/sign-in-with-cid-example.png"
+  alt="Example community application screen with a Sign in with Citizen iD button."
+  title="Sign in button"
+  caption="Shows how a community application may start a Citizen iD sign-in flow."
+  description="After selecting this kind of button, the application sends you to Citizen iD so you can sign in and review any required consent."
+  note="This image is a placeholder from an older community-tool sign-in surface and should be replaced with a current demo application when available."
+/>
+
 **Diagram: App sign-in and consent.**
 The important player choice happens at the consent screen before Citizen iD sends approved information back to the application.
 

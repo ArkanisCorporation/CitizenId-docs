@@ -5,6 +5,9 @@ import { defineComponent, h, nextTick, onMounted, onUnmounted, watch } from 'vue
 import DiagramLegend from './components/DiagramLegend.vue'
 import FlexGrid from './components/FlexGrid.vue'
 import GridItem from './components/GridItem.vue'
+import ImageFigure from './components/ImageFigure.vue'
+import ImageStepper from './components/ImageStepper.vue'
+import MermaidDiagram from './components/MermaidDiagram.vue'
 import Tabs from './components/Tabs.vue'
 import './styles.css'
 import 'uno.css'
@@ -101,6 +104,9 @@ export default {
     app.component('DiagramLegend', DiagramLegend)
     app.component('FlexGrid', FlexGrid)
     app.component('GridItem', GridItem)
+    app.component('ImageFigure', ImageFigure)
+    app.component('ImageStepper', ImageStepper)
+    app.component('MermaidDiagram', MermaidDiagram)
     app.component('Tabs', Tabs)
   },
 }

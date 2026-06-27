@@ -1,27 +1,27 @@
-import type { HeadConfig, PageData, UserConfig } from 'vitepress'
+import type { HeadConfig, PageData } from 'vitepress'
 import { fileURLToPath } from 'node:url'
 import Unocss from 'unocss/vite'
 import { defineConfig } from 'vitepress'
-import { withMermaid } from 'vitepress-plugin-mermaid'
 
 const siteUrl = 'https://docs.citizenid.space'
 const siteTitle = 'Citizen iD Docs'
 const siteDescription = 'Public documentation for Citizen iD players, community admins, and community developers.'
 const socialImage = `${siteUrl}/citizenid-logo-dark.png`
-const dayjsEsm = fileURLToPath(new URL('../../node_modules/dayjs/esm/index.js', import.meta.url))
-const dayjsAdvancedFormat = fileURLToPath(new URL('../../node_modules/dayjs/esm/plugin/advancedFormat/index.js', import.meta.url))
-const dayjsCustomParseFormat = fileURLToPath(new URL('../../node_modules/dayjs/esm/plugin/customParseFormat/index.js', import.meta.url))
-const dayjsDuration = fileURLToPath(new URL('../../node_modules/dayjs/esm/plugin/duration/index.js', import.meta.url))
-const dayjsIsoWeek = fileURLToPath(new URL('../../node_modules/dayjs/esm/plugin/isoWeek/index.js', import.meta.url))
 const quackbackWidgetScript = `(function(w,d){if(w.Quackback)return;w.Quackback=function(){
   (w.Quackback.q=w.Quackback.q||[]).push(arguments)};
+  function loadWidget(){if(loadWidget.loaded)return;loadWidget.loaded=true;
   var s=d.createElement("script");s.async=true;
   s.src="https://feedback.citizenid.dev/api/widget/sdk.js";
-  d.head.appendChild(s)})(window,document);
+  d.head.appendChild(s)}
+  function scheduleWidget(){w.setTimeout(function(){
+  if("requestIdleCallback" in w)w.requestIdleCallback(loadWidget,{timeout:2000});
+  else loadWidget()},2500)}
+  if(d.readyState==="complete")scheduleWidget();
+  else w.addEventListener("load",scheduleWidget,{once:true})})(window,document);
 
   Quackback("init");`
 
-export default withPatchedMermaid(defineConfig({
+export default defineConfig({
   base: '/',
   lang: 'en-US',
   title: siteTitle,
@@ -55,49 +55,15 @@ export default withPatchedMermaid(defineConfig({
           ?? self.renderToken(tokens, idx, options)
         const info = tokens[idx]?.info.trim().split(/\s+/)[0]
 
-        if (info !== 'mermaid')
+        if (info !== 'mermaid' && info !== 'mmd')
           return renderedFence
 
-        return `${renderedFence}\n<DiagramLegend />`
+        const id = `mermaid-${idx}`
+        const graph = encodeURIComponent(tokens[idx].content)
+
+        return `<MermaidDiagram id="${id}" class="cid-mermaid" graph="${graph}" />\n<DiagramLegend />`
       }
     },
-  },
-  mermaid: {
-    theme: 'base',
-    flowchart: {
-      useMaxWidth: false,
-      htmlLabels: true,
-      curve: 'basis',
-      diagramPadding: 12,
-      nodeSpacing: 36,
-      rankSpacing: 38,
-    },
-    themeVariables: {
-      background: 'transparent',
-      primaryColor: '#fff8ec',
-      primaryTextColor: '#20242c',
-      primaryBorderColor: '#f39c12',
-      secondaryColor: '#ffffff',
-      secondaryTextColor: '#20242c',
-      secondaryBorderColor: '#aeb7c4',
-      tertiaryColor: '#ffffff',
-      tertiaryTextColor: '#20242c',
-      tertiaryBorderColor: '#aeb7c4',
-      lineColor: '#b96f06',
-      textColor: '#20242c',
-      mainBkg: '#fff8ec',
-      nodeBorder: '#f39c12',
-      edgeLabelBackground: '#fff8ec',
-      labelTextColor: '#20242c',
-      labelBoxBkgColor: '#fff8ec',
-      labelBoxBorderColor: '#f39c12',
-      clusterBkg: '#ffffff',
-      clusterBorder: '#aeb7c4',
-      fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif',
-    },
-  },
-  mermaidPlugin: {
-    class: 'cid-mermaid',
   },
   themeConfig: {
     footer: {
@@ -196,30 +162,7 @@ export default withPatchedMermaid(defineConfig({
       }),
     ],
   },
-}))
-
-function withPatchedMermaid(config: UserConfig): UserConfig {
-  const mermaidConfig = withMermaid(config)
-  mermaidConfig.vite ??= {}
-  mermaidConfig.vite.resolve ??= {}
-  const existingAlias = mermaidConfig.vite.resolve.alias
-  const otherAliases = Array.isArray(existingAlias)
-    ? existingAlias.filter(alias => typeof alias.find !== 'string' || !alias.find.startsWith('dayjs'))
-    : Object.entries(existingAlias ?? {})
-        .filter(([find]) => !find.startsWith('dayjs'))
-        .map(([find, replacement]) => ({ find, replacement }))
-
-  mermaidConfig.vite.resolve.alias = [
-    { find: /^dayjs$/, replacement: dayjsEsm },
-    { find: 'dayjs/plugin/advancedFormat.js', replacement: dayjsAdvancedFormat },
-    { find: 'dayjs/plugin/customParseFormat.js', replacement: dayjsCustomParseFormat },
-    { find: 'dayjs/plugin/duration.js', replacement: dayjsDuration },
-    { find: 'dayjs/plugin/isoWeek.js', replacement: dayjsIsoWeek },
-    ...otherAliases,
-  ]
-
-  return mermaidConfig
-}
+})
 
 function createPageHead(title: string, description: string, url: string): HeadConfig[] {
   return [

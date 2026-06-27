@@ -80,11 +80,34 @@ Use these steps as the practical checklist:
 6. Return to Citizen iD and run verification.
 7. Remove the string after Citizen iD confirms success.
 
-<figure class="cid-illustration">
-  <figcaption><strong>Illustration plan:</strong> RSI verification three-step screenshot sequence.</figcaption>
-  <p>The page should show three screenshots side by side: the RSI account dashboard where the username is found, the RSI profile settings page with the Short Bio field highlighted, and the Citizen iD success state after verification.</p>
-  <p>A short video variant could show copying the verification string, opening RSI profile settings, saving the short bio, and returning to Citizen iD.</p>
-</figure>
+<ImageStepper
+  title="Existing Citizen iD verification screens"
+  note="These images are placeholders from the older interface and should be replaced with current production screenshots when available."
+  missing="The missing screenshot is the RSI profile settings page with the Short Bio field highlighted."
+  :items="[
+    {
+      src: '/images/citizenid-overview-unverified.png',
+      alt: 'Old Citizen iD account overview showing RSI Account status as pending with a Verify Now button.',
+      title: 'Pending status',
+      caption: 'Shows where the player starts RSI verification from the account overview.',
+      description: 'Use this screen to confirm that you are signed in to the expected Citizen iD account before starting verification.'
+    },
+    {
+      src: '/images/citizenid-verify.png',
+      alt: 'Old Citizen iD RSI verification screen showing the username entry step.',
+      title: 'Verification flow',
+      caption: 'Shows the old username step before Citizen iD asks for the profile update.',
+      description: 'This placeholder should eventually become the full current flow, including the generated code and the prompt to update RSI Short Bio.'
+    },
+    {
+      src: '/images/citizenid-overview-verified.png',
+      alt: 'Old Citizen iD account overview showing RSI Account status as verified.',
+      title: 'Verified status',
+      caption: 'Shows the account overview after RSI verification succeeds.',
+      description: 'After this state appears, the original verification string can be safely removed from the RSI Short Bio.'
+    }
+  ]"
+/>
 
 ## Failed Checks
 

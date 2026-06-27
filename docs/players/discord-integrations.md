@@ -94,6 +94,48 @@ If your account is not RSI-verified, Citizen iD can warn you that the linked rol
 Linked roles are often the most visible Discord feature because the claim action happens in Discord.
 They are not the only role feature Citizen iD supports.
 
+<ImageStepper
+  title="Existing Discord linked role claim screens"
+  note="These images are placeholders from an older Discord linked-role flow and should be replaced with current Discord screenshots when available."
+  :items="[
+    {
+      src: '/images/discord_full-server-menu-roles.png',
+      alt: 'Discord server menu with the Linked Roles entry visible.',
+      title: 'Open linked roles',
+      caption: 'Shows where a player starts from Discord when claiming a server role connected to Citizen iD.',
+      description: 'The exact Discord menu can vary by client, but the important step is that the player begins from Discord and chooses the server role interface.'
+    },
+    {
+      src: '/images/discord_full-linkedroles-select.png',
+      alt: 'Discord linked role selection dialog showing roles available in a server.',
+      title: 'Choose a role',
+      caption: 'Shows the Discord role selection step before Citizen iD receives the linked-role request.',
+      description: 'Discord controls this surface, while Citizen iD supplies the metadata Discord needs to decide whether the role can be claimed.'
+    },
+    {
+      src: '/images/discord-linkedroles-authorize.png',
+      alt: 'Discord connection dialog asking the player to connect Citizen iD for a linked role.',
+      title: 'Connect account',
+      caption: 'Shows the Discord-side connection prompt that appears when the role needs Citizen iD metadata.',
+      description: 'This step belongs to Discord, but it prepares the handoff to Citizen iD so the account requirement can be checked.'
+    },
+    {
+      src: '/images/discord-linkedroles-authorize-redirect.png',
+      alt: 'Discord leaving-site confirmation dialog for visiting the Citizen iD linked roles URL.',
+      title: 'Visit Citizen iD',
+      caption: 'Shows Discord warning that the flow is leaving Discord and opening Citizen iD.',
+      description: 'Continue only when the destination is the expected Citizen iD site for the environment you are using.'
+    },
+    {
+      src: '/images/discord_full-linkedroles-claim.png',
+      alt: 'Discord linked role claim screen showing a Citizen iD-connected role requirement.',
+      title: 'Claim role',
+      caption: 'Shows the final Discord-side claim step after the Citizen iD-linked requirement is available.',
+      description: 'If the requirement is not satisfied, return to Citizen iD to finish the missing account setup, such as linking Discord or completing RSI verification.'
+    }
+  ]"
+/>
+
 ## Role Assignments
 
 Some servers use Citizen iD role assignments.

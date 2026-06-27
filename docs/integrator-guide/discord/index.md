@@ -8,9 +8,15 @@ Begin by [inviting the official Citizen iD bot to your Discord server](https://d
 The bot acts as the connection between Discord’s Linked Roles system, your Discord server and the Citizen iD platform.
 Follow the prompts to select the relevant server and authorize the bot with requested permissions.
 
-![Discord Bot Installation Dialog](/images/discord-bot-install.png)
+<ImageFigure
+  src="/images/discord-bot-install.png"
+  alt="Discord Bot Installation Dialog"
+/>
 
-![Discord Bot Installation Server Selection Dialog](/images/discord-bot-install-server.png)
+<ImageFigure
+  src="/images/discord-bot-install-server.png"
+  alt="Discord Bot Installation Server Selection Dialog"
+/>
 
 ## Step 2 — Change the Bot's Role Position
 
@@ -18,7 +24,10 @@ After adding the bot to your server, navigate to the Roles section in your Serve
 Ensure that the Citizen iD bot's role is positioned **<u>above</u> any roles it will manage**.
 _This is crucial for the bot to have the necessary permissions to manage roles and nicknames correctly._
 
-![Discord Server Role Ordering Priority](/images/discord-bot-server-roles.png)
+<ImageFigure
+  src="/images/discord-bot-server-roles.png"
+  alt="Discord Server Role Ordering Priority"
+/>
 
 ---
 

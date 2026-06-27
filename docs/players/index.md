@@ -7,8 +7,9 @@ description: Start here if you use Citizen iD as a player.
 
 Citizen iD is a player identity service for Star Citizen communities.
 It helps you use one account to sign in to community tools, prove control of your RSI account, connect Discord features, and decide which parts of your identity can be shared.
+
 The most important idea is that Citizen iD is not one single feature.
-It is a set of connected flows: <strong>website account management</strong>, <strong>RSI verification</strong>, <strong>Discord integrations</strong>, <strong>external application consent</strong>, and <strong>privacy and data controls</strong>.
+It is a set of connected experiences: <strong>website account management</strong>, <strong>RSI verification</strong>, <strong>Discord integrations</strong>, <strong>external application consent</strong>, and <strong>privacy and data controls</strong>.
 This guide follows that same shape so you can start with the thing you are trying to do instead of learning the entire platform first.
 
 **Diagram: Player journey map.**

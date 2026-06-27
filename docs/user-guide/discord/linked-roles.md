@@ -5,16 +5,27 @@ Individual roles may have requirements based on your RSI account verification st
 This integration removes the need for manual role management and ensures access is always in sync with your verification status.
 
 To claim a linked role, start by navigating to the server’s menu in Discord and selecting **Linked Roles**.
-![Discord server menu](/images/discord_full-server-menu-roles.png)
+<ImageFigure
+  src="/images/discord_full-server-menu-roles.png"
+  alt="Discord server menu"
+  caption="Discord server menu"
+  description="Open the server menu before choosing the Linked Roles entry."
+/>
 
 You’ll see a list of available Linked Roles, along with the application icons.
 Select the appropriate role which has the Citizen iD application icon to begin the connection process.
-![Discord linked roles selection](/images/discord_full-linkedroles-select.png)
+<ImageFigure
+  src="/images/discord_full-linkedroles-select.png"
+  alt="Discord linked roles selection"
+/>
 
 Discord may display a prompt to connect your Citizen iD account.
 This step verifies that your account meets the role requirements—for example, having a verified RSI profile that is at least a certain number of days old.
 Once verified, click **Finish** to complete the process.
-![Discord linked roles claim screen](/images/discord_full-linkedroles-claim.png)
+<ImageFigure
+  src="/images/discord_full-linkedroles-claim.png"
+  alt="Discord linked roles claim screen"
+/>
 
 When the link is successful, the corresponding role will be immediately to your Discord account for that server.
 

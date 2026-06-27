@@ -15,11 +15,12 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "visual:audit": "node scripts/visual-audit.mjs",
+    "visual:image-stepper": "node scripts/image-stepper-smoke.mjs",
+    "performance:smoke": "node scripts/performance-smoke.mjs",
     "release": "pnpm lint && pnpm build && changelogen --patch --release && git push --follow-tags"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.19.0",
-    "@braintree/sanitize-url": "^7.1.2",
     "@iconify-json/bx": "^1.2.3",
     "@iconify-json/fluent-emoji": "^1.2.7",
     "@iconify-json/heroicons-outline": "^1.2.1",
@@ -28,17 +29,12 @@
     "@unocss/preset-icons": "65.4.3",
     "@unocss/preset-uno": "65.4.3",
     "changelogen": "^0.5.7",
-    "cytoscape": "^3.34.0",
-    "cytoscape-cose-bilkent": "^4.1.0",
-    "dayjs": "^1.11.21",
-    "debug": "^4.4.3",
     "eslint": "^9.39.4",
     "mermaid": "^11.16.0",
     "playwright": "^1.61.1",
     "typescript": "^5.9.3",
     "unocss": "65.4.3",
     "vitepress": "^1.6.4",
-    "vitepress-plugin-mermaid": "^2.0.17",
     "vue": "^3.5.39"
   }
 }

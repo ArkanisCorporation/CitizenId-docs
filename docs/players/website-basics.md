@@ -18,11 +18,14 @@ The production sign-in surface is intended to support:
 - Google for general account access.
 - Twitch for general account access where Twitch identity is useful to the player or application.
 
-<figure class="cid-illustration">
-  <figcaption><strong>Illustration plan:</strong> Citizen iD account portal overview screenshot.</figcaption>
-  <p>The screenshot should show the signed-in account portal with callouts for verified status, linked accounts, authorized apps, account settings, and privacy/data actions.</p>
-  <p>The callouts should avoid personal data by using a seeded demo account.</p>
-</figure>
+<ImageFigure
+  src="/images/citizenid-sign-in.png"
+  alt="Old Citizen iD sign-in page showing available external provider buttons."
+  title="Sign-in providers"
+  caption="Shows the provider choice that appears when you start sign-in or account creation from Citizen iD."
+  description="Choose the provider that belongs to the Citizen iD account you want to open, especially when you already use Citizen iD with Discord servers or community tools."
+  note="This image is a placeholder from the older sign-in interface and should be replaced with a current production sign-in screenshot when available."
+/>
 
 ## First Sign-Up
 
@@ -71,6 +74,16 @@ Use it to confirm the high-signal account facts before changing external systems
 
 If you are trying to debug a problem, check the portal before changing Discord roles or reauthorizing an external application.
 It tells you whether the issue is likely about your Citizen iD account or about the external system using it.
+
+<ImageFigure
+  src="/images/citizenid-overview-unverified.png"
+  alt="Old Citizen iD account overview showing RSI Account status as pending, account standing, roles, applications, and organizations."
+  title="Account portal"
+  caption="Shows the signed-in account overview where a player checks important account state."
+  description="Use this placeholder to orient readers before they follow sign-up, sign-in, provider linking, RSI verification, or account settings instructions."
+  note="This image is a placeholder from the older interface and should be replaced with a current production account portal screenshot when available."
+  missing="The ideal image should use a seeded demo account and call out verified status, linked accounts, authorized apps, account settings, and privacy or data actions."
+/>
 
 ## Account Settings
 
