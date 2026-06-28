@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { mermaidConfig } from '../../mermaidConfig'
+import { mermaidConfig, mermaidDarkThemeVariables } from '../../mermaidConfig'
 
 const props = defineProps<{
   graph: string
@@ -32,9 +32,12 @@ async function renderDiagram() {
   try {
     const { default: mermaid } = await import('mermaid')
     const isDark = document.documentElement.classList.contains('dark')
+    const themeVariables = isDark
+      ? { ...mermaidConfig.themeVariables, ...mermaidDarkThemeVariables }
+      : mermaidConfig.themeVariables
     const config = {
       ...mermaidConfig,
-      theme: isDark ? 'dark' : mermaidConfig.theme,
+      themeVariables,
     }
 
     mermaid.initialize(config)

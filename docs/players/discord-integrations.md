@@ -1,6 +1,6 @@
 ---
 title: Discord Integrations
-description: How Discord linked roles, role assignments, nickname management, and player commands work.
+description: How Discord linked roles, role assignments, nickname management, profile lookup, and player commands work.
 ---
 
 # Discord Integrations
@@ -10,76 +10,115 @@ The important phrase is <strong>choose to use it</strong>.
 Citizen iD does not automatically manage every Discord server you join.
 A server owner or community admin must configure the Citizen iD bot, Discord linked roles, role assignment templates, nickname management, or another integration.
 
+All community Discord integration features expect your Citizen iD account to be linked to a Discord account.
+If Discord is not linked, the bot cannot reliably identify your Citizen iD account from Discord, linked roles cannot evaluate the expected account conditions, and server automation cannot apply account-aware rules to you.
+
 Different servers may use different parts of the platform.
 For example:
 
 - One server may only let you claim Discord linked roles.
-- Another server may automatically assign roles when you join.
-- Another server may update your server nickname based on Citizen iD and RSI data.
-- Another community may pair Discord automation with an external application that requests Citizen iD claims.
+- Another server may automatically assign roles when you join or when account facts change.
+- Another server may update your server nickname from a Citizen iD nickname template.
+- Another server may let members use public RSI lookup commands through the Citizen iD bot.
+- Another community may pair Discord automation with a third-party application that requests Citizen iD claims.
 
 **Diagram: Discord integration map.**
-Citizen iD connects your Discord account to the server features a community chooses to enable.
+Citizen iD connects your linked Discord account to the server features a community chooses to enable.
 
 ```mermaid
 flowchart TD
-  player(["Player<br/>Discord account"])
-  cid[["Citizen iD<br/>Account and verification"]]
-  server["Community Discord server"]
-  linked[/"Linked roles"/]
-  roles["Role assignment rules"]
-  nick["Nickname template"]
-  commands[["Player commands"]]
-  admins(["Community admins"])
+  you(["You"])
+  linkedDiscord{"Discord<br/>linked?"}
+  cid[["Citizen iD"]]
+  basicData[/Account data<br/>roles + verified/]
+  lookupAllowed{"Privacy<br/>allows<br/>lookup?"}
+  rsiData[/RSI profile/]
+  redacted(("Redacted<br/>RSI profile"))
+  noLink(("No Discord<br/>features"))
+  admins(["Admins"])
+  server[/"Discord<br/>server"/]
 
-  player ==>|Link Discord| cid
-  cid ==>|Eligible facts| server
-  admins ==>|Configure server| server
-  server -. "Optional feature" .-> linked
-  server -. "Optional feature" .-> roles
-  server -. "Optional feature" .-> nick
-  player -->|"Runs command"| commands
-  commands -. "Preference update" .-> cid
+  subgraph features["Discord features"]
+    direction LR
+    botCommands[/"Bot<br>Commands"/]
+    linkedRoles[/"Linked<br>Roles"/]
+    roles[/"Role<br>Management"/]
+    nicknameTemplates[/"Nickname<br>Templates"/]
+  end
 
-  class player,admins actor;
+  you ==> linkedDiscord
+  linkedDiscord -. "No" .-> noLink
+  linkedDiscord ==>|Yes| cid
+  cid --> basicData
+  cid --> lookupAllowed
+  lookupAllowed ==>|Yes| rsiData
+  lookupAllowed -. "No" .-> redacted
+
+  basicData --> features
+  rsiData --> features
+  redacted -. "Private result" .-> features
+  features --> server
+  admins ==>|Configure| features
+
+  botCommands ~~~ linkedRoles
+  roles ~~~ nicknameTemplates
+
+  class you,members,admins actor;
+  class server,linkedRoles,roles,nicknameTemplates,botCommands context;
   class cid service;
-  class server context;
-  class linked,roles,nick,commands action;
+  class basicData,rsiData data;
+  class linkedDiscord,lookupAllowed decision;
+  class noLink,redacted blocked;
 
   click admins "/community-admins/" "Open Community Admin Guide" _self
   click server "/community-admins/discord-bot" "Open Discord Bot" _self
-  click roles "/community-admins/role-assignments" "Open Role Assignments" _self
-  click nick "/community-admins/nickname-management" "Open Nickname Management" _self
+  click linkedRoles "#linked-roles" "Open Linked Roles" _self
+  click nicknameTemplates "/community-admins/nickname-management" "Open Nickname Management" _self
+  click botCommands "/players/discord-integrations#player-commands" "Open Player Commands" _self
 ```
 
-Read the three server branches as optional features.
-A community can enable one feature, several features, or none of those features.
-The player-command path is separate because commands are actions you trigger, while linked roles, role assignments, and nickname templates are server features configured by admins.
+Read the diagram as a data-flow map.
+The Discord link decides whether any account-aware Discord feature can use Citizen iD for your Discord account.
+Once Discord is linked, basic account data such as roles and verified state can feed configured Discord features even when detailed RSI lookup is private.
+The external lookup setting is the privacy gate for detailed RSI profile data.
+When that lookup is disabled, Discord features can still run, but RSI-specific fields can be redacted or unavailable.
+The Roles feature group includes linked roles and automated role management.
+Community admins configure the feature group, and server members reach Citizen iD through bot commands where the bot is present.
 
 ## Shared Data
 
-Discord integrations use only the information needed for the configured feature.
-Typical data can include:
+When your Citizen iD account is linked to a Discord account, any Discord server may publicly learn whether that Discord account is tied to a verified RSI account.
+This public signal is only a yes-or-no verified-state signal.
+It does not reveal your RSI handle, RSI profile details, organization memberships, Citizen iD roles, authorized applications, email, or other account data by itself.
 
-- Whether your Discord account is linked.
-- Whether your Citizen iD account exists.
-- Whether RSI verification is complete.
-- Selected public RSI profile facts.
-- Public discovery state.
-- Community-specific role or nickname preferences.
+This verified-state signal applies regardless of your Citizen iD privacy settings.
+The only way to prevent Discord from being used for that public verified-state signal is to unlink the Discord provider from your Citizen iD account and use a different sign-in method.
+If Discord is your only sign-in provider, link another provider such as Google or Twitch before unlinking Discord.
 
-The exact data depends on the server configuration and the feature being used.
-Citizen iD does not give every Discord server unlimited account access just because you linked Discord.
+::: warning Discord link boundary
+Privacy settings can limit profile lookup and public profile discovery, but they do not hide the fact that a linked Discord account is or is not tied to a verified RSI account.
+Treat Discord linking as a public verification signal.
+:::
+
+Discord integrations can also use more information when a community configures deeper automation.
+The exact data depends on the server feature and on your discovery settings, but the important split is:
+
+- A linked Discord account can expose the yes-or-no RSI verified-state signal.
+- A configured server feature can evaluate general Citizen iD account facts needed for that feature.
+- Detailed RSI profile lookup and advanced RSI-based conditions depend on external account lookup being allowed.
 
 ::: tip Data boundary
-Discord integration facts are not the same thing as an external application authorization.
-External applications use OAuth consent.
+Discord integration facts are not the same thing as a third-party application authorization.
+Third-party applications use OAuth consent.
 Discord server automation uses the community's configured Discord integration features.
 :::
 
 ## Linked Roles
 
-Discord linked roles are claimed from Discord's own role interface.
+Discord linked roles must be enabled by server admins.
+Admins configure dedicated Discord roles that are linked to Citizen iD account conditions.
+Players must then explicitly claim those roles through Discord's own role dialogs.
+
 The normal linked-role flow is:
 
 1. Open Discord's linked role interface.
@@ -89,7 +128,17 @@ The normal linked-role flow is:
 5. Let Citizen iD update the role metadata Discord needs.
 6. Return to Discord and claim the role.
 
-If your account is not RSI-verified, Citizen iD can warn you that the linked role may still be unavailable.
+Linked-role details can appear on server profiles for the corresponding Discord members.
+If privacy settings disallow external account lookup, Discord can show `<REDACTED> (profile not public)` instead of the actual RSI handle.
+The linked-role surface can still show that the account is active or RSI-verified when that is one of the configured linked-role conditions.
+
+<ImageFigure
+  src="/images/discord-linked-role-profile-preview.png"
+  alt="Discord server profile app section showing Citizen iD linked-role details including account active, RSI profile verified, and RSI registration date."
+  title="Linked role preview"
+  caption="Shows how Citizen iD linked-role details can appear on a Discord server profile."
+  description="When external account lookup is not allowed, profile fields such as the RSI handle can be redacted while linked-role condition badges can still appear."
+/>
 
 Linked roles are often the most visible Discord feature because the claim action happens in Discord.
 They are not the only role feature Citizen iD supports.
@@ -136,11 +185,11 @@ They are not the only role feature Citizen iD supports.
   ]"
 />
 
-## Role Assignments
+## Role Management
 
-Some servers use Citizen iD role assignments.
-Role assignments are configured by community admins and can change your Discord server roles automatically.
-They may run when:
+Some servers use automated Citizen iD role management.
+Role management is configured by community admins and can change your Citizen iD community roles or Discord server roles automatically.
+It may run when:
 
 - You join a server.
 - Your linked accounts change.
@@ -148,28 +197,47 @@ They may run when:
 - A role-sync event is triggered.
 - Someone uses a manual resync command.
 
-A role assignment can depend on:
+Automated role management can access general information about the Citizen iD account linked to the corresponding Discord account regardless of privacy settings.
+That general information can include:
 
-- Citizen iD account state.
-- Discord state.
-- Public profile settings.
-- RSI profile data.
-- RSI profile details.
-- RSI organization membership.
+- Citizen iD system roles.
+- Some community-scoped roles.
+- Discord server roles that you have on the designated community server.
+- Current profile accessibility: Public, Public without external account lookup, or Private.
+
+Communities can use that information to conditionally assign Citizen iD community roles, Discord server roles, or both.
+Privacy settings do not block this general automation data when the feature is running in a server where your linked Discord account is present.
+
+When external account lookup is allowed on your account, server admins may also configure advanced conditions based on public RSI profile information.
+Advanced conditions can filter by:
+
+- Concrete individual RSI profiles.
+  - RSI profile age.
+- Public organization memberships.
+  - Membership in concrete organizations.
+  - Concrete ranks, membership types, or organization roles.
 
 The exact rules are chosen by the community.
-If you do not understand why a role was added or removed, ask that community's admins which Citizen iD role-assignment templates they use.
+If you do not understand why a role was added or removed, ask that community's admins which Citizen iD role-management templates they use.
 
 ## Nickname Management
 
 Some servers use Citizen iD nickname management.
 Nickname management can set or update your server nickname from a configured template.
-The template may use:
+Server admins choose the template.
 
-- Your Citizen iD display name.
-- Your server-local display-name preference.
-- RSI information.
-- Other fields selected by the server.
+Templates can enforce formats such as:
+
+- `<YOUR_DISPLAY_NAME> (<YOUR_RSI_HANDLE>)`
+- `<YOUR_RSI_HANDLE>`
+- A custom format chosen by the community.
+
+Some templates include a customizable display-name segment.
+Use `/account set-display-name server-display-name:<YOUR_DISPLAY_NAME>` in any Discord server where the Citizen iD integration bot is present to configure your preferred display name for that server.
+Use `/account unset-display-name server-display-name:<YOUR_DISPLAY_NAME>` to reset the server-preferred nickname value to the default, which is your global/default Discord profile display name.
+
+If no Citizen iD account is linked to the Discord account, or if privacy settings disallow external service lookup for a field used in the template, unavailable fields use the literal value `<REDACTED>`.
+For example, a template that expects an RSI handle can produce a nickname containing `<REDACTED>` when the handle is not available to that server feature.
 
 Discord still controls final nickname limits and permissions.
 If the bot cannot manage your nickname, the cause is often one of these Discord-side constraints:
@@ -180,25 +248,41 @@ If the bot cannot manage your nickname, the cause is often one of these Discord-
 
 ## Player Commands
 
-The Citizen iD Discord bot includes player-facing account commands.
+The Citizen iD Discord bot includes player-facing account and RSI commands.
 Depending on server configuration, you may be able to:
 
 - Prompt account creation.
 - Set a global Citizen iD display name.
 - Set a server-specific display-name preference.
 - Remove display-name preferences.
+- Request public RSI profile information.
 
+Use `/account set-display-name server-display-name:<YOUR_DISPLAY_NAME>` to set the server-preferred display name used by compatible nickname templates.
+Use `/account unset-display-name server-display-name:<YOUR_DISPLAY_NAME>` to reset that server preference to the default.
+
+Members on servers with the Citizen iD integration bot can use `/rsi profile rsi-handle:<RSI_HANDLE>` to request detailed public information about a corresponding RSI profile.
+They can also use `/rsi profile server-member:<MEMBER_TAG>` to request the RSI profile tied to a particular Discord user.
+
+The member lookup has important caveats:
+
+- The target user must have a Citizen iD account linked to their Discord account.
+- The target user's privacy settings must allow external provider discovery.
+- You, the Citizen iD bot, and the target user must share the server where you request the information.
+
+If those conditions are not met, the lookup can fail or return a redacted/not-public result.
 Commands can be rate-limited.
 Some command responses are private to you.
 Some admin-triggered prompts may mention another server member.
 
 ## Opt Out
 
-The simplest way to opt out of a server's role or nickname automation is to leave that Discord server.
-You can unlink Discord from Citizen iD where supported, but that may affect sign-in and other servers.
-If Discord is your last supported sign-in method, link another provider first.
+All community integration features expect a Discord provider link to function properly.
+Leaving a server can stop that server from applying its own role or nickname automation to you, but it does not remove the Discord provider link from your Citizen iD account.
+Revoking a third-party application also does not disable Discord server automation, because those are different integration paths.
 
-Revoking an external application does not necessarily disable Discord server automation, because those are different integration paths.
+To opt out of Discord-based Citizen iD identification, unlink the Discord provider from your Citizen iD account and use a different sign-in method.
+This is also the only way to prevent Discord servers from learning the public yes-or-no verified RSI state tied to your linked Discord account.
+If Discord is your last supported sign-in method, link another provider first.
 
 ::: details Details for role or nickname disputes
 
@@ -212,6 +296,7 @@ For a role or nickname dispute, collect:
 - Whether you recently changed RSI data.
 - Whether you recently changed linked-account data.
 - Whether a manual resync was attempted.
+- Whether you recently changed external account lookup or profile discovery settings.
 
 Do not post private tokens or account exports in a Discord support channel.
 

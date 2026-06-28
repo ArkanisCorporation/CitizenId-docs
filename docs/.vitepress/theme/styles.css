@@ -15,6 +15,9 @@
   --cid-mermaid-label-text: #20242c;
   --cid-mermaid-edge: #b96f06;
   --cid-mermaid-text: #20242c;
+  --cid-mermaid-cluster-fill: #f8fafc;
+  --cid-mermaid-cluster-stroke: #d3dae4;
+  --cid-mermaid-cluster-text: #20242c;
   --cid-mermaid-actor-fill: #eff6ff;
   --cid-mermaid-actor-stroke: #3b82f6;
   --cid-mermaid-service-fill: #fff8ec;
@@ -50,6 +53,9 @@
   --cid-mermaid-label-bg: #fff1d6;
   --cid-mermaid-label-text: #20242c;
   --cid-mermaid-edge: #f39c12;
+  --cid-mermaid-cluster-fill: #22252c;
+  --cid-mermaid-cluster-stroke: #4b5563;
+  --cid-mermaid-cluster-text: #edede8;
 }
 
 .vp-doc figure.cid-illustration {
@@ -190,6 +196,21 @@
 .vp-doc .cid-mermaid .label,
 .vp-doc .cid-mermaid .cluster-label {
   color: var(--cid-mermaid-text) !important;
+}
+
+.vp-doc .cid-mermaid .cluster rect,
+.vp-doc .cid-mermaid .cluster path,
+.vp-doc .cid-mermaid .cluster polygon {
+  fill: var(--cid-mermaid-cluster-fill) !important;
+  stroke: var(--cid-mermaid-cluster-stroke) !important;
+  stroke-width: 1.5px !important;
+}
+
+.vp-doc .cid-mermaid .cluster .label,
+.vp-doc .cid-mermaid .cluster .cluster-label,
+.vp-doc .cid-mermaid .cluster .nodeLabel,
+.vp-doc .cid-mermaid .cluster .nodeLabel p {
+  color: var(--cid-mermaid-cluster-text) !important;
 }
 
 .vp-doc .cid-mermaid a,
