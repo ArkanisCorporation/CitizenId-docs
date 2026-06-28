@@ -38,8 +38,8 @@ flowchart TD
   class thirdParties actor;
 
   click cid "/players/website-basics" "Open Website Basics" _self
-  click outside "/players/external-apps" "Open Third-Party Apps" _self
-  click thirdParties "/players/external-apps" "Open Third-Party Apps" _self
+  click outside "/players/third-party-apps" "Open Third-Party Apps" _self
+  click thirdParties "/players/third-party-apps" "Open Third-Party Apps" _self
 ```
 
 Read the first branch as the practical export boundary.

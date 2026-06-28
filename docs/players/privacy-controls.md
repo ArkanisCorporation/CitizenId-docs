@@ -25,27 +25,33 @@ Each layer answers a different privacy question and points you to the matching c
 
 ```mermaid
 flowchart TD
-  start["What are you trying to control?"]
-  discovery[/Public discovery/]
-  consent{"Application consent"}
-  analytics(["Analytics consent"])
-  public["Profile discovery switches"]
-  authorized>Authorized apps<br/>and revocation]
-  local["Browser consent<br/>or Do Not Track"]
+  you([You])
+  controls["Privacy Controls"]
 
-  start -->|"Findability"| discovery
-  start -->|"App access"| consent
-  start -->|"Browser analytics"| analytics
-  discovery -->|"Profile lookup"| public
-  consent -->|"Per app"| authorized
+  external[/Public discovery/]
+  apps[/"Authorized apps"/]
+  analytics[/"Browser analytics"/]
+
+  privacy>"Account settings"]
+  authorized>Application authorizations]
+  local>"Browser consent"]
+
+  you ==> controls
+
+  controls --> external
+  controls --> apps
+  controls --> analytics
+
+  external -.->|"Controlled by"| privacy
+  apps -->|"Per app"| authorized
   analytics -->|"Local browser"| local
 
-  class start,consent decision;
-  class discovery,public data;
-  class analytics,local context;
-  class authorized caution;
+  class you actor;
+  class external,apps,analytics context;
 
-  click authorized "/players/external-apps" "Open Third-Party Apps" _self
+  click privacy "#discovery-options" "Open Discovery Options" _self
+  click authorized "/players/third-party-apps" "Open Third-Party Apps" _self
+  click local "#analytics-consent" "Open Analytics Consent" _self
 ```
 
 Read the three branches as separate privacy questions.
@@ -112,7 +118,7 @@ Application consent is separate from public discovery.
 An application can receive data covered by approved scopes even if your public profile is not discoverable.
 That happens because you explicitly authorized that application through the Citizen iD consent flow.
 
-If you no longer want an application to receive data, review and revoke it in [Third-Party Apps](/players/external-apps).
+If you no longer want an application to receive data, review and revoke it in [Third-Party Apps](/players/third-party-apps).
 
 The practical rule is:
 

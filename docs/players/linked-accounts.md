@@ -97,4 +97,4 @@ After unlinking, remember these follow-up effects:
 - Discord servers may need time or a resync before role or nickname automation reflects the change.
 - Third-party applications may retain data they already received while authorized.
 - Provider-side data remains controlled by the provider.
-- Application authorization is separate, so use [Third-Party Apps](/players/external-apps) to revoke application access.
+- Application authorization is separate, so use [Third-Party Apps](/players/third-party-apps) to revoke application access.

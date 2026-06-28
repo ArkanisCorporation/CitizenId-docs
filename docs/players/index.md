@@ -45,7 +45,7 @@ flowchart TD
   click accounts "/players/linked-accounts" "Open Linked Accounts" _self
   click rsi "/players/rsi-verification" "Open RSI Verification" _self
   click discord "/players/discord-integrations" "Open Discord Integrations" _self
-  click apps "/players/external-apps" "Open Third-Party Apps" _self
+  click apps "/players/third-party-apps" "Open Third-Party Apps" _self
   click privacy "/players/privacy-controls" "Open Privacy Controls" _self
   click dataRights "/players/data-rights" "Open Data Rights" _self
   click support "/players/getting-help" "Open Getting Help" _self
@@ -60,7 +60,7 @@ Each item points to the page that answers the practical question behind the task
 2. Use [RSI Verification](/players/rsi-verification) when a community asks you to prove control of your Star Citizen identity.
 3. Use [Linked Accounts](/players/linked-accounts) when you need to add or remove Discord, Google, Twitch, email, or RSI-related links.
 4. Use [Discord Integrations](/players/discord-integrations) when the question starts with Discord roles, nicknames, linked roles, or bot commands.
-5. Use [Third-Party Apps](/players/external-apps) when the question starts in a community website, bot, overlay, dashboard, or other third-party tool.
+5. Use [Third-Party Apps](/players/third-party-apps) when the question starts in any web, desktop, or mobile application operated outside Citizen iD.
 6. Use [Privacy Controls](/players/privacy-controls) when the question is about visibility, public discovery, application consent, or analytics consent.
 7. Use [Data Rights](/players/data-rights) when the question is about data export, account removal, retained records, or third-party data boundaries.
 8. Use [Getting Help](/players/getting-help) when something is not working and you need to collect the right evidence before asking for support.
