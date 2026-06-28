@@ -36,7 +36,7 @@ The common provider roles are:
 
 Use the linked-account flow when you intentionally want another provider attached to the same Citizen iD account.
 
-1. Open the linked accounts page from your account portal or account settings.
+1. Open the linked accounts page from your account overview or account settings.
 2. Choose the provider you want to add.
 3. Authorize the connection on the provider's own screen.
 4. Return to Citizen iD after the provider callback completes.
@@ -45,7 +45,7 @@ Use the linked-account flow when you intentionally want another provider attache
 
 ## Unlink Accounts
 
-You can unlink supported external providers from the linked accounts page.
+You can unlink supported sign-in providers from the linked accounts page.
 The normal unlink flow is:
 
 1. Open the linked accounts page.
@@ -90,11 +90,11 @@ If you verified the wrong RSI account or need the link reviewed, contact support
 ## After Unlinking
 
 Unlinking stops Citizen iD from treating that provider account as connected going forward.
-It does not automatically delete data that a Discord server, external application, or provider already stored.
+It does not automatically delete data that a Discord server, third-party application, or provider already stored.
 
 After unlinking, remember these follow-up effects:
 
 - Discord servers may need time or a resync before role or nickname automation reflects the change.
-- External applications may retain data they already received while authorized.
+- Third-party applications may retain data they already received while authorized.
 - Provider-side data remains controlled by the provider.
-- Application authorization is separate, so use [External Apps](/players/external-apps) to revoke application access.
+- Application authorization is separate, so use [Third-Party Apps](/players/external-apps) to revoke application access.

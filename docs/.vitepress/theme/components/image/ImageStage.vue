@@ -81,19 +81,4 @@ defineEmits<{
   max-height: 430px;
   object-fit: contain;
 }
-
-:global(.cid-image-figure) .cid-image-stepper__stage {
-  padding: 0;
-  background: transparent;
-}
-
-:global(.cid-image-figure) .cid-image-stepper__viewer {
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-}
-
-:global(.cid-image-figure) .cid-image-stepper__image {
-  max-height: none;
-}
 </style>

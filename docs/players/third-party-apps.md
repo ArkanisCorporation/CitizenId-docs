@@ -1,11 +1,11 @@
 ---
-title: External Apps
+title: Third-Party Apps
 description: Sign in to community tools, review consent, understand claims, and revoke authorization.
 ---
 
-# External Apps
+# Third-Party Apps
 
-External applications are community tools that use Citizen iD for sign-in, account linking, or API access.
+Third-party apps are community tools that use Citizen iD for sign-in, account linking, or API access.
 They can include:
 
 - Websites.
@@ -16,7 +16,7 @@ They can include:
 - Other Star Citizen community software.
 
 Citizen iD is the identity provider in these flows.
-The external application is still operated by its own community or developer.
+The third-party application is still operated by its own community or developer.
 
 That distinction matters because Citizen iD can control what it sends going forward, but it does not control every database where an application stores data after receiving it.
 
@@ -77,13 +77,16 @@ The later revocation branch explains a different action: it stops future Citizen
 When an application needs Citizen iD identity, it redirects you to Citizen iD.
 The normal authorization flow is:
 
-1. The external application redirects you to Citizen iD.
+1. The third-party application redirects you to Citizen iD.
 2. Citizen iD signs you in or uses your existing session.
 3. Citizen iD shows a consent screen if the requested access requires consent.
 4. You approve or reject the request.
 5. Citizen iD redirects you back to the application with the authorization result.
 
 If something is missing, such as required email or RSI profile data, Citizen iD can stop the flow and tell you which requirement must be satisfied first.
+Citizen iD tries not to create a new account by accident during a third-party app sign-in.
+If the app expects an existing Citizen iD account, choose a provider that is already linked to that account.
+Some third-party app flows can still support deliberate creation of a completely new Citizen iD account, but that should be treated as account setup rather than ordinary returning-user sign-in.
 
 ## Consent Screen
 
@@ -156,7 +159,7 @@ Use these habits for community tools:
 
 ::: details Details for debugging app sign-in
 
-When an external application sign-in fails, record:
+When a third-party application sign-in fails, record:
 
 - The application name.
 - The environment, if you know it.

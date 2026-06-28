@@ -73,7 +73,41 @@ const item = computed<ImageDisplayItem>(() => {
 
 <style scoped>
 .cid-image-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 1rem 0;
+}
+
+:deep(.cid-image-stepper__stage) {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  text-align: center;
+}
+
+:deep(.cid-image-stepper__viewer) {
+  display: inline-block;
+  max-width: 100%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  vertical-align: top;
+}
+
+:deep(.cid-image-stepper__preview-button) {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  vertical-align: top;
+}
+
+:deep(.cid-image-stepper__image) {
+  width: auto;
+  max-width: 100%;
+  max-height: none;
+  height: auto;
 }
 
 .cid-image-figure__note {

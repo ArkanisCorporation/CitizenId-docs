@@ -7,7 +7,7 @@ description: Download your data, request account removal, and understand retaine
 
 Citizen iD provides player-facing data export and account removal processes.
 These processes cover data controlled by Citizen iD.
-They do not automatically control data held only by Discord, RSI/Spectrum, Google, Twitch, a community Discord server, or an external application database.
+They do not automatically control data held only by Discord, RSI/Spectrum, Google, Twitch, a community Discord server, or a third-party application database.
 
 Use this page when you need a GDPR-style overview of what you can download, what you can request to remove, and what may remain for legal, security, or integrity reasons.
 
@@ -38,8 +38,8 @@ flowchart TD
   class thirdParties actor;
 
   click cid "/players/website-basics" "Open Website Basics" _self
-  click outside "/players/external-apps" "Open External Apps" _self
-  click thirdParties "/players/external-apps" "Open External Apps" _self
+  click outside "/players/external-apps" "Open Third-Party Apps" _self
+  click thirdParties "/players/external-apps" "Open Third-Party Apps" _self
 ```
 
 Read the first branch as the practical export boundary.
@@ -83,12 +83,12 @@ Typical export categories include:
 - Discord nickname preferences.
 - Export metadata.
 
-For example, a player who never authorized external applications will have less OAuth data than a player who has used several community tools.
+For example, a player who never authorized third-party applications will have less OAuth data than a player who has used several community tools.
 A player who never joined a Citizen iD-managed community may have less community data than a community admin or staff member.
 
 ::: tip Export scope
 The export is a Citizen iD export.
-It does not export data held only by Discord, RSI, Google, Twitch, or an external community application.
+It does not export data held only by Discord, RSI, Google, Twitch, or a third-party community application.
 :::
 
 ## Delete Account

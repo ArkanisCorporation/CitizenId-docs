@@ -252,7 +252,7 @@ function sidebarPlayers() {
       collapsed: false,
       items: [
         { text: 'Discord Integrations', link: '/players/discord-integrations' },
-        { text: 'External Apps', link: '/players/external-apps' },
+        { text: 'Third-Party Apps', link: '/players/third-party-apps' },
       ],
     },
     {

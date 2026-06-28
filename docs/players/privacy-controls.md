@@ -6,7 +6,7 @@ description: Public profile discovery, external account discovery, application c
 # Privacy Controls
 
 Citizen iD privacy controls decide how your account can be discovered and how future sharing happens through Citizen iD.
-They are not a magic eraser for every copy of information already held by Discord, RSI, Google, Twitch, a community server, or an external application.
+They are not a magic eraser for every copy of information already held by Discord, RSI, Google, Twitch, a community server, or a third-party application.
 
 Think of privacy controls as three separate layers: <strong>public discovery</strong>, <strong>application consent</strong>, and <strong>analytics consent</strong>.
 Each layer answers a different question.
@@ -15,7 +15,7 @@ Each layer answers a different question.
   <dt><strong>Public discovery</strong></dt>
   <dd>Controls whether other people or supported lookup paths can find your Citizen iD profile.</dd>
   <dt><strong>Application consent</strong></dt>
-  <dd>Controls whether a specific external application may receive approved claims through Citizen iD.</dd>
+  <dd>Controls whether a specific third-party application may receive approved claims through Citizen iD.</dd>
   <dt><strong>Analytics consent</strong></dt>
   <dd>Controls whether analytics can run in your browser for the Citizen iD website.</dd>
 </dl>
@@ -45,7 +45,7 @@ flowchart TD
   class analytics,local context;
   class authorized caution;
 
-  click authorized "/players/external-apps" "Open External Apps" _self
+  click authorized "/players/external-apps" "Open Third-Party Apps" _self
 ```
 
 Read the three branches as separate privacy questions.
@@ -112,7 +112,7 @@ Application consent is separate from public discovery.
 An application can receive data covered by approved scopes even if your public profile is not discoverable.
 That happens because you explicitly authorized that application through the Citizen iD consent flow.
 
-If you no longer want an application to receive data, review and revoke it in [External Apps](/players/external-apps).
+If you no longer want an application to receive data, review and revoke it in [Third-Party Apps](/players/external-apps).
 
 The practical rule is:
 

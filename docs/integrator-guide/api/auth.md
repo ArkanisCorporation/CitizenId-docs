@@ -10,7 +10,7 @@ External integrators should generally rely on OAuth2 tokens instead.
 
 ## Bearer Tokens
 
-The primary method for external applications to authenticate with the API is using **Bearer Tokens** in the `Authorization` header.
+The primary method for third-party applications to authenticate with the API is using **Bearer Tokens** in the `Authorization` header.
 
 ```http
 Authorization: Bearer <your_access_token>

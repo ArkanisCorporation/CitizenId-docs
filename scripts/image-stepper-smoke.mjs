@@ -19,6 +19,20 @@ async function checkInlineImage(path, index, options = {}) {
 
     const figure = page.locator('.cid-image-figure').nth(index)
     await figure.waitFor({ state: 'visible', timeout: 5000 })
+    await figure.scrollIntoViewIfNeeded()
+    await figure.locator('.cid-image-stepper__image').waitFor({ state: 'visible', timeout: 5000 })
+    await figure.locator('.cid-image-stepper__image').evaluate((image) => {
+      if (!(image instanceof HTMLImageElement))
+        return
+
+      if (image.complete && image.naturalWidth > 0)
+        return
+
+      return new Promise((resolve, reject) => {
+        image.addEventListener('load', resolve, { once: true })
+        image.addEventListener('error', reject, { once: true })
+      })
+    })
     assert.equal(await figure.locator('.cid-image-stepper__header').count(), 0)
     assert.equal(await figure.locator('.cid-image-stepper__dot').count(), 0)
     assert.equal(await figure.locator('.cid-image-stepper__image-nav').count(), 0)
@@ -28,6 +42,49 @@ async function checkInlineImage(path, index, options = {}) {
     }
     else {
       assert.equal(await figure.locator('.cid-image-stepper__copy').count(), 0)
+    }
+
+    if (options.preserveIntrinsicWidth) {
+      const imageSizing = await figure.evaluate((element) => {
+        const viewer = element.querySelector('.cid-image-stepper__viewer')
+        const button = element.querySelector('.cid-image-stepper__preview-button')
+        const image = element.querySelector('.cid-image-stepper__image')
+
+        if (!(viewer instanceof HTMLElement) || !(button instanceof HTMLElement) || !(image instanceof HTMLImageElement))
+          return null
+
+        const figureRect = element.getBoundingClientRect()
+        const viewerRect = viewer.getBoundingClientRect()
+        const buttonRect = button.getBoundingClientRect()
+        const imageRect = image.getBoundingClientRect()
+
+        return {
+          figureCenter: figureRect.left + figureRect.width / 2,
+          imageCenter: imageRect.left + imageRect.width / 2,
+          viewerWidth: viewerRect.width,
+          buttonWidth: buttonRect.width,
+          imageWidth: imageRect.width,
+          naturalWidth: image.naturalWidth,
+        }
+      })
+
+      assert.ok(imageSizing, 'inline image sizing metrics should be available')
+      assert.ok(
+        imageSizing.imageWidth <= imageSizing.naturalWidth + 1,
+        'inline image should not stretch beyond its intrinsic width',
+      )
+      assert.ok(
+        Math.abs(imageSizing.viewerWidth - imageSizing.imageWidth) <= 4,
+        'inline image wrapper should fit the image width',
+      )
+      assert.ok(
+        Math.abs(imageSizing.buttonWidth - imageSizing.imageWidth) <= 4,
+        'inline image click target should fit the image width',
+      )
+      assert.ok(
+        Math.abs(imageSizing.figureCenter - imageSizing.imageCenter) <= 2,
+        'inline image should be centered inside the content column',
+      )
     }
 
     await figure.locator('.cid-image-stepper__preview-button').click()
@@ -183,8 +240,13 @@ try {
   })
   await checkInlineImage('/players/website-basics', 1, {
     expectedStepperCount: 0,
-    hasCopy: /Account portal/,
-    hasLightboxTitle: /Account portal/,
+    hasCopy: /Account overview/,
+    hasLightboxTitle: /Account overview/,
+  })
+  await checkInlineImage('/players/website-basics', 2, {
+    expectedStepperCount: 0,
+    hasCopy: /Account settings/,
+    hasLightboxTitle: /Account settings/,
   })
   await checkInlineImage('/players/linked-accounts', 0, {
     expectedStepperCount: 0,
@@ -195,6 +257,13 @@ try {
     expectedStepperCount: 0,
     hasCopy: /Sign in button/,
     hasLightboxTitle: /Sign in button/,
+    preserveIntrinsicWidth: true,
+  })
+  await checkInlineImage('/players/discord-integrations', 0, {
+    expectedStepperCount: 1,
+    hasCopy: /Linked role preview/,
+    hasLightboxTitle: /Linked role preview/,
+    preserveIntrinsicWidth: true,
   })
   await checkMultiImageStepper('/players/discord-integrations', /Open linked roles/, 5)
   await checkMultiImageStepper('/community-admins/discord-bot', /Install bot/, 3)

@@ -6,7 +6,7 @@ description: Troubleshooting and support evidence for players.
 # Getting Help
 
 Support works best when your report is specific, safe to share, and tied to the surface where the problem happened.
-A sign-in issue, Discord role issue, RSI verification issue, external application issue, and data export issue need different evidence.
+A sign-in issue, Discord role issue, RSI verification issue, third-party application issue, and data export issue need different evidence.
 This page helps you collect that evidence before asking for help.
 
 Never post access tokens, refresh tokens, authorization codes, client secrets, password reset links, private account exports, or full private screenshots in public channels.
@@ -56,7 +56,7 @@ Every useful support report should include:
 
 For account-level issues, include the detail that matches the failing flow:
 
-- For sign-in or sign-up problems, say which provider you used and whether you were starting from Citizen iD directly or returning from an external application.
+- For sign-in or sign-up problems, say which provider you used and whether you were starting from Citizen iD directly or returning from a third-party application.
 - For linked-account problems, say which provider you tried to link or unlink and whether it is your last sign-in provider.
 - For RSI verification problems, include the RSI username you entered and the exact error message.
 
@@ -75,7 +75,7 @@ Citizen iD support may need the community admin to check audit logs or bot permi
 
 ## App Issues
 
-For external application issues, include the application name, requested action, and non-secret error message.
+For third-party application issues, include the application name, requested action, and non-secret error message.
 If the consent screen appeared, describe the scopes or requirement it mentioned.
 
 Do not share:

@@ -139,7 +139,7 @@ Verified status tells Citizen iD and approved integrations that your account has
 A community or third-party application can use verified status for several kinds of access decisions:
 
 - Granting Discord roles.
-- Allowing community website or external application access.
+- Allowing community website or third-party application access.
 - Displaying verified profile context.
 - Requiring verified claims in a community tool.
 
@@ -153,7 +153,7 @@ The skip option means:
 
 - You do not receive verified status.
 - You can continue when verification is not required for the action you are doing right now.
-- Community role/nickname rules, or external applications can block access until verified.
+- Community role/nickname rules, or third-party applications can block access until verified.
 
 ## Refresh Behavior
 
