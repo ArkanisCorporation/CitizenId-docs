@@ -7,6 +7,8 @@ import { chromium } from 'playwright'
 const baseUrl = process.env.VISUAL_AUDIT_BASE_URL ?? 'http://127.0.0.1:5174'
 const outputDir = process.env.VISUAL_AUDIT_OUTPUT_DIR
   ?? path.join(os.tmpdir(), 'citizenid-docs-visual-audit')
+const browserChannel = process.env.VISUAL_AUDIT_BROWSER_CHANNEL
+const browserExecutablePath = process.env.VISUAL_AUDIT_BROWSER_EXECUTABLE_PATH
 
 const pages = [
   { slug: 'home', path: '/' },
@@ -15,7 +17,7 @@ const pages = [
   { slug: 'rsi-verification', path: '/players/rsi-verification' },
   { slug: 'linked-accounts', path: '/players/linked-accounts' },
   { slug: 'discord-integrations', path: '/players/discord-integrations' },
-  { slug: 'external-apps', path: '/players/external-apps' },
+  { slug: 'third-party-apps', path: '/players/third-party-apps' },
   { slug: 'privacy-controls', path: '/players/privacy-controls' },
   { slug: 'data-rights', path: '/players/data-rights' },
   { slug: 'getting-help', path: '/players/getting-help' },
@@ -29,7 +31,11 @@ const viewports = [
 
 fs.mkdirSync(outputDir, { recursive: true })
 
-const browser = await chromium.launch({ headless: true })
+const browser = await chromium.launch({
+  headless: true,
+  ...(browserChannel ? { channel: browserChannel } : {}),
+  ...(browserExecutablePath ? { executablePath: browserExecutablePath } : {}),
+})
 const auditResults = []
 
 try {

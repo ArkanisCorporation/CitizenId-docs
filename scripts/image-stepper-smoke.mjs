@@ -4,8 +4,14 @@ import { chromium } from 'playwright'
 
 const baseUrl = process.env.IMAGE_STEPPER_BASE_URL ?? 'http://127.0.0.1:5177'
 const targetUrl = `${baseUrl}/players/rsi-verification`
+const browserChannel = process.env.IMAGE_STEPPER_BROWSER_CHANNEL
+const browserExecutablePath = process.env.IMAGE_STEPPER_BROWSER_EXECUTABLE_PATH
 
-const browser = await chromium.launch({ headless: true })
+const browser = await chromium.launch({
+  headless: true,
+  ...(browserChannel ? { channel: browserChannel } : {}),
+  ...(browserExecutablePath ? { executablePath: browserExecutablePath } : {}),
+})
 
 async function checkInlineImage(path, index, options = {}) {
   const page = await browser.newPage({ viewport: { width: 1200, height: 900 } })
@@ -253,7 +259,7 @@ try {
     hasCopy: /Provider authorization/,
     hasLightboxTitle: /Provider authorization/,
   })
-  await checkInlineImage('/players/external-apps', 0, {
+  await checkInlineImage('/players/third-party-apps', 0, {
     expectedStepperCount: 0,
     hasCopy: /Sign in button/,
     hasLightboxTitle: /Sign in button/,
