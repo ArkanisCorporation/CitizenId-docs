@@ -38,21 +38,21 @@ flowchart TD
   choice{"Consent<br/>granted?"}
   approved[/Data claims/]
   denied((No data<br/>claims))
-  revoke>Revoke access]
-  future["Future access stops"]
-  stored[(Old stored copies<br/>remain with the app)]
-  operator(["Third-party operator"])
+  revoke>Revoke consent]
+  future["Future access"]
+  stored[(Outside<br/>copies)]
+  operator(["Third-party<br/>operator"])
 
   you ==> app
-  app ==>|Sign in| cid
-  cid ==>|Request consent| choice
-  choice -->|"Approve"| approved
-  choice -. "Reject" .-> denied
+  app ==>|Initiates| cid
+  cid ==>|Requests consent| choice
+  choice -->|"Yes"| approved
+  choice -. "No" .-> denied
   approved ==>|Return| app
   denied -. "Return" .-> app
   you -. "Later" .-> revoke
-  revoke --> future
-  future -. "Not deletion" .-> stored
+  revoke -- "Prevents" --> future
+  future -. "Does not delete" .-> stored
   stored -. "Deletion request" .-> operator
 
   class you,app,operator actor;
@@ -155,13 +155,14 @@ Reject the request if the application has not explained why it needs that inform
 
 Use revocation when you no longer want an application to keep receiving information through Citizen iD.
 
-1. Open the authorized apps area of your Citizen iD account.
-2. Review the applications connected to your account.
-3. Open the application's details.
-4. Check what access it currently has.
-5. Look for more than one saved entry from the same application.
-6. Use <strong>Revoke Authorization</strong> for every entry that should stop.
-7. Sign in again later only if you intentionally want the application to use Citizen iD again.
+1. Open the Citizen iD account portal home page.
+2. Find the Applications row and select <strong>Manage</strong>.
+3. Review the applications connected to your account.
+4. Open the application's details from the list.
+5. Check what access it currently has.
+6. Look for more than one saved entry from the same application.
+7. Use <strong>Revoke Authorization</strong> for every saved authorization that should stop.
+8. Sign in again later only if you intentionally want the application to use Citizen iD again.
 
 One application can have more than one saved access entry if it asked for different access over time.
 To fully stop future Citizen iD access for that application, revoke all saved entries for that application.
@@ -171,7 +172,7 @@ To fully stop future Citizen iD access for that application, revoke all saved en
   alt="Current Citizen iD account overview showing an applications row with an authorized application count and manage action."
   title="Authorized applications"
   caption="Shows where a player can start reviewing applications that currently have Citizen iD access."
-  description="Use the applications area to inspect connected apps, review approved access, and revoke access you no longer want."
+  description="Use the Applications row on the account portal home page to inspect connected apps, review approved access, and revoke access you no longer want."
   missing="The ideal image should show the current authorized-app detail page, including app identity, community relationship indicator, approved access, more than one saved entry when present, and the revoke action."
 />
 

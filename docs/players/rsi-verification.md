@@ -22,7 +22,7 @@ flowchart TD
   bio[/"RSI Short Bio"/]
   cid2[["Load public profile"]]
   contains{"Contains<br/>the code?"}
-  store[(Store RSI Details)]
+  store[(Stores<br/>RSI Details)]
   verified((Account<br/>Verified))
   refresh[["Load public profile"]]
 
@@ -37,7 +37,7 @@ flowchart TD
   refresh -. "Updates the profile" .-> store
 
   class you,scheduler actor;
-  class cid1,refresh service;
+  class cid1,cid2,refresh service;
   class bio context;
   class contains decision;
   class store data;

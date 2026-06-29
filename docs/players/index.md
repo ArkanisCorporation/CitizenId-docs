@@ -1,122 +1,161 @@
 ---
 title: Player Guide
-description: Start here if you use Citizen iD as a player.
+description: Start here if you use Citizen iD as a player and need to find the right account, verification, privacy, app, Discord, data, or support page.
 ---
 
 # Player Guide
 
-Citizen iD is a player identity service for Star Citizen communities.
-It helps you use one account to sign in to community tools, prove control of your RSI account, connect Discord features, and decide which parts of your identity can be shared.
+Citizen iD helps Star Citizen players use one account across community websites, Discord servers, and community tools.
+Use this guide when you want to sign in, prove control of your RSI account, connect Discord features, approve an application, change privacy settings, download your data, or ask for help safely.
 
-The most important idea is that Citizen iD is not one single feature.
-It is a set of connected experiences: <strong>website account management</strong>, <strong>RSI verification</strong>, <strong>Discord integrations</strong>, <strong>third-party application consent</strong>, and <strong>privacy and data controls</strong>.
-This guide follows that same shape so you can start with the thing you are trying to do instead of learning the entire platform first.
+The player docs are organized around the place where your question starts.
+If the issue starts on the Citizen iD website, begin with website and account pages.
+If it starts in Discord, begin with Discord integrations.
+If it starts in a community tool, begin with third-party apps and consent.
+If it starts with visibility, exports, deletion, or support, begin with the privacy, data, or help pages.
 
-**Diagram: Player journey map.**
-Each station points to the guide page that explains that part of the player experience.
+**Diagram: Player identity map.**
+This is a relationship map, not a checklist.
+It shows the main places where your account, linked accounts, verified status, privacy choices, shared facts, outside copies, and support questions meet.
 
 ```mermaid
 flowchart TD
-  website(["Website Basics<br/>Sign in or sign up"])
-  accounts["Linked Accounts<br/>Providers and RSI links"]
-  rsi[["RSI Verification<br/>Prove account control"]]
-  discord["Discord Integrations<br/>Servers, roles, nicknames"]
-  apps["Third-Party Apps<br/>Consent and claims"]
-  privacy[/"Privacy Controls<br/>Discovery and consent"/]
-  dataRights[/Data Rights<br/>Export and deletion/]
-  support>Getting Help<br/>Troubleshoot safely]
+  you(["You"])
+  website[["Citizen iD Website"]]
+  linked[/"Linked<br/>accounts"/]
+  rsi[/"RSI profile"/]
+  discord[/"Discord"/]
+  shared[/Shared facts/]
+  privacy[/"Privacy<br/>and consent"/]
+  apps(["Third-party apps"])
+  records[(Citizen iD<br/>records)]
+  outside[(Outside<br/>copies)]
+  ask[Ask operator]
+  support>Support]
 
-  website ==>|Start here| accounts
-  accounts ==>|If required| rsi
-  rsi -->|"Community servers"| discord
-  rsi -->|"Community tools"| apps
-  discord -->|"Review effects"| privacy
-  apps -->|"Review sharing"| privacy
-  privacy -->|"Export or deletion"| dataRights
-  dataRights -. "When stuck" .-> support
+  you ==> website
+  website --> linked
+  website --> rsi
+  website --> privacy
+  website --> records
 
-  class website,discord,apps context;
-  class accounts action;
-  class rsi service;
-  class privacy,dataRights data;
-  class support caution;
+  rsi --> shared
+  linked --> shared
+  linked -.->|Limits| discord
+  privacy --> shared
+  privacy -.->|Limits| apps
+  shared --> discord
+  shared --> apps
+  apps -. "Stores" .-> outside
+  discord -. "Exposes" .-> outside
+  records -. "Questions" .-> support
+  outside -.-> ask
+  outside ~~~ support
+
+  class you,apps actor;
+  class ask action;
+  class website service;
+  class linked,rsi,discord,privacy context;
+  class account,shared,records data;
+  class verified success;
+  class outside,support caution;
 
   click website "/players/website-basics" "Open Website Basics" _self
-  click accounts "/players/linked-accounts" "Open Linked Accounts" _self
+  click linked "/players/linked-accounts" "Open Linked Accounts" _self
   click rsi "/players/rsi-verification" "Open RSI Verification" _self
   click discord "/players/discord-integrations" "Open Discord Integrations" _self
   click apps "/players/third-party-apps" "Open Third-Party Apps" _self
   click privacy "/players/privacy-controls" "Open Privacy Controls" _self
-  click dataRights "/players/data-rights" "Open Data Rights" _self
+  click outside "/players/data-rights#third-party-copies" "Open Third Party Copies" _self
+  click records "/players/data-rights" "Open Data Rights" _self
   click support "/players/getting-help" "Open Getting Help" _self
 ```
 
-## Start Here
+The clickable diagram nodes are only shortcuts.
+Use the ordinary links below when you prefer a regular page list.
 
-Use this order when you are unsure where to begin.
-Each item points to the page that answers the practical question behind the task.
+## Choose A Page
 
-1. Start with [Website Basics](/players/website-basics) if you are creating an account, signing in, checking the account overview, or finding the right account setting.
-2. Use [RSI Verification](/players/rsi-verification) when a community asks you to prove control of your Star Citizen identity.
-3. Use [Linked Accounts](/players/linked-accounts) when you need to add or remove Discord, Google, Twitch, email, or RSI-related links.
-4. Use [Discord Integrations](/players/discord-integrations) when the question starts with Discord roles, nicknames, linked roles, or bot commands.
-5. Use [Third-Party Apps](/players/third-party-apps) when the question starts in any web, desktop, or mobile application operated outside Citizen iD.
-6. Use [Privacy Controls](/players/privacy-controls) when the question is about visibility, public discovery, application consent, or analytics consent.
-7. Use [Data Rights](/players/data-rights) when the question is about data export, account removal, retained records, or third-party data boundaries.
-8. Use [Getting Help](/players/getting-help) when something is not working and you need to collect the right evidence before asking for support.
+- [Website Basics](/players/website-basics) covers sign-up, sign-in, account overview, account settings, first setup, third-party redirects, and maintenance states.
+- [Linked Accounts](/players/linked-accounts) covers Discord, Google, Twitch, email, RSI-related links, unlinking, last sign-in provider warnings, and what changes after a provider is removed.
+- [RSI Verification](/players/rsi-verification) covers the Star Citizen account-control check, the RSI Short Bio verification string, verified status, skip behavior, failed checks, and daily public profile refresh.
+- [Discord Integrations](/players/discord-integrations) covers Discord linked roles, role automation, nickname templates, player commands, public verified-state signals, and the limits of privacy settings inside Discord features.
+- [Third-Party Apps](/players/third-party-apps) covers community-operated web, desktop, or mobile apps, sign-in redirects, consent screens, requested information, required account data, revocation, and app-held copies.
+- [Privacy Controls](/players/privacy-controls) covers public profile discovery, linked-account discovery, authorized applications, browser analytics preferences, and how those controls differ from each other.
+- [Data Rights](/players/data-rights) covers data exports, account removal requests, records that may remain, third-party copies, and who controls each kind of data.
+- [Getting Help](/players/getting-help) covers safe support reports, where to ask, what evidence to include, and what private material to remove before sharing.
 
-## Core Concepts
+## First Choices
 
-Citizen iD gives communities a consistent identity layer, but it does not make every community behave the same way.
-The same player account can appear in several different surfaces:
+Start with the surface where you are taking the action.
 
-- A Discord server might only use Citizen iD linked roles.
-- Another Discord server might use automatic role assignments and nickname management.
-- A community website might request Citizen iD claims through a third-party application consent flow.
-- A separate community tool might use Citizen iD only for sign-in and never touch Discord at all.
+- Use the Citizen iD website when you need to create or open an account, check account state, change settings, manage linked providers, review authorized apps, or request an export.
+- Use RSI verification when a community asks for a verified Star Citizen identity or when a tool says verified RSI status is required.
+- Use Discord integrations when the visible result is a Discord role, nickname, linked-role badge, bot command, or server-specific lookup.
+- Use third-party apps when another website, desktop app, mobile app, or community tool sends you to Citizen iD for sign-in or consent.
+- Use privacy controls when the question is about who can find your public profile, which app can keep using approved information, or whether this browser sends optional analytics.
+- Use data rights when the question is about downloading Citizen iD data, asking for account removal, or understanding data stored outside Citizen iD.
+- Use getting help when something is blocked, confusing, or sensitive enough that you need support evidence before posting.
 
-When you are unsure what is happening, identify which surface you are using first: the Citizen iD website, Discord, or a third-party application.
-That one distinction usually explains which settings matter and who controls the next step.
+::: tip A simple way to debug
+Ask where the action happened first.
+The Citizen iD website, Discord, an RSI profile page, a third-party app, and a support request each have different controls and different owners.
+:::
 
-::: tip Player control
-Citizen iD is designed around <strong>explicit account links</strong>, <strong>application consent</strong>, <strong>revocation</strong>, and <strong>privacy switches</strong>.
-Those controls govern future sharing through Citizen iD.
-They do not automatically erase data that a community, Discord server, or third-party application already received while access was allowed.
+## Core Ideas
+
+Citizen iD is not a government identity service, payment service, age check, reputation system, or promise that every community has configured its tools correctly.
+It is a player identity service for Star Citizen communities.
+
+Several account facts can work together without being the same thing.
+
+- A sign-in provider lets you open the Citizen iD account.
+- A linked Discord account lets Discord features match your Discord user to your Citizen iD account.
+- RSI verification proves control of one RSI account and can become a stable verified-status signal for communities and apps.
+- Public discovery settings affect lookup and public profile visibility through Citizen iD.
+- Application consent lets a specific app receive approved information even when public discovery is limited.
+- Revocation stops future access through Citizen iD, but it does not erase data an app or server already stored.
+- Data export and account removal apply to records Citizen iD controls, not to every copy held by providers, communities, Discord servers, or third-party apps.
+
+::: warning Controls are separate
+Turning off public discovery does not revoke a third-party app.
+Revoking an app does not unlink Discord.
+Unlinking a provider does not delete old copies stored by an app, provider, Discord server, or community.
+Use the page that matches the control you want to change.
 :::
 
 ## Common Journeys
 
 <dl>
-  <dt><strong>I want to join a community Discord server.</strong></dt>
-  <dd>Sign in to Citizen iD, link Discord, verify RSI if the server requires it, and then follow that server's linked-role or role-assignment instructions.</dd>
-  <dt><strong>I want to use a community website.</strong></dt>
-  <dd>Let the website redirect you to Citizen iD, read the consent screen, approve only the access you understand, and return to the website after authorization.</dd>
-  <dt><strong>I want people to find my verified profile.</strong></dt>
-  <dd>Enable public profile discovery, verify RSI, and decide whether discovery through linked external accounts should also be allowed.</dd>
-  <dt><strong>I want to stop using an application.</strong></dt>
-  <dd>Open authorized apps, review the application, revoke its authorization, and contact the application operator if you need deletion of data already stored outside Citizen iD.</dd>
+  <dt><strong>I want to set up my account.</strong></dt>
+  <dd>Start with <a href="/players/website-basics">Website Basics</a>, choose the intended sign-in provider, complete first setup, review privacy choices, link Discord if needed, and verify RSI when your community requires it.</dd>
+  <dt><strong>I want to join or fix a Discord server feature.</strong></dt>
+  <dd>Use <a href="/players/linked-accounts">Linked Accounts</a> to confirm Discord is linked, use <a href="/players/rsi-verification">RSI Verification</a> if verified status is required, and use <a href="/players/discord-integrations">Discord Integrations</a> for roles, nicknames, and commands.</dd>
+  <dt><strong>I want to use a community app.</strong></dt>
+  <dd>Use <a href="/players/third-party-apps">Third-Party Apps</a> to understand sign-in and consent, then use <a href="/players/privacy-controls">Privacy Controls</a> when you want to review or revoke saved app access.</dd>
+  <dt><strong>I want to control visibility or sharing.</strong></dt>
+  <dd>Use <a href="/players/privacy-controls">Privacy Controls</a> for public discovery, app authorization, and browser analytics, then use <a href="/players/data-rights">Data Rights</a> when the question is about exports, removal, or copies outside Citizen iD.</dd>
+  <dt><strong>I need help without oversharing.</strong></dt>
+  <dd>Use <a href="/players/getting-help">Getting Help</a> before posting screenshots, exports, request details, or account identifiers.</dd>
 </dl>
 
-## Not Covered
+## Important Boundaries
 
-Citizen iD is not a government identity service, age verification service, reputation system, payment service, or guarantee that a third-party community configured its tools correctly.
-The most important boundaries are:
+RSI verification proves control of an RSI account when Citizen iD can verify it.
+It does not prove real-world identity, legal status, trustworthiness, account value, or player reputation.
 
-- RSI verification proves control of an RSI account when Citizen iD can verify it.
-- RSI verification does <em>not</em> prove real-world identity, legal status, trustworthiness, account value, or player reputation.
-- Discord role automation reflects the rules chosen by a server or community admin.
-- Citizen iD can evaluate and apply those rules, but it does not decide what every server should grant you.
+Discord server roles and nicknames reflect the rules chosen by that server or community.
+Citizen iD can evaluate and apply configured rules, but it does not decide what every server should grant you.
+
+Third-party apps are operated outside Citizen iD.
+Citizen iD can stop future access after you revoke authorization, but it cannot guarantee deletion from an app database that it does not control.
 
 ::: warning When something looks wrong
-Do not assume every unexpected role, nickname, or blocked application means your Citizen iD account is broken.
-First identify whether the behavior comes from Citizen iD account state, Discord server configuration, third-party application scopes, privacy settings, or a temporary maintenance/rate-limit condition.
+Do not assume every unexpected role, nickname, blocked app, missing profile, or failed sign-in means your Citizen iD account is broken.
+First identify whether the behavior comes from Citizen iD account state, a linked provider, RSI verification, Discord server configuration, third-party app consent, privacy settings, or a temporary maintenance or rate-limit condition.
 :::
 
-## Manual Depth
+## Related Reference
 
-The manual is layered so that casual readers and careful troubleshooters can use the same page.
-
-- The main sections explain the normal path first.
-- Lists capture steps, checks, and decision points that players commonly need to repeat.
-- Expandable detail blocks explain edge cases, data boundaries, and troubleshooting reasons.
-- Use the detail blocks when you need to understand why Citizen iD behaves a certain way rather than only how to click through a flow.
+- [Support Evidence](/reference/support-evidence) is the cross-audience checklist for collecting useful, non-secret support details.
+- [Legal And Privacy](/reference/legal-and-privacy) points to broader privacy, legal, and data-rights documentation.

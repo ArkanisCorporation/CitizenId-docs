@@ -1,154 +1,193 @@
 ---
 title: Privacy Controls
-description: Public profile discovery, external account discovery, application consent, and analytics choices.
+description: Public discovery, application access, and browser analytics choices for Citizen iD accounts.
 ---
 
 # Privacy Controls
 
-Citizen iD privacy controls decide how your account can be discovered and how future sharing happens through Citizen iD.
-They are not a magic eraser for every copy of information already held by Discord, RSI, Google, Twitch, a community server, or a third-party application.
+Citizen iD privacy controls answer three different questions.
+Who can find your public profile?
+Which applications can use information you approved?
+Can this browser send optional analytics for the Citizen iD website?
 
-Think of privacy controls as three separate layers: <strong>public discovery</strong>, <strong>application consent</strong>, and <strong>analytics consent</strong>.
-Each layer answers a different question.
+These controls are helpful, but they are not a magic eraser.
+They do not delete copies of information already held by Discord, RSI/Spectrum, Google, Twitch, a community server, or a third-party application.
 
-<dl>
-  <dt><strong>Public discovery</strong></dt>
-  <dd>Controls whether other people or supported lookup paths can find your Citizen iD profile.</dd>
-  <dt><strong>Application consent</strong></dt>
-  <dd>Controls whether a specific third-party application may receive approved claims through Citizen iD.</dd>
-  <dt><strong>Analytics consent</strong></dt>
-  <dd>Controls whether analytics can run in your browser for the Citizen iD website.</dd>
-</dl>
+## Quick Map
 
-**Diagram: Privacy control layers.**
-Each layer answers a different privacy question and points you to the matching control.
+Use the control that matches the thing you want to change.
+
+**Diagram: Where privacy controls live.**
+Each branch answers a different privacy question and points you to the matching control.
 
 ```mermaid
 flowchart TD
   you([You])
-  controls["Privacy Controls"]
+  controls["Privacy controls"]
 
-  external[/Public discovery/]
+  discovery[/Public discovery/]
   apps[/"Authorized apps"/]
   analytics[/"Browser analytics"/]
 
-  privacy>"Account settings"]
+  settings>"Account settings"]
   authorized>Application authorizations]
-  local>"Browser consent"]
+  preferences>"Browser consent"]
 
   you ==> controls
 
-  controls --> external
+  controls --> discovery
   controls --> apps
   controls --> analytics
 
-  external -.->|"Controlled by"| privacy
-  apps -->|"Per app"| authorized
-  analytics -->|"Local browser"| local
+  discovery -.->|Controlled by| settings
+  apps -->|Per app| authorized
+  analytics -->|Configured by| preferences
 
   class you actor;
-  class external,apps,analytics context;
+  class discovery,apps,analytics context;
+  class controls service;
+  class settings,authorized,preferences boundary;
 
-  click privacy "#discovery-options" "Open Discovery Options" _self
+  click settings "#public-discoverability" "Open Public Discoverability" _self
   click authorized "/players/third-party-apps" "Open Third-Party Apps" _self
-  click local "#analytics-consent" "Open Analytics Consent" _self
+  click preferences "#analytics-preferences" "Open Analytics Preferences" _self
 ```
 
-Read the three branches as separate privacy questions.
-Turning off discovery does not revoke application access, and revoking an application does not change analytics consent.
-Choose the branch that matches the thing you are trying to control.
+Changing one of these controls does not automatically change the others.
+For example, hiding public profile discovery does not cancel an app access you already authorized.
 
-## Discovery Options
+<dl>
+  <dt><strong>Public discoverability</strong></dt>
+  <dd>Available during initial account setup and later in <a href="https://citizenid.space/account/settings">account settings</a>.</dd>
+  <dt><strong>Authorized applications</strong></dt>
+  <dd>Available from the account portal home page, where the Applications row shows connected apps and a Manage action.</dd>
+  <dt><strong>Browser analytics</strong></dt>
+  <dd>Shown on your first website visit and available later through the Privacy Preferences link in the account portal footer.</dd>
+</dl>
 
-Citizen iD has two public discovery switches that matter most to players.
+## Public Discoverability
+
+Public discoverability settings are available immediately after you create your Citizen iD account.
+You can also change them at any time in [account settings](https://citizenid.space/account/settings).
+
+These settings can prevent your RSI account details from being publicly accessible through Citizen iD lookup surfaces.
+That includes supported lookups that start from linked external accounts, such as Discord context on shared servers.
+
+Citizen iD currently exposes two main discovery switches.
 
 <dl>
   <dt><strong>Allow public profile discovery</strong></dt>
-  <dd>This allows your Citizen iD profile to be discovered by your Citizen iD account ID or verified RSI handle.</dd>
-  <dt><strong>Allow discovery via linked external accounts</strong></dt>
-  <dd>This allows supported linked external accounts, such as Discord, to be used for public profile discovery where a feature supports it.</dd>
+  <dd>Allows your Citizen iD profile to be found by your Citizen iD account ID or verified RSI handle.</dd>
+  <dt><strong>Allow public profile discovery via linked external accounts</strong></dt>
+  <dd>Allows supported linked accounts, including Discord, to be used as a way to find your public profile where a feature supports it.</dd>
 </dl>
 
-The first switch controls whether the profile itself can be public.
-The second switch controls whether linked external accounts can be used as a lookup path into that profile.
+The first switch controls whether your public Citizen iD profile can be found directly.
+The second switch controls whether linked accounts can act as lookup paths into that public profile.
 
-External-account discovery depends on public profile discovery.
-If the profile is not publicly discoverable, linked external account discovery cannot make it public by itself.
+Turn public profile discovery off when you do not want public lookup to confirm or show your Citizen iD profile.
+Turn linked-account discovery off when you do not want supported provider links, such as Discord, to be used as public lookup handles.
 
-Use this quick interpretation:
+<ImageFigure
+  src="/images/citizenid-account-settings-current.png"
+  alt="Current Citizen iD account settings page showing public profile discovery controls and the Privacy Preferences footer link."
+  title="Account settings"
+  caption="Shows where public profile discovery and linked-account discovery can be changed."
+  description="Use account settings when you want to control whether your public Citizen iD profile and public RSI details can be found through supported lookup paths."
+/>
 
-- Turn off public profile discovery when you do not want profile lookup to confirm that your Citizen iD profile is public.
-- Turn off linked-account discovery when you do not want supported provider links, such as Discord, to act as public lookup handles.
-- Keep both concepts separate from application authorization, because applications use consent rather than public discovery.
+::: tip Set this early
+The discovery choices are available during initial account setup, so you can decide before other people or integrations rely on public lookup.
+:::
 
-## Public Profiles
+::: warning Discord visibility is layered
+Discovery settings can block detailed public profile and RSI lookup through Citizen iD.
+They are not the same as unlinking Discord, and they may not disable every yes-or-no Discord feature that only checks whether a linked account satisfies a server condition.
+:::
+
+## Public Lookup Results
 
 When public profile discovery is enabled, public profile pages can show your display name, avatar, and public RSI account data.
-Public RSI account data means data that Citizen iD can read from public RSI/Spectrum sources and that is suitable for the public profile surface.
+Public RSI account data means information Citizen iD can read from public RSI/Spectrum sources and show on the public profile surface.
 
 When discovery is disabled, a lookup can return a not-found or not-public result even when the account exists.
 That is intentional.
-It prevents the lookup result from confirming private account existence in situations where the profile should not be discoverable.
+It prevents the lookup result from confirming private account existence when the profile should not be discoverable.
 
-Public profile behavior can therefore produce three different outcomes:
+Public lookup can therefore produce a few different results.
 
 - A public profile appears because discovery is enabled and the profile has public data to show.
 - A lookup fails because the profile is not publicly discoverable.
-- A lookup finds an account but cannot expose details because the relevant visibility setting blocks the surface.
+- A lookup finds an account but cannot show details because the relevant visibility setting blocks that surface.
 
-## External Discovery
+If a Discord or community feature cannot find your public RSI details, check the two discovery switches first.
+Also check whether the Discord account is linked to the expected Citizen iD account.
 
-External-account discovery matters when a feature tries to resolve your Citizen iD profile through a linked provider account.
-Discord is the most important example today.
-Some Discord linked-role or bot flows may need to resolve your Citizen iD account from Discord account context.
-
-If the relevant discovery setting is off, the lookup can fail even though both accounts exist.
-Use this setting when you want to decide whether provider links can be used as public lookup handles.
-
-When external discovery fails, check:
-
-- Whether public profile discovery is enabled.
-- Whether discovery through linked external accounts is enabled.
-- Whether the provider account is actually linked to the expected Citizen iD account.
-- Whether the feature you are using supports that provider as a lookup path.
-
-## Application Consent
+## Application Access
 
 Application consent is separate from public discovery.
-An application can receive data covered by approved scopes even if your public profile is not discoverable.
-That happens because you explicitly authorized that application through the Citizen iD consent flow.
+An application can receive the information you approved even when your public profile is not discoverable.
+That happens because you authorized that specific application through Citizen iD.
 
-If you no longer want an application to receive data, review and revoke it in [Third-Party Apps](/players/third-party-apps).
+Authorized applications and their saved consents are directly accessible from the Citizen iD account portal home page.
+Use the Applications row to open the authorized-app list, review each application, and open its details.
+The detailed view uses the revoke action to cancel that saved authorization individually.
+
+<ImageFigure
+  src="/images/citizenid-account-overview-current.png"
+  alt="Current Citizen iD account overview showing an Applications row with an authorized application count and Manage action."
+  title="Authorized applications"
+  caption="Shows where application consents can be reviewed from the account portal home page."
+  description="Open the Applications area to review connected apps, inspect what you approved, and revoke access you no longer want."
+/>
+
+Use [Third-Party Apps](/players/third-party-apps) when you want the full walkthrough for app sign-in, consent review, and revocation.
 
 The practical rule is:
 
 - Public discovery controls who can look up public profile surfaces.
-- Application consent controls which approved application can receive approved claims.
-- Revocation stops future application access through Citizen iD.
-- Revocation does not automatically delete data an application already received.
+- Application consent controls which approved application can receive approved information.
+- Revoking authorization stops future application access through Citizen iD.
+- Revoking authorization does not automatically delete data an application already received.
 
 ::: warning Consent is separate
 Turning off public discovery does not revoke an application authorization.
+Revoking an application authorization does not change browser analytics consent.
 Revoking an application authorization does not necessarily disable Discord server automation.
 These controls are related, but they are not interchangeable.
 :::
 
-## Analytics Consent
+## Analytics Preferences
 
-Citizen iD analytics are consent-gated.
-The analytics behavior is:
+Citizen iD asks for browser analytics consent when you first visit the website.
+You can accept analytics, reject analytics, or manage preferences from that banner.
+You can change the choice later by using the <strong>Privacy Preferences</strong> link in the account portal footer.
 
-- If you accept analytics, analytics may run in that browser context.
-- If you reject analytics, analytics tracking should stay disabled.
-- If your browser sends Do Not Track, Citizen iD can treat that as a forced analytics rejection.
+Necessary cookies and similar technologies are still used for login, security, OAuth authorization, account sessions, and abuse prevention.
+Those are needed for the website and account portal to work.
 
-Analytics consent is stored locally in your browser, so changing browsers or clearing storage can cause the banner or preference state to appear again.
+Optional analytics are different.
+With your permission, Citizen iD uses privacy-preserving analytics to understand how the website is used and to improve reliability.
+The current notice says those analytics are processed through PostHog EU, retained for up to 3 months, and not used for advertising, retargeting, sale of personal data, or cross-site behavioral tracking.
 
-## Good Questions
+You can reject analytics and still use Citizen iD.
+Analytics consent is stored in your browser, so changing browsers or clearing browser storage can make the banner or preference state appear again.
+If your browser sends Do Not Track, Citizen iD may treat that as an analytics rejection.
 
-Use these questions to choose the right control:
+<ImageFigure
+  src="/images/citizenid-analytics-consent-banner.png"
+  alt="Citizen iD analytics consent banner with Accept Analytics, Reject Analytics, and Manage Preferences actions."
+  title="Analytics consent"
+  caption="Shows the browser banner that appears when Citizen iD asks for optional analytics consent."
+  description="Use the banner or the Privacy Preferences footer link to choose whether this browser sends optional analytics."
+/>
 
-- Ask <em>who can find my profile</em> when changing discovery settings.
-- Ask <em>which application can access which data</em> when reviewing consent.
+## Which Control
+
+Use these questions to choose the right place.
+
+- Ask <em>who can find my profile or RSI details</em> when changing public discoverability.
+- Ask <em>which app can use information I approved</em> when reviewing authorized applications.
+- Ask <em>whether this browser can send optional analytics</em> when changing analytics preferences.
 - Ask <em>which server configured this automation</em> when Discord roles or nicknames change.
 - Ask <em>where is this data stored now</em> when trying to delete or correct old third-party data.

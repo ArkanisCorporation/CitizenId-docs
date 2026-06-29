@@ -56,7 +56,7 @@ flowchart TD
 
   basicData --> features
   rsiData --> features
-  redacted -. "Private result" .-> features
+  redacted -.-> features
   features --> server
   admins ==>|Configure| features
 
@@ -73,6 +73,7 @@ flowchart TD
   click admins "/community-admins/" "Open Community Admin Guide" _self
   click server "/community-admins/discord-bot" "Open Discord Bot" _self
   click linkedRoles "#linked-roles" "Open Linked Roles" _self
+  click roles "/community-admins/role-assignments" "Open Role Assignments" _self
   click nicknameTemplates "/community-admins/nickname-management" "Open Nickname Management" _self
   click botCommands "/players/discord-integrations#player-commands" "Open Player Commands" _self
 ```
