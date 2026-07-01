@@ -80,9 +80,13 @@ If Citizen iD controls the record, use the Citizen iD branch for export, account
 If another operator controls the copy, use the outside branch and ask that app, provider, Discord server, or community for export, correction, or deletion.
 Privacy controls and app access controls can change future sharing through Citizen iD, but they do not delete old outside copies.
 
-## Download Your Data
+## Download Your Data {#download-your-data}
 
 Use account settings when you want a copy of your Citizen iD account data.
+This section covers the [export flow](#export-flow) and [what is included](#what-is-included) in a Citizen iD export.
+
+### Export Flow {#export-flow}
+
 The normal export flow is:
 
 1. Open account settings.
@@ -92,7 +96,7 @@ The normal export flow is:
 5. Store the export carefully because it can contain personal data.
 
 Repeated export requests may be temporarily blocked to reduce abuse.
-If a download fails, wait before retrying and include the request ID when asking for support.
+If a download fails, wait before retrying and include the request ID when [asking for support](/players/getting-help#privacy-and-data).
 
 Handle the exported file carefully:
 
@@ -106,7 +110,7 @@ A full export can contain enough information to expose your account history or h
 Do not upload it to Discord, GitHub, public forums, or public tickets.
 :::
 
-## What Is Included
+### What Is Included {#what-is-included}
 
 The export is a Citizen iD export.
 It can include Citizen iD records that exist for your account.
@@ -133,11 +137,12 @@ An empty or missing category does not automatically mean something went wrong.
 It can simply mean you never used that Citizen iD feature.
 :::
 
-## Request Account Removal
+## Request Account Removal {#request-account-removal}
 
 Account removal is currently request-only.
 Self-service account removal is intended, but it is not the current player flow.
-Use the official support path when you need account removal reviewed.
+Use the [official support path](/players/getting-help#sensitive-issues) when you need account removal reviewed.
+This section covers removal [side effects](#side-effects) and [records that may remain](#records-that-may-remain).
 
 Use private support from the start if the request involves account ownership, deletion, identity review, a dispute, or private screenshots.
 
@@ -154,7 +159,14 @@ Removing a Citizen iD account does not automatically delete records stored by Di
 Contact those operators for data they control.
 :::
 
-## Records That May Remain
+### Side Effects {#side-effects}
+
+Account removal can affect whether provider accounts can be used with Citizen iD again.
+An active identity provider link cannot be immediately reused on a different Citizen iD account.
+If an RSI account is linked, it can remain locked from being linked to another Citizen iD account after removal.
+That restriction exists to reduce duplicate verification, impersonation, and ban evasion.
+
+### Records That May Remain {#records-that-may-remain}
 
 Some records may need to remain after account closure or removal.
 This can happen for legal, security, abuse-prevention, moderation, or verification integrity reasons.
@@ -172,11 +184,11 @@ Citizen iD should minimize retention where possible.
 Deletion does not always mean every historical trust or safety record can be removed immediately.
 
 ::: tip Why this matters
-Some communities rely on Citizen iD verification as a stable account-control signal.
+Some communities rely on Citizen iD verification as stable proof of RSI account control.
 Removing every historical integrity record immediately could make duplicate verification, impersonation, or ban evasion easier.
 :::
 
-## Third-Party Copies
+## Third-Party Copies {#third-party-copies}
 
 Third-party copies are records stored outside Citizen iD.
 They can exist because you signed in to an app, joined a community server, linked a provider, claimed a Discord role, or used a community tool.
@@ -210,7 +222,7 @@ Citizen iD cannot export, correct, delete, or guarantee removal of copies stored
 Ask the operator that controls that copy.
 :::
 
-## Ask For Help
+## Ask For Help {#ask-for-help}
 
 For privacy or data issues, include only the details needed for support to route the request.
 Do not send secrets or full exports in public.

@@ -63,19 +63,24 @@ flowchart TD
   class revoke,future,stored caution;
 
   click cid "/players/website-basics" "Open Website Basics" _self
-  click approved "/players/privacy-controls" "Open Privacy Controls" _self
-  click revoke "/players/privacy-controls" "Open Privacy Controls" _self
-  click stored "/players/data-rights" "Open Data Rights" _self
-  click operator "/players/data-rights" "Open Data Rights" _self
+  click choice "#consent-screen" "Open Consent Screen" _self
+  click approved "#shared-information" "Open Shared Information" _self
+  click revoke "#revoke-access" "Open Revoke Access" _self
+  click stored "/players/data-rights#third-party-copies" "Open Third-Party Copies" _self
+  click operator "/players/data-rights#third-party-copies" "Open Third-Party Copies" _self
 ```
 
 Read the approval and rejection branches as the decision point in the consent screen.
 Approval lets Citizen iD send only the approved facts back to the app, while rejection ends the request without granting access.
 The later revocation branch explains a different action: it stops future Citizen iD access, but it does not erase copies an app already stored.
 
-## Sign In Flow
+## Sign In Flow {#sign-in-flow}
 
 When an application needs Citizen iD identity, it redirects you to Citizen iD.
+This section covers the [returning account](#returning-account) flow and what happens when [missing data](#missing-data) blocks the request.
+
+### Returning Account {#returning-account}
+
 The normal sign-in flow is:
 
 1. The third-party application redirects you to Citizen iD.
@@ -88,13 +93,16 @@ The first time an application asks for access, Citizen iD always asks for your e
 After that, Citizen iD may skip showing the same consent screen if the application asks for the same access and you have not revoked it.
 If the application asks for new access later, you should expect to review consent again.
 
-If something required is missing, such as an email address, linked Discord account, or verified RSI profile, Citizen iD can stop the flow and tell you what needs attention first.
+### Missing Data {#missing-data}
+
+If something required is missing, such as an email address, [linked Discord account](/players/linked-accounts), or [verified RSI profile](/players/rsi-verification), Citizen iD can stop the flow and tell you what needs attention first.
 Citizen iD tries not to create a new account by accident during a third-party app sign-in.
 Some flows can still support deliberate creation of a completely new Citizen iD account, but that should be treated as account setup rather than ordinary returning-user sign-in.
 
-## Consent Screen
+## Consent Screen {#consent-screen}
 
 The consent screen is where you decide whether a specific application may receive selected information from Citizen iD.
+
 Before approving, review:
 
 - The application name.
@@ -118,12 +126,15 @@ Community relationship icons are context for the application and community you a
 They may indicate a closer or more trusted relationship with Citizen iD, but they do not automatically mean that every requested permission is necessary.
 :::
 
-## Shared Information
+## Shared Information {#shared-information}
 
 Applications ask for permissions.
 The technical word for a permission category is a scope.
 After you approve access, Citizen iD may send individual pieces of information to the app.
 Those pieces of information are sometimes called claims.
+This section covers [scopes and claims](#scopes-and-claims) and [required data](#required-data).
+
+### Scopes And Claims {#scopes-and-claims}
 
 Shared information might include:
 
@@ -143,6 +154,8 @@ Some information is optional, so Citizen iD can simply leave it out when your ac
 Other information is required by the application.
 You cannot consent to required information that your account does not have.
 
+### Required Data {#required-data}
+
 For example, an app may require a verified RSI profile, a linked Discord account, or an email address.
 If your account is missing the required item, Citizen iD can block the consent flow until you add it.
 
@@ -151,7 +164,7 @@ If Citizen iD says required account data is missing, fix that account item first
 Reject the request if the application has not explained why it needs that information.
 :::
 
-## Revoke Access
+## Revoke Access {#revoke-access}
 
 Use revocation when you no longer want an application to keep receiving information through Citizen iD.
 
@@ -176,7 +189,7 @@ To fully stop future Citizen iD access for that application, revoke all saved en
   missing="The ideal image should show the current authorized-app detail page, including app identity, community relationship indicator, approved access, more than one saved entry when present, and the revoke action."
 />
 
-## Retained Data
+## Retained Data {#retained-data}
 
 Revocation stops future access through Citizen iD.
 It does not automatically delete data the application already received while authorized.
@@ -190,7 +203,7 @@ Request deletion from the corresponding application operator or developer.
 If the application stored a copy of your profile, roles, RSI data, or email while access was valid, contact the application or community operator for deletion, correction, or export requests about that copy.
 This is the same practical boundary that exists with many sign-in providers: revoking future access does not reach into every third-party system and erase historical records by itself.
 
-## Safer Habits
+## Safer Habits {#safer-habits}
 
 Use these habits for third-party apps:
 

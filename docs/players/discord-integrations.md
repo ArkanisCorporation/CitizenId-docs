@@ -10,7 +10,7 @@ The important phrase is <strong>choose to use it</strong>.
 Citizen iD does not automatically manage every Discord server you join.
 A server owner or community admin must configure the Citizen iD bot, Discord linked roles, role assignment templates, nickname management, or another integration.
 
-All community Discord integration features expect your Citizen iD account to be linked to a Discord account.
+All community Discord integration features expect your Citizen iD account to be [linked to a Discord account](/players/linked-accounts).
 If Discord is not linked, the bot cannot reliably identify your Citizen iD account from Discord, linked roles cannot evaluate the expected account conditions, and server automation cannot apply account-aware rules to you.
 
 Different servers may use different parts of the platform.
@@ -73,8 +73,8 @@ flowchart TD
   click admins "/community-admins/" "Open Community Admin Guide" _self
   click server "/community-admins/discord-bot" "Open Discord Bot" _self
   click linkedRoles "#linked-roles" "Open Linked Roles" _self
-  click roles "/community-admins/role-assignments" "Open Role Assignments" _self
-  click nicknameTemplates "/community-admins/nickname-management" "Open Nickname Management" _self
+  click roles "#role-management" "Open Role Management" _self
+  click nicknameTemplates "#nickname-management" "Open Nickname Management" _self
   click botCommands "/players/discord-integrations#player-commands" "Open Player Commands" _self
 ```
 
@@ -86,25 +86,29 @@ When that lookup is disabled, Discord features can still run, but RSI-specific f
 The Roles feature group includes linked roles and automated role management.
 Community admins configure the feature group, and server members reach Citizen iD through bot commands where the bot is present.
 
-## Shared Data
+## Shared Data {#shared-data}
+
+This section explains the public Discord verification state and [detailed lookup](#detailed-lookup) behavior.
 
 When your Citizen iD account is linked to a Discord account, any Discord server may publicly learn whether that Discord account is tied to a verified RSI account.
-This public signal is only a yes-or-no verified-state signal.
+This public result is only a yes-or-no verified-state check.
 It does not reveal your RSI handle, RSI profile details, organization memberships, Citizen iD roles, authorized applications, email, or other account data by itself.
 
-This verified-state signal applies regardless of your Citizen iD privacy settings.
-The only way to prevent Discord from being used for that public verified-state signal is to unlink the Discord provider from your Citizen iD account and use a different sign-in method.
+This verified-state check applies regardless of your Citizen iD privacy settings.
+The only way to prevent Discord from being used for that public verified-state check is to unlink the Discord provider from your Citizen iD account and use a different sign-in method.
 If Discord is your only sign-in provider, link another provider such as Google or Twitch before unlinking Discord.
 
 ::: warning Discord link boundary
 Privacy settings can limit profile lookup and public profile discovery, but they do not hide the fact that a linked Discord account is or is not tied to a verified RSI account.
-Treat Discord linking as a public verification signal.
+Treat Discord linking as publicly visible verification context.
 :::
+
+### Detailed Lookup {#detailed-lookup}
 
 Discord integrations can also use more information when a community configures deeper automation.
 The exact data depends on the server feature and on your discovery settings, but the important split is:
 
-- A linked Discord account can expose the yes-or-no RSI verified-state signal.
+- A linked Discord account can expose the yes-or-no RSI verified-state check.
 - A configured server feature can evaluate general Citizen iD account facts needed for that feature.
 - Detailed RSI profile lookup and advanced RSI-based conditions depend on external account lookup being allowed.
 
@@ -114,11 +118,14 @@ Third-party applications use OAuth consent.
 Discord server automation uses the community's configured Discord integration features.
 :::
 
-## Linked Roles
+## Linked Roles {#linked-roles}
 
 Discord linked roles must be enabled by server admins.
 Admins configure dedicated Discord roles that are linked to Citizen iD account conditions.
 Players must then explicitly claim those roles through Discord's own role dialogs.
+This section covers how to [claim roles](#claim-roles) and how [removing roles](#removing-roles) works after a role is on your Discord server profile.
+
+### Claim Roles {#claim-roles}
 
 The normal linked-role flow is:
 
@@ -186,10 +193,20 @@ They are not the only role feature Citizen iD supports.
   ]"
 />
 
-## Role Management
+### Removing Roles {#removing-roles}
+
+Linked roles can be removed from a member's Discord server profile by that member.
+Server admins cannot individually remove a linked role claim from one member's server profile through Citizen iD.
+Admins can change the linked-role configuration for the server, but an already claimed linked role is removed from the member side in Discord.
+
+## Role Management {#role-management}
 
 Some servers use automated Citizen iD role management.
 Role management is configured by community admins and can change your Citizen iD community roles or Discord server roles automatically.
+This section covers [automation triggers](#automation-triggers) and [advanced conditions](#advanced-conditions) that a community may configure.
+
+### Automation Triggers {#automation-triggers}
+
 It may run when:
 
 - You join a server.
@@ -210,6 +227,9 @@ Communities can use that information to conditionally assign Citizen iD communit
 Privacy settings do not block this general automation data when the feature is running in a server where your linked Discord account is present.
 
 When external account lookup is allowed on your account, server admins may also configure advanced conditions based on public RSI profile information.
+
+### Advanced Conditions {#advanced-conditions}
+
 Advanced conditions can filter by:
 
 - Concrete individual RSI profiles.
@@ -219,13 +239,17 @@ Advanced conditions can filter by:
   - Concrete ranks, membership types, or organization roles.
 
 The exact rules are chosen by the community.
+Community admins can review [role assignment setup](/community-admins/role-assignments) when the issue depends on configured templates.
 If you do not understand why a role was added or removed, ask that community's admins which Citizen iD role-management templates they use.
 
-## Nickname Management
+## Nickname Management {#nickname-management}
 
 Some servers use Citizen iD nickname management.
 Nickname management can set or update your server nickname from a configured template.
 Server admins choose the template.
+This section covers [template formats](#template-formats) and [Discord limits](#discord-limits) that can prevent nickname changes.
+
+### Template Formats {#template-formats}
 
 Templates can enforce formats such as:
 
@@ -241,13 +265,17 @@ If no Citizen iD account is linked to the Discord account, or if privacy setting
 For example, a template that expects an RSI handle can produce a nickname containing `<REDACTED>` when the handle is not available to that server feature.
 
 Discord still controls final nickname limits and permissions.
+Community admins can review [nickname management setup](/community-admins/nickname-management) when the issue depends on server configuration.
+
+### Discord Limits {#discord-limits}
+
 If the bot cannot manage your nickname, the cause is often one of these Discord-side constraints:
 
 - The bot role is too low in the Discord role hierarchy.
 - The bot is missing nickname-management permission.
 - The nickname cannot be represented within Discord's limits.
 
-## Player Commands
+## Player Commands {#player-commands}
 
 The Citizen iD Discord bot includes player-facing account and RSI commands.
 Depending on server configuration, you may be able to:
@@ -257,9 +285,14 @@ Depending on server configuration, you may be able to:
 - Set a server-specific display-name preference.
 - Remove display-name preferences.
 - Request public RSI profile information.
+This section covers [account commands](#account-commands) and [lookup commands](#lookup-commands).
+
+### Account Commands {#account-commands}
 
 Use `/account set-display-name server-display-name:<YOUR_DISPLAY_NAME>` to set the server-preferred display name used by compatible nickname templates.
 Use `/account unset-display-name server-display-name:<YOUR_DISPLAY_NAME>` to reset that server preference to the default.
+
+### Lookup Commands {#lookup-commands}
 
 Members on servers with the Citizen iD integration bot can use `/rsi profile rsi-handle:<RSI_HANDLE>` to request detailed public information about a corresponding RSI profile.
 They can also use `/rsi profile server-member:<MEMBER_TAG>` to request the RSI profile tied to a particular Discord user.
@@ -275,14 +308,14 @@ Commands can be rate-limited.
 Some command responses are private to you.
 Some admin-triggered prompts may mention another server member.
 
-## Opt Out
+## Opt Out {#opt-out}
 
 All community integration features expect a Discord provider link to function properly.
 Leaving a server can stop that server from applying its own role or nickname automation to you, but it does not remove the Discord provider link from your Citizen iD account.
 Revoking a third-party application also does not disable Discord server automation, because those are different integration paths.
 
 To opt out of Discord-based Citizen iD identification, unlink the Discord provider from your Citizen iD account and use a different sign-in method.
-This is also the only way to prevent Discord servers from learning the public yes-or-no verified RSI state tied to your linked Discord account.
+This is also the only way to prevent Discord servers from learning the public yes-or-no verified RSI state tied to your linked Discord account through Citizen iD.
 If Discord is your last supported sign-in method, link another provider first.
 
 ::: details Details for role or nickname disputes

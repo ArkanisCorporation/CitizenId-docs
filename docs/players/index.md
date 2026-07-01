@@ -78,8 +78,8 @@ Use the ordinary links below when you prefer a regular page list.
 
 - [Website Basics](/players/website-basics) covers sign-up, sign-in, account overview, account settings, first setup, third-party redirects, and maintenance states.
 - [Linked Accounts](/players/linked-accounts) covers Discord, Google, Twitch, email, RSI-related links, unlinking, last sign-in provider warnings, and what changes after a provider is removed.
-- [RSI Verification](/players/rsi-verification) covers the Star Citizen account-control check, the RSI Short Bio verification string, verified status, skip behavior, failed checks, and daily public profile refresh.
-- [Discord Integrations](/players/discord-integrations) covers Discord linked roles, role automation, nickname templates, player commands, public verified-state signals, and the limits of privacy settings inside Discord features.
+- [RSI Verification](/players/rsi-verification) covers the Star Citizen account-control check, the RSI Short Bio verification string, verified status, failed checks, and daily public profile refresh.
+- [Discord Integrations](/players/discord-integrations) covers Discord linked roles, role automation, nickname templates, player commands, public verified-state checks, and the limits of privacy settings inside Discord features.
 - [Third-Party Apps](/players/third-party-apps) covers community-operated web, desktop, or mobile apps, sign-in redirects, consent screens, requested information, required account data, revocation, and app-held copies.
 - [Privacy Controls](/players/privacy-controls) covers public profile discovery, linked-account discovery, authorized applications, browser analytics preferences, and how those controls differ from each other.
 - [Data Rights](/players/data-rights) covers data exports, account removal requests, records that may remain, third-party copies, and who controls each kind of data.
@@ -89,13 +89,13 @@ Use the ordinary links below when you prefer a regular page list.
 
 Start with the surface where you are taking the action.
 
-- Use the Citizen iD website when you need to create or open an account, check account state, change settings, manage linked providers, review authorized apps, or request an export.
-- Use RSI verification when a community asks for a verified Star Citizen identity or when a tool says verified RSI status is required.
-- Use Discord integrations when the visible result is a Discord role, nickname, linked-role badge, bot command, or server-specific lookup.
-- Use third-party apps when another website, desktop app, mobile app, or community tool sends you to Citizen iD for sign-in or consent.
-- Use privacy controls when the question is about who can find your public profile, which app can keep using approved information, or whether this browser sends optional analytics.
-- Use data rights when the question is about downloading Citizen iD data, asking for account removal, or understanding data stored outside Citizen iD.
-- Use getting help when something is blocked, confusing, or sensitive enough that you need support evidence before posting.
+- Use the [Citizen iD website](/players/website-basics) when you need to create or open an account, check account state, change settings, manage linked providers, review authorized apps, or request an export.
+- Use [RSI verification](/players/rsi-verification) when a community asks for a verified Star Citizen identity or when a tool says verified RSI status is required.
+- Use [Discord integrations](/players/discord-integrations) when the visible result is a Discord role, nickname, linked-role badge, bot command, or server-specific lookup.
+- Use [third-party apps](/players/third-party-apps) when another website, desktop app, mobile app, or community tool sends you to Citizen iD for sign-in or consent.
+- Use [privacy controls](/players/privacy-controls) when the question is about who can find your public profile, which app can keep using approved information, or whether this browser sends optional analytics.
+- Use [data rights](/players/data-rights) when the question is about downloading Citizen iD data, asking for account removal, or understanding data stored outside Citizen iD.
+- Use [getting help](/players/getting-help) when something is blocked, confusing, or sensitive enough that you need support evidence before posting.
 
 ::: tip A simple way to debug
 Ask where the action happened first.
@@ -111,7 +111,7 @@ Several account facts can work together without being the same thing.
 
 - A sign-in provider lets you open the Citizen iD account.
 - A linked Discord account lets Discord features match your Discord user to your Citizen iD account.
-- RSI verification proves control of one RSI account and can become a stable verified-status signal for communities and apps.
+- RSI verification proves control of one RSI account and can become stable verified status for communities and apps.
 - Public discovery settings affect lookup and public profile visibility through Citizen iD.
 - Application consent lets a specific app receive approved information even when public discovery is limited.
 - Revocation stops future access through Citizen iD, but it does not erase data an app or server already stored.
@@ -124,20 +124,29 @@ Unlinking a provider does not delete old copies stored by an app, provider, Disc
 Use the page that matches the control you want to change.
 :::
 
-## Common Journeys
+## Common Journeys {#common-journeys}
 
-<dl>
-  <dt><strong>I want to set up my account.</strong></dt>
-  <dd>Start with <a href="/players/website-basics">Website Basics</a>, choose the intended sign-in provider, complete first setup, review privacy choices, link Discord if needed, and verify RSI when your community requires it.</dd>
-  <dt><strong>I want to join or fix a Discord server feature.</strong></dt>
-  <dd>Use <a href="/players/linked-accounts">Linked Accounts</a> to confirm Discord is linked, use <a href="/players/rsi-verification">RSI Verification</a> if verified status is required, and use <a href="/players/discord-integrations">Discord Integrations</a> for roles, nicknames, and commands.</dd>
-  <dt><strong>I want to use a community app.</strong></dt>
-  <dd>Use <a href="/players/third-party-apps">Third-Party Apps</a> to understand sign-in and consent, then use <a href="/players/privacy-controls">Privacy Controls</a> when you want to review or revoke saved app access.</dd>
-  <dt><strong>I want to control visibility or sharing.</strong></dt>
-  <dd>Use <a href="/players/privacy-controls">Privacy Controls</a> for public discovery, app authorization, and browser analytics, then use <a href="/players/data-rights">Data Rights</a> when the question is about exports, removal, or copies outside Citizen iD.</dd>
-  <dt><strong>I need help without oversharing.</strong></dt>
-  <dd>Use <a href="/players/getting-help">Getting Help</a> before posting screenshots, exports, request details, or account identifiers.</dd>
-</dl>
+Use these paths for common player tasks: [Account Setup](#account-setup), [Discord Features](#discord-features), [Community Apps](#community-apps), [Visibility And Sharing](#visibility-and-sharing), and [Support Requests](#support-requests).
+
+### Account Setup {#account-setup}
+
+Start with [Website Basics](/players/website-basics), choose the intended sign-in provider, complete first setup, review privacy choices, link Discord if needed, and verify RSI when your community requires it.
+
+### Discord Features {#discord-features}
+
+Use [Linked Accounts](/players/linked-accounts) to confirm Discord is linked, use [RSI Verification](/players/rsi-verification) if verified status is required, and use [Discord Integrations](/players/discord-integrations) for roles, nicknames, and commands.
+
+### Community Apps {#community-apps}
+
+Use [Third-Party Apps](/players/third-party-apps) to understand sign-in and consent, then use [Privacy Controls](/players/privacy-controls) when you want to review or revoke saved app access.
+
+### Visibility And Sharing {#visibility-and-sharing}
+
+Use [Privacy Controls](/players/privacy-controls) for public discovery, app authorization, and browser analytics, then use [Data Rights](/players/data-rights) when the question is about exports, removal, or copies outside Citizen iD.
+
+### Support Requests {#support-requests}
+
+Use [Getting Help](/players/getting-help) before posting screenshots, exports, request details, or account identifiers.
 
 ## Important Boundaries
 

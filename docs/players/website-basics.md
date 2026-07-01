@@ -6,7 +6,7 @@ description: Player sign-up, sign-in, account overview, settings, and normal web
 # Website Basics
 
 The Citizen iD website is where you manage the parts of your identity that belong to Citizen iD itself.
-That includes signing in, creating an account, linking sign-in providers, checking RSI verification, reviewing authorized applications, changing privacy settings, and downloading your account data.
+That includes signing in, creating an account, [linking sign-in providers](/players/linked-accounts), checking [RSI verification](/players/rsi-verification), reviewing [authorized applications](/players/third-party-apps#revoke-access), changing [privacy settings](/players/privacy-controls), and downloading your [account data](/players/data-rights#download-your-data).
 If a community tool, Discord server, or third-party app sends you to Citizen iD, the website is the place where you authenticate and decide what happens next.
 
 Production is intended to support Discord, Google, and Twitch sign-in.
@@ -30,12 +30,18 @@ The behavior is intentionally different, so use the entry point that matches wha
   note="This image is a placeholder from the older sign-in interface and should be replaced with current production sign-in and sign-up screenshots when available."
 />
 
-## Account Entry
+## Account Entry {#account-entry}
 
 Citizen iD has two direct entry points for normal account access.
+Use [Create Account](#create-account) when a new account may be created, and [Open Account](#open-account) when you only want an existing account.
+
+### Create Account {#create-account}
+
 Use [register or sign in](https://citizenid.space/sign-up) when you are ready for Citizen iD to create an account if one does not already exist for the selected provider.
 If the selected provider is already linked to an existing Citizen iD account, the same page signs you in to that account instead.
 If the selected provider is not linked to any Citizen iD account, Citizen iD can automatically create a new account for you.
+
+### Open Account {#open-account}
 
 Use [sign in](https://citizenid.space/sign-in) when you are unsure whether an account already exists or when you want the safer no-create path.
 The sign-in page either signs you in to an account that already has the selected provider linked, or tells you that the account was not found.
@@ -93,7 +99,7 @@ When troubleshooting account access, compare three things before changing settin
 
 ## Third-Party Sign-In
 
-Third-party apps are community-operated tools that use Citizen iD for sign-in, consent, or API access.
+Third-party apps are community-operated tools that use Citizen iD for [sign-in, consent, or API access](/players/third-party-apps).
 When a third-party app sends you to Citizen iD, Citizen iD tries not to create a new account by accident.
 The selected sign-in provider should already be linked to the existing Citizen iD account that you want to use.
 
@@ -102,12 +108,12 @@ The important difference is intent: if the app flow is trying to find an existin
 If the flow lets you intentionally create a new account, complete the same first-account setup steps described above before expecting verified or consent-protected data to be available.
 
 If a third-party app says that required data is missing, return to the Citizen iD account overview and check the account state first.
-Common blockers include missing linked providers, missing email data, incomplete legal agreements, privacy settings, or incomplete RSI verification.
+Common blockers include missing [linked providers](/players/linked-accounts), missing email data, incomplete legal agreements, [privacy settings](/players/privacy-controls), or incomplete [RSI verification](/players/rsi-verification).
 
 ## Account Overview
 
 The account overview is the best first place to check account state.
-Use it to confirm the high-signal account facts before changing Discord roles, reauthorizing a third-party app, or asking a community admin to debug an issue.
+Use it to confirm the important account facts before changing Discord roles, reauthorizing a third-party app, or asking a community admin to debug an issue.
 
 From the account overview, players can reach the main account surfaces:
 
@@ -128,7 +134,7 @@ It tells you whether the issue is likely about your Citizen iD account or about 
   description="Use this page to navigate to settings, community management areas, RSI account details, and authorized applications before troubleshooting connected tools."
 />
 
-## Account Settings
+## Account Settings {#account-settings}
 
 Account settings contain profile, access, contact, linked-account, and privacy controls.
 Use account settings for:
@@ -144,6 +150,7 @@ Use account settings for:
 The public discovery switches affect how other users and applications can find your Citizen iD profile.
 They do not override consent that you intentionally granted to a third-party app.
 If an application already has authorization to receive linked profile data, it may still resolve your account through the data you approved for that app.
+Use [Privacy Controls](/players/privacy-controls) to compare public discovery, authorized applications, and browser analytics preferences.
 
 <ImageFigure
   src="/images/citizenid-account-settings-current.png"

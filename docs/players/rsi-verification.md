@@ -42,9 +42,15 @@ flowchart TD
   class contains decision;
   class store data;
   class verified success;
+
+  click cid1 "#verification" "Open Verification" _self
+  click bio "#verification" "Open Verification" _self
+  click contains "#failed-checks" "Open Failed Checks" _self
+  click verified "#verified-status" "Open Verified Status" _self
+  click refresh "#refresh-behavior" "Open Refresh Behavior" _self
 ```
 
-## Before Starting
+## Before Starting {#before-starting}
 
 Use only an RSI account that you own or control.
 Citizen iD expects one Citizen iD account to be linked with one RSI account.
@@ -60,10 +66,10 @@ Before you begin, check these boundaries:
 RSI verification is intentionally more sensitive than ordinary provider linking.
 After an RSI account is verified, it cannot be unlinked or replaced with a different RSI account.
 If the verified RSI account is wrong, the Citizen iD account must be closed as a whole.
-This is intentional because communities and third-party applications rely on the verified RSI link as a stable account-control signal.
+This is intentional because communities and third-party applications rely on the verified RSI link as stable proof that the same player controls that RSI account.
 :::
 
-## Verification Steps
+## Account Verification {#verification}
 
 Verification is a short handoff between Citizen iD and your public RSI profile.
 Citizen iD gives you a generated string, you place that whole string somewhere in the RSI <strong>Short Bio</strong> field, and Citizen iD checks the public profile for the exact same string.
@@ -109,7 +115,7 @@ Use these steps as the practical checklist:
   ]"
 />
 
-## Failed Checks
+## Failed Checks {#failed-checks}
 
 Verification can fail for ordinary reasons.
 Common causes include:
@@ -133,7 +139,7 @@ If verification fails:
 Extra text around the verification string is fine.
 Citizen iD only needs to find the exact generated string somewhere in the public Short Bio content.
 
-## Verified Status
+## Verified Status {#verified-status}
 
 Verified status tells Citizen iD and approved integrations that your account has passed the RSI account-control check.
 A community or third-party application can use verified status for several kinds of access decisions:
@@ -145,17 +151,10 @@ A community or third-party application can use verified status for several kinds
 
 Some Citizen iD features can be used without verified status.
 Other features can be blocked until verification is complete because the community or application requires RSI-backed identity.
+Use [Discord Integrations](/players/discord-integrations) for Discord roles, nicknames, and commands that depend on verified status.
+Use [Third-Party Apps](/players/third-party-apps) for community tools that request verified RSI claims during consent.
 
-## Skip Option
-
-Some flows let you skip verification and continue.
-The skip option means:
-
-- You do not receive verified status.
-- You can continue when verification is not required for the action you are doing right now.
-- Community role/nickname rules, or third-party applications can block access until verified.
-
-## Refresh Behavior
+## Refresh Behavior {#refresh-behavior}
 
 After verification, Citizen iD refreshes all public RSI profile details once per day.
 This matters if your RSI handle, display data, or public organization data changes.

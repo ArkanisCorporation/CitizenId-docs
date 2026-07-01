@@ -53,6 +53,7 @@ async function renderDiagram() {
     svg.value = `${renderedSvg}<span hidden>${version}</span>`
     await nextTick()
     centerDiagram()
+    window.dispatchEvent(new CustomEvent('cid:mermaid-rendered'))
   }
   catch (caughtError) {
     error.value = caughtError instanceof Error

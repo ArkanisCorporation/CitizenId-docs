@@ -11,11 +11,12 @@ Which applications can use information you approved?
 Can this browser send optional analytics for the Citizen iD website?
 
 These controls are helpful, but they are not a magic eraser.
-They do not delete copies of information already held by Discord, RSI/Spectrum, Google, Twitch, a community server, or a third-party application.
+They do not delete [copies of information](/players/data-rights#third-party-copies) already held by Discord, RSI/Spectrum, Google, Twitch, a community server, or a third-party application.
 
-## Quick Map
+## Quick Map {#quick-map}
 
 Use the control that matches the thing you want to change.
+The map points to the main controls, and [control locations](#control-locations) lists where each one appears.
 
 **Diagram: Where privacy controls live.**
 Each branch answers a different privacy question and points you to the matching control.
@@ -46,15 +47,17 @@ flowchart TD
   class you actor;
   class discovery,apps,analytics context;
   class controls service;
-  class settings,authorized,preferences boundary;
+  class settings,authorized,preferences context;
 
   click settings "#public-discoverability" "Open Public Discoverability" _self
-  click authorized "/players/third-party-apps" "Open Third-Party Apps" _self
+  click authorized "#application-access" "Open Application Access" _self
   click preferences "#analytics-preferences" "Open Analytics Preferences" _self
 ```
 
 Changing one of these controls does not automatically change the others.
 For example, hiding public profile discovery does not cancel an app access you already authorized.
+
+### Control Locations {#control-locations}
 
 <dl>
   <dt><strong>Public discoverability</strong></dt>
@@ -65,10 +68,11 @@ For example, hiding public profile discovery does not cancel an app access you a
   <dd>Shown on your first website visit and available later through the Privacy Preferences link in the account portal footer.</dd>
 </dl>
 
-## Public Discoverability
+## Public Discoverability {#public-discoverability}
 
 Public discoverability settings are available immediately after you create your Citizen iD account.
 You can also change them at any time in [account settings](https://citizenid.space/account/settings).
+This section covers the discovery switches and [public lookup results](#public-lookup-results).
 
 These settings can prevent your RSI account details from being publicly accessible through Citizen iD lookup surfaces.
 That includes supported lookups that start from linked external accounts, such as Discord context on shared servers.
@@ -103,9 +107,10 @@ The discovery choices are available during initial account setup, so you can dec
 ::: warning Discord visibility is layered
 Discovery settings can block detailed public profile and RSI lookup through Citizen iD.
 They are not the same as unlinking Discord, and they may not disable every yes-or-no Discord feature that only checks whether a linked account satisfies a server condition.
+Use [Discord Integrations](/players/discord-integrations#shared-data) to understand the public Discord verified-state check.
 :::
 
-## Public Lookup Results
+### Public Lookup Results {#public-lookup-results}
 
 When public profile discovery is enabled, public profile pages can show your display name, avatar, and public RSI account data.
 Public RSI account data means information Citizen iD can read from public RSI/Spectrum sources and show on the public profile surface.
@@ -123,7 +128,7 @@ Public lookup can therefore produce a few different results.
 If a Discord or community feature cannot find your public RSI details, check the two discovery switches first.
 Also check whether the Discord account is linked to the expected Citizen iD account.
 
-## Application Access
+## Application Access {#application-access}
 
 Application consent is separate from public discovery.
 An application can receive the information you approved even when your public profile is not discoverable.
@@ -157,7 +162,7 @@ Revoking an application authorization does not necessarily disable Discord serve
 These controls are related, but they are not interchangeable.
 :::
 
-## Analytics Preferences
+## Analytics Preferences {#analytics-preferences}
 
 Citizen iD asks for browser analytics consent when you first visit the website.
 You can accept analytics, reject analytics, or manage preferences from that banner.
@@ -182,7 +187,7 @@ If your browser sends Do Not Track, Citizen iD may treat that as an analytics re
   description="Use the banner or the Privacy Preferences footer link to choose whether this browser sends optional analytics."
 />
 
-## Which Control
+## Which Control {#which-control}
 
 Use these questions to choose the right place.
 

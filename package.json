@@ -16,6 +16,7 @@
     "lint:fix": "eslint --fix .",
     "visual:audit": "node scripts/visual-audit.mjs",
     "visual:image-stepper": "node scripts/image-stepper-smoke.mjs",
+    "visual:fragment-navigation": "node scripts/fragment-navigation-smoke.mjs",
     "performance:smoke": "node scripts/performance-smoke.mjs",
     "release": "pnpm lint && pnpm build && changelogen --patch --release && git push --follow-tags"
   },
