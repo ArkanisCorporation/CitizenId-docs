@@ -38,6 +38,9 @@ pnpm-debug.log*
 
 .gitconfig
 
+# Superpowers brainstorming companion
+.superpowers/
+
 # vitepress
 docs/.vitepress/cache
 docs/.vitepress/dist
