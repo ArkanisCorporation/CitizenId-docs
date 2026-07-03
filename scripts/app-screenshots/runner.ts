@@ -20,10 +20,13 @@ export async function runCaptures(
   await ensureBaseUrlReachable(options.baseUrl)
   await fs.mkdir(options.outputDir, { recursive: true })
 
-  const browser = createBrowserless({
+  const browserOptions = {
     timeout: 30000,
+    headless: 'shell',
     defaultViewport: null,
-  } as Parameters<typeof createBrowserless>[0]) as unknown as Browserless
+  } as unknown as Parameters<typeof createBrowserless>[0]
+
+  const browser = createBrowserless(browserOptions) as unknown as Browserless
 
   try {
     const results: CaptureResult[] = []
