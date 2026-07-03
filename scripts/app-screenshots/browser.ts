@@ -30,6 +30,7 @@ export async function captureRawScreenshot(
     await browserlessContext.goto(page, {
       url: url.href,
       waitUntil: target.waitUntil ?? 'networkidle2',
+      adblock: false,
       animations: false,
       styles: target.styles ?? [],
     })
