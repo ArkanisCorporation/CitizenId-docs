@@ -35,3 +35,21 @@ pnpm build
 ```shell
 pnpm serve
 ```
+
+### App Screenshots
+
+Use the app screenshot workflow against a locally running Citizen iD app base URL.
+This does not start, stop, deploy, or modify the Citizen iD Aspire project.
+
+```shell
+pnpm screenshots:app -- --list-targets
+pnpm screenshots:app -- --base-url http://localhost:5085
+```
+
+Generated screenshots are written to `docs/public/images/app-screenshots/` by default.
+Use `--target`, `--viewport`, `--output-dir`, and `--full-page` to narrow or reshape a run.
+
+```shell
+pnpm screenshots:app -- --base-url http://localhost:5085 --target analytics-banner --viewport desktop
+pnpm screenshots:app:smoke
+```

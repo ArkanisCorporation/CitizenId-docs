@@ -82,3 +82,10 @@ Do not use JavaScript callbacks, `javascript:` URLs, or external clickable diagr
 After changing diagrams or theme CSS, run lint and build.
 Also run the visual audit when the change can affect layout, dark mode, mobile rendering, or scroll behavior.
 Confirm that diagrams render as SVG, have no page-level horizontal overflow, and remain readable in light and dark themes.
+
+## App Screenshots
+
+Generate app screenshots from a local Citizen iD base URL with `pnpm screenshots:app -- --base-url <url>`.
+Generated app screenshots belong under `docs/public/images/app-screenshots/` unless a task gives a narrower output path.
+Use `pnpm screenshots:app -- --list-targets` to inspect the code-defined capture targets before changing them.
+Run `pnpm screenshots:app:smoke` after changing the capture workflow.
