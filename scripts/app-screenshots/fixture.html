@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Citizen iD screenshot fixture</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #1e2430;
+      background: #f6f7fb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 1800px;
+      margin: 0;
+      background:
+        linear-gradient(135deg, rgba(33, 118, 255, 0.12), transparent 34%),
+        linear-gradient(180deg, #fff 0, #f4f5f8 100%);
+    }
+
+    main {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 72px 0;
+    }
+
+    .hero {
+      display: grid;
+      gap: 24px;
+      max-width: 680px;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      padding: 6px 10px;
+      border: 1px solid #cfd6e4;
+      border-radius: 999px;
+      color: #506176;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      background: #fff;
+    }
+
+    h1 {
+      margin: 0;
+      color: #111722;
+      font-size: clamp(40px, 7vw, 84px);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    p {
+      max-width: 58ch;
+      margin: 0;
+      color: #536070;
+      font-size: 20px;
+      line-height: 1.55;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 78px;
+    }
+
+    .panel {
+      min-height: 180px;
+      padding: 24px;
+      border: 1px solid #dce2ea;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .panel h2 {
+      margin: 0 0 12px;
+      color: #1d2532;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .panel p {
+      font-size: 16px;
+    }
+
+    .privacy-preferences-banner {
+      position: fixed;
+      right: 28px;
+      bottom: 28px;
+      left: 28px;
+      z-index: 20;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .privacy-preferences-banner__surface {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      width: min(980px, 100%);
+      padding: 20px;
+      border: 1px solid #d4dbea;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 18px 58px rgba(26, 31, 45, 0.18);
+      pointer-events: auto;
+    }
+
+    .privacy-preferences-banner__copy strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #141a25;
+      font-size: 18px;
+    }
+
+    .privacy-preferences-banner__copy span {
+      display: block;
+      max-width: 62ch;
+      color: #566274;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .privacy-preferences-banner__actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    button {
+      height: 42px;
+      padding: 0 14px;
+      border: 1px solid #cfd6e2;
+      border-radius: 6px;
+      color: #1d2532;
+      font: inherit;
+      font-weight: 700;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    button.primary {
+      border-color: #1f6feb;
+      color: #fff;
+      background: #1f6feb;
+    }
+
+    .mud-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: none;
+      place-items: center;
+      padding: 24px;
+      background: rgba(15, 19, 28, 0.5);
+    }
+
+    .mud-dialog {
+      width: min(680px, 100%);
+      padding: 28px;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 24px 80px rgba(9, 13, 20, 0.24);
+    }
+
+    .mud-dialog h2 {
+      margin: 0 0 10px;
+      color: #131923;
+      font-size: 26px;
+      letter-spacing: 0;
+    }
+
+    .preference-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 0;
+      border-top: 1px solid #e4e8f0;
+    }
+
+    .preference-row span {
+      display: block;
+      color: #5a6575;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .toggle {
+      flex: 0 0 auto;
+      width: 52px;
+      height: 30px;
+      border-radius: 999px;
+      background: #1f6feb;
+    }
+
+    .toggle::after {
+      display: block;
+      width: 24px;
+      height: 24px;
+      margin: 3px 3px 3px auto;
+      border-radius: 999px;
+      background: #fff;
+      content: "";
+    }
+
+    @media (max-width: 760px) {
+      main {
+        padding-top: 44px;
+      }
+
+      .content-grid,
+      .privacy-preferences-banner__surface {
+        grid-template-columns: 1fr;
+      }
+
+      .privacy-preferences-banner {
+        right: 14px;
+        bottom: 14px;
+        left: 14px;
+      }
+
+      .privacy-preferences-banner__actions {
+        justify-content: stretch;
+      }
+
+      .privacy-preferences-banner__actions button {
+        flex: 1 1 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="eyebrow">Citizen iD Aspire</div>
+      <h1>Screenshot fixture</h1>
+      <p>This page gives the capture workflow stable viewport, full page, banner, and dialog surfaces without connecting to any deployed service.</p>
+    </section>
+
+    <section class="content-grid" aria-label="Example content">
+      <article class="panel">
+        <h2>Analytics</h2>
+        <p>Stable card content keeps full viewport screenshots visually meaningful.</p>
+      </article>
+      <article class="panel">
+        <h2>Privacy</h2>
+        <p>Consent surfaces use the same selectors as the local Citizen iD pages.</p>
+      </article>
+      <article class="panel">
+        <h2>Docs</h2>
+        <p>Generated assets can be embedded into documentation after review.</p>
+      </article>
+    </section>
+  </main>
+
+  <section class="privacy-preferences-banner" aria-label="Privacy preferences banner">
+    <div class="privacy-preferences-banner__surface">
+      <div class="privacy-preferences-banner__copy">
+        <strong>Help Citizen iD improve</strong>
+        <span>Choose whether analytics can measure documentation and sign-in journeys.</span>
+      </div>
+      <div class="privacy-preferences-banner__actions">
+        <button type="button">Reject</button>
+        <button class="primary" type="button">Accept</button>
+        <button id="manage-preferences" type="button">Preferences</button>
+      </div>
+    </div>
+  </section>
+
+  <div id="preferences-dialog" class="mud-overlay" role="presentation">
+    <section class="mud-dialog" role="dialog" aria-modal="true" aria-labelledby="preferences-title">
+      <h2 id="preferences-title">Privacy preferences</h2>
+      <p>Enable the measurement categories that are acceptable for this browser.</p>
+      <div class="preference-row">
+        <div>
+          <strong>Required cookies</strong>
+          <span>Required for security, session handling, and basic preferences.</span>
+        </div>
+        <div class="toggle" aria-hidden="true"></div>
+      </div>
+      <div class="preference-row">
+        <div>
+          <strong>Analytics</strong>
+          <span>Helps improve navigation, onboarding, and documentation quality.</span>
+        </div>
+        <div class="toggle" aria-hidden="true"></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    document.querySelector('#manage-preferences').addEventListener('click', () => {
+      document.querySelector('#preferences-dialog').style.display = 'grid'
+    })
+  </script>
+</body>
+</html>
