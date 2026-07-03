@@ -1,0 +1,109 @@
+import type { Context } from 'browserless'
+import type { Page, ScreenshotOptions } from 'puppeteer'
+import type { CaptureStep, CaptureTarget, CaptureViewport, ScreenshotScope } from './types.js'
+import { Buffer } from 'node:buffer'
+
+interface RawCapture {
+  buffer: Buffer
+  scope: ScreenshotScope
+}
+
+export async function captureRawScreenshot(
+  browserlessContext: Context,
+  target: CaptureTarget,
+  viewport: CaptureViewport,
+  baseUrl: URL,
+  forceFullPage: boolean,
+): Promise<RawCapture> {
+  const page = await browserlessContext.page(`${target.id}:${viewport.id}`)
+
+  try {
+    await page.setViewport({
+      width: viewport.width,
+      height: viewport.height,
+      deviceScaleFactor: viewport.deviceScaleFactor ?? 1,
+      isMobile: viewport.isMobile ?? false,
+    })
+
+    const url = new URL(target.path, baseUrl)
+
+    await browserlessContext.goto(page, {
+      url: url.href,
+      waitUntil: target.waitUntil ?? 'networkidle2',
+      animations: false,
+      styles: target.styles ?? [],
+    })
+
+    if (target.waitForSelector) {
+      await page.waitForSelector(target.waitForSelector, { visible: true, timeout: 10000 })
+    }
+
+    for (const step of target.steps ?? []) {
+      await runStep(page, step)
+    }
+
+    const scope = forceFullPage && target.scope !== 'element'
+      ? 'fullPage'
+      : target.scope
+
+    if (scope === 'element') {
+      if (!target.selector) {
+        throw new Error(`Target '${target.id}' uses element scope but has no selector.`)
+      }
+
+      const element = await page.waitForSelector(target.selector, { visible: true, timeout: 10000 })
+
+      if (!element) {
+        throw new Error(`Target '${target.id}' selector '${target.selector}' did not resolve.`)
+      }
+
+      if (target.scrollIntoView ?? true) {
+        await element.evaluate(node => node.scrollIntoView({ block: 'center', inline: 'center' }))
+      }
+
+      return {
+        scope,
+        buffer: Buffer.from(await element.screenshot({ type: 'png' })),
+      }
+    }
+
+    const screenshotOptions: ScreenshotOptions = {
+      type: 'png',
+      fullPage: scope === 'fullPage',
+    }
+
+    return {
+      scope,
+      buffer: Buffer.from(await page.screenshot(screenshotOptions)),
+    }
+  }
+  finally {
+    await page.close().catch(() => undefined)
+  }
+}
+
+async function runStep(page: Page, step: CaptureStep) {
+  switch (step.type) {
+    case 'clearLocalStorage':
+      await page.evaluate(() => window.localStorage.clear())
+      break
+    case 'click':
+      await page.waitForSelector(step.selector, { visible: true, timeout: 10000 })
+      await page.click(step.selector)
+      break
+    case 'waitForSelector':
+      await page.waitForSelector(step.selector, {
+        visible: step.visible ?? false,
+        timeout: step.timeoutMs ?? 10000,
+      })
+      break
+    case 'evaluate':
+      await page.evaluate((script) => {
+        const element = document.createElement('script')
+        element.textContent = script
+        document.documentElement.append(element)
+        element.remove()
+      }, step.script)
+      break
+  }
+}
