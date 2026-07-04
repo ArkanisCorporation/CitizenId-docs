@@ -19,7 +19,6 @@ export const defaultFrame: CaptureFrame = {
 function desktopBrowserFrame(title: string): CaptureFrame {
   return {
     padding: 44,
-    background: '#050505',
     borderRadius: 14,
     shadow: {
       blur: 34,
