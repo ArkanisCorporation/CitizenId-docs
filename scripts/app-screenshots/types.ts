@@ -20,6 +20,10 @@ export interface CaptureFrame {
   background?: string
   borderRadius?: number
   shadow?: CaptureShadow
+  browserChrome?: {
+    title: string
+    url?: string
+  }
 }
 
 export type CaptureStep
@@ -40,6 +44,7 @@ export interface CaptureTarget {
   steps?: CaptureStep[]
   styles?: string[]
   frame?: CaptureFrame
+  frames?: Record<string, CaptureFrame>
   scrollIntoView?: boolean
 }
 

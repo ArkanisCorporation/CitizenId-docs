@@ -16,6 +16,20 @@ export const defaultFrame: CaptureFrame = {
   },
 }
 
+function desktopBrowserFrame(title: string): CaptureFrame {
+  return {
+    padding: 44,
+    background: '#050505',
+    borderRadius: 14,
+    shadow: {
+      blur: 34,
+      offsetY: 18,
+      color: 'rgba(0,0,0,0.42)',
+    },
+    browserChrome: { title },
+  }
+}
+
 export const deterministicStyles = [
   `*, *::before, *::after {
     caret-color: transparent !important;
@@ -33,18 +47,21 @@ export const targets: CaptureTarget[] = [
     id: 'home',
     path: '/',
     scope: 'viewport',
+    frames: { desktop: desktopBrowserFrame('Citizen iD') },
     styles: deterministicStyles,
   },
   {
     id: 'sign-in',
     path: '/sign-in',
     scope: 'viewport',
+    frames: { desktop: desktopBrowserFrame('Citizen iD - Sign in') },
     styles: deterministicStyles,
   },
   {
     id: 'sign-up',
     path: '/sign-up',
     scope: 'viewport',
+    frames: { desktop: desktopBrowserFrame('Citizen iD - Sign up') },
     styles: deterministicStyles,
   },
   {

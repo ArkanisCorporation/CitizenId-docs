@@ -37,7 +37,7 @@ export async function runCaptures(
 
         try {
           const raw = await captureRawScreenshot(context, target, viewport, options.baseUrl, options.forceFullPage)
-          const framed = await frameScreenshot(raw.buffer, target.frame)
+          const framed = await frameScreenshot(raw.buffer, frameForCapture(target, viewport, options.baseUrl))
           const outputPath = path.join(options.outputDir, createOutputFileName(target, viewport, raw.scope))
 
           await fs.writeFile(outputPath, framed.data)
@@ -114,4 +114,20 @@ function createOutputFileName(target: CaptureTarget, viewport: CaptureViewport, 
   const stem = target.outputName ?? target.id
 
   return `${stem}-${viewport.id}-${scope}.png`
+}
+
+function frameForCapture(target: CaptureTarget, viewport: CaptureViewport, baseUrl: URL) {
+  const frame = target.frames?.[viewport.id] ?? target.frame
+
+  if (!frame?.browserChrome) {
+    return frame
+  }
+
+  return {
+    ...frame,
+    browserChrome: {
+      ...frame.browserChrome,
+      url: frame.browserChrome.url ?? new URL(target.path, baseUrl).href,
+    },
+  }
 }
