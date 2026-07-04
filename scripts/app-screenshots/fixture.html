@@ -300,7 +300,12 @@
   </div>
 
   <script>
-    document.querySelector('#manage-preferences').addEventListener('click', () => {
+    if (localStorage.getItem('citizenid.privacy.analytics-consent.v1') === 'rejected') {
+      document.documentElement.dataset.consentHidden = 'true'
+      document.querySelector('.privacy-preferences-banner').remove()
+    }
+
+    document.querySelector('#manage-preferences')?.addEventListener('click', () => {
       document.querySelector('#preferences-dialog').style.display = 'grid'
     })
   </script>

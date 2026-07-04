@@ -49,6 +49,7 @@ pnpm screenshots:app
 Generated screenshots are written to `docs/public/images/app-screenshots/` by default.
 The default local app base URL is `http://localhost:5085`.
 The default stylized browser address origin is `https://citizenid.space`.
+Ordinary page captures set `citizenid.privacy.analytics-consent.v1=rejected` in local storage to keep the privacy banner out of the way.
 Use `--base-url`, `--display-origin`, `--target`, `--viewport`, `--output-dir`, and `--full-page` to narrow or reshape a run.
 Use `--debug` when selector waits or page steps need more detail.
 

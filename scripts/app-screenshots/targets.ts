@@ -40,12 +40,17 @@ export const deterministicStyles = [
   }`,
 ]
 
+const hidePrivacyBannerStorage = {
+  'citizenid.privacy.analytics-consent.v1': 'rejected',
+}
+
 export const targets: CaptureTarget[] = [
   {
     id: 'home',
     path: '/',
     scope: 'viewport',
     frames: { desktop: desktopBrowserFrame('Citizen iD') },
+    localStorage: hidePrivacyBannerStorage,
     styles: deterministicStyles,
   },
   {
@@ -53,6 +58,7 @@ export const targets: CaptureTarget[] = [
     path: '/sign-in',
     scope: 'viewport',
     frames: { desktop: desktopBrowserFrame('Citizen iD - Sign in') },
+    localStorage: hidePrivacyBannerStorage,
     styles: deterministicStyles,
   },
   {
@@ -60,24 +66,28 @@ export const targets: CaptureTarget[] = [
     path: '/sign-up',
     scope: 'viewport',
     frames: { desktop: desktopBrowserFrame('Citizen iD - Sign up') },
+    localStorage: hidePrivacyBannerStorage,
     styles: deterministicStyles,
   },
   {
     id: 'legal-cookies',
     path: '/legal/cookies',
     scope: 'fullPage',
+    localStorage: hidePrivacyBannerStorage,
     styles: deterministicStyles,
   },
   {
     id: 'legal-privacy-policy',
     path: '/legal/privacy-policy',
     scope: 'fullPage',
+    localStorage: hidePrivacyBannerStorage,
     styles: deterministicStyles,
   },
   {
     id: 'legal-providers',
     path: '/legal/providers',
     scope: 'fullPage',
+    localStorage: hidePrivacyBannerStorage,
     styles: deterministicStyles,
   },
   {

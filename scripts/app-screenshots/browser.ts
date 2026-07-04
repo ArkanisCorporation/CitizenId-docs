@@ -27,6 +27,15 @@ export async function captureRawScreenshot(
     })
 
     const url = new URL(target.path, baseUrl)
+    if (target.localStorage) {
+      debugLog(`localStorage ${Object.keys(target.localStorage).join(', ')}`)
+      await page.evaluateOnNewDocument((entries) => {
+        for (const [key, value] of Object.entries(entries)) {
+          window.localStorage.setItem(key, value)
+        }
+      }, target.localStorage)
+    }
+
     debugLog(`goto ${url.href}`)
 
     await browserlessContext.goto(page, {
@@ -94,6 +103,8 @@ function formatStep(step: CaptureStep) {
   switch (step.type) {
     case 'clearLocalStorage':
       return 'clearLocalStorage'
+    case 'setLocalStorage':
+      return `setLocalStorage ${step.key}`
     case 'click':
       return `click ${step.selector}`
     case 'waitForSelector':
@@ -107,6 +118,9 @@ async function runStep(page: Page, step: CaptureStep) {
   switch (step.type) {
     case 'clearLocalStorage':
       await page.evaluate(() => window.localStorage.clear())
+      break
+    case 'setLocalStorage':
+      await page.evaluate((key, value) => window.localStorage.setItem(key, value), step.key, step.value)
       break
     case 'click':
       await page.waitForSelector(step.selector, { visible: true, timeout: 10000 })

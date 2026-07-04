@@ -13,6 +13,9 @@ import { targets, viewports } from './targets.js'
 const pngSignature = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]
 const defaultCommand = parseCli([], targets, viewports)
 const overrideCommand = parseCli(['--display-origin', 'https://example.test'], targets, viewports)
+const smokeTargets = targets.map(target => target.id === 'home'
+  ? { ...target, waitForSelector: 'html[data-consent-hidden="true"]' }
+  : target)
 const fixturePath = fileURLToPath(new URL('./fixture.html', import.meta.url))
 const fixtureHtml = await readFile(fixturePath)
 const server = createServer((request, response) => {
@@ -55,7 +58,7 @@ try {
       forceFullPage: false,
       debug: true,
     },
-    targets,
+    smokeTargets,
     viewports,
   )
 

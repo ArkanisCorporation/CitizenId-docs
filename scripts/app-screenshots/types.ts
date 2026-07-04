@@ -28,6 +28,7 @@ export interface CaptureFrame {
 
 export type CaptureStep
   = | { type: 'clearLocalStorage' }
+    | { type: 'setLocalStorage', key: string, value: string }
     | { type: 'click', selector: string }
     | { type: 'waitForSelector', selector: string, visible?: boolean, timeoutMs?: number }
     | { type: 'evaluate', script: string }
@@ -41,6 +42,7 @@ export interface CaptureTarget {
   viewports?: string[]
   waitUntil?: 'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2'
   waitForSelector?: string
+  localStorage?: Record<string, string>
   steps?: CaptureStep[]
   styles?: string[]
   frame?: CaptureFrame
