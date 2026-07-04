@@ -3,6 +3,7 @@ import type { CaptureOptions, CaptureResult, CaptureTarget, CaptureViewport } fr
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import createBrowserless from 'browserless'
+import { applyAuthState, authLocalStorage, ensureAuthState } from './auth.js'
 import { captureRawScreenshot } from './browser.js'
 import { frameScreenshot } from './frame.js'
 
@@ -45,7 +46,30 @@ export async function runCaptures(
 
       try {
         console.error(`[screenshots] ${targetKey} processing...`)
-        const raw = await captureRawScreenshot(context, target, viewport, options.baseUrl, options.forceFullPage, debugLog)
+        const authState = target.authScope
+          ? await ensureAuthState({
+              scope: target.authScope,
+              target,
+              viewport,
+              baseUrl: options.baseUrl,
+              authStateDir: options.authStateDir,
+              debugLog,
+            })
+          : undefined
+
+        if (authState) {
+          await applyAuthState(context, authState)
+        }
+
+        const raw = await captureRawScreenshot(
+          context,
+          target,
+          viewport,
+          options.baseUrl,
+          options.forceFullPage,
+          debugLog,
+          authLocalStorage(authState),
+        )
         const framed = await frameScreenshot(raw.buffer, frameForCapture(target, viewport, options.displayOrigin))
         const outputPath = path.join(options.outputDir, createOutputFileName(target, viewport, raw.scope))
 

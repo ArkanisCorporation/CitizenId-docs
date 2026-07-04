@@ -89,6 +89,8 @@ Generate app screenshots from a local Citizen iD base URL with `pnpm screenshots
 Use `--base-url <url>` only when the local app is not running at `http://localhost:5085`.
 Use `--display-origin <origin>` when stylized desktop browser frames should show a non-default origin.
 Ordinary page captures seed `citizenid.privacy.analytics-consent.v1=rejected`; banner targets clear local storage in their capture steps.
+Protected targets should declare `authScope` and `authenticatedSelector` in `scripts/app-screenshots/targets.ts`.
+Manual auth states are bearer-secret local files under `.local/app-screenshot-auth/`.
 Generated app screenshots belong under `docs/public/images/app-screenshots/` unless a task gives a narrower output path.
 Use `pnpm screenshots:app -- --list-targets` to inspect the code-defined capture targets before changing them.
 Run `pnpm screenshots:app:smoke` after changing the capture workflow.

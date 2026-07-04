@@ -4,6 +4,7 @@ import path from 'node:path'
 interface ParsedArgs {
   baseUrl?: string
   displayOrigin?: string
+  authStateDir?: string
   outputDir?: string
   selectedTargets: string[]
   selectedViewports: string[]
@@ -14,6 +15,7 @@ interface ParsedArgs {
 
 const defaultBaseUrl = 'http://localhost:5085'
 const defaultDisplayOrigin = 'https://citizenid.space'
+const defaultAuthStateDir = path.join('.local', 'app-screenshot-auth')
 
 export function parseCli(
   args: string[],
@@ -31,6 +33,7 @@ export function parseCli(
     options: {
       baseUrl: new URL(parsed.baseUrl ?? defaultBaseUrl),
       displayOrigin: new URL(parsed.displayOrigin ?? defaultDisplayOrigin),
+      authStateDir: parsed.authStateDir ?? defaultAuthStateDir,
       outputDir: parsed.outputDir ?? path.join('docs', 'public', 'images', 'app-screenshots'),
       selectedTargets: parsed.selectedTargets,
       selectedViewports: parsed.selectedViewports,
@@ -78,6 +81,9 @@ function parseArgs(args: string[]): ParsedArgs {
         break
       case '--display-origin':
         parsed.displayOrigin = readValue(normalizedArgs, ++index, arg)
+        break
+      case '--auth-state-dir':
+        parsed.authStateDir = readValue(normalizedArgs, ++index, arg)
         break
       case '--output-dir':
         parsed.outputDir = readValue(normalizedArgs, ++index, arg)

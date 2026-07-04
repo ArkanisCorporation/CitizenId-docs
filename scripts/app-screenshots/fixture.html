@@ -305,6 +305,10 @@
       document.querySelector('.privacy-preferences-banner').remove()
     }
 
+    if (localStorage.getItem('citizenid.auth.scope') === 'user') {
+      document.documentElement.dataset.authenticated = 'true'
+    }
+
     document.querySelector('#manage-preferences')?.addEventListener('click', () => {
       document.querySelector('#preferences-dialog').style.display = 'grid'
     })

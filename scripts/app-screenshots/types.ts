@@ -1,5 +1,7 @@
 export type ScreenshotScope = 'viewport' | 'fullPage' | 'element'
 
+export type AuthScope = 'user' | 'moderator' | 'admin'
+
 export interface CaptureViewport {
   id: string
   width: number
@@ -39,6 +41,8 @@ export interface CaptureTarget {
   scope: ScreenshotScope
   selector?: string
   outputName?: string
+  authScope?: AuthScope
+  authenticatedSelector?: string
   viewports?: string[]
   waitUntil?: 'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2'
   waitForSelector?: string
@@ -53,6 +57,7 @@ export interface CaptureTarget {
 export interface CaptureOptions {
   baseUrl: URL
   displayOrigin: URL
+  authStateDir: string
   outputDir: string
   selectedTargets: string[]
   selectedViewports: string[]

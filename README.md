@@ -50,7 +50,9 @@ Generated screenshots are written to `docs/public/images/app-screenshots/` by de
 The default local app base URL is `http://localhost:5085`.
 The default stylized browser address origin is `https://citizenid.space`.
 Ordinary page captures set `citizenid.privacy.analytics-consent.v1=rejected` in local storage to keep the privacy banner out of the way.
-Use `--base-url`, `--display-origin`, `--target`, `--viewport`, `--output-dir`, and `--full-page` to narrow or reshape a run.
+Protected targets can declare an auth scope in `scripts/app-screenshots/targets.ts`.
+Missing or stale scope state opens a headful browser for manual sign-in and stores it under `.local/app-screenshot-auth/`.
+Use `--base-url`, `--display-origin`, `--auth-state-dir`, `--target`, `--viewport`, `--output-dir`, and `--full-page` to narrow or reshape a run.
 Use `--debug` when selector waits or page steps need more detail.
 
 ```shell

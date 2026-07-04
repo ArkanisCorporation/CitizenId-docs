@@ -15,6 +15,7 @@ export async function captureRawScreenshot(
   baseUrl: URL,
   forceFullPage: boolean,
   debugLog: (message: string) => void,
+  authLocalStorage: Record<string, string> = {},
 ): Promise<RawCapture> {
   const page = await browserlessContext.page(`${target.id}:${viewport.id}`)
 
@@ -27,13 +28,18 @@ export async function captureRawScreenshot(
     })
 
     const url = new URL(target.path, baseUrl)
-    if (target.localStorage) {
-      debugLog(`localStorage ${Object.keys(target.localStorage).join(', ')}`)
+    const localStorage = {
+      ...authLocalStorage,
+      ...target.localStorage,
+    }
+
+    if (Object.keys(localStorage).length > 0) {
+      debugLog(`localStorage ${Object.keys(localStorage).join(', ')}`)
       await page.evaluateOnNewDocument((entries) => {
         for (const [key, value] of Object.entries(entries)) {
           window.localStorage.setItem(key, value)
         }
-      }, target.localStorage)
+      }, localStorage)
     }
 
     debugLog(`goto ${url.href}`)
