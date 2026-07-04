@@ -43,14 +43,17 @@ This does not start, stop, deploy, or modify the Citizen iD Aspire project.
 
 ```shell
 pnpm screenshots:app -- --list-targets
-pnpm screenshots:app -- --base-url http://localhost:5085
+pnpm screenshots:app
 ```
 
 Generated screenshots are written to `docs/public/images/app-screenshots/` by default.
-Use `--target`, `--viewport`, `--output-dir`, and `--full-page` to narrow or reshape a run.
+The default local app base URL is `http://localhost:5085`.
+The default stylized browser address origin is `https://citizenid.space`.
+Use `--base-url`, `--display-origin`, `--target`, `--viewport`, `--output-dir`, and `--full-page` to narrow or reshape a run.
 Use `--debug` when selector waits or page steps need more detail.
 
 ```shell
 pnpm screenshots:app -- --base-url http://localhost:5085 --target analytics-banner --viewport desktop
+pnpm screenshots:app -- --display-origin https://staging.citizenid.space
 pnpm screenshots:app:smoke
 ```

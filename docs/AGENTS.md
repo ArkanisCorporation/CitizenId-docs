@@ -85,7 +85,9 @@ Confirm that diagrams render as SVG, have no page-level horizontal overflow, and
 
 ## App Screenshots
 
-Generate app screenshots from a local Citizen iD base URL with `pnpm screenshots:app -- --base-url <url>`.
+Generate app screenshots from a local Citizen iD base URL with `pnpm screenshots:app`.
+Use `--base-url <url>` only when the local app is not running at `http://localhost:5085`.
+Use `--display-origin <origin>` when stylized desktop browser frames should show a non-default origin.
 Generated app screenshots belong under `docs/public/images/app-screenshots/` unless a task gives a narrower output path.
 Use `pnpm screenshots:app -- --list-targets` to inspect the code-defined capture targets before changing them.
 Run `pnpm screenshots:app:smoke` after changing the capture workflow.

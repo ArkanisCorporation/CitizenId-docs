@@ -38,17 +38,19 @@ export async function runCaptures(
     const results: CaptureResult[] = []
 
     for (const [index, { target, viewport }] of jobs.entries()) {
-      console.error(`[screenshots] ${index + 1}/${jobs.length} ${target.id}:${viewport.id}`)
+      const targetKey = `${target.id}:${viewport.id}`
+      console.error(`[screenshots] ${index + 1}/${jobs.length} ${targetKey}`)
 
       const context = await browser.createContext({ retry: 0 })
 
       try {
+        console.error(`[screenshots] ${targetKey} processing...`)
         const raw = await captureRawScreenshot(context, target, viewport, options.baseUrl, options.forceFullPage, debugLog)
-        const framed = await frameScreenshot(raw.buffer, frameForCapture(target, viewport, options.baseUrl))
+        const framed = await frameScreenshot(raw.buffer, frameForCapture(target, viewport, options.displayOrigin))
         const outputPath = path.join(options.outputDir, createOutputFileName(target, viewport, raw.scope))
 
         await fs.writeFile(outputPath, framed.data)
-        console.error(`[screenshots] saved ${outputPath}`)
+        console.error(`[screenshots] ${targetKey} saved to ${outputPath}`)
 
         results.push({
           targetId: target.id,
@@ -123,7 +125,7 @@ function createOutputFileName(target: CaptureTarget, viewport: CaptureViewport, 
   return `${stem}-${viewport.id}-${scope}.png`
 }
 
-function frameForCapture(target: CaptureTarget, viewport: CaptureViewport, baseUrl: URL) {
+function frameForCapture(target: CaptureTarget, viewport: CaptureViewport, displayOrigin: URL) {
   const frame = target.frames?.[viewport.id] ?? target.frame
 
   if (!frame?.browserChrome) {
@@ -134,7 +136,7 @@ function frameForCapture(target: CaptureTarget, viewport: CaptureViewport, baseU
     ...frame,
     browserChrome: {
       ...frame.browserChrome,
-      url: frame.browserChrome.url ?? new URL(target.path, baseUrl).href,
+      url: frame.browserChrome.url ?? new URL(target.path, displayOrigin).href,
     },
   }
 }

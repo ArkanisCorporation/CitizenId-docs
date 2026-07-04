@@ -3,6 +3,7 @@ import path from 'node:path'
 
 interface ParsedArgs {
   baseUrl?: string
+  displayOrigin?: string
   outputDir?: string
   selectedTargets: string[]
   selectedViewports: string[]
@@ -10,6 +11,9 @@ interface ParsedArgs {
   debug: boolean
   listTargets: boolean
 }
+
+const defaultBaseUrl = 'http://localhost:5085'
+const defaultDisplayOrigin = 'https://citizenid.space'
 
 export function parseCli(
   args: string[],
@@ -22,14 +26,11 @@ export function parseCli(
     return { kind: 'list', text: formatTargetList(targets, viewports) }
   }
 
-  if (!parsed.baseUrl) {
-    throw new Error('Missing required --base-url <url>. Use --list-targets to inspect available targets without a base URL.')
-  }
-
   return {
     kind: 'capture',
     options: {
-      baseUrl: new URL(parsed.baseUrl),
+      baseUrl: new URL(parsed.baseUrl ?? defaultBaseUrl),
+      displayOrigin: new URL(parsed.displayOrigin ?? defaultDisplayOrigin),
       outputDir: parsed.outputDir ?? path.join('docs', 'public', 'images', 'app-screenshots'),
       selectedTargets: parsed.selectedTargets,
       selectedViewports: parsed.selectedViewports,
@@ -74,6 +75,9 @@ function parseArgs(args: string[]): ParsedArgs {
     switch (arg) {
       case '--base-url':
         parsed.baseUrl = readValue(normalizedArgs, ++index, arg)
+        break
+      case '--display-origin':
+        parsed.displayOrigin = readValue(normalizedArgs, ++index, arg)
         break
       case '--output-dir':
         parsed.outputDir = readValue(normalizedArgs, ++index, arg)

@@ -5,10 +5,13 @@ import { createServer } from 'node:http'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { parseCli } from './cli.js'
 import { runCaptures } from './runner.js'
 import { targets, viewports } from './targets.js'
 
 const pngSignature = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]
+const defaultCommand = parseCli([], targets, viewports)
+const overrideCommand = parseCli(['--display-origin', 'https://example.test'], targets, viewports)
 const fixturePath = fileURLToPath(new URL('./fixture.html', import.meta.url))
 const fixtureHtml = await readFile(fixturePath)
 const server = createServer((request, response) => {
@@ -28,6 +31,12 @@ const server = createServer((request, response) => {
 await listen(server)
 
 try {
+  assert.equal(defaultCommand.kind, 'capture')
+  assert.equal(defaultCommand.options.baseUrl.href, 'http://localhost:5085/')
+  assert.equal(defaultCommand.options.displayOrigin.href, 'https://citizenid.space/')
+  assert.equal(overrideCommand.kind, 'capture')
+  assert.equal(overrideCommand.options.displayOrigin.href, 'https://example.test/')
+
   const address = server.address()
 
   assertAddressInfo(address)
@@ -38,6 +47,7 @@ try {
   const results = await runCaptures(
     {
       baseUrl: new URL(`http://127.0.0.1:${address.port}/`),
+      displayOrigin: new URL('https://citizenid.space'),
       outputDir,
       selectedTargets: ['home', 'legal-cookies', 'analytics-banner', 'privacy-preferences-dialog'],
       selectedViewports: ['desktop'],

@@ -50,6 +50,7 @@ export interface CaptureTarget {
 
 export interface CaptureOptions {
   baseUrl: URL
+  displayOrigin: URL
   outputDir: string
   selectedTargets: string[]
   selectedViewports: string[]
