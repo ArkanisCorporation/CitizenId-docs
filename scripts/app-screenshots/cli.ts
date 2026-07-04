@@ -7,6 +7,7 @@ interface ParsedArgs {
   selectedTargets: string[]
   selectedViewports: string[]
   forceFullPage: boolean
+  debug: boolean
   listTargets: boolean
 }
 
@@ -33,6 +34,7 @@ export function parseCli(
       selectedTargets: parsed.selectedTargets,
       selectedViewports: parsed.selectedViewports,
       forceFullPage: parsed.forceFullPage,
+      debug: parsed.debug,
     },
   }
 }
@@ -58,6 +60,7 @@ function parseArgs(args: string[]): ParsedArgs {
     selectedTargets: [],
     selectedViewports: [],
     forceFullPage: false,
+    debug: false,
     listTargets: false,
   }
 
@@ -83,6 +86,9 @@ function parseArgs(args: string[]): ParsedArgs {
         break
       case '--full-page':
         parsed.forceFullPage = true
+        break
+      case '--debug':
+        parsed.debug = true
         break
       case '--list-targets':
         parsed.listTargets = true

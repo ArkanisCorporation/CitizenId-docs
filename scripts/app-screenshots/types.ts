@@ -54,6 +54,7 @@ export interface CaptureOptions {
   selectedTargets: string[]
   selectedViewports: string[]
   forceFullPage: boolean
+  debug: boolean
 }
 
 export interface CaptureResult {

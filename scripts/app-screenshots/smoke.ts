@@ -42,6 +42,7 @@ try {
       selectedTargets: ['home', 'legal-cookies', 'analytics-banner', 'privacy-preferences-dialog'],
       selectedViewports: ['desktop'],
       forceFullPage: false,
+      debug: true,
     },
     targets,
     viewports,

@@ -16,9 +16,15 @@ export async function runCaptures(
 
   const targets = filterByIds(allTargets, options.selectedTargets, 'target')
   const viewports = filterByIds(allViewports, options.selectedViewports, 'viewport')
+  const jobs = targets.flatMap(target => viewportsForTarget(target, viewports).map(viewport => ({ target, viewport })))
+  const debugLog = options.debug
+    ? (message: string) => console.error(`[screenshots:debug] ${message}`)
+    : () => undefined
 
+  console.error(`[screenshots] checking ${options.baseUrl.href}`)
   await ensureBaseUrlReachable(options.baseUrl)
   await fs.mkdir(options.outputDir, { recursive: true })
+  console.error(`[screenshots] writing ${jobs.length} screenshot(s) to ${options.outputDir}`)
 
   const browserOptions = {
     timeout: 30000,
@@ -31,29 +37,30 @@ export async function runCaptures(
   try {
     const results: CaptureResult[] = []
 
-    for (const target of targets) {
-      for (const viewport of viewportsForTarget(target, viewports)) {
-        const context = await browser.createContext({ retry: 0 })
+    for (const [index, { target, viewport }] of jobs.entries()) {
+      console.error(`[screenshots] ${index + 1}/${jobs.length} ${target.id}:${viewport.id}`)
 
-        try {
-          const raw = await captureRawScreenshot(context, target, viewport, options.baseUrl, options.forceFullPage)
-          const framed = await frameScreenshot(raw.buffer, frameForCapture(target, viewport, options.baseUrl))
-          const outputPath = path.join(options.outputDir, createOutputFileName(target, viewport, raw.scope))
+      const context = await browser.createContext({ retry: 0 })
 
-          await fs.writeFile(outputPath, framed.data)
+      try {
+        const raw = await captureRawScreenshot(context, target, viewport, options.baseUrl, options.forceFullPage, debugLog)
+        const framed = await frameScreenshot(raw.buffer, frameForCapture(target, viewport, options.baseUrl))
+        const outputPath = path.join(options.outputDir, createOutputFileName(target, viewport, raw.scope))
 
-          results.push({
-            targetId: target.id,
-            viewportId: viewport.id,
-            outputPath,
-            width: framed.info.width,
-            height: framed.info.height,
-            size: framed.info.size,
-          })
-        }
-        finally {
-          await context.destroyContext({ force: true }).catch(() => undefined)
-        }
+        await fs.writeFile(outputPath, framed.data)
+        console.error(`[screenshots] saved ${outputPath}`)
+
+        results.push({
+          targetId: target.id,
+          viewportId: viewport.id,
+          outputPath,
+          width: framed.info.width,
+          height: framed.info.height,
+          size: framed.info.size,
+        })
+      }
+      finally {
+        await context.destroyContext({ force: true }).catch(() => undefined)
       }
     }
 

@@ -14,6 +14,7 @@ export async function captureRawScreenshot(
   viewport: CaptureViewport,
   baseUrl: URL,
   forceFullPage: boolean,
+  debugLog: (message: string) => void,
 ): Promise<RawCapture> {
   const page = await browserlessContext.page(`${target.id}:${viewport.id}`)
 
@@ -26,6 +27,7 @@ export async function captureRawScreenshot(
     })
 
     const url = new URL(target.path, baseUrl)
+    debugLog(`goto ${url.href}`)
 
     await browserlessContext.goto(page, {
       url: url.href,
@@ -36,10 +38,12 @@ export async function captureRawScreenshot(
     })
 
     if (target.waitForSelector) {
+      debugLog(`wait ${target.waitForSelector}`)
       await page.waitForSelector(target.waitForSelector, { visible: true, timeout: 10000 })
     }
 
     for (const step of target.steps ?? []) {
+      debugLog(`step ${formatStep(step)}`)
       await runStep(page, step)
     }
 
@@ -52,6 +56,7 @@ export async function captureRawScreenshot(
         throw new Error(`Target '${target.id}' uses element scope but has no selector.`)
       }
 
+      debugLog(`capture element ${target.selector}`)
       const element = await page.waitForSelector(target.selector, { visible: true, timeout: 10000 })
 
       if (!element) {
@@ -73,6 +78,8 @@ export async function captureRawScreenshot(
       fullPage: scope === 'fullPage',
     }
 
+    debugLog(`capture ${scope}`)
+
     return {
       scope,
       buffer: Buffer.from(await page.screenshot(screenshotOptions)),
@@ -80,6 +87,19 @@ export async function captureRawScreenshot(
   }
   finally {
     await page.close().catch(() => undefined)
+  }
+}
+
+function formatStep(step: CaptureStep) {
+  switch (step.type) {
+    case 'clearLocalStorage':
+      return 'clearLocalStorage'
+    case 'click':
+      return `click ${step.selector}`
+    case 'waitForSelector':
+      return `wait ${step.selector}`
+    case 'evaluate':
+      return `evaluate ${step.script.length} chars`
   }
 }
 

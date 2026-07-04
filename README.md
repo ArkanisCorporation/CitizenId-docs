@@ -48,6 +48,7 @@ pnpm screenshots:app -- --base-url http://localhost:5085
 
 Generated screenshots are written to `docs/public/images/app-screenshots/` by default.
 Use `--target`, `--viewport`, `--output-dir`, and `--full-page` to narrow or reshape a run.
+Use `--debug` when selector waits or page steps need more detail.
 
 ```shell
 pnpm screenshots:app -- --base-url http://localhost:5085 --target analytics-banner --viewport desktop
