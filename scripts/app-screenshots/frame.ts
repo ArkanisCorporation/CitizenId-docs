@@ -168,38 +168,66 @@ function createBrowserChromeSvg(
   title: string,
   url: string,
 ) {
-  const tabWidth = Math.min(340, Math.round(width * 0.36))
-  const addressX = 184
-  const addressWidth = Math.max(300, width - 346)
+  const topHeight = 38
+  const toolbarHeight = chromeHeight - topHeight
+  const toolbarCenter = topHeight + toolbarHeight / 2
+  const addressHeight = 30
+  const addressY = topHeight + Math.round((toolbarHeight - addressHeight) / 2)
+  const tabX = 104
+  const tabWidth = Math.min(270, Math.round(width * 0.22))
+  const toolbarItemSize = 24
+  const toolbarGap = 12
+  const toolbarStartX = 16
+  const backX = toolbarStartX + toolbarItemSize / 2
+  const forwardX = backX + toolbarItemSize + toolbarGap
+  const reloadX = forwardX + toolbarItemSize + toolbarGap
+  const addressX = reloadX + toolbarItemSize / 2 + toolbarGap
+  const incognitoHeight = addressHeight
+  const incognitoWidth = 124
+  const menuX = width - 24
+  const incognitoX = menuX - incognitoWidth - 24
+  const addressWidth = Math.max(300, incognitoX - addressX - 20)
+  const starX = addressX + addressWidth - 28
+  const lockX = addressX + 43
+  const urlTextX = lockX + 22
   const escapedTitle = escapeSvg(title)
   const escapedUrl = escapeSvg(url.replace(/^https?:\/\//, ''))
 
   return Buffer.from(
     `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
-      <rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="${radius}" fill="#2c2d33" stroke="#5f6067"/>
+      <rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="${radius}" fill="#2b2d30" stroke="#4a4d52"/>
       <clipPath id="windowClip">
         <rect x="0" y="0" width="${width}" height="${height}" rx="${radius}"/>
       </clipPath>
       <g clip-path="url(#windowClip)">
-        <rect x="0" y="0" width="${width}" height="${chromeHeight}" fill="#252529"/>
-        <rect x="0" y="42" width="${width}" height="${chromeHeight - 42}" fill="#2f3035"/>
-        <path d="M0 0 H${width} V42 H${tabWidth + 96} Q${tabWidth + 76} 42 ${tabWidth + 76} 22 V14 Q${tabWidth + 76} 4 ${tabWidth + 66} 4 H116 Q104 4 104 16 V24 Q104 42 86 42 H0 Z" fill="#2b2b2d"/>
-        <circle cx="30" cy="21" r="7" fill="#ff5f57"/>
-        <circle cx="54" cy="21" r="7" fill="#febc2e"/>
-        <circle cx="78" cy="21" r="7" fill="#28c840"/>
-        <circle cx="118" cy="21" r="8" fill="#44464b"/>
-        <text x="136" y="26" fill="#d9d9dd" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="16">${escapedTitle}</text>
-        <text x="${tabWidth + 48}" y="26" fill="#d9d9dd" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="22">+</text>
-        <text x="28" y="67" fill="#c8c8cd" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="28">&#8249;</text>
-        <text x="66" y="67" fill="#8f9198" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="28">&#8250;</text>
-        <text x="107" y="65" fill="#d3d4d8" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="18">&#8635;</text>
-        <rect x="${addressX}" y="52" width="${addressWidth}" height="26" rx="13" fill="#202125"/>
-        <circle cx="${addressX + 22}" cy="65" r="9" fill="#3a3c42"/>
-        <text x="${addressX + 40}" y="70" fill="#f2f2f4" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="17">${escapedUrl}</text>
-        <text x="${addressX + addressWidth - 34}" y="70" fill="#c4c5ca" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="20">&#9734;</text>
-        <rect x="${width - 158}" y="52" width="116" height="28" rx="14" fill="#1f2024"/>
-        <text x="${width - 136}" y="71" fill="#f4f4f6" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="16">Incognito</text>
-        <text x="${width - 24}" y="70" fill="#c7c8cd" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="22">&#8942;</text>
+        <rect x="0" y="0" width="${width}" height="${topHeight}" fill="#1f2023"/>
+        <rect x="0" y="${topHeight}" width="${width}" height="${toolbarHeight}" fill="#303337"/>
+        <circle cx="26" cy="19" r="6.5" fill="#ff5f57"/>
+        <circle cx="50" cy="19" r="6.5" fill="#febc2e"/>
+        <circle cx="74" cy="19" r="6.5" fill="#28c840"/>
+        <path d="M${tabX + 10} 4 H${tabX + tabWidth - 12} Q${tabX + tabWidth} 4 ${tabX + tabWidth} 16 V28 Q${tabX + tabWidth} 38 ${tabX + tabWidth + 10} 38 H${tabX - 10} Q${tabX} 38 ${tabX} 28 V16 Q${tabX} 4 ${tabX + 10} 4 Z" fill="#303337"/>
+        <circle cx="${tabX + 17}" cy="19.5" r="7.5" fill="none" stroke="#cbd0d6" stroke-width="1.3"/>
+        <path d="M${tabX + 9.5} 19.5 H${tabX + 24.5} M${tabX + 17} 12 C${tabX + 13.5} 15.5 ${tabX + 13.5} 23.5 ${tabX + 17} 27 M${tabX + 17} 12 C${tabX + 20.5} 15.5 ${tabX + 20.5} 23.5 ${tabX + 17} 27" fill="none" stroke="#cbd0d6" stroke-width="1.1" stroke-linecap="round"/>
+        <text x="${tabX + 34}" y="25" fill="#dadddf" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="13">${escapedTitle}</text>
+        <path d="M${tabX + tabWidth - 27} 16.5 L${tabX + tabWidth - 20} 23.5 M${tabX + tabWidth - 20} 16.5 L${tabX + tabWidth - 27} 23.5" stroke="#dadddf" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M${tabX + tabWidth + 30} 15.5 V24.5 M${tabX + tabWidth + 25.5} 20 H${tabX + tabWidth + 34.5}" stroke="#dadddf" stroke-width="2" stroke-linecap="round"/>
+        <g transform="translate(${backX - 12} ${toolbarCenter - 12})" fill="none" stroke="#e8eaed" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6 L9 12 L15 18"/><path d="M9 12 H21"/></g>
+        <g transform="translate(${forwardX - 12} ${toolbarCenter - 12})" fill="none" stroke="#8d9095" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 L15 12 L9 18"/><path d="M3 12 H15"/></g>
+        <g transform="translate(${reloadX - 12} ${toolbarCenter - 12})" fill="none" stroke="#e8eaed" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19 4 V9 H14"/><path d="M5 12 A7 7 0 0 1 17.5 7.5 L19 9"/><path d="M5 20 V15 H10"/><path d="M19 12 A7 7 0 0 1 6.5 16.5 L5 15"/></g>
+        <rect x="${addressX}" y="${addressY}" width="${addressWidth}" height="${addressHeight}" rx="${addressHeight / 2}" fill="#202124"/>
+        <circle cx="${addressX + 18}" cy="${toolbarCenter}" r="13" fill="#4a4d52"/>
+        <path d="M${addressX + 11} ${toolbarCenter - 4} H${addressX + 25} M${addressX + 11} ${toolbarCenter + 4} H${addressX + 25}" stroke="#e8eaed" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="${addressX + 15}" cy="${toolbarCenter - 4}" r="2" fill="#3c4043" stroke="#e8eaed" stroke-width="1.4"/>
+        <circle cx="${addressX + 21}" cy="${toolbarCenter + 4}" r="2" fill="#3c4043" stroke="#e8eaed" stroke-width="1.4"/>
+        <rect x="${lockX}" y="${toolbarCenter - 1}" width="13" height="10" rx="2" fill="#34a853"/>
+        <path d="M${lockX + 3} ${toolbarCenter - 1} V${toolbarCenter - 5} C${lockX + 3} ${toolbarCenter - 9} ${lockX + 10} ${toolbarCenter - 9} ${lockX + 10} ${toolbarCenter - 5} V${toolbarCenter - 1}" fill="none" stroke="#34a853" stroke-width="2" stroke-linecap="round"/>
+        <text x="${urlTextX}" y="${toolbarCenter + 5}" fill="#ffffff" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="16">${escapedUrl}</text>
+        <g transform="translate(${starX - 10} ${toolbarCenter - 10})" fill="none" stroke="#e8eaed" stroke-width="1.8" stroke-linejoin="round"><path d="M10 2 L12.5 7 L18 7.5 L14 11.5 L15 17 L10 14 L5 17 L6 11.5 L2 7.5 L7.5 7 Z"/></g>
+        <rect x="${incognitoX}" y="${addressY}" width="${incognitoWidth}" height="${incognitoHeight}" rx="${incognitoHeight / 2}" fill="#202124"/>
+        <text x="${incognitoX + 23}" y="${toolbarCenter + 5}" fill="#ffffff" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="16">Incognito</text>
+        <circle cx="${menuX}" cy="${toolbarCenter - 8}" r="2.2" fill="#e8eaed"/>
+        <circle cx="${menuX}" cy="${toolbarCenter}" r="2.2" fill="#e8eaed"/>
+        <circle cx="${menuX}" cy="${toolbarCenter + 8}" r="2.2" fill="#e8eaed"/>
       </g>
     </svg>`,
   )
