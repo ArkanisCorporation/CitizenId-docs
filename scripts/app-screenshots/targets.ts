@@ -44,6 +44,20 @@ const hidePrivacyBannerStorage = {
   'citizenid.privacy.analytics-consent.v1': 'rejected',
 }
 
+function authenticatedPlayerTarget(id: string, path: string, title: string): CaptureTarget {
+  return {
+    id,
+    path,
+    scope: 'viewport',
+    authScope: 'user',
+    authenticatedSelector: 'a[href="/account"]',
+    waitForSelector: 'a[href="/account"]',
+    frames: { desktop: desktopBrowserFrame(title) },
+    localStorage: hidePrivacyBannerStorage,
+    styles: deterministicStyles,
+  }
+}
+
 export const targets: CaptureTarget[] = [
   {
     id: 'home',
@@ -69,6 +83,11 @@ export const targets: CaptureTarget[] = [
     localStorage: hidePrivacyBannerStorage,
     styles: deterministicStyles,
   },
+  authenticatedPlayerTarget('account-overview', '/account', 'Citizen iD - Account'),
+  authenticatedPlayerTarget('account-settings', '/account/settings', 'Citizen iD - Account Settings'),
+  authenticatedPlayerTarget('account-linked-accounts', '/account/linked', 'Citizen iD - Linked Accounts'),
+  authenticatedPlayerTarget('account-authorized-apps', '/account/apps', 'Citizen iD - Authorized Applications'),
+  authenticatedPlayerTarget('account-rsi-verification', '/account/verify/rsi', 'Citizen iD - RSI Verification'),
   {
     id: 'legal-cookies',
     path: '/legal/cookies',
