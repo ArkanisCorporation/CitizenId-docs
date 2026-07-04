@@ -5,6 +5,7 @@ import { createServer } from 'node:http'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import sharp from 'sharp'
 import { parseCli } from './cli.js'
 import { runCaptures } from './runner.js'
 import { targets, viewports } from './targets.js'
@@ -68,6 +69,10 @@ try {
     assert.deepEqual([...output.subarray(0, pngSignature.length)], pngSignature)
     assert.ok(result.width > 0, `${result.outputPath} should report a width`)
     assert.ok(result.height > 0, `${result.outputPath} should report a height`)
+
+    if (['home', 'analytics-banner', 'privacy-preferences-dialog'].includes(result.targetId)) {
+      assert.equal(await topLeftAlpha(result.outputPath), 0, `${result.outputPath} should have a transparent frame background`)
+    }
   }
 
   console.log(JSON.stringify({ outputDir, results }, null, 2))
@@ -103,4 +108,13 @@ function assertAddressInfo(address: string | AddressInfo | null): asserts addres
   if (!address || typeof address === 'string') {
     throw new TypeError('Smoke server did not bind to a TCP address.')
   }
+}
+
+async function topLeftAlpha(imagePath: string) {
+  const { data } = await sharp(imagePath)
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true })
+
+  return data[3]
 }

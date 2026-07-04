@@ -7,7 +7,6 @@ export const viewports: CaptureViewport[] = [
 
 export const defaultFrame: CaptureFrame = {
   padding: 32,
-  background: '#101114',
   borderRadius: 16,
   shadow: {
     blur: 42,
