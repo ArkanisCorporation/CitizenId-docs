@@ -17,7 +17,7 @@ Do not use `CitizenID` in diagrams or prose.
 
 ## Audience Fit
 
-Write for three first-class audiences: players, community admins, and community developers.
+Write for three first-class audiences: players, community admins, and developers.
 Player pages should explain the user-facing consequence first and keep implementation detail behind prose or details blocks.
 Community admin pages should emphasize setup decisions, operational effects, permissions, and support boundaries.
 Community developer pages should be precise about protocols, scopes, claims, tokens, endpoints, and data ownership.

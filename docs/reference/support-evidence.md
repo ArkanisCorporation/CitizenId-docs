@@ -32,7 +32,7 @@ Never share access tokens, refresh tokens, client secrets, password reset links,
 - The role-assignment audit entry or operation ID when available.
 - Whether manual resync was attempted.
 
-## Community Developers
+## Developers
 
 - The client ID or application name.
 - The environment, such as production or staging.

@@ -105,7 +105,15 @@ export default defineConfig({
       },
     },
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/ArkanisCorporation/CitizenId-docs', ariaLabel: 'Citizen iD documentation source on GitHub' },
+      {
+        icon: 'github',
+        link: 'https://github.com/ArkanisCorporation/CitizenId-docs',
+        ariaLabel: 'Citizen iD documentation source on GitHub',
+      },
+      {
+        icon: 'discord',
+        link: 'https://discord.citizenid.space',
+      },
     ],
     editLink: {
       pattern: 'https://github.com/ArkanisCorporation/CitizenId-docs/edit/main/docs/:path',
@@ -202,7 +210,7 @@ function nav() {
       activeMatch: '/community-admins/',
     },
     {
-      text: 'Community Developers',
+      text: 'Developers',
       link: '/community-developers/',
       activeMatch: '/community-developers/',
     },
@@ -210,27 +218,6 @@ function nav() {
       text: 'Reference',
       link: '/reference/',
       activeMatch: '/reference/',
-    },
-    {
-      text: 'External Links',
-      items: [
-        {
-          text: 'Citizen iD',
-          link: 'https://citizenid.space',
-        },
-        {
-          text: 'Community Discord',
-          link: 'https://discord.citizenid.space',
-        },
-        {
-          text: 'Arkanis Corporation',
-          link: 'https://arkanis.cc',
-        },
-        {
-          text: 'Citizen iD Docs Source',
-          link: 'https://github.com/ArkanisCorporation/CitizenId-docs',
-        },
-      ],
     },
   ]
 }

@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: Citizen iD
-  text: Public Documentation
-  tagline: One identity platform for Star Citizen players, community admins, and community developers.
+  text: Documentation
+  tagline: One identity platform for Star Citizen players, community admins, and developers.
   image:
     light:
       src: /citizenid-logo-dark.png
@@ -20,7 +20,7 @@ hero:
       text: Community Admins
       link: /community-admins/
     - theme: alt
-      text: Community Developers
+      text: Developers
       link: /community-developers/
 
 features:
@@ -32,7 +32,7 @@ features:
     details: |
         Connect Discord, configure role assignments, manage nickname automation, review audit logs, and support members with better evidence.
         The community guide separates admin workflows from developer-only OAuth and API material.
-  - title: "For community developers"
+  - title: "For developers"
     details: |
         Request the Integrator product role, create applications, use OAuth 2.0 and OpenID Connect, and integrate with Citizen iD APIs.
         The developer guide focuses on community-built tools and keeps implementation details close to the current platform.

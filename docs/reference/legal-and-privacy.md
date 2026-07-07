@@ -17,7 +17,7 @@ See [Privacy Controls](/players/privacy-controls) and [Data Rights](/players/dat
 
 ## Developer Terms
 
-Community developers request the Integrator product role before managing applications.
+Developers request the Integrator product role before managing applications.
 
 Developer terms acceptance is part of that request flow.
 

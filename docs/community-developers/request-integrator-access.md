@@ -1,11 +1,11 @@
 ---
 title: Request Integrator Access
-description: How community developers request the Integrator product role.
+description: How developers request the Integrator product role.
 ---
 
 # Request Integrator Access
 
-Integrator is the Citizen iD product role for approved community developers.
+Integrator is the Citizen iD product role for approved developers.
 
 It unlocks developer portal access and application management.
 

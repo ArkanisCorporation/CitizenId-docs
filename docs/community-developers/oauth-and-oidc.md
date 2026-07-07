@@ -1,6 +1,6 @@
 ---
 title: OAuth And OIDC
-description: OAuth 2.0 and OpenID Connect entry points for community developers.
+description: OAuth 2.0 and OpenID Connect entry points for developers.
 ---
 
 # OAuth And OIDC

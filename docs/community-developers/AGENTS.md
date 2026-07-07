@@ -12,7 +12,7 @@ Separate normative requirements from examples.
 ## Developer Diagrams
 
 Use diagrams for OAuth flows, consent boundaries, token lifecycle, claim production, API calls, revocation, and data ownership.
-Use `actor` for players, app operators, community developers, and external providers.
+Use `actor` for players, app operators, developers, and external providers.
 Use `service` for Citizen iD authorization, identity, consent, token, and API services.
 Use `context` for client apps, redirects, browsers, dashboards, and external systems.
 Use `data` for tokens, claims, userinfo responses, exports, and stored records.

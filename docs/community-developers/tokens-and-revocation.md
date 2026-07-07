@@ -7,7 +7,7 @@ description: Token lifetime, refresh tokens, delegated tokens, and revocation su
 
 Citizen iD issues tokens through OAuth 2.0 and OpenID Connect flows.
 
-Community developers should understand which token belongs to the user, which token belongs to the application, and which revocation path applies.
+Developers should understand which token belongs to the user, which token belongs to the application, and which revocation path applies.
 
 ## Token Types
 

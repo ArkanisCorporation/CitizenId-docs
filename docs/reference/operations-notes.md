@@ -11,11 +11,11 @@ Operational pages should explain user-visible behavior without publishing secret
 
 ## Publicly Useful Operations Topics
 
-Maintenance windows are useful to players, community admins, and community developers.
+Maintenance windows are useful to players, community admins, and developers.
 
 Rate limits are useful when explaining retry behavior.
 
-OpenAPI availability is useful to community developers.
+OpenAPI availability is useful to developers.
 
 Role-assignment audit behavior is useful to community admins.
 

@@ -24,6 +24,6 @@ Use it when you manage a community, configure the Citizen iD bot, maintain role 
 
 Community admins manage a community's operational setup.
 
-Community developers build tools that integrate with Citizen iD through OAuth, OpenID Connect, and APIs.
+Developers build tools that integrate with Citizen iD through OAuth, OpenID Connect, and APIs.
 
 Some people do both, but the docs keep the workflows separate so each path stays readable.

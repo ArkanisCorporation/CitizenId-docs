@@ -64,7 +64,7 @@ test assets and environments.
 
 ## Production assets
 
-Use these assets for production integrations, public documentation, media references, application login screens, and
+Use these assets for production integrations, documentation, media references, application login screens, and
 community pages.
 
 ### Production logos

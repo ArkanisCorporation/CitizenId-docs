@@ -5,11 +5,11 @@ description: Start here if you build community tools with Citizen iD OAuth, Open
 
 # Community Developer Guide
 
-Community developers build tools that integrate with Citizen iD.
+Developers build tools that integrate with Citizen iD.
 
 The product role that unlocks this surface is still called Integrator.
 
-The docs use Community Developers as the audience label because it describes who the documentation is for.
+The docs use Developers as the audience label because it describes who the documentation is for.
 
 ## Start Here
 
@@ -24,6 +24,6 @@ The docs use Community Developers as the audience label because it describes who
 
 Community admins configure Citizen iD for a server or community.
 
-Community developers build applications that use Citizen iD as an identity and authorization provider.
+Developers build applications that use Citizen iD as an identity and authorization provider.
 
 If you are both, use the community admin guide for bot and role operations, and this guide for application integration.
