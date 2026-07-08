@@ -21,6 +21,13 @@ const pages = [
   { slug: 'privacy-controls', path: '/players/privacy-controls' },
   { slug: 'data-rights', path: '/players/data-rights' },
   { slug: 'getting-help', path: '/players/getting-help' },
+  { slug: 'community-admins-index', path: '/community-admins/' },
+  { slug: 'community-setup', path: '/community-admins/community-setup' },
+  { slug: 'discord-bot', path: '/community-admins/discord-bot' },
+  { slug: 'role-assignments', path: '/community-admins/role-assignments' },
+  { slug: 'nickname-management', path: '/community-admins/nickname-management' },
+  { slug: 'branding-assets', path: '/community-admins/branding-assets' },
+  { slug: 'maintenance-and-support', path: '/community-admins/maintenance-and-support' },
 ]
 
 const viewports = [
