@@ -18,27 +18,40 @@ A trigger builds context, templates evaluate conditions, matching targets are pl
 
 ```mermaid
 flowchart TD
-  trigger(["Join, account change,<br/>RSI refresh, or resync"])
-  context[["Evaluation context"]]
-  condition{"Template<br/>matches?"}
-  outcome[["Evaluation result<br/>No match: preview<br/>Match: change plan"]]
-  permission{"Target can<br/>be applied?"}
-  result(("Applied or<br/>failed attempt"))
-  audit[(Audit entry<br/>for attempt)]
+  trigger(["Sync or preview"])
+  context[/Member context/]
+  rules[["Rule set"]]
+  match{"Rule matches?"}
+  noMatch(("No match"))
+  targets["Planned targets"]
+  already(("Already correct"))
+  cidRole(("Community role"))
+  discordGate{"Discord OK?"}
+  discordRole(("Discord role"))
+  blocked>Blocked]
+  audit[(Audit)]
 
   trigger ==> context
-  context ==> condition
-  condition ==> outcome
-  outcome ==> permission
-  permission --> result
-  result ==> audit
+  context ==> rules
+  rules ==> match
+  match -. "No" .-> noMatch
+  match ==>|Yes| targets
+  targets -. "No diff" .-> already
+  targets ==>|Community| cidRole
+  targets ==>|Discord| discordGate
+  discordGate ==>|OK| discordRole
+  discordGate -. "Blocked" .-> blocked
+  cidRole --> audit
+  discordRole --> audit
+  blocked --> audit
 
   class trigger actor;
-  class context service;
-  class condition,permission decision;
-  class outcome action;
-  class result success;
-  class audit data;
+  class rules service;
+  class match,discordGate decision;
+  class targets action;
+  class context,audit data;
+  class noMatch,already,cidRole,discordRole success;
+  class blocked caution;
 ```
 
 Read the diagram as a safe rollout model.
@@ -46,6 +59,7 @@ The template match is only one part of the result.
 Preview is the best place to explain no-match and no-change cases before live automation runs.
 Audit evidence is most useful when Citizen iD attempts a Discord role change and records whether that attempt succeeded or failed.
 Do not expect every member who matches no template to produce an audit entry.
+Only Discord targets use the Discord permission branch.
 The target still has to be valid, and Discord can still block a Discord role change because of permission or hierarchy.
 
 ## First Verified-Member Role

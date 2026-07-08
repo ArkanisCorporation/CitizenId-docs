@@ -17,46 +17,51 @@ This guide separates community administration from community development.
 Use it when you manage a community, configure the Citizen iD bot, maintain role automation, review audit logs, update community presentation, or support members.
 
 **Diagram: Admin operating map.**
-The map shows the main admin responsibilities and the links below route to the individual guide pages.
+The map shows the main control and evidence path that all admin features share.
 
-**what should be on the screenshot/diagram:** A current admin journey map that shows community setup feeding Discord setup, role rules, nickname rules, branding, maintenance, and support evidence.
+**what should be on the screenshot/diagram:** A current admin journey map that shows admins maintaining the community record, choosing configuration, checking external state, producing member-visible results, and collecting support evidence.
 
 ```mermaid
 flowchart TD
-  setup(["Community Setup<br/>Record and server"])
-  bot["Discord Bot<br/>Install and tabs"]
-  features[["Choose Features<br/>Linked roles<br/>Role rules<br/>Nicknames"]]
-  branding[/"Branding Assets<br/>Community visuals"/]
-  support>Maintenance And Support<br/>Evidence and escalation]
-  developers(["Community Developers<br/>APIs"])
+  admin(["Admin"])
+  record[["Community<br/>record"]]
+  server[/"Discord<br/>server"/]
+  config[["Config"]]
+  state[/Member state/]
+  apply{"Can apply?"}
+  result(("Member<br/>result"))
+  evidence>Support<br/>evidence]
 
-  setup ==> bot
-  bot ==> features
-  features --> branding
-  branding --> support
-  support -.-> developers
+  admin ==> record
+  record --> server
+  record ==> config
+  server --> state
+  config ==> apply
+  state --> apply
+  apply ==>|Yes| result
+  apply -. "No" .-> evidence
+  result -. "Logs" .-> evidence
+  record -. "Context" .-> evidence
 
-  class setup,developers actor;
-  class bot context;
-  class features service;
-  class branding data;
-  class support caution;
+  class admin actor;
+  class record,config service;
+  class server context;
+  class state data;
+  class apply decision;
+  class result success;
+  class evidence caution;
 
-  click setup "/community-admins/community-setup" "Open Community Setup" _self
-  click bot "/community-admins/discord-bot" "Open Discord Bot" _self
-  click features "/community-admins/discord-bot" "Open Discord Bot" _self
-  click branding "/community-admins/branding-assets" "Open Branding Assets" _self
-  click support "/community-admins/maintenance-and-support" "Open Maintenance And Support" _self
-  click developers "/community-developers/" "Open Community Developer Guide" _self
+  click record "/community-admins/community-setup" "Open Community Setup" _self
+  click server "/community-admins/discord-bot" "Open Discord Bot" _self
+  click evidence "/community-admins/maintenance-and-support" "Open Maintenance And Support" _self
 ```
 
 Read the diagram as an ownership map.
-Community setup anchors the public record and the official Discord server.
-The bot page explains the Discord bridge, including linked roles, bot-managed roles, and nickname automation.
-Those features are separate responsibilities, so a community can use one without configuring every other one first.
-The feature node is a choice point, not a dependency chain.
-Branding and support explain operational follow-through around the community record.
-The developer guide is separate because OAuth applications and API integrations need more technical detail than ordinary community administration.
+Community setup anchors the public record, staff access, and the official Discord server.
+Configuration covers bot setup, role rules, nickname templates, branding, and maintenance choices.
+Player account state, Discord server state, and RSI public data can all affect whether configured automation can apply.
+Support collects evidence from the workflow that produced the surprise instead of assuming one single cause.
+The developer guide is separate from this map because OAuth applications and API integrations need more technical detail than ordinary community administration.
 
 ## Start Here
 

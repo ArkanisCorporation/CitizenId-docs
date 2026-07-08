@@ -18,28 +18,42 @@ Start with the member report, check the community-owned configuration, collect a
 ```mermaid
 flowchart TD
   report(["Member report"])
-  classify{"Which surface?"}
-  config["Check community<br/>configuration"]
-  discord["Check Discord<br/>permissions + hierarchy"]
-  audit[(Audit or operation<br/>evidence)]
-  resync["Manual resync<br/>when appropriate"]
-  private>Remove secrets<br/>and private data]
-  result(("Resolved or<br/>escalated"))
+  classify{"Where is<br/>issue?"}
+  setup["Setup"]
+  automation["Automation"]
+  discord["Discord"]
+  maintenance["Maintenance"]
+  owner{"Community<br/>managed?"}
+  evidence[(Evidence)]
+  local{"Staff can<br/>fix?"}
+  fix["Fix or resync"]
+  private>Redact<br/>evidence]
+  escalate>Escalate]
+  resolved(("Resolved"))
 
   report ==> classify
-  classify -->|"Setup context"| config
-  config -->|"Role or nickname"| discord
-  discord -->|"Automation history"| audit
-  audit --> resync
-  resync --> private
-  private ==> result
+  classify --> setup
+  classify --> automation
+  classify --> discord
+  classify --> maintenance
+  setup --> evidence
+  automation --> evidence
+  discord --> evidence
+  maintenance --> owner
+  owner ==>|Yes| evidence
+  owner -. "No" .-> private
+  evidence ==> local
+  local ==>|Yes| fix
+  fix ==> resolved
+  local -. "No" .-> private
+  private ==> escalate
 
   class report actor;
-  class classify decision;
-  class config,discord,resync action;
-  class audit data;
-  class result success;
-  class private caution;
+  class classify,owner,local decision;
+  class setup,automation,discord,maintenance,fix action;
+  class evidence data;
+  class resolved success;
+  class private,escalate caution;
 ```
 
 Read the diagram as an escalation filter.

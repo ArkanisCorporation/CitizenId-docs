@@ -18,36 +18,43 @@ Community admins maintain the record, Citizen iD uses it as the anchor for commu
 
 ```mermaid
 flowchart TD
-  admins(["Community admins"])
-  record[["Community record"]]
-  public[/Public identity<br/>name, slug, homepage/]
-  hierarchy["Parent or child<br/>community"]
-  server[/"Official Discord<br/>server"/]
-  bot["Bot configuration"]
-  automation[["Role and nickname<br/>automation"]]
-  staff["Staff access"]
-  discordLimit>Discord permissions<br/>still apply]
+  admin(["Admin"])
+  record[["Community<br/>record"]]
+  details[/Public details/]
+  parent["Parent<br/>community"]
+  staff[/Staff access/]
+  server[/"Official server"/]
+  assigned{"Used by<br/>another?"}
+  canManage{"Can manage<br/>server?"}
+  bot["Bot setup"]
+  fixMap>Fix mapping]
+  fixAccess>Fix access]
 
-  admins ==>|Maintain| record
-  record --> public
-  public --> hierarchy
-  hierarchy --> staff
-  staff --> server
-  server ==>|Enables| bot
-  bot ==> automation
-  automation -. "Blocked when Discord says no" .-> discordLimit
+  admin ==>|maintains| record
+  record --> details
+  record --> parent
+  record --> staff
+  record ==>|maps to| server
+  server ==> assigned
+  assigned ==>|No| canManage
+  assigned -. "Yes" .-> fixMap
+  canManage ==>|Yes| bot
+  canManage -. "No" .-> fixAccess
 
-  class admins actor;
-  class record,automation service;
-  class public data;
-  class hierarchy,server,bot,staff context;
-  class discordLimit caution;
+  class admin actor;
+  class record service;
+  class details,staff data;
+  class parent,server,bot context;
+  class assigned,canManage decision;
+  class fixMap,fixAccess caution;
 ```
 
 Read the diagram as a setup boundary.
 The community record is where Citizen iD knows which community is being managed.
-The Discord server mapping tells bot features which server belongs to the community.
+The Discord server mapping tells bot features and linked-role instructions which server belongs to the community.
+A Discord server that is already assigned to another community needs a mapping correction before setup can continue.
 Discord permissions still decide whether a requested role or nickname change can actually happen.
+Record fields, parent relationships, and staff access explain the community context around that server mapping.
 
 ## First Setup Path
 

@@ -19,32 +19,52 @@ Community admins configure the bot, Citizen iD evaluates the rule, and Discord d
 ```mermaid
 flowchart TD
   admin(["Community admin"])
-  portal["Citizen iD<br/>community portal"]
-  bot[["Citizen iD bot"]]
-  features[["Feature paths<br/>Linked-role metadata<br/>Role requests<br/>Nickname requests"]]
-  discord{"Discord or player<br/>allows result?"}
-  applied(("Applied, claimed,<br/>or unchanged"))
-  blocked>Blocked by permission,<br/>hierarchy, owner, or limit]
+  portal["Portal"]
+  features[["Enabled features"]]
+  state[/Account<br/>and Discord/]
+  discord[/"Discord server"/]
+  linked["Linked roles"]
+  requirement["Discord req."]
+  authorize{"Player auth?"}
+  metadata[/Metadata/]
+  sync["Role/name sync"]
+  gate{"Discord OK?"}
+  claim(("Member<br/>claimed role"))
+  applied(("Role/name set"))
+  evidence[(Evidence)]
 
   admin ==> portal
-  portal ==> bot
-  bot ==> features
-  features ==> discord
-  discord ==> applied
-  discord -.-> blocked
+  portal ==> features
+  features --> linked
+  linked --> requirement
+  state --> authorize
+  authorize ==>|Yes| metadata
+  authorize -. "No" .-> evidence
+  requirement --> claim
+  metadata --> claim
+  discord --> claim
+
+  features --> sync
+  sync --> gate
+  state --> gate
+  discord --> gate
+  gate ==>|Yes| applied
+  gate -. "No" .-> evidence
+  applied -. "Logs" .-> evidence
 
   class admin actor;
-  class portal context;
-  class bot service;
-  class discord decision;
-  class features action;
-  class applied success;
-  class blocked caution;
+  class portal,discord context;
+  class features service;
+  class authorize,gate decision;
+  class linked,requirement,sync action;
+  class state,metadata,evidence data;
+  class claim,applied success;
 ```
 
 Read the diagram as a permission flow.
-Citizen iD can request the Discord change only after your configuration says the member should receive it.
-Discord can still refuse the change because the bot lacks permission, the bot role is too low, the member is protected by role hierarchy, or the requested nickname does not fit Discord rules.
+Bot-managed role and nickname paths are separate from Discord linked roles.
+Citizen iD can request a Discord role or nickname change only after your configuration says the member should receive it.
+Discord can still refuse that requested change because the bot lacks permission, the bot role is too low, the member is protected by role hierarchy, or the requested nickname does not fit Discord rules.
 Linked roles use a different Discord claim flow.
 Citizen iD supplies metadata, and the player claims the role in Discord.
 

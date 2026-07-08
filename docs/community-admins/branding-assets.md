@@ -14,44 +14,49 @@ Treat it as public presentation, not just file upload.
 **Diagram: Branding asset lifecycle.**
 Admins prepare assets, preview placements, submit for review, and then approved assets can represent the community across supported Citizen iD surfaces.
 
-**what should be on the screenshot/diagram:** A branding workflow showing upload or edit, preview matrix, Pending, Submitted, Approved, Rejected, rejection reason, and supported placements.
+**what should be on the screenshot/diagram:** A branding workflow showing upload or edit, preview matrix, Pending Submission, Pending Approval, Approved, Rejected, rejection reason, and supported placements.
 
 ```mermaid
 flowchart TD
   admin(["Community admin"])
-  draft["Prepare asset"]
-  preview["Preview placements"]
-  submit{"Ready for<br/>review?"}
-  pending[["Submitted for review"]]
-  review{"Review<br/>outcome"}
-  result[/Approved or<br/>rejected result/]
-  surfaces["Citizen iD surfaces"]
+  draft[["Pending<br/>submission"]]
+  preview[/Preview/]
+  submit{"Submit?"}
+  pending[(Pending<br/>approval)]
+  review{"Approved?"}
+  approved[/Approved/]
+  rejected>Rejected]
+  reason>Review reason]
+  surfaces["Surfaces"]
 
-  admin ==>|Create or update| draft
+  admin ==>|New version| draft
   draft --> preview
-  preview ==> submit
-  submit ==>|Submit when ready| pending
+  preview --> submit
+  submit -. "No" .-> draft
+  submit ==>|Yes| pending
   pending ==> review
-  review --> result
-  result -. "Fix and resubmit" .-> draft
-  result ==>|Approved| surfaces
+  review ==>|Yes| approved
+  review -. "No" .-> rejected
+  approved ==> surfaces
+  rejected -. "Reason" .-> reason
+  reason -.-> admin
 
   class admin actor;
-  class draft,preview,surfaces context;
+  class draft,pending service;
+  class preview,approved,surfaces data;
   class submit,review decision;
-  class pending service;
-  class result data;
+  class rejected,reason caution;
 ```
 
 Read the diagram as a review workflow.
-Draft and preview are community-controlled.
+Pending submission and preview are community-controlled.
 Approval decides whether the asset should be used broadly.
 A rejected asset should come with enough reason that the next version can fix the real issue.
 
 ## Asset Lifecycle
 
 Admins can add assets, preview placements, update pending assets, delete assets, and submit assets for review.
-Asset states can appear as Pending, Submitted, Approved, or Rejected.
+Asset states can appear as Pending Submission, Pending Approval, Approved, or Rejected.
 
 Approved assets are used across supported Citizen iD surfaces to represent the community.
 Unapproved assets may be visible in preview or review contexts, but they should not be treated as public approved branding.

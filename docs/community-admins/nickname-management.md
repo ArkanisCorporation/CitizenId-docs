@@ -19,23 +19,39 @@ The template uses available player data, handles unavailable fields, checks Disc
 ```mermaid
 flowchart TD
   admin(["Community admin"])
-  template["Nickname template"]
-  data[/Available player data/]
-  composed["Composed nickname"]
-  discord{"Discord can<br/>apply it?"}
-  result(("Updated, fallback,<br/>or unchanged"))
+  template[["Template"]]
+  data[/Available fields/]
+  preference[/Name preference/]
+  available{"Fields available?"}
+  fallback["Fallback name"]
+  build["Build nickname"]
+  limits[/Discord limits/]
+  discord{"Discord can<br/>apply?"}
+  updated(("Nickname set"))
+  unchanged(("No change"))
+  clues>Support clues]
 
-  admin ==>|Configure| template
-  template ==>|Select fields| data
-  data ==>|Fill fields| composed
-  composed ==> discord
-  discord -->|"Allowed or blocked"| result
+  admin ==> template
+  template --> available
+  data --> available
+  preference --> available
+  available ==>|Yes| build
+  available -. "No" .-> fallback
+  fallback --> build
+  build ==> discord
+  limits --> discord
+  discord ==>|Yes| updated
+  discord -. "No" .-> unchanged
+  unchanged -. "captures" .-> clues
+  updated -. "captures" .-> clues
 
   class admin actor;
-  class template,composed action;
-  class data data;
-  class discord decision;
-  class result success;
+  class template action;
+  class preference,data,limits data;
+  class available,discord decision;
+  class build,fallback action;
+  class updated,unchanged success;
+  class clues caution;
 ```
 
 Read the diagram as a constraint map.
