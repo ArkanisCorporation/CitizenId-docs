@@ -129,11 +129,7 @@ Saving an enabled target makes `Verified Pilot` controlled by this assignment po
 
 ### Confirm Result
 
-After saving, a Discord administrator with **Manage Roles** can scope a manual update to Alex and `Verified Pilot` with this command:
-
-```text
-/roles update affected-user:@Alex targeted-role:@Verified Pilot
-```
+After saving, a Discord administrator with **Manage Roles** can scope a manual update to Alex and `Verified Pilot` with `/roles update affected-user:@Alex targeted-role:@Verified Pilot`.
 
 The command scopes the request to the selected member and role and responds `Role update request sent.`.
 After a few minutes, confirm the live role in Asteria Hub and check **Audit Log** for an attempted add or remove operation.
@@ -207,7 +203,7 @@ Confirm those no-match and no-change cases in **Preview**, and collect an audit 
 **Privacy or availability caveat:** `Verified` is a known present-or-absent Citizen iD fact, while unavailable outcomes apply to private or missing RSI profile or organization facts.
 **Verification step:** Preview one verified member and one known unverified member, then confirm an attempted live change in **Audit Log** after saving.
 
-### Main Organization Members
+### Main Org Members
 
 **Goal:** Give members whose main RSI organization is Asteria Rescue the `Org Member` role.
 **Condition:** RSI main organization is exactly `Asteria Rescue`.
@@ -225,7 +221,7 @@ Confirm those no-match and no-change cases in **Preview**, and collect an audit 
 **Privacy or availability caveat:** Hidden organization membership or unavailable officer data cannot satisfy the condition.
 **Verification step:** Preview one visible officer and one visible non-officer, then verify the first attempted change in **Audit Log**.
 
-### Combine Multiple Conditions
+### Combine Conditions
 
 **Goal:** Give verified Asteria Rescue main-organization members the `Flight Ready` role.
 **Condition:** Citizen iD role is exactly `Verified` and RSI main organization is exactly `Asteria Rescue`.
@@ -234,7 +230,7 @@ Confirm those no-match and no-change cases in **Preview**, and collect an audit 
 **Privacy or availability caveat:** Unavailable organization data makes the combined evaluation unavailable, and `Verified` alone is not enough.
 **Verification step:** Preview members representing both true, one false, and one unavailable inputs before saving.
 
-### Exclude Restricted Members
+### Restricted Members
 
 **Goal:** Give eligible verified members `Operations Access` unless they have the Citizen iD role `Restricted`.
 **Condition:** Citizen iD role is exactly `Verified` and Citizen iD role is not `Restricted`.
@@ -291,7 +287,7 @@ A Discord-managed linked role cannot become assignable through permission change
 Replace it with an ordinary Discord role for bot-managed assignment or configure it through the separate [Discord Linked Roles flow](/community-admins/discord-bot#linked-role-setup).
 Use the failed **Audit Log** entry, if available, to identify the Discord rejection before retrying the targeted command.
 
-### Role Removed Unexpectedly
+### Unexpected Removal
 
 An enabled target controls both addition and continued membership.
 If a member loses eligibility for a controlled target, Citizen iD can remove the role.
@@ -322,7 +318,7 @@ For broader escalation guidance, use [Maintenance And Support](/community-admins
 
 ## Advanced Rules
 
-### One Role, Multiple Templates
+### Multiple Templates
 
 Multiple enabled templates can target the same role.
 Their desired targets combine as a union, so one matching template keeps the shared role desired even when another template does not match.
@@ -346,15 +342,33 @@ Treat RSI organization data as an input whose privacy or availability can affect
 Composite conditions can combine Citizen iD state, Discord state, profile settings, RSI profile details, and RSI organization membership when the required data is available.
 Use these results to keep unavailable facts distinct from false throughout nested conditions.
 
-| Operation | Match | No-match | Unavailable |
-| --- | --- | --- | --- |
-| `AND` | All facts are true. | Any fact is false. | No fact is false and at least one fact is unavailable. |
-| `OR` | Any fact is true. | All facts are false. | No fact is true and at least one fact is unavailable. |
-| Negation | A no-match becomes a match. | A match becomes a no-match. | Unavailable remains unavailable. |
+**AND**
+
+| Result | When |
+| --- | --- |
+| Match | All facts are true. |
+| No-match | Any fact is false. |
+| Unavailable | No fact is false and at least one fact is unavailable. |
+
+**OR**
+
+| Result | When |
+| --- | --- |
+| Match | Any fact is true. |
+| No-match | All facts are false. |
+| Unavailable | No fact is true and at least one fact is unavailable. |
+
+**Negation**
+
+| Input | Result |
+| --- | --- |
+| Match | Becomes no-match. |
+| No-match | Becomes match. |
+| Unavailable | Remains unavailable. |
 
 Split deeply nested policies into clearer templates when separate eligibility paths are easier to explain and verify.
 
-### Rule Complexity Limits
+### Complexity Limits
 
 The current default model supports up to 25 templates per community, 10 conditions per template, 5 items in one composite condition, and 2 nested composite levels.
 Ask for a limit review only after simplifying the community policy into clear templates.
