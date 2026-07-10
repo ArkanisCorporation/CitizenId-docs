@@ -13,9 +13,17 @@ Begin with **Before You Start** so the first preview reflects the correct commun
 
 ### Required Setup
 
-Confirm that Asteria Rescue has selected Asteria Hub as its official Discord server.
-Install the Citizen iD bot in Asteria Hub and grant it permission to manage roles.
-Members need linked Citizen iD and Discord accounts, must belong to Asteria Hub, and must have the Citizen iD facts required by the policy.
+Confirm each owner has completed the setup that only they control.
+
+| Owner | Requirement |
+| --- | --- |
+| Citizen iD community administrator | Has access to Asteria Rescue and its bot configuration in the **Community Portal**. |
+| Discord server owner or administrator | Has Discord **Manage Server** and installs the Citizen iD app in Asteria Hub. |
+| Discord administrator | Has Discord **Manage Roles**, grants or verifies the bot permission, reorders roles, and can run the manual role update command. |
+| Citizen iD bot | Is installed in the official server, has Discord **Manage Roles**, and can manage only target roles below its highest role. |
+| Test member | Has linked Citizen iD and Discord accounts, belongs to Asteria Hub, and has the Citizen iD facts used by the policy. |
+
+Use [Community Setup](/community-admins/community-setup) for the broader community path and [Discord Bot](/community-admins/discord-bot) for installation and server configuration.
 Prepare at least one member who should match and one who should not match before opening the editor.
 
 ### Choose Target Role
@@ -27,7 +35,9 @@ Use only a target from the official server selected for Asteria Rescue.
 
 ### Know Who Controls What
 
-Asteria Rescue administrators own the policy, template configuration, official server choice, and Discord role hierarchy.
+Asteria Rescue community administrators own the Citizen iD policy, template configuration, and official server choice in the **Community Portal**.
+A Discord server owner or administrator owns app installation, Discord permissions, and the Asteria Hub role hierarchy.
+Citizen iD community access alone does not grant authority to install the app, grant Discord permissions, or reorder Discord roles.
 Members own their account links and any privacy choices that affect the available Citizen iD or public RSI data.
 Citizen iD evaluates saved templates and determines the desired role state.
 Discord decides whether a requested Discord role change can be executed.
@@ -55,7 +65,8 @@ The editor shows **Changes Pending** while this draft differs from the saved liv
 ### Add Condition
 
 In **Conditions**, select the Citizen iD role `Verified`.
-This condition matches when the evaluated member currently has that Citizen iD role.
+Citizen iD grants this status after the member completes RSI account-control verification, as described in [Verified Status](/players/rsi-verification#verified-status).
+The `Verified` condition is a known present-or-absent Citizen iD fact and matches when the evaluated member currently has that role.
 
 ### Select Discord Role
 
@@ -104,6 +115,12 @@ Preview does not prove that Discord will accept a live change after the template
 | Casey | No | Yes | Remove the controlled role. |
 | Erin | No | No | Make no change. |
 
+::: warning Controlled role
+Saving the enabled `Verified Pilot` target makes every membership in that role authoritative to the policy.
+Citizen iD can remove the role from an evaluated member when no enabled matching template desires it, including when staff originally assigned the role manually.
+Disabling the target or deleting the final template that targets the role stops managing it and leaves existing memberships untouched.
+:::
+
 ### Save Template
 
 Return to **Editor** after the representative results match the intended policy.
@@ -112,10 +129,16 @@ Saving an enabled target makes `Verified Pilot` controlled by this assignment po
 
 ### Confirm Result
 
-Allow the saved policy to evaluate a test member, or use the available role-update command if a manual resync is needed.
-Confirm the member's live role state in Asteria Hub.
-Open **Audit Log** to inspect an attempted add or remove operation and whether Discord accepted it.
+After saving, a Discord administrator with **Manage Roles** can scope a manual update to Alex and `Verified Pilot` with this command:
+
+```text
+/roles update affected-user:@Alex targeted-role:@Verified Pilot
+```
+
+The command scopes the request to the selected member and role and responds `Role update request sent.`.
+After a few minutes, confirm the live role in Asteria Hub and check **Audit Log** for an attempted add or remove operation.
 Treat the live Discord state and any recorded attempt as confirmation, rather than treating preview alone as proof of execution.
+If the live role still contradicts preview after about twenty minutes, collect the evidence under **Support Evidence** and escalate instead of repeatedly retrying.
 
 ## Understand Results
 
@@ -130,8 +153,12 @@ For Erin, `Verified` is known to be absent, so the template does not match and n
 
 An unavailable result means Citizen iD cannot evaluate a required fact, such as private or missing RSI organization data.
 Unavailable is different from no-match because the policy does not know whether the requirement is true or false.
-A negative condition does not turn an unavailable fact into a match.
-Restore or expose the required data, then preview again before changing the policy.
+An unavailable condition does not match and therefore does not desire its targets.
+A member without the controlled target receives no addition.
+A member who already has the controlled target receives a planned removal unless another enabled matching template still desires it.
+The multiple-template union preserves the role when at least one enabled template matches and desires it.
+Negation does not turn an unavailable fact into a match.
+Preview unavailable organization-data cases before saving because privacy changes or provider unavailability can revoke a controlled access role.
 
 ### Roles Added Or Removed
 
@@ -177,7 +204,7 @@ Confirm those no-match and no-change cases in **Preview**, and collect an audit 
 **Condition:** Citizen iD role is exactly `Verified`.
 **Target:** Discord role is exactly `Verified Pilot`.
 **Representative result:** Alex matches and preview plans to add `Verified Pilot`, while Blake matches and keeps the role without a change.
-**Privacy or availability caveat:** The member's linked Citizen iD state must make the `Verified` role available to evaluation.
+**Privacy or availability caveat:** `Verified` is a known present-or-absent Citizen iD fact, while unavailable outcomes apply to private or missing RSI profile or organization facts.
 **Verification step:** Preview one verified member and one known unverified member, then confirm an attempted live change in **Audit Log** after saving.
 
 ### Main Organization Members
@@ -207,13 +234,13 @@ Confirm those no-match and no-change cases in **Preview**, and collect an audit 
 **Privacy or availability caveat:** Unavailable organization data makes the combined evaluation unavailable, and `Verified` alone is not enough.
 **Verification step:** Preview members representing both true, one false, and one unavailable inputs before saving.
 
-### Exclude Specific Members
+### Exclude Restricted Members
 
 **Goal:** Give eligible verified members `Operations Access` unless they have the Citizen iD role `Restricted`.
 **Condition:** Citizen iD role is exactly `Verified` and Citizen iD role is not `Restricted`.
 **Target:** Discord role is exactly `Operations Access`.
 **Representative result:** Alex receives `Operations Access` when verified and not restricted, while a verified restricted member does not match.
-**Privacy or availability caveat:** The exclusion fact must be available because a missing fact does not make the negative condition true.
+**Privacy or availability caveat:** Citizen iD roles are known present or absent, so an absent `Restricted` role is a no-match that negation turns into a match.
 **Verification step:** Preview one verified unrestricted member and one verified restricted member, then confirm that only the intended member has the live target role.
 
 ## Safe Rollout
@@ -240,7 +267,10 @@ Avoid introducing nested organization, verification, and Discord conditions in t
 
 Watch **Audit Log** for attempted additions, removals, and failures after saving.
 Compare member reports with live Asteria Hub roles and preview inputs.
-Administrators with Discord role-management permission can request a server role update through the bot command surface, and members can ask staff for a manual role update when roles appear out of sync.
+A Discord administrator with **Manage Roles** can scope a manual update to Alex and `Verified Pilot` with `/roles update affected-user:@Alex targeted-role:@Verified Pilot`.
+The command responds `Role update request sent.`.
+Check the live role and **Audit Log** after a few minutes.
+If a contradiction persists for about twenty minutes, collect evidence and escalate instead of repeatedly retrying.
 Remember that no-match and no-change evaluations might have no audit record to monitor.
 
 ## Troubleshoot Assignments
@@ -257,7 +287,9 @@ Preview representative inputs again after correcting the condition or data sourc
 First confirm that **Preview** desires the role.
 Then confirm that the target belongs to Asteria Hub, is an ordinary bot-managed Discord role, and is below the Citizen iD bot role.
 Check that the bot remains installed and can manage roles in the official server.
-Use the failed **Audit Log** entry, if available, to identify the Discord rejection before retrying or requesting a resync.
+A Discord-managed linked role cannot become assignable through permission changes, hierarchy changes, or resyncs.
+Replace it with an ordinary Discord role for bot-managed assignment or configure it through the separate [Discord Linked Roles flow](/community-admins/discord-bot#linked-role-setup).
+Use the failed **Audit Log** entry, if available, to identify the Discord rejection before retrying the targeted command.
 
 ### Role Removed Unexpectedly
 
@@ -275,9 +307,17 @@ Escalate only after recording the evaluation inputs, expected target, live state
 
 ### Support Evidence
 
-Collect the Asteria Rescue community slug, Asteria Hub server, affected member, target role, template name, and UTC time.
-Include the audit entry or operation ID when one exists, whether a manual resync was attempted, and whether the bot role is above the target.
-Record which required fact was unavailable without copying private RSI profile content, account tokens, or other secrets.
+Route every detail according to its sensitivity before sending evidence.
+
+| Route | Evidence |
+| --- | --- |
+| Public | Community slug, general issue summary, affected page or feature, template name, target role name, and UTC time. |
+| Staff-private | Server, member, and role IDs; preview outcome; saved, enabled, or pending state; current versus expected role state; bot hierarchy; targeted command attempt; and redacted audit failure reason. |
+| Citizen iD-private | Account identity, privacy-setting details, unavailable-fact details, or private profile evidence that community staff should not receive. |
+| Never share | Bot tokens, access or refresh tokens, client secrets, authorization codes, password-reset links, verification codes, URLs containing credentials, private Discord messages, or unredacted private profiles. |
+
+For a support request, include the stable server, member, and role IDs; preview outcome; saved, enabled, or pending template state; current and expected role state; targeted command attempt; operation ID; and redacted Discord reason when available.
+Crop and redact screenshots and exports according to the routing table before sharing them.
 For broader escalation guidance, use [Maintenance And Support](/community-admins/maintenance-and-support).
 
 ## Advanced Rules
@@ -297,14 +337,21 @@ Name the template so administrators can tell which system owns the target.
 
 ### RSI Org Targets
 
-Some templates can express supported outcomes connected to RSI organization context.
-Citizen iD does not change a player's RSI organization membership on RSI.
-Treat public RSI organization data as an input whose privacy or availability can affect evaluation, not as a system Citizen iD controls.
+An RSI organization target projects a configured RSI organization membership role or rank into the evaluated Citizen iD policy context for downstream rule evaluation.
+This target does not write to or change RSI itself.
+Treat RSI organization data as an input whose privacy or availability can affect evaluation, not as a system Citizen iD controls.
 
 ### Nested Conditions
 
 Composite conditions can combine Citizen iD state, Discord state, profile settings, RSI profile details, and RSI organization membership when the required data is available.
-Keep the missing-data state distinct from false throughout nested `AND`, `OR`, and negative conditions.
+Use these results to keep unavailable facts distinct from false throughout nested conditions.
+
+| Operation | Match | No-match | Unavailable |
+| --- | --- | --- | --- |
+| `AND` | All facts are true. | Any fact is false. | No fact is false and at least one fact is unavailable. |
+| `OR` | Any fact is true. | All facts are false. | No fact is true and at least one fact is unavailable. |
+| Negation | A no-match becomes a match. | A match becomes a no-match. | Unavailable remains unavailable. |
+
 Split deeply nested policies into clearer templates when separate eligibility paths are easier to explain and verify.
 
 ### Rule Complexity Limits
