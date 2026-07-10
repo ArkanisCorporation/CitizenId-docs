@@ -40,6 +40,7 @@ Use this heading structure:
 ### Create Template
 ### Add Condition
 ### Select Discord Role
+### Stage Template
 ### Preview Member Results
 ### Save Template
 ### Confirm Result
@@ -56,7 +57,7 @@ Use this heading structure:
 
 ### Verified Members
 ### Main Organization Members
-### Organization Officers
+### Organization Rank
 ### Combine Multiple Conditions
 ### Exclude Specific Members
 
@@ -99,17 +100,22 @@ Use these example names:
 Follow the actual product workflow:
 
 1. Open the community bot configuration and select **Roles** and then **Editor**.
-2. Select **Add new template**.
-3. Add a plain-language display name, description, and optional group.
+2. Select **Add New Template**.
+3. Explain that the new enabled draft initially appears as `Assignment Template` and is not persisted yet.
 4. Select the Citizen iD `Verified` role in **Conditions**.
 5. Select the `Verified Pilot` Discord role in **Role Assignments**.
-6. Open **Preview** while the editor shows **Changes Pending**.
-7. Test representative Citizen iD and Discord states.
-8. Return to **Editor** and save the template after the results match the intended policy.
-9. Confirm attempted live changes under **Audit Log**.
+6. Select **Disable role assignment**, then **Edit role assignment details**.
+7. Enter the `Verified Citizen iD member` display name, description, and optional group.
+8. Select **Save changes** to persist the whole template while it is disabled and cannot make live role changes.
+9. Select **Enable role assignment** and explain that the enabled state remains pending under **Changes Pending** until **Save All**.
+10. Open **Preview** and test representative Citizen iD and Discord states against the final named template.
+11. Return to **Editor** and select **Save All** after the results match the intended policy.
+12. Run `/roles update affected-user:@Alex targeted-role:@Verified Pilot` for targeted confirmation.
+13. Confirm the live role and attempted live changes under **Audit Log**.
 
-Explain that a newly added template is enabled in the editor but remains unsaved.
-Pending templates participate in preview without changing live members until they are saved.
+Explain that condition and target controls remain editable while the new template is enabled.
+Explain that **Save changes** in the details dialog persists the whole template, so the walkthrough disables it first.
+The pending re-enabled state participates in preview without changing live members until **Save All** is selected.
 Explain that saving an enabled template makes the target role controlled by the assignment policy.
 
 ## Example Results
@@ -135,12 +141,14 @@ Give each recipe a goal, exact condition, exact target, representative result, p
 Include these recipes:
 
 - Main organization membership assigns `Org Member`.
-- Organization officer status assigns `Officer`.
+- Asteria Rescue membership with **Member Rank** exactly `Rank 5` assigns `Senior Member`.
 - Verified status combined with main organization membership assigns `Flight Ready`.
-- Missing or private organization data produces an unavailable result, while a genuine mismatch produces no-match.
-- Neither unavailable data nor negation turns the missing fact into a match.
+- Explicitly private or unavailable organization facts produce unavailable, while visible absent or nonmatching profile, organization, membership type, or rank facts produce no-match.
+- Negation preserves unavailable but can invert a real no-match.
 - Lost eligibility removes a role controlled by an enabled target.
 - Multiple matching templates targeting the same role combine their desired targets, so one matching template keeps the role desired.
+
+Verify the organization-rank recipe with one visible `Rank 5` member, one visible different-rank member, and one member whose organization facts are explicitly unavailable.
 
 Move deeply nested conditions, Citizen iD targets, RSI organization targets, and evaluation limits into the advanced section.
 
@@ -182,10 +190,10 @@ Add three placement blocks to the page.
 ### Editor Placement
 
 Place the editor block in the first walkthrough after the configuration steps.
-Request a screenshot of one pending `Verified Citizen iD member` template in **Roles → Editor**.
-Require the display name, `Verified` condition, `Verified Pilot` Discord target, **Changes Pending** indicator, and save action to be visible.
+Request a screenshot of the final named `Verified Citizen iD member` template after its disabled save and pending re-enable in **Roles → Editor**.
+Require the display name, `Verified` condition, `Verified Pilot` Discord target, **Changes Pending** indicator, and **Save All** action to be visible.
 Focus on the template card rather than the full application shell.
-Request callouts for the condition, target, pending state, and save action.
+Request callouts for the condition, target, pending enabled state, and **Save All** action.
 
 ### Preview Placement
 
@@ -227,5 +235,6 @@ Inspect the rendered page at desktop and narrow viewport widths.
 Confirm that the table remains readable and the placement blocks render as intentional authoring placeholders.
 Confirm that outline labels remain concise and do not wrap excessively.
 Confirm that every product label matches the current Roles editor, Preview, and Audit Log interfaces.
-Confirm that the walkthrough distinguishes pending preview state from saved live behavior.
+Confirm that the walkthrough disables the template before **Save changes**, previews the pending re-enabled state, and selects **Save All** only after preview matches policy.
+Confirm that unavailable is reserved for explicitly private or unavailable RSI facts and visible absent or nonmatching facts produce no-match.
 Confirm that no screenshot or generated illustration was added.

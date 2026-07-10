@@ -16,7 +16,7 @@ Represent future visuals as rendered VitePress information containers rather tha
 Use `docs/superpowers/specs/2026-07-10-role-assignments-operational-guide-design.md` as the binding content specification.
 Keep every Markdown sentence on its own source line.
 Keep outline headings to three or four words where practical.
-Use exact product labels including **Roles**, **Editor**, **Preview**, **Audit Log**, **Add new template**, and **Changes Pending**.
+Use exact product labels including **Roles**, **Editor**, **Preview**, **Audit Log**, **Add New Template**, **Disable role assignment**, **Edit role assignment details**, **Save changes**, **Enable role assignment**, **Changes Pending**, and **Save All**.
 Use Asteria Rescue, Asteria Hub, and the named example members consistently.
 Explain pending preview behavior separately from saved live behavior.
 Explain that enabled targets control role membership and can remove a role after eligibility is lost.
@@ -51,8 +51,11 @@ Preserve any implementation-backed facts from the current page that remain usefu
 
 Configure `Verified Citizen iD member` for Asteria Rescue.
 Use Citizen iD role `Verified` as the condition and Discord role `Verified Pilot` as the target.
-Describe the path through **Roles → Editor**, **Add new template**, template details, conditions, role assignments, **Preview**, **Changes Pending**, save, and **Audit Log**.
-State that a newly added template is enabled in the editor but is not live until saved.
+Describe the path through **Roles → Editor** and **Add New Template**, noting that the new enabled, unpersisted draft is named `Assignment Template`.
+Configure conditions and role assignments while the draft is enabled, then select **Disable role assignment** before **Edit role assignment details**.
+Enter the final details and select **Save changes**, which persists the whole template while it is disabled and cannot make live role changes.
+Select **Enable role assignment**, preview the final named template while **Changes Pending** is visible, and select **Save All** only after the results match policy.
+Confirm the targeted `/roles update affected-user:@Alex targeted-role:@Verified Pilot` result in the live Discord role and **Audit Log**.
 
 - [ ] **Step 3: Add concrete outcomes**
 
@@ -62,13 +65,15 @@ Cover matched, no-match, unavailable, add, keep, remove, no-change, failed execu
 
 - [ ] **Step 4: Add compact recipes**
 
-Add recipes for verified members, main organization members, organization officers, combined conditions, and explicit exclusions.
+Add recipes for verified members, main organization members, Asteria Rescue members whose **Member Rank** is exactly `Rank 5` and receive `Senior Member`, combined conditions, and explicit exclusions.
 For each recipe include the goal, exact condition, exact target, representative result, privacy or availability caveat, and verification step without turning those labels into additional headings.
+Reserve unavailable for RSI facts explicitly marked private or unavailable, and treat visible absent or nonmatching profile, organization membership, membership type, or rank facts as no-match.
+Verify the organization-rank recipe with one visible `Rank 5` member, one visible different-rank member, and one member whose organization facts are explicitly unavailable.
 Keep Citizen iD targets, RSI organization targets, multiple-template union behavior, nested conditions, and complexity limits in **Advanced Rules**.
 
 - [ ] **Step 5: Add placement blocks**
 
-Add one rendered `::: info Screenshot placement` block for the editor after the configuration steps.
+Add one rendered `::: info Screenshot placement` block for the editor after the disabled save and pending re-enable, showing the final named template, **Changes Pending**, and **Save All**.
 Add one rendered block for preview immediately before the result matrix.
 Add one rendered block for the failed audit entry under **Discord Rejections** or **Role Not Applied**.
 Use all six required labels in every block.
@@ -207,6 +212,8 @@ Stop the local server after the final audit.
 
 Compare the final page line by line with the Global Constraints and design specification.
 Confirm that all required configurations, outcomes, placement blocks, ownership boundaries, and review passes are present.
+Confirm that the safe disabled-save and pending-re-enable sequence uses every exact product label and ends with **Save All** only after preview matches policy.
+Confirm that the organization recipe uses supported **Member Rank** and that unavailable remains distinct from visible no-match.
 Confirm that no screenshot or generated illustration asset was added.
 
 - [ ] **Step 7: Commit visual fixes**

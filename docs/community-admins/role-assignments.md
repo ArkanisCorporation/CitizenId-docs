@@ -54,12 +54,10 @@ For Asteria Rescue, name the template `Verified Citizen iD member` so preview re
 
 1. Open the community bot configuration for Asteria Rescue.
 2. Select **Roles**, then **Editor**.
-3. Select **Add new template**.
-4. Enter `Verified Citizen iD member` as the display name.
-5. Add a description such as “Assigns Verified Pilot to members with the Verified Citizen iD role.”
-6. Add an optional group if Asteria Rescue uses groups to organize related templates.
+3. Select **Add New Template**.
 
-A newly added template is enabled in the editor, but it remains unsaved and is not live until you save it.
+A newly added template appears as an enabled, unsaved draft named `Assignment Template`.
+The draft is not persisted yet.
 The editor shows **Changes Pending** while this draft differs from the saved live policy.
 
 ### Add Condition
@@ -73,24 +71,37 @@ The `Verified` condition is a known present-or-absent Citizen iD fact and matche
 In **Role Assignments**, select the Asteria Hub Discord role `Verified Pilot` as the target.
 The complete pending rule now reads: when the member has the Citizen iD role `Verified`, the desired Discord roles include `Verified Pilot`.
 
-::: info Screenshot placement
-**Purpose:** Show the complete first template before an administrator previews or saves it.
+### Stage Template
 
-**Required contents:** Show one pending `Verified Citizen iD member` template in **Roles → Editor**, including the display name, `Verified` condition, `Verified Pilot` Discord target, **Changes Pending** indicator, and save action.
+1. Select **Disable role assignment** before editing the template details.
+2. Select **Edit role assignment details**.
+3. Enter `Verified Citizen iD member` as the display name.
+4. Add a description such as “Assigns Verified Pilot to members with the Verified Citizen iD role.”
+5. Add an optional group if Asteria Rescue uses groups to organize related templates.
+6. Select **Save changes**.
+
+**Save changes** persists the whole template, but the template is disabled and therefore cannot make live role changes.
+Select **Enable role assignment** to stage the final enabled state.
+The enabled state remains pending and shows **Changes Pending** until you select **Save All**.
+
+::: info Screenshot placement
+**Purpose:** Show the final named template after its disabled save and pending re-enable, before an administrator previews or selects **Save All**.
+
+**Required contents:** Show one pending, enabled `Verified Citizen iD member` template in **Roles → Editor**, including the display name, `Verified` condition, `Verified Pilot` Discord target, **Changes Pending** indicator, and **Save All** action.
 
 **Crop and focus:** Crop to the template card and the nearby pending and save controls rather than the full application shell.
 
-**Annotations:** Add callouts for the condition, target, pending state, and save action.
+**Annotations:** Add callouts for the condition, target, pending enabled state, and **Save All** action.
 
-**Proposed caption:** The pending verified-member template in **Roles → Editor** before it is saved live.
+**Proposed caption:** The final verified-member template remains pending in **Roles → Editor** until the administrator selects **Save All**.
 
-**Alt-text intent:** Communicate that an enabled but unsaved template connects the `Verified` Citizen iD condition to the `Verified Pilot` Discord target and still shows **Changes Pending**.
+**Alt-text intent:** Communicate that the re-enabled `Verified Citizen iD member` template connects the `Verified` Citizen iD condition to the `Verified Pilot` Discord target and shows **Changes Pending** beside **Save All**.
 :::
 
 ### Preview Member Results
 
-Open **Preview** while **Changes Pending** is visible.
-The enabled pending template participates in preview, so you can test the proposed policy before it changes live members.
+Open **Preview** while the final named template shows **Changes Pending**.
+The pending re-enabled state participates in preview, so you can test the proposed policy before it changes live members.
 Preview shows whether the Citizen iD policy matches and which role changes are desired.
 Preview does not prove that Discord will accept a live change after the template is saved.
 
@@ -124,7 +135,7 @@ Disabling the target or deleting the final template that targets the role stops 
 ### Save Template
 
 Return to **Editor** after the representative results match the intended policy.
-Save the pending template to clear **Changes Pending** and make the enabled rule live.
+Select **Save All** to clear **Changes Pending** and make the enabled rule live.
 Saving an enabled target makes `Verified Pilot` controlled by this assignment policy, so later loss of eligibility can remove the role.
 
 ### Confirm Result
@@ -147,13 +158,14 @@ For Erin, `Verified` is known to be absent, so the template does not match and n
 
 ### Missing Data Outcomes
 
-An unavailable result means Citizen iD cannot evaluate a required fact, such as private or missing RSI organization data.
+An unavailable result means Citizen iD explicitly marks a required RSI fact as private or unavailable.
 Unavailable is different from no-match because the policy does not know whether the requirement is true or false.
+A visible member with no matching RSI profile, organization membership, membership type, or rank produces no-match.
 An unavailable condition does not match and therefore does not desire its targets.
 A member without the controlled target receives no addition.
 A member who already has the controlled target receives a planned removal unless another enabled matching template still desires it.
 The multiple-template union preserves the role when at least one enabled template matches and desires it.
-Negation does not turn an unavailable fact into a match.
+Negation preserves unavailable, but it can invert a real no-match.
 Preview unavailable organization-data cases before saving because privacy changes or provider unavailability can revoke a controlled access role.
 
 ### Roles Added Or Removed
@@ -200,7 +212,7 @@ Confirm those no-match and no-change cases in **Preview**, and collect an audit 
 **Condition:** Citizen iD role is exactly `Verified`.
 **Target:** Discord role is exactly `Verified Pilot`.
 **Representative result:** Alex matches and preview plans to add `Verified Pilot`, while Blake matches and keeps the role without a change.
-**Privacy or availability caveat:** `Verified` is a known present-or-absent Citizen iD fact, while unavailable outcomes apply to private or missing RSI profile or organization facts.
+**Privacy or availability caveat:** `Verified` is a known present-or-absent Citizen iD fact, while unavailable outcomes apply when Citizen iD explicitly marks a required RSI fact private or unavailable.
 **Verification step:** Preview one verified member and one known unverified member, then confirm an attempted live change in **Audit Log** after saving.
 
 ### Main Org Members
@@ -209,17 +221,17 @@ Confirm those no-match and no-change cases in **Preview**, and collect an audit 
 **Condition:** RSI main organization is exactly `Asteria Rescue`.
 **Target:** Discord role is exactly `Org Member`.
 **Representative result:** A member with Asteria Rescue as the available main organization matches and receives `Org Member` if it is missing.
-**Privacy or availability caveat:** Private or missing organization data produces unavailable rather than no-match, and it must not be treated as proof of non-membership.
+**Privacy or availability caveat:** Explicitly private or unavailable main-organization facts produce unavailable, while a visible absent or different main organization produces no-match.
 **Verification step:** Preview one member with visible Asteria Rescue main-organization data and one visible member whose main organization is different.
 
-### Organization Officers
+### Organization Rank
 
-**Goal:** Give public Asteria Rescue officers the `Officer` role.
-**Condition:** RSI organization is exactly `Asteria Rescue` and organization membership type is exactly `Officer`.
-**Target:** Discord role is exactly `Officer`.
-**Representative result:** A member whose available Asteria Rescue membership reports `Officer` matches and receives the Discord role.
-**Privacy or availability caveat:** Hidden organization membership or unavailable officer data cannot satisfy the condition.
-**Verification step:** Preview one visible officer and one visible non-officer, then verify the first attempted change in **Audit Log**.
+**Goal:** Give Asteria Rescue members with RSI organization `Rank 5` the `Senior Member` role.
+**Condition:** RSI organization is exactly `Asteria Rescue` and **Member Rank** is exactly `Rank 5`.
+**Target:** Discord role is exactly `Senior Member`.
+**Representative result:** A visible Asteria Rescue member at `Rank 5` matches and receives `Senior Member` when it is missing.
+**Privacy or availability caveat:** Explicitly private or unavailable organization facts produce unavailable, while a visible absent membership or different rank produces no-match.
+**Verification step:** Preview one visible `Rank 5` member, one visible different-rank member, and one unavailable organization-data case.
 
 ### Combine Conditions
 
@@ -227,7 +239,7 @@ Confirm those no-match and no-change cases in **Preview**, and collect an audit 
 **Condition:** Citizen iD role is exactly `Verified` and RSI main organization is exactly `Asteria Rescue`.
 **Target:** Discord role is exactly `Flight Ready`.
 **Representative result:** A verified member with available Asteria Rescue main-organization data matches only when both conditions are true.
-**Privacy or availability caveat:** Unavailable organization data makes the combined evaluation unavailable, and `Verified` alone is not enough.
+**Privacy or availability caveat:** Explicitly private or unavailable organization facts produce unavailable when no other required input is a real no-match, while a visible absent or different main organization produces no-match.
 **Verification step:** Preview members representing both true, one false, and one unavailable inputs before saving.
 
 ### Restricted Members
@@ -256,7 +268,7 @@ Notify moderators before a policy change can remove access or change support exp
 ### Start Small
 
 Begin with one clear template and one ordinary Discord target.
-Use the enabled but unsaved draft in **Preview**, then save it only while staff are available to monitor the first live evaluations.
+Persist the configured template while it is disabled, re-enable it as a pending change, and use **Preview** before selecting **Save All** while staff are available to monitor the first live evaluations.
 Avoid introducing nested organization, verification, and Discord conditions in the first rollout.
 
 ### Monitor Changes
@@ -274,8 +286,8 @@ Remember that no-match and no-change evaluations might have no audit record to m
 ### No Template Matches
 
 Confirm that the intended template is saved and enabled.
-Check whether every required condition is available and uses the expected member, community, and official server context.
-Distinguish a genuine no-match from unavailable private or missing data.
+Check whether every required condition uses the expected member, community, and official server context.
+Treat a visible absent or different RSI fact as no-match, and reserve unavailable for a fact that Citizen iD explicitly marks private or unavailable.
 Preview representative inputs again after correcting the condition or data source.
 
 ### Role Not Applied
