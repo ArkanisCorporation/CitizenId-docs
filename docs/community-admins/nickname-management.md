@@ -49,8 +49,8 @@ Adding, removing, or reordering a field changes the stored template immediately,
 New joins and other nickname-refresh events can use the changed template before you run a server-wide re-sync.
 :::
 
-**Re-sync on server** is a separate action that asks Citizen iD to process eligible human members and may take time.
-Bots and webhooks are skipped.
+**Re-sync on server** is a separate action that asks Citizen iD to process human server members and may take time.
+It skips bots and webhooks.
 
 ## Set First Template
 
@@ -141,7 +141,7 @@ In **Re-sync User Nicknames**, confirm the dialog names `Asteria Hub` and explai
 :::
 
 Select **Re-sync**.
-The re-sync processes eligible human members and skips bots and webhooks.
+The re-sync processes human server members and skips bots and webhooks.
 It provides no completion signal or admin-visible audit entry.
 
 ### Confirm Result
@@ -202,7 +202,7 @@ See Discord's [guild member modification](https://docs.discord.com/developers/re
 
 Template edits persist as they are made, but existing members are not necessarily updated at the same moment.
 New joins and other refresh events may use the stored template before a manual re-sync.
-A server-wide re-sync processes eligible human members separately and skips bots and webhooks.
+A server-wide re-sync processes human server members separately and skips bots and webhooks.
 It has no completion signal or admin-visible audit entry.
 
 ## Common Templates
@@ -229,9 +229,9 @@ Use these recipes as starting points, then preview representative members before
 
 **Fields and formatting:** Add **Preferred Display Name (Guild/Account)** with no prefix or suffix.
 
-**Result:** Alex's configured preferred name becomes the nickname, with fallback through account or Discord display values when needed.
+**Result:** Citizen iD uses Alex's server preference, then Citizen iD account display name, then global Discord display name, then Discord username.
 
-**Missing data:** Citizen iD uses the available account value, then global Discord display name when present, otherwise username; live sync may leave a custom server nickname unchanged.
+**Missing data:** Citizen iD follows the same precedence through the first available value; live sync may leave a custom server nickname unchanged when the result reaches a Discord fallback.
 
 **Policy caveat:** Member-controlled names require a documented naming policy and moderation path.
 
@@ -341,7 +341,7 @@ Shorten formatting or remove a lower-priority field if important text is being t
 ### Resync Delayed
 
 A server-wide re-sync may take time and is separate from saving the template.
-It processes eligible human members, skips bots and webhooks, and provides no completion signal.
+It processes human server members, skips bots and webhooks, and provides no completion signal.
 Until the local observation deadline, inspect the same representative members and do not start another re-sync while changes are appearing.
 At the deadline, check permissions, hierarchy, owner protection, and fallback comparison behavior, then escalate with the UTC start and evidence instead of retrying blindly.
 
@@ -392,7 +392,7 @@ Formatting saves persist immediately, so preview again after every change.
 ### Content Casing
 
 **Content Casing** is currently ineffective because the case-transformed string is discarded.
-Do not rely on **Title**, **Upper**, **Lower**, or **Sentence** casing until this limitation is fixed.
+Do not rely on **Title**, **All Uppercase**, **All Lowercase**, or **Sentence** until this limitation is fixed.
 **Normalize content before formatting** works and lowercases content before prefix and suffix formatting.
 
 ### Field Ordering
