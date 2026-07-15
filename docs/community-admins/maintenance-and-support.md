@@ -17,7 +17,7 @@ Confirm Asteria Dispatch is already available as an application target.
 The community and application names in this guide are replaceable examples.
 
 A matching maintenance notice blocks the selected child content instead of merely displaying a passive status message.
-Prepare an informed test user, a controlled test application or agreed window, a second authorized operator when practical, and a confirmed superadmin escalation route before any live test.
+Prepare an informed test user, a controlled test application or agreed window, a second authorized operator whose context is confirmed not to match when practical, and a confirmed superadmin escalation route before any live test.
 
 ### Choose Safe Scope
 
@@ -92,6 +92,7 @@ Enter the walkthrough window exactly:
 
 Do not convert these values to browser-local time.
 They remain fixed examples so the walkthrough is deterministic.
+For a real controlled test, substitute an agreed near-future UTC window and review every boundary again before saving.
 
 ### Choose Authorization Create
 
@@ -207,6 +208,7 @@ It is no longer time-eligible at exactly `2030-01-15 19:00 UTC` because the end 
 
 When **Display until** is empty, the notice continues matching after its start while it remains enabled and every other condition matches.
 An **Enabled** chip alone never proves the notice is currently active.
+Already loaded pages do not poll for a changed switch or clock boundary, so navigate again or refresh after enabling, disabling, reaching the start, or reaching the end.
 
 ## Test Blocking Safely
 
@@ -214,7 +216,7 @@ An **Enabled** chip alone never proves the notice is currently active.
 
 Treat enabling as a live operational change, not a preview.
 Use a controlled test application or agreed test window and inform the test user.
-Confirm a second authorized operator when practical and a superadmin escalation route before toggling.
+Confirm a second authorized operator whose context is known not to match when practical and a superadmin escalation route before toggling.
 
 Only superadmins bypass maintenance.
 Ordinary community administrators and staff remain subject to matching notices.
@@ -248,7 +250,7 @@ When the notice is enabled, within its UTC window, and matched by all targeting 
 
 Disable the notice immediately after confirming the blocked result.
 Disabling applies immediately and has no confirmation dialog.
-Refresh the same flow and confirm normal Authorization Create content returns.
+Navigate again or refresh the same flow and confirm normal Authorization Create content returns.
 
 Do not use **Community Portal** for this first test.
 A matching Community Portal notice can remove ordinary staff access to the maintenance controls, and only a superadmin bypasses that gate.
@@ -308,7 +310,7 @@ Review every matching outcome rather than stopping at the first row.
 ::: info Screenshot placement
 **Purpose:** Show the evidence used to distinguish a failed role operation from a rule mismatch or no-change result.
 
-**Required contents:** Current **Roles** > **Audit Log** with UTC **From** and **To**, `Verified Pilot` selected as **Discord Role**, Dana under **Search**, and one privacy-safe row showing **Time**, **Result**, **Target member**, **Action**, **Role**, and **Reason**.
+**Required contents:** Current **Roles** > **Audit Log** with UTC **From** and **To**, `Verified Pilot` selected as **Discord Role**, Dana under **Search**, and one privacy-safe row showing **Time**, **Result**, **Target**, **Action**, **Role**, and **Reason**.
 
 **Crop and focus:** Keep the filters and one representative row legible; redact member and server identifiers before publication.
 
@@ -319,7 +321,8 @@ Review every matching outcome rather than stopping at the first row.
 **Alt-text intent:** Role audit filters and one Dana result used to diagnose a missing Verified Pilot role.
 :::
 
-Capture only displayed **Time**, **Result**, **Target member**, **Action**, **Role**, and **Reason**.
+Capture only displayed **Time**, **Result**, **Target**, **Action**, **Role**, and **Reason**.
+The **Target** column contains the affected member.
 The current community grid does not display the stored operation ID, evaluated rule, or full plan.
 
 A failed row can reveal a reason to correct before resync.
@@ -340,6 +343,7 @@ Do not repeat the request while results are still changing.
 Open **Bot Configuration** and **Nicknames**.
 Compare the configured template and preview with the live nickname.
 Check the bot's **Manage Nicknames** permission and its role position above the affected member.
+Account for Citizen iD truncating the rendered nickname to 32 characters before treating a shorter live result as a failure.
 
 Nickname management has no detailed community-admin-visible audit log.
 Use **Re-sync on server** only after a confirmed correction, read **Re-sync User Nicknames**, confirm the named server, and remember the action is server-wide.
@@ -378,7 +382,8 @@ Every required role must match, while any excluded role vetoes the notice.
 
 Identify whether an enabled, time-active notice targets **Community Portal** and matches the staff member's context.
 Ordinary community staff cannot bypass it.
-Use the prearranged second operator or superadmin recovery route rather than repeatedly refreshing or changing unrelated configuration.
+Use a prearranged operator only when their context is confirmed not to match.
+For a broad/default Community Portal block, use private support for superadmin recovery or wait for the exclusive end, then navigate again or refresh.
 
 ### Notice Was Deleted
 
@@ -402,6 +407,6 @@ Remove secrets and unrelated identities before sharing.
 
 ### Contact Citizen Support
 
-Use the [official support Discord](https://discord.citizenid.space) or email `hi@citizenid.space` for private operational help.
+Open a [private `#support-and-contact` ticket](https://discord.com/channels/1401938319843004416/1401942231707029505) in the official support Discord, or email `hi@citizenid.space`, for private operational help.
 Do not place private account, Discord, RSI, authorization, or callback evidence in public channels.
 Citizen iD does not promise a specific uptime, restoration, support-response, role-sync, nickname-sync, or service-level commitment.

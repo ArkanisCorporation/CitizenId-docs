@@ -154,6 +154,7 @@ Document exact time behavior:
 - When no end exists, the notice continues matching after its start while it remains enabled and all other conditions match.
 - **Enabled** and **Disabled** chips show the stored switch only; they do not prove whether the current time and targeting context produce an active match.
 - All form labels and walkthrough values use UTC, so the guide must not silently convert them to browser-local time.
+- Already loaded gates do not poll for switch or clock changes, so readers must navigate again or refresh after enable, disable, start, or end boundaries.
 
 Document exact targeting behavior:
 
@@ -172,12 +173,12 @@ Removing the community and keeping only Asteria Dispatch makes the example appli
 ## Blocking Safety
 
 Treat enabling as an operational change, not a harmless preview.
-Before a controlled live test, require a separate test application or agreed test window, an informed test user, a second authorized operator when practical, and a confirmed superadmin escalation route.
+Before a controlled live test, require a separate test application or agreed test window, an informed test user, a second authorized operator whose context is confirmed not to match when practical, and a confirmed superadmin escalation route.
 Require the operator to verify the saved row again before toggling.
 
 State that enable and disable actions apply immediately and show no confirmation dialog.
 At the scheduled start, an enabled matching row replaces the selected child content with **Maintenance in progress**.
-After the controlled check, the operator must disable the notice immediately and verify the normal content returns.
+After the controlled check, the operator must disable the notice immediately, navigate again or refresh, and verify the normal content returns.
 Disabling is also immediate and has no confirmation dialog.
 
 Warn prominently that selecting **Community Portal** can block community staff from the management page containing the maintenance controls.
@@ -213,7 +214,7 @@ Use this sequence:
 3. If Preview excludes the role, inspect the rule and member data instead of resyncing.
 4. If Preview includes the role, open **Audit Log**.
 5. Filter **From** and **To** around the report in UTC, select the Discord role, search Dana, and review all outcomes.
-6. Capture only the displayed **Time**, **Result**, **Target member**, **Action**, **Role**, and **Reason**.
+6. Capture only the displayed **Time**, **Result**, **Target**, **Action**, **Role**, and **Reason**; **Target** contains the affected member.
 7. Explain that the stored operation ID is not displayed in the current community grid and the audit row does not expose the evaluated rule or full plan.
 8. A failed row can identify the reason to fix before resync.
 9. A successful row means Citizen iD recorded success, so compare current Discord state and hierarchy.
@@ -221,7 +222,7 @@ Use this sequence:
 11. After a confirmed correction only, select **Resync**, read **Re-sync Role Assignments**, and run it once.
 12. Explain that resync is server-wide, rate-limited, can add and remove managed roles, and has no promised completion time.
 
-For a nickname problem, open **Bot Configuration** and **Nicknames**, compare preview with the live nickname, and check **Manage Nicknames** plus Discord hierarchy.
+For a nickname problem, open **Bot Configuration** and **Nicknames**, compare preview with the live nickname after the 32-character truncation, and check **Manage Nicknames** plus Discord hierarchy.
 State that no detailed admin-visible nickname audit exists.
 Use **Re-sync on server** only after a confirmed correction, read **Re-sync User Nicknames**, and explain that it is server-wide.
 Do not claim Citizen iD exposes a detailed rejection reason for server owners or Discord-protected accounts.
@@ -323,7 +324,7 @@ Place this block after the Dana audit filters:
 ::: info Screenshot placement
 **Purpose:** Show the evidence used to distinguish a failed role operation from a rule mismatch or no-change result.
 
-**Required contents:** Current **Roles** > **Audit Log** with UTC **From** and **To**, `Verified Pilot` selected as **Discord Role**, Dana under **Search**, and one privacy-safe row showing **Time**, **Result**, **Target member**, **Action**, **Role**, and **Reason**.
+**Required contents:** Current **Roles** > **Audit Log** with UTC **From** and **To**, `Verified Pilot` selected as **Discord Role**, Dana under **Search**, and one privacy-safe row showing **Time**, **Result**, **Target**, **Action**, **Role**, and **Reason**.
 
 **Crop and focus:** Keep the filters and one representative row legible; redact member and server identifiers before publication.
 
