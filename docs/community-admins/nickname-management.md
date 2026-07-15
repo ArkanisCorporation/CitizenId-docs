@@ -63,7 +63,8 @@ Build and verify the RSI-handle template before applying it server-wide.
 2. Open its Discord bot configuration for Asteria Hub.
 3. Select **Nicknames**.
 
-If the tab is unavailable, confirm the portal administrator has **Manage Roles** or an internal Citizen iD override.
+If the tab is unavailable, confirm the portal administrator has **Manage Roles**.
+If it remains unavailable, contact Citizen iD support because internal access and override state are not visible to community administrators.
 Bot permissions and hierarchy do not grant portal access.
 
 ### Select RSI Handle
@@ -164,7 +165,7 @@ RSI and organization fields selected by the community may therefore become publi
 
 | Member state | Resolved template | Expected result |
 | --- | --- | --- |
-| Linked account with verified RSI handle `AlexRsi` | `AlexRsi` | Discord nickname becomes `AlexRsi`. |
+| Linked account with verified RSI handle `AlexRsi` | `AlexRsi` | Discord nickname becomes `AlexRsi` if Discord accepts the update. |
 | Linked account without verified RSI profile | **Result parts** is empty; **Final result** is global Discord display name, else username. | Citizen iD expects the fallback, but an existing custom server nickname may remain unchanged. |
 | No linked Citizen iD account | Preview returns an error; live composition expects global Discord display name, else username. | An existing custom server nickname may remain unchanged. |
 | Handle longer than the remaining limit | Truncated | Citizen iD limits the generated nickname to 32 characters and may append an ellipsis. |
@@ -312,7 +313,8 @@ Nickname management currently has no community-admin-visible audit log, so the p
 
 ### Preview Fails
 
-If **Nicknames** cannot be opened, check the administrator's **Manage Roles** permission or internal Citizen iD override.
+If **Nicknames** cannot be opened, verify that the administrator has **Manage Roles**.
+If the tab remains unavailable, contact Citizen iD support because internal access and override state are not visible to community administrators.
 Do not troubleshoot bot **Manage Nicknames** or hierarchy for portal access.
 Confirm the example value is the member's Discord user ID and that the member linked the expected Discord account to Citizen iD.
 An unlinked Discord user ID returns an error instead of a fallback preview.

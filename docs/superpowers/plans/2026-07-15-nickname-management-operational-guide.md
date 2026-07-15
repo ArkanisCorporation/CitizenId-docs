@@ -37,6 +37,7 @@ Do not add dependencies or modify application code.
 **Files:**
 
 - Modify: `docs/community-admins/nickname-management.md`
+- Modify: `docs/players/discord-integrations.md`
 - Read: `docs/superpowers/specs/2026-07-15-nickname-management-operational-guide-design.md`
 - Read: `docs/community-admins/AGENTS.md`
 
@@ -44,6 +45,7 @@ Do not add dependencies or modify application code.
 
 - Consumes: The existing community-admin navigation entry and VitePress Markdown conventions.
 - Produces: A self-contained operational Nickname Management page at the existing URL.
+- Produces: Consistent player-facing nickname commands, visibility boundaries, fallback behavior, and preference precedence.
 
 - [ ] **Step 1: Replace the linear outline**
 
@@ -116,9 +118,13 @@ Run:
 rtk rg -n "^#{1,4} " docs/community-admins/nickname-management.md
 rtk rg -n "Screenshot placement|Purpose:|Required contents:|Crop and focus:|Annotations:|Proposed caption:|Alt-text intent:" docs/community-admins/nickname-management.md
 rtk rg -n "mermaid|what should be on the screenshot" docs/community-admins/nickname-management.md
+rtk rg -n "/account unset-display-name" docs/community-admins/nickname-management.md docs/players/discord-integrations.md
+rtk rg -n "unset-display-name server-display-name:<YOUR_DISPLAY_NAME>|privacy settings disallow.*template|<REDACTED>.*nickname|nickname.*<REDACTED>" docs/community-admins/nickname-management.md docs/players/discord-integrations.md
 ```
 
 Expected: The approved concise outline is present, three complete placement blocks are reported, and the stale visual markers are absent.
+Expected: Every unset command is `/account unset-display-name server-display-name:true`, and the stale unset, nickname-privacy, and nickname-`<REDACTED>` patterns are absent.
+Compare both pages directly and confirm they use the same **Preferred Display Name (Guild/Account)** precedence, public nickname visibility boundary, null-field omission, all-null fallback, and custom-server-nickname limitation.
 
 - [ ] **Step 9: Build the page**
 
@@ -135,7 +141,7 @@ Expected: VitePress exits with code 0 and reports a successful build.
 Run:
 
 ```powershell
-rtk git add docs/community-admins/nickname-management.md
+rtk git add docs/community-admins/nickname-management.md docs/players/discord-integrations.md
 rtk git commit -m "docs: add nickname management walkthrough"
 ```
 
@@ -241,10 +247,11 @@ Stop the local server after the final audit.
 
 - [ ] **Step 6: Final requirements audit**
 
-Compare the final page line by line with the Global Constraints and design specification.
+Compare the final admin and player pages line by line with the Global Constraints and design specification.
 Confirm that all required templates, outcomes, placement blocks, ownership boundaries, and review passes are present.
 Confirm that immediate persistence, manual backup, no undo or export, and manual restoration are explained before the first configuration action and that **Re-sync** happens only after representative previews.
 Confirm that the unset command uses a Boolean value, null and empty-string fields are distinct, unlinked preview IDs error, fallback may retain a custom nickname, and no completion signal or admin-visible audit log is promised.
+Confirm that both pages agree on preferred-name precedence, public nickname visibility, privacy-setting independence, null-field omission, all-null fallback, and live custom-nickname retention.
 Confirm that no screenshot, generated illustration, or Mermaid asset was added.
 
 - [ ] **Step 7: Commit visual fixes**

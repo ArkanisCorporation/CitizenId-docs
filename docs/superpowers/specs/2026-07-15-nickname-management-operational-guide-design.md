@@ -136,7 +136,7 @@ Use a compact matrix to demonstrate the first template.
 
 | Member state | Resolved template | Expected result |
 | --- | --- | --- |
-| Linked account with verified RSI handle `AlexRsi` | `AlexRsi` | Discord nickname becomes `AlexRsi`. |
+| Linked account with verified RSI handle `AlexRsi` | `AlexRsi` | Discord nickname becomes `AlexRsi` if Discord accepts the update. |
 | Linked account without verified RSI profile | **Result parts** is empty; **Final result** is global Discord display name, else username. | Citizen iD expects the fallback, but an existing custom server nickname may remain unchanged. |
 | No linked Citizen iD account | Preview errors; live composition expects global Discord display name, else username. | An existing custom server nickname may remain unchanged. |
 | Handle longer than the remaining limit | Truncated | Citizen iD limits the generated nickname to 32 characters and may append an ellipsis. |
@@ -185,6 +185,22 @@ Portal access requires administrator **Manage Roles** unless an internal overrid
 **Normalize content before formatting** works and lowercases content.
 Field order is left to right and may wrap visually on narrow screens.
 The final composed nickname is limited to 32 characters.
+
+## Implementation Evidence
+
+The behavior in this design was verified on 2026-07-15 against the clean sibling repository `D:/Git/github/ArkanisCorporation/CitizenId` at commit `330f1477ad58f0afee38be62652acc94707a2a38`.
+Recheck these limitations whenever the application changes.
+
+- `src/CitizenId.Host.Web/Components/DiscordBotNicknameManagementControlsTabPanel.razor` establishes the **Nicknames** access control, product labels, and **Re-sync on server** workflow.
+- `src/CitizenId.Host.Web/Components/DiscordBotNicknameTemplateControls.razor` establishes immediate template persistence for field additions, removals, and ordering.
+- `src/CitizenId.Host.Web/Components/DiscordBotNicknameUserInfoField.razor` establishes field labels, per-field formatting access, and immediate field-setting persistence.
+- `src/CitizenId.Host.Web/Components/Dialogs/TextEmbedFormatOptionsDialog.razor` establishes the **Text Embed Format Options**, preview controls, normalization option, casing labels, and **Save changes** behavior.
+- `src/CitizenId.Infrastructure/Data/Repositories/DiscordNicknameManagementRepository.cs` establishes stored nickname templates and the absence of a separate draft or final-save stage.
+- `src/CitizenId.Infrastructure/Models/UserInfoField.cs` establishes the available nickname field model and formatting metadata.
+- `src/CitizenId.Infrastructure/Services/UserInfoFieldValueProviders.cs` establishes field resolution, preview errors for unlinked Discord IDs, fallback values, and that public-discovery or privacy settings are not consulted for nickname values.
+- `src/CitizenId.Domain/Helpers/TextEmbedFormatting.cs` establishes null-field formatting omission, empty-string formatting behavior, working lowercase normalization, and the current discarded casing transformation.
+- `src/CitizenId.Host.Discord/EventHandlers/UserNicknameSyncHandler.cs` establishes live Discord execution, global display-name then username fallback, custom-server-nickname fallback limitation, skipped bots and webhooks, and failures that can stop processing before every human member is reached.
+- `src/CitizenId.Host.Discord/Modules/AccountModule.cs` establishes `/account set-display-name server-display-name:<YOUR_DISPLAY_NAME>` and `/account unset-display-name server-display-name:true`.
 
 ## Public Inspiration
 

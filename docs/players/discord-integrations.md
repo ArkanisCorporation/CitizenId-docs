@@ -31,6 +31,7 @@ flowchart TD
   linkedDiscord{"Discord<br/>linked?"}
   cid[["Citizen iD"]]
   basicData[/Account data<br/>roles + verified/]
+  nicknameData[/Configured<br/>nickname fields/]
   lookupAllowed{"Privacy<br/>allows<br/>lookup?"}
   rsiData[/RSI profile/]
   redacted(("Redacted<br/>RSI profile"))
@@ -50,13 +51,17 @@ flowchart TD
   linkedDiscord -. "No" .-> noLink
   linkedDiscord ==>|Yes| cid
   cid --> basicData
+  cid --> nicknameData
   cid --> lookupAllowed
   lookupAllowed ==>|Yes| rsiData
   lookupAllowed -. "No" .-> redacted
 
   basicData --> features
-  rsiData --> features
-  redacted -.-> features
+  nicknameData --> nicknameTemplates
+  rsiData --> botCommands
+  rsiData --> linkedRoles
+  redacted -.-> botCommands
+  redacted -.-> linkedRoles
   features --> server
   admins ==>|Configure| features
 
@@ -66,7 +71,7 @@ flowchart TD
   class you,members,admins actor;
   class server,linkedRoles,roles,nicknameTemplates,botCommands context;
   class cid service;
-  class basicData,rsiData data;
+  class basicData,nicknameData,rsiData data;
   class linkedDiscord,lookupAllowed decision;
   class noLink,redacted blocked;
 
@@ -81,8 +86,9 @@ flowchart TD
 Read the diagram as a data-flow map.
 The Discord link decides whether any account-aware Discord feature can use Citizen iD for your Discord account.
 Once Discord is linked, basic account data such as roles and verified state can feed configured Discord features even when detailed RSI lookup is private.
-The external lookup setting is the privacy gate for detailed RSI profile data.
-When that lookup is disabled, Discord features can still run, but RSI-specific fields can be redacted or unavailable.
+The external lookup setting is the privacy gate for detailed RSI profile lookups and other privacy-aware surfaces.
+Nickname template preview and resolution are separate and do not consult public-discovery or privacy settings.
+Configured nickname fields flow to nickname templates independently of the privacy-aware lookup branch.
 The Roles feature group includes linked roles and automated role management.
 Community admins configure the feature group, and server members reach Citizen iD through bot commands where the bot is present.
 
@@ -259,10 +265,15 @@ Templates can enforce formats such as:
 
 Some templates include a customizable display-name segment.
 Use `/account set-display-name server-display-name:<YOUR_DISPLAY_NAME>` in any Discord server where the Citizen iD integration bot is present to configure your preferred display name for that server.
-Use `/account unset-display-name server-display-name:<YOUR_DISPLAY_NAME>` to reset the server-preferred nickname value to the default, which is your global/default Discord profile display name.
+Use `/account unset-display-name server-display-name:true` to remove the server preference.
+After removal, the result follows the community's configured template fallback.
+For **Preferred Display Name (Guild/Account)**, Citizen iD uses the server preference, then Citizen iD account display name, then global Discord display name, then Discord username.
 
-If no Citizen iD account is linked to the Discord account, or if privacy settings disallow external service lookup for a field used in the template, unavailable fields use the literal value `<REDACTED>`.
-For example, a template that expects an RSI handle can produce a nickname containing `<REDACTED>` when the handle is not available to that server feature.
+Nickname template preview and resolution do not consult public-discovery or privacy settings.
+Server admins choose the template, and configured linked Citizen iD, RSI, or organization values can become visible in your Discord nickname.
+Missing or null fields and their formatting are omitted.
+If every selected value is null, or no fields are configured, composition uses your global Discord display name when present, otherwise your Discord username.
+During live sync, that fallback may leave an existing custom server nickname unchanged instead of clearing it.
 
 Discord still controls final nickname limits and permissions.
 Community admins can review [nickname management setup](/community-admins/nickname-management) when the issue depends on server configuration.
@@ -290,7 +301,8 @@ This section covers [account commands](#account-commands) and [lookup commands](
 ### Account Commands {#account-commands}
 
 Use `/account set-display-name server-display-name:<YOUR_DISPLAY_NAME>` to set the server-preferred display name used by compatible nickname templates.
-Use `/account unset-display-name server-display-name:<YOUR_DISPLAY_NAME>` to reset that server preference to the default.
+Use `/account unset-display-name server-display-name:true` to remove that server preference.
+The resulting nickname follows the configured template fallback, including server preference, Citizen iD account display name, global Discord display name, then Discord username for **Preferred Display Name (Guild/Account)**.
 
 ### Lookup Commands {#lookup-commands}
 
@@ -330,7 +342,7 @@ For a role or nickname dispute, collect:
 - Whether you recently changed RSI data.
 - Whether you recently changed linked-account data.
 - Whether a manual resync was attempted.
-- Whether you recently changed external account lookup or profile discovery settings.
+- For role or lookup disputes only, whether you recently changed external account lookup or profile discovery settings.
 
 Do not post private tokens or account exports in a Discord support channel.
 
