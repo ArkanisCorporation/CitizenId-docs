@@ -191,16 +191,21 @@ The final composed nickname is limited to 32 characters.
 The behavior in this design was verified on 2026-07-15 against the clean sibling repository `D:/Git/github/ArkanisCorporation/CitizenId` at commit `330f1477ad58f0afee38be62652acc94707a2a38`.
 Recheck these limitations whenever the application changes.
 
-- `src/CitizenId.Host.Web/Components/DiscordBotNicknameManagementControlsTabPanel.razor` establishes the **Nicknames** access control, product labels, and **Re-sync on server** workflow.
-- `src/CitizenId.Host.Web/Components/DiscordBotNicknameTemplateControls.razor` establishes immediate template persistence for field additions, removals, and ordering.
-- `src/CitizenId.Host.Web/Components/DiscordBotNicknameUserInfoField.razor` establishes field labels, per-field formatting access, and immediate field-setting persistence.
-- `src/CitizenId.Host.Web/Components/Dialogs/TextEmbedFormatOptionsDialog.razor` establishes the **Text Embed Format Options**, preview controls, normalization option, casing labels, and **Save changes** behavior.
-- `src/CitizenId.Infrastructure/Data/Repositories/DiscordNicknameManagementRepository.cs` establishes stored nickname templates and the absence of a separate draft or final-save stage.
+- `src/CitizenId.Host.Web/Components/DiscordBotNicknameManagementControlsTabPanel.razor` establishes the **Nicknames** access control, product labels, **Re-sync on server** workflow, and lack of a portal progress or completion display.
+- `src/CitizenId.Host.Web/Components/DiscordBotNicknameTemplateControls.razor` establishes immediate persistence for field additions, removals, and ordering, plus preview errors for invalid or unlinked Discord user IDs.
+- `src/CitizenId.Host.Web/Components/DiscordBotNicknameUserInfoField.razor` and `src/CitizenId.Host.Web/Components/Dialogs/TextEmbedFormatOptionsDialog.razor` establish per-field formatting access, the formatting controls, and **Save changes** persistence.
+- `src/CitizenId.Infrastructure/Data/Repositories/DiscordNicknameManagementRepository.cs` establishes stored fields, nickname composition, no-account, no-field, and all-null fallback, and the 32-character limit.
+  Together with the editor components, it shows that the current workflow has no separate draft or final-save stage.
 - `src/CitizenId.Infrastructure/Models/UserInfoField.cs` establishes the available nickname field model and formatting metadata.
-- `src/CitizenId.Infrastructure/Services/UserInfoFieldValueProviders.cs` establishes field resolution, preview errors for unlinked Discord IDs, fallback values, and that public-discovery or privacy settings are not consulted for nickname values.
+- `src/CitizenId.Infrastructure/Services/UserInfoFieldValueProviders.cs` establishes the concrete field-resolution chains, their null results, and the absence of public-discovery or privacy checks in those providers.
 - `src/CitizenId.Domain/Helpers/TextEmbedFormatting.cs` establishes null-field formatting omission, empty-string formatting behavior, working lowercase normalization, and the current discarded casing transformation.
-- `src/CitizenId.Host.Discord/EventHandlers/UserNicknameSyncHandler.cs` establishes live Discord execution, global display-name then username fallback, custom-server-nickname fallback limitation, skipped bots and webhooks, and failures that can stop processing before every human member is reached.
+- `src/CitizenId.Host.Discord/EventHandlers/UserNicknameSyncHandler.cs` establishes live comparison that causes the custom-server-nickname fallback limitation, Discord execution, skipped bots and webhooks, early abort before every human member is reached, and server-side logging.
+- `src/CitizenId.Host.Gateway/DiscordBotHub.cs` and `src/CitizenId.Host.Discord/DiscordBotHubProviderForBot.cs` forward the nickname-refresh request without returning portal progress or a completion result.
+  Together with the tab panel, they establish the current lack of a portal completion UI or signal.
 - `src/CitizenId.Host.Discord/Modules/AccountModule.cs` establishes `/account set-display-name server-display-name:<YOUR_DISPLAY_NAME>` and `/account unset-display-name server-display-name:true`.
+
+At the pinned commit, repository-wide verification with `rg -n -i "nickname.*audit|audit.*nickname" src -g "*.cs" -g "*.razor"` returned no matches, while `UserNicknameSyncHandler.cs` records server logs only.
+This is evidence that no admin-visible nickname audit was found at that commit, not proof beyond the pinned revision.
 
 ## Public Inspiration
 
