@@ -114,7 +114,7 @@ Use stored identifier when describing the canonical saved value.
 
 ### Connect Discord
 
-1. Select the edit-pencil adornment on **Official Community Server**.
+1. If the form is not already in server-edit mode, select the edit-pencil adornment on **Official Community Server**.
 2. Find the icon beside the server selector with tooltip **Invite Citizen iD bot to your Discord server**.
 3. Use it to open the trusted Discord installation flow.
 4. Confirm Citizen iD and Asteria Hub before authorizing.

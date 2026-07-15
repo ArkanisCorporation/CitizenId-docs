@@ -121,7 +121,8 @@ Use actual creation flow:
 State field requirements accurately:
 
 - Domain-required: **Display Name**, **Identifier**, and **Description**.
-- UI-required: **Community Type** and **Official Community Server** are also marked required; **Community Type** defaults to **Generic**.
+- UI-required: **Community Type** is marked required and defaults to **Generic**.
+- Server-edit mode marks **Official Community Server** required, while the initial read-only field can remain empty when saving a record without Discord mapping.
 - Optional: **Parent Community**, **Short Display Name**, **Homepage**.
 - System-managed for community admins: **Official Relationship**.
 - Limits: display name 60, short display name 20, stored identifier 40, description 2000 characters.
