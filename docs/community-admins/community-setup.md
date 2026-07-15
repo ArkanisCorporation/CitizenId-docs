@@ -67,6 +67,14 @@ Create the record through the community selector, installing Citizen iD before s
 2. Open the selector labeled **Citizen Community** with placeholder **Select a community**.
 3. Select **Create new community**.
 4. Confirm the **Manage Community** dialog opens.
+5. Before entering other values, select the edit-pencil adornment on **Official Community Server**.
+6. If the green shield icon or **You need to authorize additional permissions.** appears, select the shield and complete Discord authorization.
+
+The shield uses full-page navigation.
+It closes **Manage Community** and discards every unsaved input in the dialog.
+
+After authorization, return to the Community Portal, reopen **Citizen Community** > **Create new community**, select the **Official Community Server** edit-pencil again, and then continue.
+If no additional authorization is required, remain in server-edit mode and continue without leaving the dialog.
 
 ### Enter Core Details
 
@@ -118,14 +126,17 @@ Use stored identifier when describing the canonical saved value.
 Do not try to select Asteria Hub before installing Citizen iD there.
 
 If the selector displays **You need to authorize additional permissions.**, select the green shield icon at the right side of the field.
+Expect full-page navigation to close **Manage Community** and discard all unsaved values.
 Complete Discord authorization for the same linked account.
-Discord returns to the same page, where you must re-enter server-edit mode and recheck the selector.
+Return to the Community Portal, reopen **Citizen Community** > **Create new community**, re-enter the core values and **Identifier**, select the **Official Community Server** edit-pencil, and recheck the selector.
+Do not imply that the dialog or its inputs survive authorization.
 If it displays **There are no guilds in common with the current user.**, confirm bot presence, the same linked Discord account, **Administrator**, and server visibility.
 
 Mutual-server results are unsorted, so search the full list carefully.
 After installation, allow up to five minutes for cached mutual-server state without repeated refresh.
 Then refresh once and recheck.
-The cache uses a sliding window capped at 20 minutes, and repeated checks can keep presenting the stale view.
+The mutual-server cache has a five-minute sliding expiration and a separate 20-minute absolute expiration.
+Repeated checks can extend sliding freshness only until the absolute cap.
 Do not poll or turn the 20-minute cap into a wait recommendation.
 If Asteria Hub remains absent after the single bounded recovery, use [private Citizen iD support](/community-admins/maintenance-and-support) instead of reinstalling blindly.
 
@@ -348,7 +359,8 @@ Handle exact selector messages:
 - **There are no guilds in common with the current user.** means current mutual-server data contains no selectable server.
 
 Allow up to five minutes for cached mutual-server state without repeated refresh, then refresh once.
-The sliding cache is capped at 20 minutes, but repeated checks can keep serving stale state.
+The mutual-server cache has a five-minute sliding expiration and a separate 20-minute absolute expiration.
+Repeated checks can extend sliding freshness only until the absolute cap.
 Do not poll or recommend waiting 20 minutes.
 Search the unsorted results fully.
 If the server remains missing after the single bounded recovery, contact [private Citizen iD support](/community-admins/maintenance-and-support) instead of reinstalling blindly.
