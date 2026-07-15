@@ -61,6 +61,7 @@ Use this structure:
 ### Theme Matching
 ### Background Matching
 ### Container Matching
+### Size Matching
 ### Priority Order
 
 ## Add Logo Variants
@@ -75,6 +76,7 @@ Use this structure:
 ### Pending Approval
 ### Approved Asset
 ### Rejected Asset
+### Review Ownership
 
 ## Manage Assets
 
@@ -188,7 +190,7 @@ Use exact state labels:
 | State | Meaning | Available action |
 | --- | --- | --- |
 | **Pending Submission** | Draft exists and can be edited. | Preview, edit, submit, or remove. |
-| **Pending Approval** | Submitted asset awaits review and matching fields are locked. | Open or update the manual support ticket, or permanently remove the asset to withdraw it. |
+| **Pending Approval** | Submitted asset awaits review; normal metadata fields except **Priority** are locked. | Open or update the manual support ticket, or permanently remove the asset to withdraw it. |
 | **Approved** | Asset is eligible for matching public placements. | Verify public result or remove carefully. |
 | **Rejected** | Review failed and the reason is visible. | Read the reason and create a corrected new asset. |
 

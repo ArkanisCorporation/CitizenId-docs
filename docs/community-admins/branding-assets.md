@@ -26,7 +26,7 @@ Follow the [Brand Guidelines](/reference/brand-guidelines) when using Citizen iD
 Host a simple SVG at a public, stable, versioned, absolute HTTPS URL controlled by the community.
 This walkthrough uses `https://assets.example.org/asteria-rescue/icon-v1.svg`, which must be replaced with a real reachable URL.
 
-The response must be an image below the 2 MiB maximum.
+The response must be an image at most 2 MiB in size.
 Prefer simple SVG artwork with clear edges and little or no small text.
 Verify the artwork remains legible at small sizes and on light and dark surfaces.
 
@@ -170,7 +170,7 @@ Before submission, confirm:
 - The community owns or licenses the artwork.
 - Source URL is public HTTPS and contains no secret.
 - Filename is versioned and hosted stably.
-- Response is a valid image below 2 MiB.
+- Response is a valid image at most 2 MiB in size.
 - Preview remains legible at small sizes.
 - Light, dark, square, and circle matches are intentional.
 - Wording and artwork do not imply unsupported official status or endorsement.
@@ -217,7 +217,6 @@ Do not send unreleased source files or secrets in a public support channel.
 ### Confirm Locked State
 
 Confirm the asset shows **Pending Approval** and normal matching controls are locked.
-Do not change **Priority** even if its control remains available.
 Wait for manual review through the support ticket.
 Do not create repeated submissions for the same source while review is active.
 
@@ -283,7 +282,7 @@ Use status to determine the only safe next action.
 | State | Meaning | Available action |
 | --- | --- | --- |
 | **Pending Submission** | Draft exists and can be edited. | Preview, edit, submit, or remove. |
-| **Pending Approval** | Submitted asset awaits review and matching fields are locked. | Open or update the manual support ticket, or permanently remove the asset to withdraw it. |
+| **Pending Approval** | Submitted asset awaits review; normal metadata fields except **Priority** are locked. | Open or update the manual support ticket, or permanently remove the asset to withdraw it. |
 | **Approved** | Asset is eligible for matching public placements. | Verify public result or remove carefully. |
 | **Rejected** | Review failed and the reason is visible. | Read the reason and create a corrected new asset. |
 
@@ -295,7 +294,6 @@ Draft metadata changes save immediately, while the source URL remains read-only.
 ### Pending Approval
 
 Theme, background, container, orientation, and source configuration are locked.
-Do not change **Priority** even though the current control remains editable.
 Use the existing manual support ticket for review status and additional evidence.
 
 Use **Remove asset** only when the submission must be withdrawn.
@@ -310,7 +308,7 @@ Verify representative public surfaces before retiring any older approved asset.
 ### Rejected Asset
 
 Read and preserve the visible rejection reason.
-The current community UI locks rejected assets and does not expose their delete action.
+The current community UI locks source and normal metadata fields except **Priority**, and it does not expose the rejected asset's delete action.
 Do not promise in-place editing, resubmission, or deletion.
 
 Create corrected artwork at a new versioned URL, create a new asset, preview it, and submit that new asset.
@@ -373,7 +371,7 @@ Start with source validation and matching metadata before escalating review or p
 
 ### Source Fails
 
-Confirm the URL is absolute public HTTPS, reachable without authentication, stable, and served as an image below 2 MiB.
+Confirm the URL is absolute public HTTPS, reachable without authentication, stable, and served as an image at most 2 MiB in size.
 Remove tokens, signatures, private hostnames, and redirects to protected resources.
 If processing is rate-limited, stop repeated attempts, wait at least five seconds, then retry once.
 
