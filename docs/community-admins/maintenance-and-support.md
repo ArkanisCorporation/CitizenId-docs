@@ -67,13 +67,13 @@ Do not select **Clear** as a shortcut.
 
 Enter these exact values:
 
-| Field | Example value | Operational result |
-| --- | --- | --- |
-| **Title** | `Asteria Dispatch authorization maintenance` | Identifies the affected application flow. |
-| **Enabled** | Off | Prevents the saved row from matching or blocking users. |
-| **Markdown Body** | `Asteria Dispatch authorization creation is temporarily unavailable from 18:00 to 19:00 UTC.` | States the impact and window without promising an SLA. |
-| **Scope Community** | Asteria Rescue | Keeps ownership in the current community scope. |
-| **Community Management** | **Community managed** | Identifies a row the community administrator may change. |
+| Field | Example and result |
+| --- | --- |
+| **Title** | `Asteria Dispatch authorization maintenance` identifies the affected application flow. |
+| **Enabled** | Off prevents the saved row from matching or blocking users. |
+| **Markdown Body** | `Asteria Dispatch authorization creation is temporarily unavailable from 18:00 to 19:00 UTC.` states the impact and window without promising an SLA. |
+| **Scope Community** | Asteria Rescue keeps ownership in the current community scope. |
+| **Community Management** | **Community managed** identifies a row the community administrator may change. |
 
 The title is required and has a 120-character maximum.
 Markdown is sanitized when rendered, and the editor has no preview.
@@ -407,6 +407,6 @@ Remove secrets and unrelated identities before sharing.
 
 ### Contact Citizen Support
 
-Open a [private `#support-and-contact` ticket](https://discord.com/channels/1401938319843004416/1401942231707029505) in the official support Discord, or email `hi@citizenid.space`, for private operational help.
+Follow the [official Discord support routes](/user-guide/support/contact#official-discord-server) to open a private support ticket, or email `hi@citizenid.space`, for private operational help.
 Do not place private account, Discord, RSI, authorization, or callback evidence in public channels.
 Citizen iD does not promise a specific uptime, restoration, support-response, role-sync, nickname-sync, or service-level commitment.
