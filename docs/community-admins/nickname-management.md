@@ -5,151 +5,357 @@ description: Template-based Discord nickname automation for communities.
 
 # Nickname Management
 
-Citizen iD can manage Discord nicknames for a community server.
-Nickname management is useful when a community wants server names to follow a recognizable pattern such as RSI handle, community display name, primary organization context, or a combination of several fields.
+Configure, preview, roll out, and verify automated Discord nicknames for your community.
+This walkthrough configures Asteria Rescue to use each linked member's verified RSI handle as their nickname in Asteria Hub.
 
-Nickname management is template-based.
-The community chooses fields, Citizen iD composes the nickname from available account data, and Discord decides whether the bot can apply it.
+## Before You Start
 
-**Diagram: Nickname application path.**
-The template uses available player data, handles unavailable fields, checks Discord constraints, and either applies the nickname, falls back, or leaves the Discord nickname unchanged.
+Prepare the Discord permissions, naming policy, and rollout window before changing the template.
 
-**what should be on the screenshot/diagram:** A nickname flow showing template fields, available player data, missing or fallback fields, Discord 32-character limit handling, permission check, and applied, fallback, or unchanged nickname.
+### Required Setup
 
-```mermaid
-flowchart TD
-  admin(["Community admin"])
-  template[["Template"]]
-  data[/Available fields/]
-  preference[/Name preference/]
-  available{"Fields available?"}
-  fallback["Fallback name"]
-  build["Build nickname"]
-  limits[/Discord limits/]
-  discord{"Discord can<br/>apply?"}
-  updated(("Nickname set"))
-  unchanged(("No change"))
-  clues>Support clues]
+Confirm all of these prerequisites:
 
-  admin ==> template
-  template --> available
-  data --> available
-  preference --> available
-  available ==>|Yes| build
-  available -. "No" .-> fallback
-  fallback --> build
-  build ==> discord
-  limits --> discord
-  discord ==>|Yes| updated
-  discord -. "No" .-> unchanged
-  unchanged -. "captures" .-> clues
-  updated -. "captures" .-> clues
+- Citizen iD is installed in the official Asteria Hub server.
+- The Citizen iD bot has **Manage Nicknames**.
+- The bot's highest role is above every member role it must rename.
+- You can open the Asteria Rescue community's Discord bot configuration and its **Nicknames** tab.
 
-  class admin actor;
-  class template action;
-  class preference,data,limits data;
-  class available,discord decision;
-  class build,fallback action;
-  class updated,unchanged success;
-  class clues caution;
-```
+The portal administrator may also need Discord role-management authority to open the **Nicknames** tab, even though the bot uses **Manage Nicknames** to apply nicknames.
+Discord prevents bots from changing the server owner's nickname and from managing members at or above the bot's highest role.
 
-Read the diagram as a constraint map.
-The template can be correct while Discord still blocks the nickname because of permission, role hierarchy, owner protection, or nickname length.
-Missing fields can also lead to fallback behavior before Discord receives the final nickname.
-Today, some nickname failures may appear to admins as no visible nickname change rather than a detailed admin-visible audit entry.
-Collect safe evidence before escalating.
+### Choose Naming Policy
 
-## How It Works
+Write the policy in one sentence before configuring it.
+For this walkthrough, use: “Use each linked member's verified RSI handle as their Asteria Hub nickname.”
 
-Choose the fields that should appear in the nickname template.
-Citizen iD composes a Discord-safe nickname from the available account information.
-Discord nickname limits still apply.
+The selected field is **Username (Handle/IGN)** under **RSI Account**.
+Alex is the example member, `AlexRsi` is Alex's verified RSI handle, and `AlexRsi` is the expected nickname.
 
-The current implementation keeps generated nicknames within Discord's 32-character limit.
-When the configured fields cannot produce a useful guild nickname, Citizen iD can fall back to the member's ordinary Discord display name.
+### Understand Live Changes
 
-Available nickname data can come from Citizen iD account data, verified RSI account data, and RSI primary organization data.
-Only use a field when the community understands what happens if the field is missing for a member.
+Choose a quiet production support window before opening the editor.
 
-Common template ideas include:
-
-- RSI handle only.
-- Citizen iD display name only.
-- Server-specific display-name preference.
-- Display name followed by RSI handle.
-- Primary organization context plus player name.
-- A community-specific prefix or suffix combined with one player field.
-
-Keep templates short.
-A format that looks good for a short handle can become unreadable or clipped for longer names.
-
-**what should be on the screenshot/diagram:** Current screenshots of the nickname template controls, available field list, previewed generated nickname, and the resync confirmation dialog.
-
-## Player Preferences
-
-Some templates can use player display-name preferences.
-Players can set or remove global and server-local display-name preferences through Citizen iD bot account commands where the bot is present.
-Players can use `/account set-display-name server-display-name:<YOUR_DISPLAY_NAME>` to set a server-preferred display name for compatible nickname templates.
-Players can use `/account unset-display-name server-display-name:<YOUR_DISPLAY_NAME>` to reset that server preference to the default.
-See [Discord Integrations](/players/discord-integrations#player-commands) for the player-facing command context.
-
-Use these preferences only when the community is comfortable letting members choose part of the nickname.
-If the community needs strict RSI-handle naming, use a template that does not depend on a member-controlled display-name field.
-
-When a field is unavailable, the generated result may need a fallback or may omit the unavailable value depending on the configured field behavior.
-Tell members which account setup or privacy setting affects the field before asking them to contact Citizen iD support.
-
-## Operational Notes
-
-The bot needs Discord permission to manage nicknames.
-The bot role must be high enough in the server role hierarchy.
-The bot cannot change the server owner.
-The bot also cannot manage members whose highest role outranks the bot.
-
-Some admin surfaces can also depend on the Discord permissions of the admin using the portal.
-If the Nicknames tab reports a permission problem, check both the bot's Discord permissions and the current admin's Discord permissions.
-The current portal may require the admin configuring nickname automation to have Discord role-management authority for the server, even though the Discord action itself depends on nickname-management ability.
-If the tab stays unavailable after nickname permissions look correct, also check whether the current admin can manage roles in that server.
-
-Manual resync is useful when Discord state and Citizen iD state appear out of sync.
-The Nicknames tab can request a server-wide nickname resync, and the confirmation warns that the operation may take a while.
-
-## Troubleshooting
-
-When a nickname is wrong, check:
-
-1. The member has a Citizen iD account linked to the expected Discord account.
-2. The template uses fields that are available for that member.
-3. The member's privacy settings allow any field the template depends on.
-4. The bot has nickname-management permission.
-5. The bot role is above the member's highest relevant role.
-6. The generated nickname fits Discord's nickname rules.
-7. A recent template, role, permission, or account change has had time to sync.
-
-For nickname issues, collect:
-
-- The community slug.
-- The Discord server.
-- The affected member.
-- The template fields.
-- The nickname that appeared.
-- The nickname you expected.
-- The UTC time.
-- Whether server-wide resync was attempted.
-- Whether Discord showed a permission or hierarchy problem.
-
-For broader escalation guidance, use [Maintenance And Support](/community-admins/maintenance-and-support).
-
-::: warning Enforcement expectations
-If nickname management is enabled, a member changing their Discord nickname manually may be corrected by the bot later.
-Explain this in server rules so members know whether the nickname format is optional, recommended, or enforced.
+::: warning Changes persist immediately
+The template editor has no separate draft or final-save step.
+Adding, removing, or reordering a field changes the stored template immediately, and saving field formatting does the same.
+New joins and other nickname-refresh events can use the changed template before you run a server-wide re-sync.
 :::
 
-::: details Details for unavailable fields
+**Re-sync on server** is a separate action that asks Citizen iD to process every server member and may take time.
 
-Unavailable fields are usually caused by account state, privacy settings, missing provider links, incomplete RSI verification, or a template that expects data the member does not have.
-Do not ask members to publish private account information in a Discord channel to prove the field manually.
-Use safe support evidence and private support paths when sensitive account data is involved.
+## Set First Template
 
+Build and verify the RSI-handle template before applying it server-wide.
+
+### Open Nicknames
+
+1. Open the Asteria Rescue community in the Citizen iD portal.
+2. Open its Discord bot configuration for Asteria Hub.
+3. Select **Nicknames**.
+
+If the tab reports a permission problem, confirm both the portal administrator's role-management authority and the bot's nickname permissions and role position.
+
+### Select RSI Handle
+
+Under **RSI Account**, use the plus control to add **Username (Handle/IGN)** to **Naming template**.
+The field is stored immediately and may affect nickname-refresh events from this point onward.
+
+### Preview Member
+
+Enter Alex's Discord user ID in **Example Discord user ID**.
+Use a member whose Discord account is linked to Citizen iD and whose verified RSI handle is `AlexRsi`.
+Wait for **Result parts** and **Final result** to populate before evaluating the preview.
+If they do not populate, use [Preview Fails](#preview-fails) instead of starting a re-sync.
+
+::: info Screenshot placement
+**Purpose:** Show the complete RSI-handle template and Alex preview used in the walkthrough.
+
+**Required contents:** Show **Nicknames**, **Username (Handle/IGN)** selected under **Naming template**, Alex's Discord user ID in **Example Discord user ID**, `AlexRsi` under **Result parts**, and `AlexRsi` under **Final result**.
+
+**Crop and focus:** Crop to the naming template and preview grid rather than the full application shell.
+
+**Annotations:** Call out the selected field, test-user input, resolved result part, and final result.
+
+**Proposed caption:** Asteria Hub's RSI-handle template resolves Alex's linked account to `AlexRsi` before re-sync.
+
+**Alt-text intent:** Communicate which field is selected, where the example Discord user ID is entered, and how `AlexRsi` appears in both preview outputs.
 :::
+
+### Check Results
+
+Confirm **Result parts** shows Alex's resolved handle and **Final result** shows `AlexRsi`.
+Then preview one member with a verified RSI profile and one linked member without usable RSI handle data.
+
+A correct **Final result** proves template composition, not Discord execution.
+Discord permissions, role hierarchy, owner protection, and name validation still determine whether the live nickname changes.
+
+### Resync Server
+
+Select **Re-sync on server** only after both previews match the naming policy.
+In **Re-sync User Nicknames**, confirm the dialog names `Asteria Hub` and explains the server-wide scope.
+
+::: info Screenshot placement
+**Purpose:** Show the separate confirmation required to apply a stored template across the server.
+
+**Required contents:** Show **Re-sync User Nicknames** naming `Asteria Hub`, with the server-wide warning and both **Re-sync** and **Cancel** visible.
+
+**Crop and focus:** Focus on the server name, scope warning, and dialog actions.
+
+**Annotations:** Call out that template edits are already stored and that **Re-sync** starts a separate server-wide operation.
+
+**Proposed caption:** Confirm Asteria Hub before starting the separate server-wide nickname re-sync.
+
+**Alt-text intent:** Communicate the named server, the operation's server-wide scope, and the available confirm and cancel actions.
+:::
+
+Select **Re-sync**.
+
+### Confirm Result
+
+Wait for processing to complete, then inspect Alex in Asteria Hub.
+Confirm Alex's live Discord nickname is `AlexRsi`.
+If the preview was correct but the live nickname is unchanged, continue to [Nickname Unchanged](#nickname-unchanged).
+
+## Understand Results
+
+Use the preview and live Discord state together to distinguish composition results from execution results.
+The community administrator owns the naming policy, template, and re-sync decision.
+The member owns account linking, preferred names, and privacy choices; Citizen iD resolves available data, composes the nickname, and attempts the update; Discord accepts or rejects the live change.
+
+| Member state | Resolved template | Expected result |
+| --- | --- | --- |
+| Linked account with verified RSI handle `AlexRsi` | `AlexRsi` | Discord nickname becomes `AlexRsi`. |
+| Linked account without usable RSI handle data | Empty | Citizen iD falls back to the member's global Discord display name or username. |
+| No linked Citizen iD account | Not evaluated | Citizen iD falls back to the member's global Discord display name or username. |
+| Handle longer than the remaining limit | Truncated | Citizen iD limits the generated nickname to 32 characters and may append an ellipsis. |
+| Bot lacks permission or hierarchy | `AlexRsi` | Preview can be correct while the live Discord nickname remains unchanged. |
+| Member is the server owner | `AlexRsi` | Discord prevents the bot from changing the nickname. |
+
+### Available Fields
+
+Nickname fields can resolve from Citizen iD account data, verified RSI account data, and RSI primary organization data.
+Choose fields whose ownership and privacy requirements match the community's naming policy.
+
+### Missing Fields
+
+A missing value omits that field and its own prefix and suffix.
+For example, an unavailable organization does not leave empty brackets before a valid handle.
+
+If every selected field produces no content, or no template fields exist, Citizen iD falls back to the member's global Discord display name or username.
+A member without a linked Citizen iD account receives the same fallback.
+
+### Length Limits
+
+Citizen iD limits the final composed nickname to Discord's 32-character maximum and may append an ellipsis when truncating it.
+Preview long real-world values before rollout because formatting consumes part of that limit.
+See Discord's [user-name restrictions](https://docs.discord.com/developers/resources/user#usernames-and-nicknames) for the platform rules.
+
+### Discord Rejections
+
+Discord owns live nickname acceptance.
+A correct preview can still be rejected when the bot lacks **Manage Nicknames**, its role is not high enough, the member is the server owner, or the final name violates Discord rules.
+See Discord's [guild member modification](https://docs.discord.com/developers/resources/guild#modify-guild-member) and [permission hierarchy](https://docs.discord.com/developers/topics/permissions#permission-hierarchy) references for these boundaries.
+
+### Update Timing
+
+Template edits persist as they are made, but existing members are not necessarily updated at the same moment.
+New joins and other refresh events may use the stored template before a manual re-sync.
+A server-wide re-sync processes separately and may take time to finish.
+
+## Common Templates
+
+Use these recipes as starting points, then preview representative members before rollout.
+
+### RSI Handle
+
+**Goal:** Enforce a verified RSI handle where available.
+
+**Fields and formatting:** Add **Username (Handle/IGN)** with no prefix or suffix.
+
+**Result:** Alex becomes `AlexRsi`.
+
+**Missing data:** An empty composition falls back to the member's global Discord display name or username.
+
+**Policy caveat:** Members must link and verify the expected RSI account for the handle to resolve.
+
+**Verify:** Preview a member with a verified handle and one without usable handle data.
+
+### Preferred Name
+
+**Goal:** Let a member's preferred server or account name influence their nickname.
+
+**Fields and formatting:** Add **Preferred Display Name (Guild/Account)** with no prefix or suffix.
+
+**Result:** Alex's configured preferred name becomes the nickname, with fallback through account or Discord display values when needed.
+
+**Missing data:** Citizen iD uses the available account or Discord display fallback.
+
+**Policy caveat:** Member-controlled names require a documented naming policy and moderation path.
+
+**Verify:** Preview a member with a server preference and one using a fallback value.
+
+Members set a server preference with `/account set-display-name server-display-name:<YOUR_DISPLAY_NAME>`.
+Members remove it with `/account unset-display-name server-display-name:true`.
+See [Discord Integrations](/players/discord-integrations#player-commands) for player command context.
+
+### Name And Handle
+
+**Goal:** Show a preferred name followed by a verified handle.
+
+**Fields and formatting:** Place **Preferred Display Name (Guild/Account)** first, then **Username (Handle/IGN)**, and format the handle with prefix ` [` and suffix `]`.
+
+**Result:** Alex becomes `Alex [AlexRsi]`.
+
+**Missing data:** Each unavailable field and its formatting are omitted; an entirely empty composition uses the Discord fallback.
+
+**Policy caveat:** The preferred name is member-controlled and needs a documented moderation path.
+
+**Verify:** Preview members with both values and with either value missing.
+
+### Org And Handle
+
+**Goal:** Show primary organization context before the verified handle.
+
+**Fields and formatting:** Place **Spectrum ID** first with prefix `[` and suffix `] `, then add **Username (Handle/IGN)** without formatting.
+
+**Result:** An `ASTRA` Spectrum ID and `AlexRsi` handle produce `[ASTRA] AlexRsi`.
+
+**Missing data:** If **Spectrum ID** is missing, its brackets and trailing space are omitted and `AlexRsi` remains.
+
+**Policy caveat:** Organization membership data can change and may not be available for every member.
+
+**Verify:** Preview members with and without a usable Spectrum ID.
+
+## Safe Rollout
+
+Roll out in a quiet window so administrators can observe changes and help affected members.
+
+### Select Test Members
+
+Choose a small set covering linked and unlinked accounts, present and missing fields, long values, elevated roles, and an ordinary member.
+Do not use the server owner as the only test because Discord always protects that nickname.
+
+### Notify Members
+
+Tell members what policy will be enforced, which account data supplies the nickname, when rollout begins, and where to report a mismatch.
+If preferred names are allowed, publish the naming and moderation policy before enabling that recipe.
+
+### Configure Quietly
+
+Make template edits during the announced quiet support window.
+Keep an administrator available because edits persist immediately and refresh events can use them before re-sync.
+
+### Run Resync
+
+Preview every test state first.
+Then use **Re-sync on server**, confirm the correct server in **Re-sync User Nicknames**, and select **Re-sync** once.
+
+### Monitor Results
+
+Check the test members in Discord as processing proceeds.
+Record the UTC start time, expected result, visible result, and any permission or hierarchy pattern without collecting private account details.
+
+## Troubleshoot Nicknames
+
+Start with the preview, then inspect Discord execution conditions and timing.
+Nickname management currently has no community-admin-visible audit log, so the preview and visible server state are the primary evidence.
+
+### Preview Fails
+
+Confirm the example value is the member's Discord user ID and that the member linked the expected Discord account to Citizen iD.
+Check whether the selected account, RSI, or organization field exists and is available under the member's privacy settings.
+The admin preview may not distinguish absent data from data hidden by a member's privacy choice, so do not infer which state applies.
+Do not ask the member to relax privacy settings to diagnose the preview.
+Remember that a missing field omits its own formatting and an entirely empty composition uses the Discord fallback.
+
+### Nickname Unchanged
+
+If **Final result** is correct but Discord is unchanged, check the bot's **Manage Nicknames** permission and highest role position.
+Confirm the member is not the server owner and does not have a role at or above the bot's highest role.
+The preview proves composition only; it does not prove Discord execution.
+
+### Wrong Nickname
+
+Verify the template field order, prefixes, suffixes, and the account linked to the affected Discord user.
+For **Preferred Display Name (Guild/Account)**, confirm whether a server preference, account preference, or Discord display fallback supplied the value.
+Re-preview the affected member before running another server-wide re-sync.
+
+### Unexpected Truncation
+
+Count formatting as part of the 32-character final nickname limit.
+Preview the longest likely preferred names, organization IDs, and handles.
+Shorten formatting or remove a lower-priority field if important text is being truncated.
+
+### Resync Delayed
+
+A server-wide re-sync may take time and is separate from saving the template.
+Confirm the correct server was selected, allow processing time, and inspect several ordinary members before retrying.
+If they remain unchanged, check permissions, hierarchy, and owner protection before deciding the re-sync failed.
+Avoid repeated re-sync requests while the first operation may still be processing.
+
+### Support Evidence
+
+Collect privacy-safe evidence before contacting support:
+
+- Community slug and Discord server name.
+- Affected member's Discord user ID.
+- Selected fields, order, prefixes, suffixes, and casing.
+- **Result parts** and **Final result** from the preview.
+- Expected and visible live nickname.
+- UTC time of the preview and re-sync.
+- Whether re-sync was attempted and whether other members changed.
+- Bot permission, role hierarchy, and server-owner checks.
+
+Do not ask members to post private Citizen iD, RSI, or organization data in a public Discord channel.
+Send evidence through the private escalation path, include only fields needed to diagnose the mismatch, and redact unrelated values from screenshots.
+Do not ask members to disclose hidden data or relax privacy settings for support.
+There is no admin-visible nickname audit log to attach.
+Use [Maintenance And Support](/community-admins/maintenance-and-support) for escalation paths.
+
+## Advanced Formatting
+
+Use formatting to make multi-field names readable without obscuring missing-field behavior or the 32-character limit.
+
+### Prefix And Suffix
+
+Prefixes and suffixes belong to their field and disappear when that field is missing.
+For `[ASTRA] AlexRsi`, configure **Spectrum ID** with prefix `[` and suffix `] ` before **Username (Handle/IGN)**.
+
+::: info Screenshot placement
+**Purpose:** Show exactly how the organization field produces `[ASTRA] ` before the handle.
+
+**Required contents:** Show **Text Embed Format Options** for **Spectrum ID** with prefix `[`, suffix `] `, **Content Casing**, **Normalize content before formatting**, **Preview content**, the formatted preview, and **Save changes** visible.
+
+**Crop and focus:** Focus on the settings that transform `ASTRA` into `[ASTRA] ` rather than the full application shell.
+
+**Annotations:** Call out the prefix, suffix including its trailing space, preview input, formatted preview, and immediate **Save changes** action.
+
+**Proposed caption:** Spectrum ID formatting adds brackets and a trailing space before the RSI handle.
+
+**Alt-text intent:** Communicate the prefix and suffix values, relevant normalization and casing controls, the formatted preview, and where the immediate save occurs.
+:::
+
+Formatting saves persist immediately, so preview again after every change.
+
+### Content Casing
+
+Use **Content Casing** only when the community policy requires consistent capitalization.
+Test real organization IDs and names because casing changes can reduce recognizability.
+
+### Field Ordering
+
+The template resolves fields from top to bottom.
+Put the policy's most important identifier first when truncation could occur, and re-preview after every reorder because the change persists immediately.
+
+### Empty Results
+
+Missing fields omit their own content, prefix, and suffix.
+If all selected fields are missing, or no fields are configured, Citizen iD uses the member's global Discord display name or username.
+Preview missing-data cases so fallback names do not surprise moderators.
+
+### Enforcement Behavior
+
+Citizen iD can restore the configured nickname after a member changes it manually during a later refresh event.
+Explain in server rules whether the format is optional, recommended, or enforced.
+Discord still owns permission, hierarchy, owner, validation, and 32-character constraints for every attempted update.
