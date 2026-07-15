@@ -21,6 +21,11 @@ Explain that adding, removing, reordering, or formatting a field persists the te
 Explain that server-wide resync is separate and that new joins or later refresh events can use the stored template before resync.
 Separate Citizen iD template composition from Discord execution.
 Do not promise a nickname audit entry because the current admin interface has no equivalent to the Role Assignments audit log.
+Treat administrator **Manage Roles** as the portal-access requirement unless an internal override exists, separate from bot **Manage Nicknames** and hierarchy for live execution.
+State that nickname resolution does not consult public-discovery or privacy settings and may disclose configured RSI or organization fields in public Discord nicknames.
+Document global Discord display name then username composition fallback, unlinked preview errors, and the live limitation that may preserve an existing custom server nickname.
+Document that **Content Casing** is currently ineffective, normalization lowercases and works, and field order is left to right with visual wrapping on narrow screens.
+Document null-field formatting omission, empty-string formatting emission, eligible-human re-sync scope, skipped bots and webhooks, and the lack of a completion signal.
 Create renderable `::: info Screenshot placement` blocks instead of adding screenshot, illustration, or Mermaid assets.
 Every placement block must include purpose, required contents, crop and focus, annotations, proposed caption, and alt-text intent.
 Do not add dependencies or modify application code.
@@ -53,14 +58,20 @@ Configure Asteria Rescue to use verified RSI handles on Asteria Hub.
 Use **Username (Handle/IGN)** under **RSI Account** and Alex's `AlexRsi` result.
 Describe the exact path through **Nicknames**, **Naming template**, **Example Discord user ID**, **Result parts**, and **Final result**.
 Warn before the first edit that field additions and formatting changes save immediately.
+Require recording existing fields, left-to-right order, and all formatting because there is no undo or export and rollback is manual.
+Remove existing fields, add only **Username (Handle/IGN)**, leave prefix and suffix blank, use **Original** casing, and turn normalization off.
+Explain how to copy a Discord user ID through desktop Developer Mode and link the official Discord ID article.
 Explain that selecting **Re-sync on server** is a separate server-wide action.
 Confirm the `Asteria Hub` scope in **Re-sync User Nicknames** before selecting **Re-sync**.
+Before re-sync, record UTC start and set a local observation deadline such as 15 minutes that is explicitly not an SLA.
+Inspect the same representative members until the deadline, avoid another re-sync while changes appear, then troubleshoot or escalate with evidence.
 
 - [ ] **Step 3: Add concrete outcomes**
 
 Add the result matrix from the design specification.
 Cover a linked verified handle, missing usable RSI data, no linked account, truncation, missing Discord permission or hierarchy, and server-owner protection.
-Explain the global Discord display-name or username fallback when the composed template is empty.
+Explain that composition uses global Discord display name when present, otherwise username, when no account is linked, no fields exist, or all selected values are null.
+State that unlinked IDs error in preview and live sync may leave an existing custom server nickname unchanged instead of resetting it to fallback.
 State that generated nicknames are limited to 32 characters.
 
 - [ ] **Step 4: Add compact recipes**
@@ -74,20 +85,25 @@ Correct the unset command to `/account unset-display-name server-display-name:tr
 - [ ] **Step 5: Add placement blocks**
 
 Add one rendered `::: info Screenshot placement` block for the configured template and Alex preview.
+Require a dedicated demo Discord account or redact its ID before publishing the template screenshot.
 Add one rendered block for **Text Embed Format Options** configured for the Spectrum ID field.
+Annotate that **Content Casing** is ineffective and normalization lowercases content.
 Add one rendered block for **Re-sync User Nicknames** naming Asteria Hub.
 Use all six required labels in every block.
 
 - [ ] **Step 6: Add rollout guidance**
 
 Recommend a quiet production support window.
-Preview one known-good linked member and one fallback case before resync.
+Preview one known-good linked member and one dedicated linked demo member without a verified RSI profile before resync.
+Expect empty **Result parts** and global Discord display name, else username, in **Final result** for the fallback demo.
+Do not use an unlinked ID for fallback preview because it errors.
 Notify members about enforced naming and player-controlled fields.
-Explain that the server-wide operation can take time and that administrators should monitor representative members instead of repeatedly triggering resync.
+Notify members that selected RSI or organization data may become public Discord nickname content regardless of privacy settings.
+Explain that the server-wide operation processes eligible humans, skips bots and webhooks, has no completion signal, and requires a bounded observation deadline rather than repeated resync.
 
 - [ ] **Step 7: Add troubleshooting**
 
-Cover invalid or unknown example user IDs, missing linked accounts, missing RSI fields, unexpected fallback, wrong field order, truncation, permissions, role hierarchy, owner protection, and delayed resync.
+Cover invalid or unlinked example user IDs, null and empty-string fields, unexpected fallback retention, wrong left-to-right field order, ineffective casing, working normalization, truncation, portal **Manage Roles**, bot **Manage Nicknames**, role hierarchy, owner protection, and delayed resync.
 Collect the community slug, Discord server, affected member, selected fields and formatting, preview result, expected and actual nicknames, UTC time, resync attempt, permission state, and hierarchy state.
 Route private account or RSI evidence through private support paths.
 
@@ -137,13 +153,13 @@ rtk git commit -m "docs: add nickname management walkthrough"
 - [ ] **Step 1: Run newcomer review**
 
 Dispatch a first-time community administrator reviewer.
-Ask whether they can identify prerequisites, configure the first template, understand immediate persistence, preview a member, predict fallback and truncation, and run the server-wide resync safely.
+Ask whether they can identify separate portal and bot prerequisites, capture and restore an existing template, configure the first template, copy an ID, preview linked success and fallback members, predict fallback retention and truncation, and run a bounded server-wide resync safely.
 Ask them to flag ambiguous headings, unexplained product terms, and steps requiring unstated knowledge.
 
 - [ ] **Step 2: Run support review**
 
 Dispatch a support moderator reviewer in parallel with the newcomer review.
-Ask them to verify ownership boundaries, privacy-safe evidence guidance, missing-field and fallback behavior, permission and hierarchy failures, resync expectations, and the absence of an admin-visible nickname audit trail.
+Ask them to verify public nickname disclosure, privacy-safe evidence guidance, null versus empty-string formatting, unlinked preview errors, fallback retention, separate access and execution permissions, resync scope and deadline, and the absence of a completion signal or admin-visible audit trail.
 
 - [ ] **Step 3: Apply review findings**
 
@@ -226,8 +242,8 @@ Stop the local server after the final audit.
 
 Compare the final page line by line with the Global Constraints and design specification.
 Confirm that all required templates, outcomes, placement blocks, ownership boundaries, and review passes are present.
-Confirm that immediate persistence is explained before the first configuration action and that **Re-sync** happens only after representative previews.
-Confirm that the unset command uses a Boolean value, missing fields and empty results are distinct, and no admin-visible audit log is promised.
+Confirm that immediate persistence, manual backup, no undo or export, and manual restoration are explained before the first configuration action and that **Re-sync** happens only after representative previews.
+Confirm that the unset command uses a Boolean value, null and empty-string fields are distinct, unlinked preview IDs error, fallback may retain a custom nickname, and no completion signal or admin-visible audit log is promised.
 Confirm that no screenshot, generated illustration, or Mermaid asset was added.
 
 - [ ] **Step 7: Commit visual fixes**

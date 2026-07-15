@@ -98,25 +98,34 @@ Use these example names:
 - Alex's verified RSI handle: `AlexRsi`.
 - Expected Discord nickname: `AlexRsi`.
 
+State that these names are replaceable examples.
+
 Follow the actual product workflow:
 
-1. Confirm the bot is installed, the official server is correct, the bot has **Manage Nicknames**, and its highest role is above members it must rename.
-2. Confirm the portal administrator can open the **Nicknames** tab.
-3. Explain that the current portal can require the administrator to have Discord role-management authority even though Discord nickname execution requires **Manage Nicknames**.
-4. Choose a quiet support window because adding, removing, reordering, or formatting a field saves that configuration immediately.
+1. Confirm Asteria Hub is linked to the community, the portal administrator has Discord **Manage Roles** unless an internal override exists, the bot has **Manage Nicknames**, and its highest role is above members it must rename.
+2. Explain that administrator **Manage Roles** controls portal access while bot **Manage Nicknames** and hierarchy control live execution.
+3. Choose a quiet support window because adding, removing, reordering, or formatting a field saves that configuration immediately.
+4. Before editing, record selected fields, left-to-right order, and every field's formatting because there is no undo or export and restoration is manual.
 5. Open the community Discord bot configuration and select **Nicknames**.
-6. Under **RSI Account**, add **Username (Handle/IGN)** to **Naming template** with the plus control.
-7. Explain that the selected field is now persisted and can affect new joins or later nickname-refresh events before the server-wide resync.
-8. Enter Alex's Discord user ID under **Example Discord user ID**.
-9. Confirm **Result parts** shows Alex's resolved handle and **Final result** shows `AlexRsi`.
-10. Check one member with a verified RSI profile and one linked member without usable RSI handle data.
-11. Select **Re-sync on server** only after the previewed results match the policy.
-12. In **Re-sync User Nicknames**, confirm that `Asteria Hub` is named, then select **Re-sync**.
-13. Confirm Alex's live Discord nickname after processing completes.
+6. Remove existing selected fields, then add only **Username (Handle/IGN)** under **RSI Account**.
+7. Leave prefix and suffix blank, use **Original** casing, and turn **Normalize content before formatting** off.
+8. Explain that changes are persisted and can affect new joins or later nickname-refresh events before server-wide resync.
+9. Explain how to enable Discord desktop Developer Mode and use **Copy User ID**, linking the official Discord ID article.
+10. Enter Alex's Discord user ID under **Example Discord user ID** and confirm **Result parts** and **Final result** show `AlexRsi`.
+11. For fallback preview, use a dedicated linked demo member without a verified RSI profile, then confirm empty **Result parts** and a **Final result** of global Discord display name when present, otherwise username.
+12. State that an unlinked Discord user ID errors in preview and cannot demonstrate fallback.
+13. Before re-sync, notify members, arrange support coverage, check permissions and hierarchy, record UTC start, and set a local observation deadline such as 15 minutes that is explicitly not an SLA.
+14. Select **Re-sync on server** only after representative results, including fallback, match expectations.
+15. In **Re-sync User Nicknames**, confirm that `Asteria Hub` is named, then select **Re-sync**.
+16. State that eligible human members are processed while bots and webhooks are skipped.
+17. Explain that re-sync has no completion signal or admin-visible audit entry.
+18. Until the observation deadline, inspect the same representative members and do not start another re-sync while changes appear.
+19. At the deadline, troubleshoot or escalate with UTC time and evidence instead of waiting indefinitely or retrying blindly.
 
 State clearly that the template editor has no separate draft or final-save step.
 Every field add, remove, reorder, and formatting save changes the stored template immediately.
-The server-wide resync is a separate action that asks Citizen iD to process all members and may take time.
+The server-wide resync is a separate action that asks Citizen iD to process eligible human members and may take time.
+Bots and webhooks are skipped.
 New joins and other nickname-refresh events can use the stored template before that resync.
 
 ## Example Results
@@ -126,8 +135,8 @@ Use a compact matrix to demonstrate the first template.
 | Member state | Resolved template | Expected result |
 | --- | --- | --- |
 | Linked account with verified RSI handle `AlexRsi` | `AlexRsi` | Discord nickname becomes `AlexRsi`. |
-| Linked account without usable RSI handle data | Empty | Citizen iD falls back to the member's global Discord display name or username. |
-| No linked Citizen iD account | Not evaluated | Citizen iD falls back to the member's global Discord display name or username. |
+| Linked account without verified RSI profile | **Result parts** is empty; **Final result** is global Discord display name, else username. | Citizen iD expects the fallback, but an existing custom server nickname may remain unchanged. |
+| No linked Citizen iD account | Preview errors; live composition expects global Discord display name, else username. | An existing custom server nickname may remain unchanged. |
 | Handle longer than the remaining limit | Truncated | Citizen iD limits the generated nickname to 32 characters and may append an ellipsis. |
 | Bot lacks permission or hierarchy | `AlexRsi` | Preview can be correct while the live Discord nickname remains unchanged. |
 | Member is the server owner | `AlexRsi` | Discord prevents the bot from changing the nickname. |
@@ -145,7 +154,7 @@ Include these recipes:
 - **RSI Handle** uses **Username (Handle/IGN)** and produces `AlexRsi`.
 - **Preferred Name** uses **Preferred Display Name (Guild/Account)** and allows a member's server preference to influence the result, with fallback to account or Discord display values.
 - **Name And Handle** places **Preferred Display Name (Guild/Account)** before **Username (Handle/IGN)** and uses formatting to produce a result such as `Alex [AlexRsi]`.
-- **Org And Handle** places **Spectrum ID** before **Username (Handle/IGN)** and uses formatting to produce `[ASTRA] AlexRsi`; when the organization field is missing, its own prefix and suffix are omitted and the handle remains.
+- **Org And Handle** places **Spectrum ID** before **Username (Handle/IGN)** and uses formatting to produce `[ASTRA] AlexRsi`; when the organization field is null, its own prefix and suffix are omitted and the handle remains.
 
 Warn that member-controlled display names require a documented naming policy and moderation path.
 Explain the exact player commands for setting and removing a server preference.
@@ -161,8 +170,18 @@ The current nickname workflow has no community-admin audit view equivalent to th
 Troubleshooting therefore uses the template preview, visible Discord state, permissions, hierarchy, UTC time, and safe member context.
 
 Distinguish a missing field from an empty template result.
-A missing RSI or organization value omits that field and its formatting.
-If all selected fields produce no content, or no template fields exist, Citizen iD falls back to the member's global Discord display name or username.
+A missing or null RSI or organization value omits that field and its formatting.
+An empty string can still emit its prefix or suffix, so representative previews are required.
+If all selected values are null, no template fields exist, or no account is linked, composition uses global Discord display name when present, otherwise username.
+Live sync compares that fallback with the non-guild display name and may leave an existing custom server nickname unchanged.
+Do not promise that fallback clears or resets a custom server nickname.
+An unlinked ID errors in preview, so use a dedicated linked demo member without a verified RSI profile to preview fallback.
+Nickname preview and resolution do not consult public-discovery or privacy settings.
+Warn that configured RSI and organization fields may become public Discord nickname content and must be chosen deliberately.
+Portal access requires administrator **Manage Roles** unless an internal override exists; live execution separately requires bot **Manage Nicknames** and sufficient hierarchy.
+**Content Casing** is currently ineffective because its transformed string is discarded.
+**Normalize content before formatting** works and lowercases content.
+Field order is left to right and may wrap visually on narrow screens.
 The final composed nickname is limited to 32 characters.
 
 ## Public Inspiration
@@ -201,7 +220,8 @@ Add three placement blocks to the page.
 ### Template Placement
 
 Place the template block after Alex is loaded in the main walkthrough.
-Request a screenshot of **Nicknames** with **Username (Handle/IGN)** selected under **Naming template**, Alex's Discord user ID in **Example Discord user ID**, `AlexRsi` under **Result parts**, and `AlexRsi` under **Final result**.
+Request a screenshot of **Nicknames** with **Username (Handle/IGN)** selected under **Naming template**, a safe demo Discord user ID in **Example Discord user ID**, `AlexRsi` under **Result parts**, and `AlexRsi` under **Final result**.
+Require a dedicated demo account or ID redaction before publication.
 Focus on the template and preview grid instead of the full application shell.
 Request callouts for the selected field, test-user input, resolved part, and final result.
 
@@ -211,6 +231,7 @@ Place the formatting block under **Prefix And Suffix**.
 Request a screenshot of **Text Embed Format Options** for the **Spectrum ID** field configured with prefix `[` and suffix `] `.
 Require **Content Casing**, **Normalize content before formatting**, **Preview content**, formatted preview, and **Save changes** to be visible.
 Focus on settings that explain `[ASTRA] ` before the handle.
+Annotate that **Content Casing** is currently ineffective while **Normalize content before formatting** lowercases content and works.
 
 ### Resync Placement
 
@@ -244,5 +265,7 @@ Confirm that tables remain readable and the placement blocks render as intention
 Confirm that outline labels remain concise and do not wrap excessively.
 Confirm that every product label matches the current Nicknames interface and resync dialog.
 Confirm that the walkthrough explains immediate template persistence before using **Re-sync on server**.
-Confirm that missing values omit their fields, empty composed results fall back, and generated nicknames are limited to 32 characters.
+Confirm that null values omit their fields and formatting, empty strings may emit formatting, composition fallback is global Discord display name then username, and generated nicknames are limited to 32 characters.
+Confirm that unlinked preview IDs error and live fallback may preserve an existing custom server nickname.
+Confirm that no privacy-setting dependency, casing behavior, completion signal, or all-member resync is promised.
 Confirm that no screenshot, generated illustration, or Mermaid diagram remains on the page.
