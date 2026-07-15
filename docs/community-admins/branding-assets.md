@@ -30,7 +30,8 @@ The response must be an image below the 2 MiB maximum.
 Prefer simple SVG artwork with clear edges and little or no small text.
 Verify the artwork remains legible at small sizes and on light and dark surfaces.
 
-The source URL is sent to viewers' browsers.
+Citizen iD fetches the source during creation, and viewers' browsers request it later when the asset renders.
+The remote host can therefore receive both server and viewer request information.
 Never include access tokens, signatures, private hostnames, or other secrets.
 Do not change bytes behind a submitted URL.
 Use a new versioned filename and new asset for changed artwork.
@@ -61,10 +62,9 @@ Create one editable draft before configuring variants.
 ### Open Branding
 
 1. Open Asteria Rescue in the Community Portal.
-2. Open **Site Branding**.
-3. Select **Branding**.
-4. Select **Add Branding Asset**.
-5. Confirm **Create Branding Asset** opens.
+2. Open the **Site Branding** card, or select **Branding** in the community navigation.
+3. Select **Add Branding Asset**.
+4. Confirm **Create Branding Asset** opens.
 
 ### Choose Icon Type
 
@@ -101,20 +101,6 @@ Set these values:
 
 These values allow the icon to match light and dark themes plus square and circle containers when the requested background is transparent.
 
-::: info Screenshot placement
-**Purpose:** Show the complete editable draft and exact matching metadata.
-
-**Required contents:** Show the pending asset editor with **Priority** `100`, **Theme** **Theme-agnostic**, **Background** **Transparent**, **Container** **Container-agnostic**, read-only **Asset URL**, and **Pending Submission**.
-
-**Crop and focus:** Focus on status, read-only source, metadata controls, and save behavior.
-
-**Annotations:** Call out exact example values, read-only URL, draft state, and immediate metadata saves.
-
-**Proposed caption:** The Asteria Rescue icon draft matches transparent light, dark, square, and circle placements.
-
-**Alt-text intent:** Communicate draft status, immutable source URL, configured matching metadata, and immediate-save behavior.
-:::
-
 ### Save Draft
 
 Select **Save changes**.
@@ -123,6 +109,20 @@ Confirm the asset shows **Pending Submission**.
 The **Asset URL** is read-only after creation, including during **Pending Submission**.
 Changes to existing draft metadata save immediately.
 There is no separate final-save stage for later draft metadata changes.
+
+::: info Screenshot placement
+**Purpose:** Show the saved editable draft and exact matching metadata.
+
+**Required contents:** Show the asset on the **Branding** page with **Priority** `100`, **Theme** **Theme-agnostic**, **Background** **Transparent**, **Container** **Container-agnostic**, read-only **Asset URL**, and **Pending Submission**.
+
+**Crop and focus:** Focus on status, read-only source, metadata controls, and saved draft behavior.
+
+**Annotations:** Call out exact example values, read-only URL, draft state, and immediate metadata saves after creation.
+
+**Proposed caption:** The saved Asteria Rescue icon draft matches transparent light, dark, square, and circle placements.
+
+**Alt-text intent:** Communicate saved draft status, immutable source URL, configured matching metadata, and immediate-save behavior.
+:::
 
 ## Preview Asset
 
@@ -159,7 +159,9 @@ It does not mean the asset is approved or public.
 
 ## Submit For Review
 
-Submission locks normal configuration and starts a manual review request that still needs a support ticket.
+Submission locks theme, background, container, orientation, and source configuration and starts a manual review request that still needs a support ticket.
+The current UI leaves **Priority** editable after submission, but changing it can alter which approved asset wins without a new review.
+Treat all submitted and reviewed asset values as frozen.
 
 ### Run Final Checks
 
@@ -180,17 +182,17 @@ Before submission, confirm:
 3. Select **Request approval**, or select **Cancel** if another edit is needed.
 
 ::: info Screenshot placement
-**Purpose:** Show the irreversible configuration lock and separate manual-review requirement.
+**Purpose:** Show the submission lock and separate manual-review requirement.
 
-**Required contents:** Show **Submit Asset for Approval** with the lock warning, **Request approval**, and **Cancel**, followed by **Pending Approval** with normal configuration fields locked.
+**Required contents:** Show **Submit Asset for Approval** with the lock warning, **Request approval**, and **Cancel**, followed by **Pending Approval** with theme, background, and container controls locked.
 
 **Crop and focus:** Focus on the confirmation warning, actions, resulting status, and locked editor controls.
 
 **Annotations:** Call out submission lock, **Pending Approval**, and the required manual support ticket.
 
-**Proposed caption:** Requesting approval locks normal configuration, but a support ticket is still required for review.
+**Proposed caption:** Requesting approval locks normal matching fields, but a support ticket is still required for review.
 
-**Alt-text intent:** Communicate the lock warning, confirm and cancel actions, resulting status, locked fields, and manual-ticket requirement.
+**Alt-text intent:** Communicate the lock warning, confirm and cancel actions, resulting status, locked matching fields, and manual-ticket requirement.
 :::
 
 Submission does not automatically notify or assign a moderator.
@@ -214,7 +216,8 @@ Do not send unreleased source files or secrets in a public support channel.
 
 ### Confirm Locked State
 
-Confirm the asset shows **Pending Approval** and normal configuration controls are locked.
+Confirm the asset shows **Pending Approval** and normal matching controls are locked.
+Do not change **Priority** even if its control remains available.
 Wait for manual review through the support ticket.
 Do not create repeated submissions for the same source while review is active.
 
@@ -238,6 +241,12 @@ Logos require transparent backgrounds.
 **Container** distinguishes container-agnostic, square, and circle icon placements.
 Use **Container-agnostic** only when the same artwork fits both square and circle crops.
 
+### Size Matching
+
+Raster artwork must be at least as wide and tall as the requested placement.
+A valid raster below 2 MiB can still fail to match when its pixel dimensions are too small.
+SVG is treated as scalable, which is another reason to prefer it for icons and logos.
+
 ### Priority Order
 
 When multiple approved assets match one placement, the highest **Priority** value wins.
@@ -259,6 +268,8 @@ Create a second versioned SVG containing the full community name.
 Use **Transparent** background and set **Orientation** to **Vertical**.
 Do not reuse a horizontal composition if it becomes unreadable vertically.
 
+Use **Orientation-agnostic** only when one composition genuinely fits both horizontal and vertical requests.
+
 ### Light And Dark
 
 Use one **Theme-agnostic** logo when it remains legible in both themes.
@@ -272,7 +283,7 @@ Use status to determine the only safe next action.
 | State | Meaning | Available action |
 | --- | --- | --- |
 | **Pending Submission** | Draft exists and can be edited. | Preview, edit, submit, or remove. |
-| **Pending Approval** | Submitted asset awaits review and is locked. | Open or update the manual support ticket. |
+| **Pending Approval** | Submitted asset awaits review and matching fields are locked. | Open or update the manual support ticket, or permanently remove the asset to withdraw it. |
 | **Approved** | Asset is eligible for matching public placements. | Verify public result or remove carefully. |
 | **Rejected** | Review failed and the reason is visible. | Read the reason and create a corrected new asset. |
 
@@ -283,13 +294,17 @@ Draft metadata changes save immediately, while the source URL remains read-only.
 
 ### Pending Approval
 
-Normal configuration is locked.
+Theme, background, container, orientation, and source configuration are locked.
+Do not change **Priority** even though the current control remains editable.
 Use the existing manual support ticket for review status and additional evidence.
+
+Use **Remove asset** only when the submission must be withdrawn.
+The resulting **Delete Asset** action is permanent and cannot be undone.
 
 ### Approved Asset
 
-The asset becomes eligible for matching public placements.
-Approval does not promise immediate public visibility because public reads may be cached.
+The asset becomes eligible for matching public placements when a refreshed public page resolves it.
+The external image response can still be cached by browsers or the community's content delivery network.
 Verify representative public surfaces before retiring any older approved asset.
 
 ### Rejected Asset
@@ -300,6 +315,12 @@ Do not promise in-place editing, resubmission, or deletion.
 
 Create corrected artwork at a new versioned URL, create a new asset, preview it, and submit that new asset.
 
+### Review Ownership
+
+Community staff create assets, edit drafts, submit them, and can delete every state except **Rejected**.
+Citizen iD moderators perform the review and can return an asset to pending, mark it submitted, approve it, reject it with a required **Rejection message**, or delete it.
+Community staff should use the support ticket instead of trying to reproduce moderator actions.
+
 ## Manage Assets
 
 Protect public coverage while editing drafts, replacing approved artwork, or deleting assets.
@@ -309,6 +330,9 @@ Protect public coverage while editing drafts, replacing approved artwork, or del
 Edit **Priority**, **Theme**, **Background**, **Container**, or **Orientation** only while the asset is **Pending Submission**.
 Each metadata change saves immediately.
 Create a new asset when the source artwork or URL must change.
+
+Although **Priority** remains editable in later states in the current UI, changing it can alter public selection without a new review.
+Treat it as locked after submission.
 
 ### Replace Asset
 
@@ -325,6 +349,7 @@ This sequence keeps the approved version stable until its replacement is ready.
 
 **Delete Asset** is permanent.
 Deleting an approved asset can remove currently selected public branding.
+The placement may fall through to a lower-priority matching asset, an official fallback where supported, or no asset.
 
 Before selecting **Delete**, check every matching placement, priority relationship, and replacement approval.
 Select **Cancel** if coverage is uncertain.
@@ -350,14 +375,14 @@ Start with source validation and matching metadata before escalating review or p
 
 Confirm the URL is absolute public HTTPS, reachable without authentication, stable, and served as an image below 2 MiB.
 Remove tokens, signatures, private hostnames, and redirects to protected resources.
-If processing is rate-limited, stop repeated submissions and retry through the normal workflow later.
+If processing is rate-limited, stop repeated attempts, wait at least five seconds, then retry once.
 
 Use a new versioned URL after changing artwork.
 Do not mutate an already submitted source.
 
 ### Preview Mismatch
 
-Compare requested placement with **Theme**, **Background**, **Container**, **Orientation**, and **Priority**.
+Compare requested placement with **Theme**, **Background**, **Container**, **Orientation**, **Priority**, and raster pixel dimensions.
 Remember that icons use container matching, while logos use orientation and require transparent background.
 Preview can show an unapproved draft, so a correct preview is not publication evidence.
 
@@ -365,7 +390,8 @@ Preview can show an unapproved draft, so a correct preview is not publication ev
 
 Confirm the asset is **Approved**, matches the requested placement, and has sufficient priority.
 Check whether a higher-priority approved asset wins.
-Allow for cached public reads without promising a publication time.
+Refresh the public page after approval.
+If the correct approved asset is selected but the image looks stale, check browser and community-host caching for the versioned source URL.
 
 If the asset is **Pending Approval**, continue through the manual support ticket.
 If it is **Rejected**, create a corrected new asset rather than editing in place.

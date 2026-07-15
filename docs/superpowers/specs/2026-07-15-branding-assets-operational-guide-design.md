@@ -125,14 +125,14 @@ Use actual creation flow:
 14. Explain that existing draft changes save immediately.
 15. Select **Submit for approval** only after the final preview check.
 16. In **Submit Asset for Approval**, read the lock warning and select **Request approval**.
-17. Confirm the asset shows **Pending Approval** and editor controls are locked.
+17. Confirm the asset shows **Pending Approval** and normal matching controls are locked.
 18. Open a support ticket on the official Citizen iD Discord because approval is not automated.
 19. Provide visible community name, identifier, asset type, source URL, submission time, and a safe preview screenshot.
 20. Confirm the final **Approved** or **Rejected** state.
 
 Do not imply that placement preview publishes the asset.
 Do not imply that submission automatically notifies or assigns a moderator.
-Do not promise immediate public visibility after approval because public reads may be cached.
+Do not promise immediate remote-image refresh because browser or community-host caching may apply.
 
 ## Source Guidance
 
@@ -162,6 +162,7 @@ Explain each field:
 - **Container** distinguishes container-agnostic, square, and circle icon placements.
 - **Orientation** distinguishes orientation-agnostic, horizontal, and vertical logo placements.
 - **Priority** resolves multiple matching assets, with the highest value winning.
+- Raster dimensions must meet or exceed the requested placement, while SVG is treated as scalable.
 
 State supported combinations accurately:
 
@@ -187,7 +188,7 @@ Use exact state labels:
 | State | Meaning | Available action |
 | --- | --- | --- |
 | **Pending Submission** | Draft exists and can be edited. | Preview, edit, submit, or remove. |
-| **Pending Approval** | Submitted asset awaits review and is locked. | Open or update the manual support ticket. |
+| **Pending Approval** | Submitted asset awaits review and matching fields are locked. | Open or update the manual support ticket, or permanently remove the asset to withdraw it. |
 | **Approved** | Asset is eligible for matching public placements. | Verify public result or remove carefully. |
 | **Rejected** | Review failed and the reason is visible. | Read the reason and create a corrected new asset. |
 
@@ -199,7 +200,9 @@ Preserve the rejection reason as context, create a new versioned source, and sub
 
 Existing pending draft metadata changes save immediately.
 The source URL remains read-only, including while the asset is pending submission.
-Submitted and reviewed assets are locked.
+Submitted and reviewed assets lock source and normal matching fields.
+The current UI leaves **Priority** editable in later states, but changing it can alter public selection without another review.
+Tell community staff to treat **Priority** as locked after submission.
 Replacing approved artwork should use a new versioned URL and new asset so the approved version remains stable until replacement approval.
 After the replacement becomes approved and public behavior is verified, remove the old asset only when no placement still needs it.
 
@@ -249,7 +252,7 @@ Annotate matching and nonmatching cells and state that preview does not mean app
 ### Review Placement
 
 Place during submission.
-Request the **Submit Asset for Approval** dialog with lock warning, **Request approval**, and **Cancel**, followed by the **Pending Approval** state with normal configuration fields locked.
+Request the **Submit Asset for Approval** dialog with lock warning, **Request approval**, and **Cancel**, followed by the **Pending Approval** state with normal matching fields locked.
 Annotate the submission lock and required manual support ticket.
 
 ## Content Style
@@ -276,7 +279,7 @@ Confirm concise outline, readable tables, and intentional placement blocks.
 Confirm no Mermaid, `ImageStepper`, screenshot asset, or prose-only visual marker remains.
 Confirm exact labels for creation, source, save, submission, and state.
 Confirm current type availability and relationship gate.
-Confirm public URL requirements, no-secret warning, 2 MiB limit, immediate draft saves, read-only source, submission lock, and manual ticket.
+Confirm public URL requirements, no-secret warning, 2 MiB limit, raster size matching, immediate draft saves, read-only source, submission lock, priority exception, and manual ticket.
 Confirm rejected recovery does not promise editing or deletion.
 Confirm approved deletion risk is explicit.
 
