@@ -72,9 +72,10 @@ Do not reuse an unverified invite link.
 5. Select **Save changes**.
 
 Fresh installation makes Asteria Hub eligible to appear in the mutual-guild selector after Discord and portal state refresh.
-If Asteria Hub is absent, refresh community settings once.
+If Asteria Hub is absent, an earlier empty mutual-server result may still be cached.
+Wait up to five minutes without repeatedly refreshing, then refresh community settings once.
 Then confirm you used the same linked Discord account, Citizen iD is present in Asteria Hub, and that account can still see the server.
-If Asteria Hub remains absent, use a private Citizen iD support path instead of reinstalling blindly.
+If Asteria Hub remains absent, use a [private Citizen iD support path](/community-admins/maintenance-and-support) instead of reinstalling blindly.
 
 ::: info Screenshot placement
 **Purpose:** Show the trusted Discord authorization step and exact server selection used in the walkthrough.
@@ -92,7 +93,6 @@ If Asteria Hub remains absent, use a private Citizen iD support path instead of 
 
 Use a demo server or redact server IDs, account details, and unrelated server names before publishing this screenshot.
 After **Save changes**, confirm the read-only **Official Community Server** field displays Asteria Hub.
-Do not depend on an unverified success toast.
 
 ### Confirm Bot Presence
 
@@ -326,7 +326,8 @@ Diagnose server selection and portal access before bot execution and hierarchy.
 
 Confirm Asteria Hub is selected under **Official Community Server** and in **Bot Configuration**.
 Confirm Citizen iD is installed in that same server.
-If the server is absent from the selector, refresh community settings once, then verify the same linked Discord account, bot presence, Discord **Administrator**, and server visibility.
+If the server is absent from the selector, wait up to five minutes without repeatedly refreshing, then refresh community settings once.
+Verify the same linked Discord account, bot presence, Discord **Administrator**, and server visibility.
 If it remains absent, use private Citizen iD support instead of reinstalling blindly.
 
 ### Bot Missing
