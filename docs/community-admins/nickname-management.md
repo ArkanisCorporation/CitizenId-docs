@@ -355,7 +355,7 @@ Collect privacy-safe evidence before contacting support:
 
 - Community slug and Discord server name.
 - Affected member's Discord user ID.
-- Selected fields, order, prefixes, suffixes, and casing.
+- Selected fields, order, prefixes, suffixes, casing, and whether **Normalize content before formatting** is enabled or disabled.
 - **Result parts** and **Final result** from the preview.
 - Expected and visible live nickname.
 - UTC time of the preview and re-sync.
