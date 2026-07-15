@@ -5,111 +5,384 @@ description: Community-owned branding assets and review workflow.
 
 # Branding Assets
 
-Community branding assets let admins manage how a community appears in Citizen iD surfaces.
-This area belongs in the community admin guide because it is an operational community workflow, not an OAuth implementation detail.
+Create a community icon from a stable public URL, preview its matching placements, then request manual approval.
+This walkthrough uses Asteria Rescue and a replaceable example URL.
 
-Branding is visible to members, partner communities, and support staff.
-Treat it as public presentation, not just file upload.
+## Before You Start
 
-**Diagram: Branding asset lifecycle.**
-Admins prepare assets, preview placements, submit for review, and then approved assets can represent the community across supported Citizen iD surfaces.
+Confirm administrative access, artwork rights, and source hosting before creating an asset.
 
-**what should be on the screenshot/diagram:** A branding workflow showing upload or edit, preview matrix, Pending Submission, Pending Approval, Approved, Rejected, rejection reason, and supported placements.
+### Confirm Access
 
-```mermaid
-flowchart TD
-  admin(["Community admin"])
-  draft[["Pending<br/>submission"]]
-  preview[/Preview/]
-  submit{"Submit?"}
-  pending[(Pending<br/>approval)]
-  review{"Approved?"}
-  approved[/Approved/]
-  rejected>Rejected]
-  reason>Review reason]
-  surfaces["Surfaces"]
+Confirm you can administer Asteria Rescue and open its **Branding** page.
+Confirm the community owns the artwork or has a license allowing this public use.
 
-  admin ==>|New version| draft
-  draft --> preview
-  preview --> submit
-  submit -. "No" .-> draft
-  submit ==>|Yes| pending
-  pending ==> review
-  review ==>|Yes| approved
-  review -. "No" .-> rejected
-  approved ==> surfaces
-  rejected -. "Reason" .-> reason
-  reason -.-> admin
+Community branding represents the community.
+It does not imply endorsement, certification, operation, or sponsorship by Citizen iD, Cloud Imperium Games, RSI, or Star Citizen.
+Follow the [Brand Guidelines](/reference/brand-guidelines) when using Citizen iD names or assets.
 
-  class admin actor;
-  class draft,pending service;
-  class preview,approved,surfaces data;
-  class submit,review decision;
-  class rejected,reason caution;
-```
+### Prepare Source
 
-Read the diagram as a review workflow.
-Pending submission and preview are community-controlled.
-Approval decides whether the asset should be used broadly.
-A rejected asset should come with enough reason that the next version can fix the real issue.
+Host a simple SVG at a public, stable, versioned, absolute HTTPS URL controlled by the community.
+This walkthrough uses `https://assets.example.org/asteria-rescue/icon-v1.svg`, which must be replaced with a real reachable URL.
 
-## Asset Lifecycle
+The response must be an image below the 2 MiB maximum.
+Prefer simple SVG artwork with clear edges and little or no small text.
+Verify the artwork remains legible at small sizes and on light and dark surfaces.
 
-Admins can add assets, preview placements, update pending assets, delete assets, and submit assets for review.
-Asset states can appear as Pending Submission, Pending Approval, Approved, or Rejected.
+The source URL is sent to viewers' browsers.
+Never include access tokens, signatures, private hostnames, or other secrets.
+Do not change bytes behind a submitted URL.
+Use a new versioned filename and new asset for changed artwork.
 
-Approved assets are used across supported Citizen iD surfaces to represent the community.
-Unapproved assets may be visible in preview or review contexts, but they should not be treated as public approved branding.
+Citizen iD stores and renders the external URL.
+Do not assume Citizen iD copies and permanently hosts the artwork.
 
-Supported asset types can include graphics such as icons, logos, banners, backgrounds, and theme configuration assets.
-The exact placements available to your community depend on the current Citizen iD surface and asset type.
+### Choose Asset Type
 
-Use the preview matrix before submission so assets work in the placements where Citizen iD will render them.
+Create **Icon from URL** first.
+It is available and demonstrates theme, background, container, priority, preview, and review behavior.
 
-**what should be on the screenshot/diagram:** A current branding page screenshot showing asset upload, the placement preview matrix, status chips, and a rejected asset with review reason.
+Use these example values:
 
-## Good Practice
+| Field | Example value | Result |
+| --- | --- | --- |
+| **Type** | **Icon from URL** | Creates a supported graphics asset. |
+| **Source URL** | `https://assets.example.org/asteria-rescue/icon-v1.svg` | Fetches a versioned SVG from community-controlled hosting. |
+| **Priority** | `100` | Wins over another matching asset with lower priority. |
+| **Theme** | **Theme-agnostic** | Can match light and dark placements. |
+| **Background** | **Transparent** | Matches transparent placements. |
+| **Container** | **Container-agnostic** | Can match square and circle containers. |
 
-Use clear source files.
-Avoid tiny text that will not survive small placements.
-Keep variants readable on both light and dark surfaces.
-Record why an asset was rejected so the next submission can fix the real issue.
+## Add First Icon
 
-Before submitting, check:
+Create one editable draft before configuring variants.
 
-- The asset still reads at small sizes.
-- The asset has enough contrast on light and dark backgrounds.
-- The asset does not rely on text that becomes unreadable in icon placements.
-- The asset does not imply an official Citizen iD partnership unless that status is actually granted.
-- The asset does not imply endorsement by Cloud Imperium Games, RSI, or Star Citizen.
-- The asset is appropriate for public community-facing use.
+### Open Branding
 
-## Citizen iD Brand Boundary
+1. Open Asteria Rescue in the Community Portal.
+2. Open **Site Branding**.
+3. Select **Branding**.
+4. Select **Add Branding Asset**.
+5. Confirm **Create Branding Asset** opens.
 
-Community branding is different from Citizen iD brand usage.
-Your community assets represent your community.
-Citizen iD assets, names, and status language must follow the shared [Brand Guidelines](/reference/brand-guidelines).
+### Choose Icon Type
 
-Do not use wording such as "official Citizen iD partner" or "Citizen iD verified" unless that status has actually been granted and is reflected in Citizen iD systems.
-Using Citizen iD infrastructure does not mean Citizen iD endorses, certifies, audits, sponsors, operates, or is responsible for the community.
+Select **Icon from URL** under **Select Type**.
 
-::: warning Public trust
-Branding can make a community look more official than intended.
-Avoid visual or written presentation that could confuse members about who operates the community, who approved the asset, or what Citizen iD is responsible for.
+::: info Screenshot placement
+**Purpose:** Show current asset-type availability before the first icon is created.
+
+**Required contents:** Show **Create Branding Asset** at **Select Type**, with available **Icon from URL** and **Logo from URL**, disabled **Banner from URL**, **Background from URL**, and **Member Profile Page Theme**, plus relationship-gated **Authorization Page Theme**.
+
+**Crop and focus:** Focus on the type cards, availability state, and relationship gate rather than the full portal shell.
+
+**Annotations:** Call out available, disabled, and relationship-gated choices, with **Icon from URL** selected.
+
+**Proposed caption:** Icon and logo URL assets are available, while other choices remain disabled or relationship-gated.
+
+**Alt-text intent:** Communicate every visible asset type, its availability, and which type starts the walkthrough.
 :::
 
-## Review Feedback
+### Enter Source URL
 
-If an asset is rejected, read the reason before replacing the file.
-Common issues include low contrast, unreadable text, misleading status language, wrong environment branding, unsuitable aspect ratio, or a file that does not work in the intended placement.
+Enter `https://assets.example.org/asteria-rescue/icon-v1.svg` under **Source URL**.
+Substitute the community's real public versioned URL.
+Continue to **Finalize Options** only after the source validates.
 
-For branding support, include:
+### Configure Placement
 
-- The community slug.
-- The asset name or type.
-- The current asset status.
-- The rejected reason, if available.
-- The placement where the asset looked wrong.
-- A safe cropped screenshot of the preview, if useful.
+Set these values:
 
-Do not send private design source files in public support channels if they contain unrelated or unreleased community material.
+- **Priority**: `100`.
+- **Theme**: **Theme-agnostic**.
+- **Background**: **Transparent**.
+- **Container**: **Container-agnostic**.
+
+These values allow the icon to match light and dark themes plus square and circle containers when the requested background is transparent.
+
+::: info Screenshot placement
+**Purpose:** Show the complete editable draft and exact matching metadata.
+
+**Required contents:** Show the pending asset editor with **Priority** `100`, **Theme** **Theme-agnostic**, **Background** **Transparent**, **Container** **Container-agnostic**, read-only **Asset URL**, and **Pending Submission**.
+
+**Crop and focus:** Focus on status, read-only source, metadata controls, and save behavior.
+
+**Annotations:** Call out exact example values, read-only URL, draft state, and immediate metadata saves.
+
+**Proposed caption:** The Asteria Rescue icon draft matches transparent light, dark, square, and circle placements.
+
+**Alt-text intent:** Communicate draft status, immutable source URL, configured matching metadata, and immediate-save behavior.
+:::
+
+### Save Draft
+
+Select **Save changes**.
+Confirm the asset shows **Pending Submission**.
+
+The **Asset URL** is read-only after creation, including during **Pending Submission**.
+Changes to existing draft metadata save immediately.
+There is no separate final-save stage for later draft metadata changes.
+
+## Preview Asset
+
+Preview verifies rendering and metadata fit, not approval or public publication.
+
+### Check Asset Preview
+
+Inspect the asset preview for sharp edges, correct transparency, expected colors, and readable details.
+Compare light and dark surroundings.
+If the source itself is wrong, create a new versioned URL and new asset instead of changing bytes behind the saved URL.
+
+### Check Placement Matrix
+
+Inspect representative light, dark, square, and circle cells in the placement matrix.
+Confirm matching cells look correct and nonmatching cells remain excluded by metadata.
+
+The matrix can render the current unapproved asset.
+Preview therefore proves fit only.
+It does not mean the asset is approved or public.
+
+::: info Screenshot placement
+**Purpose:** Show which placements the draft matches without implying publication.
+
+**Required contents:** Show the Asteria Rescue icon across representative light, dark, square, and circle placement-matrix cells, including matching and nonmatching examples.
+
+**Crop and focus:** Focus on the matrix labels, rendered icon cells, and excluded cells.
+
+**Annotations:** Call out matching and nonmatching cells and state that preview does not mean approval or publication.
+
+**Proposed caption:** Placement preview verifies icon fit, while approval still controls public eligibility.
+
+**Alt-text intent:** Communicate where the draft renders, where it does not match, and the boundary between preview and public use.
+:::
+
+## Submit For Review
+
+Submission locks normal configuration and starts a manual review request that still needs a support ticket.
+
+### Run Final Checks
+
+Before submission, confirm:
+
+- The community owns or licenses the artwork.
+- Source URL is public HTTPS and contains no secret.
+- Filename is versioned and hosted stably.
+- Response is a valid image below 2 MiB.
+- Preview remains legible at small sizes.
+- Light, dark, square, and circle matches are intentional.
+- Wording and artwork do not imply unsupported official status or endorsement.
+
+### Request Approval
+
+1. Select **Submit for approval**.
+2. In **Submit Asset for Approval**, read the configuration-lock warning.
+3. Select **Request approval**, or select **Cancel** if another edit is needed.
+
+::: info Screenshot placement
+**Purpose:** Show the irreversible configuration lock and separate manual-review requirement.
+
+**Required contents:** Show **Submit Asset for Approval** with the lock warning, **Request approval**, and **Cancel**, followed by **Pending Approval** with normal configuration fields locked.
+
+**Crop and focus:** Focus on the confirmation warning, actions, resulting status, and locked editor controls.
+
+**Annotations:** Call out submission lock, **Pending Approval**, and the required manual support ticket.
+
+**Proposed caption:** Requesting approval locks normal configuration, but a support ticket is still required for review.
+
+**Alt-text intent:** Communicate the lock warning, confirm and cancel actions, resulting status, locked fields, and manual-ticket requirement.
+:::
+
+Submission does not automatically notify or assign a moderator.
+
+### Open Support Ticket
+
+Open a branding approval ticket through the official Citizen iD Discord support path.
+Use [Maintenance And Support](/community-admins/maintenance-and-support) for current support routing.
+
+Provide:
+
+- Visible community name and identifier.
+- Asset type.
+- Public **Source URL**.
+- UTC submission time.
+- Current **Pending Approval** status.
+- Safe cropped preview screenshot.
+- Relevant rights or licensing context when requested privately.
+
+Do not send unreleased source files or secrets in a public support channel.
+
+### Confirm Locked State
+
+Confirm the asset shows **Pending Approval** and normal configuration controls are locked.
+Wait for manual review through the support ticket.
+Do not create repeated submissions for the same source while review is active.
+
+## Understand Matching
+
+Public selection requires an **Approved** asset whose metadata matches the requested placement.
+
+### Theme Matching
+
+**Theme-agnostic** can match light and dark placements.
+Use explicit light or dark variants when one design does not remain legible in both themes.
+
+### Background Matching
+
+**Background** distinguishes transparent, semi-transparent, and opaque placements.
+Icons support transparent or opaque backgrounds.
+Logos require transparent backgrounds.
+
+### Container Matching
+
+**Container** distinguishes container-agnostic, square, and circle icon placements.
+Use **Container-agnostic** only when the same artwork fits both square and circle crops.
+
+### Priority Order
+
+When multiple approved assets match one placement, the highest **Priority** value wins.
+Use intentional priority gaps so later variants can be inserted without renumbering every asset.
+
+## Add Logo Variants
+
+Use separate logo assets when orientation or theme requires different artwork.
+
+### Horizontal Logo
+
+Create **Logo from URL** with a versioned SVG containing the full community name.
+Use **Transparent** background and set **Orientation** to **Horizontal**.
+Preview every intended horizontal placement before submission.
+
+### Vertical Logo
+
+Create a second versioned SVG containing the full community name.
+Use **Transparent** background and set **Orientation** to **Vertical**.
+Do not reuse a horizontal composition if it becomes unreadable vertically.
+
+### Light And Dark
+
+Use one **Theme-agnostic** logo when it remains legible in both themes.
+Create separate light and dark assets only when the design needs theme-specific contrast.
+Give each variant explicit matching metadata and preview it before submission.
+
+## Handle Review
+
+Use status to determine the only safe next action.
+
+| State | Meaning | Available action |
+| --- | --- | --- |
+| **Pending Submission** | Draft exists and can be edited. | Preview, edit, submit, or remove. |
+| **Pending Approval** | Submitted asset awaits review and is locked. | Open or update the manual support ticket. |
+| **Approved** | Asset is eligible for matching public placements. | Verify public result or remove carefully. |
+| **Rejected** | Review failed and the reason is visible. | Read the reason and create a corrected new asset. |
+
+### Pending Submission
+
+Preview and edit metadata before submission.
+Draft metadata changes save immediately, while the source URL remains read-only.
+
+### Pending Approval
+
+Normal configuration is locked.
+Use the existing manual support ticket for review status and additional evidence.
+
+### Approved Asset
+
+The asset becomes eligible for matching public placements.
+Approval does not promise immediate public visibility because public reads may be cached.
+Verify representative public surfaces before retiring any older approved asset.
+
+### Rejected Asset
+
+Read and preserve the visible rejection reason.
+The current community UI locks rejected assets and does not expose their delete action.
+Do not promise in-place editing, resubmission, or deletion.
+
+Create corrected artwork at a new versioned URL, create a new asset, preview it, and submit that new asset.
+
+## Manage Assets
+
+Protect public coverage while editing drafts, replacing approved artwork, or deleting assets.
+
+### Edit Draft
+
+Edit **Priority**, **Theme**, **Background**, **Container**, or **Orientation** only while the asset is **Pending Submission**.
+Each metadata change saves immediately.
+Create a new asset when the source artwork or URL must change.
+
+### Replace Asset
+
+1. Publish corrected artwork at a new versioned URL.
+2. Create and preview a new asset.
+3. Submit it and open the required support ticket.
+4. Wait for **Approved**.
+5. Verify matching public surfaces.
+6. Remove the old approved asset only when no required placement still depends on it.
+
+This sequence keeps the approved version stable until its replacement is ready.
+
+### Delete Safely
+
+**Delete Asset** is permanent.
+Deleting an approved asset can remove currently selected public branding.
+
+Before selecting **Delete**, check every matching placement, priority relationship, and replacement approval.
+Select **Cancel** if coverage is uncertain.
+
+### Current Limits
+
+| Option | Current availability |
+| --- | --- |
+| **Icon from URL** | Available. |
+| **Logo from URL** | Available. |
+| **Banner from URL** | Disabled. |
+| **Background from URL** | Disabled. |
+| **Authorization Page Theme** | Available only to communities with Partner relationship or higher. |
+| **Member Profile Page Theme** | Disabled. |
+
+Do not use relationship-gated authorization themes as part of the first graphics workflow.
+
+## Troubleshoot Branding
+
+Start with source validation and matching metadata before escalating review or public visibility.
+
+### Source Fails
+
+Confirm the URL is absolute public HTTPS, reachable without authentication, stable, and served as an image below 2 MiB.
+Remove tokens, signatures, private hostnames, and redirects to protected resources.
+If processing is rate-limited, stop repeated submissions and retry through the normal workflow later.
+
+Use a new versioned URL after changing artwork.
+Do not mutate an already submitted source.
+
+### Preview Mismatch
+
+Compare requested placement with **Theme**, **Background**, **Container**, **Orientation**, and **Priority**.
+Remember that icons use container matching, while logos use orientation and require transparent background.
+Preview can show an unapproved draft, so a correct preview is not publication evidence.
+
+### Asset Not Public
+
+Confirm the asset is **Approved**, matches the requested placement, and has sufficient priority.
+Check whether a higher-priority approved asset wins.
+Allow for cached public reads without promising a publication time.
+
+If the asset is **Pending Approval**, continue through the manual support ticket.
+If it is **Rejected**, create a corrected new asset rather than editing in place.
+
+### Support Evidence
+
+Collect privacy-safe evidence:
+
+- Visible community name and identifier.
+- Asset type and current status.
+- Public source URL without secrets.
+- **Priority**, **Theme**, **Background**, **Container**, and **Orientation** where applicable.
+- Intended placement and observed result.
+- UTC creation, submission, and observation times.
+- Rejection reason when present.
+- Safe cropped preview and public-surface screenshots.
+- Existing support ticket reference.
+
+Do not send private design archives, unreleased material, tokens, or licensing documents through public channels.
+Use [Maintenance And Support](/community-admins/maintenance-and-support) for private escalation.
