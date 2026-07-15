@@ -120,7 +120,8 @@ Use actual creation flow:
 
 State field requirements accurately:
 
-- Required: **Display Name**, **Identifier**, **Community Type**, **Official Community Server**, **Description**.
+- Domain-required: **Display Name**, **Identifier**, and **Description**.
+- UI-required: **Community Type** and **Official Community Server** are also marked required; **Community Type** defaults to **Generic**.
 - Optional: **Parent Community**, **Short Display Name**, **Homepage**.
 - System-managed for community admins: **Official Relationship**.
 - Limits: display name 60, short display name 20, stored identifier 40, description 2000 characters.
@@ -154,6 +155,7 @@ Explain identifier change effects:
 - Changing parent identifier rewrites direct child identifiers.
 - Citizen iD role-name prefixes tied to changed community identifiers are rewritten.
 - Old links, screenshots, support references, and instructions may become stale.
+- Old identifier-based routes can stop resolving.
 - Record old and new identifiers plus affected child records before rename.
 
 ## Staff Workflow
@@ -162,6 +164,8 @@ State that creator becomes owner and joins new community during save.
 Management page shows **Community Owner** separately from **Manage community staff members**.
 Current staff model has one role with full administrative access.
 Do not imply fine-grained staff permissions exist.
+Do not imply a community-settings audit trail exists.
+Individual accounts identify current access, not historical setting changes.
 
 Use exact add flow:
 
@@ -183,6 +187,9 @@ Use exact remove flow:
 2. Confirm **Remove staff member from community?** names correct person and community.
 3. Select **Delete** or **Cancel**.
 4. Confirm removed person no longer appears.
+
+State that current UI shows no owner, self-removal, or last-staff guard in this flow.
+Require checking named person and retaining another authorized operator before selecting **Delete**.
 
 Use demo UUID or redact real UUID in visual requests.
 Treat UUID and account identity as private operational evidence.
@@ -213,6 +220,13 @@ Use exact community removal flow:
 7. Select **Delete** only after impact is accepted; otherwise select **Cancel**.
 
 Never suggest deletion as troubleshooting reset.
+
+## Troubleshooting Details
+
+Use exact server-selection messages where applicable.
+**You need to authorize additional permissions.** means Discord account needs additional OAuth authorization.
+**There are no guilds in common with the current user.** means current linked account and bot have no eligible shared server in current cached view.
+Do not promise alphabetical server ordering because selector uses source order.
 
 ## Screenshot Placements
 
