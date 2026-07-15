@@ -7,6 +7,7 @@ description: Template-based Discord nickname automation for communities.
 
 Configure, preview, roll out, and verify automated Discord nicknames for your community.
 This walkthrough configures Asteria Rescue to use each linked member's verified RSI handle as their nickname in Asteria Hub.
+Asteria Rescue, Asteria Hub, Alex, and `AlexRsi` are replaceable examples; use your own community, server, test member, and expected handle.
 
 ## Before You Start
 
@@ -71,7 +72,8 @@ If they do not populate, use [Preview Fails](#preview-fails) instead of starting
 ::: info Screenshot placement
 **Purpose:** Show the complete RSI-handle template and Alex preview used in the walkthrough.
 
-**Required contents:** Show **Nicknames**, **Username (Handle/IGN)** selected under **Naming template**, Alex's Discord user ID in **Example Discord user ID**, `AlexRsi` under **Result parts**, and `AlexRsi` under **Final result**.
+**Required contents:** Show **Nicknames**, **Username (Handle/IGN)** selected under **Naming template**, a safe demo Discord user ID in **Example Discord user ID**, `AlexRsi` under **Result parts**, and `AlexRsi` under **Final result**.
+Use a dedicated demo account or redact the Discord user ID before publication.
 
 **Crop and focus:** Crop to the naming template and preview grid rather than the full application shell.
 
@@ -92,7 +94,16 @@ Discord permissions, role hierarchy, owner protection, and name validation still
 
 ### Resync Server
 
-Select **Re-sync on server** only after both previews match the naming policy.
+Before the first live re-sync, confirm:
+
+- Representative test members cover a verified handle and the expected fallback.
+- Members received notice of the naming change.
+- Support or moderation coverage is available during rollout.
+- The bot has **Manage Nicknames** and a role above the members it must rename.
+- Both previews match the expected results, including fallback.
+
+See [Safe Rollout](#safe-rollout) for the full rollout sequence.
+Select **Re-sync on server** only after this checklist passes.
 In **Re-sync User Nicknames**, confirm the dialog names `Asteria Hub` and explains the server-wide scope.
 
 ::: info Screenshot placement
@@ -113,7 +124,7 @@ Select **Re-sync**.
 
 ### Confirm Result
 
-Wait for processing to complete, then inspect Alex in Asteria Hub.
+Allow processing time, then inspect Alex and the other representative members in Asteria Hub.
 Confirm Alex's live Discord nickname is `AlexRsi`.
 If the preview was correct but the live nickname is unchanged, continue to [Nickname Unchanged](#nickname-unchanged).
 
@@ -169,7 +180,7 @@ Use these recipes as starting points, then preview representative members before
 
 ### RSI Handle
 
-**Goal:** Enforce a verified RSI handle where available.
+**Goal:** Apply a verified RSI handle where available.
 
 **Fields and formatting:** Add **Username (Handle/IGN)** with no prefix or suffix.
 
@@ -177,7 +188,7 @@ Use these recipes as starting points, then preview representative members before
 
 **Missing data:** An empty composition falls back to the member's global Discord display name or username.
 
-**Policy caveat:** Members must link and verify the expected RSI account for the handle to resolve.
+**Policy caveat:** Members must link and verify the expected RSI account for the handle to resolve, and Discord must permit the live update.
 
 **Verify:** Preview a member with a verified handle and one without usable handle data.
 
