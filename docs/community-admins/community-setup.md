@@ -14,7 +14,9 @@ Prepare account access, record shape, and field values before opening creation.
 
 ### Confirm Access
 
-Sign in with a verified Citizen iD account linked to the same Discord account that administers Asteria Hub.
+Sign in with a Citizen iD account that has a verified RSI account and is linked to the same Discord account that administers Asteria Hub.
+**Verified** here means the RSI account has completed Citizen iD RSI verification.
+Complete [RSI Verification](/players/rsi-verification) if the RSI account is not verified.
 Confirm that Discord account has **Administrator** in Asteria Hub.
 The creator becomes community owner and joins the new community when the record is saved.
 
@@ -46,7 +48,10 @@ The new-record **Community Type** default is **Generic**.
 Select **In-game organization** for this example.
 
 Domain-required fields are **Display Name**, **Identifier**, and **Description**.
-The current form also marks **Community Type** and **Official Community Server** as required.
+The current form also marks **Community Type** as required.
+The initial read-only **Official Community Server** field can remain empty when the record is saved.
+After you enter server-edit mode, the mutual-server selector marks **Official Community Server** as required.
+This walkthrough connects Asteria Hub because its goal includes Discord community features.
 Optional fields are **Parent Community**, **Short Display Name**, and **Homepage**.
 **Official Relationship** is system-managed for community administrators.
 
@@ -101,22 +106,28 @@ Use stored identifier when describing the canonical saved value.
 
 ### Connect Discord
 
-1. Find the icon beside **Official Community Server** with tooltip **Invite Citizen iD bot to your Discord server**.
-2. Use it to open the trusted Discord installation flow.
-3. Confirm Citizen iD and Asteria Hub before authorizing.
-4. Complete installation in Asteria Hub.
-5. Return to **Manage Community**.
-6. Select Asteria Hub from the mutual-server list under **Official Community Server**.
+1. Select the edit-pencil adornment on **Official Community Server**.
+2. Find the icon beside the server selector with tooltip **Invite Citizen iD bot to your Discord server**.
+3. Use it to open the trusted Discord installation flow.
+4. Confirm Citizen iD and Asteria Hub before authorizing.
+5. Complete installation in Asteria Hub.
+6. Return to **Manage Community**.
+7. Re-enter server-edit mode if needed.
+8. Select Asteria Hub from the mutual-server list under **Official Community Server**.
 
 Do not try to select Asteria Hub before installing Citizen iD there.
 
-If the selector displays **You need to authorize additional permissions.**, complete the required Discord authorization for the same linked account.
+If the selector displays **You need to authorize additional permissions.**, select the green shield icon at the right side of the field.
+Complete Discord authorization for the same linked account.
+Discord returns to the same page, where you must re-enter server-edit mode and recheck the selector.
 If it displays **There are no guilds in common with the current user.**, confirm bot presence, the same linked Discord account, **Administrator**, and server visibility.
 
 Mutual-server results are unsorted, so search the full list carefully.
 After installation, allow up to five minutes for cached mutual-server state without repeated refresh.
 Then refresh once and recheck.
-If Asteria Hub remains absent, use private Citizen iD support instead of reinstalling blindly.
+The cache uses a sliding window capped at 20 minutes, and repeated checks can keep presenting the stale view.
+Do not poll or turn the 20-minute cap into a wait recommendation.
+If Asteria Hub remains absent after the single bounded recovery, use [private Citizen iD support](/community-admins/maintenance-and-support) instead of reinstalling blindly.
 
 ### Save Record
 
@@ -196,6 +207,11 @@ Fine-grained staff permissions are not available.
 2. Review the full-administrative-access warning.
 3. Select **Add Staff Member**.
 4. Enter the consenting user's exact Citizen iD account UUID under **User ID**.
+
+Citizen iD currently has no dedicated control for copying this UUID.
+Do not enter the user's Discord ID.
+Recommended self-service: ask the consenting user to request a private account export through [Download Your Data](/players/data-rights#download-your-data), then copy the account ID from the export filename without sharing the archive.
+Alternatively, use [private Citizen iD support](/community-admins/maintenance-and-support) to resolve the account ID.
 
 ::: info Screenshot placement
 **Purpose:** Show the full-access warning and exact staff-account entry workflow.
@@ -291,7 +307,7 @@ Inventory:
 - Branding, links, and member instructions.
 
 Prefer rename, staff removal, or Discord remapping when those actions solve the actual problem.
-Deleting a parent deterministically cascades deletion to its direct child records.
+Deleting a parent deterministically cascades deletion to entire direct child communities and their dependent data.
 The confirmation dialog does not disclose that child cascade, so inventory children before opening it.
 
 ### Confirm Removal
@@ -332,8 +348,10 @@ Handle exact selector messages:
 - **There are no guilds in common with the current user.** means current mutual-server data contains no selectable server.
 
 Allow up to five minutes for cached mutual-server state without repeated refresh, then refresh once.
+The sliding cache is capped at 20 minutes, but repeated checks can keep serving stale state.
+Do not poll or recommend waiting 20 minutes.
 Search the unsorted results fully.
-If the server remains missing, contact Citizen iD through a private support path instead of reinstalling blindly.
+If the server remains missing after the single bounded recovery, contact [private Citizen iD support](/community-admins/maintenance-and-support) instead of reinstalling blindly.
 
 ### Save Fails
 
@@ -360,12 +378,12 @@ Collect privacy-safe evidence:
 - Exact action and UTC time.
 - Field labels, entered lengths, and validation messages.
 - Parent identifier and expected stored child identifier.
-- Old and new Discord server IDs for remapping.
+- Old and new Discord server IDs for remapping, included only through private support.
 - Exact mutual-server message.
 - Whether five minutes passed and one refresh was attempted.
 - Staff-table result with unrelated UUIDs redacted.
 - Deletion target and known child communities.
 
 Community settings have no admin-visible audit trail, so record before-and-after state during planned changes.
-Redact account UUIDs, unrelated communities, server data, and tokens.
+Redact account UUIDs, Discord server IDs, unrelated communities, server data, and tokens from public evidence.
 Use [Maintenance And Support](/community-admins/maintenance-and-support) for private escalation.
