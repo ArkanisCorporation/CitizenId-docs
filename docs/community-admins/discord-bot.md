@@ -15,7 +15,8 @@ Prepare access and choose one first outcome before changing Discord or Citizen i
 ### Confirm Admin Access
 
 Confirm you can edit Asteria Rescue community settings in Citizen iD and administer Asteria Hub in Discord.
-Discord server installation requires server-level authorization.
+Use the same Discord account that is linked to your Citizen iD account, appears in Asteria Hub, and holds the required server permissions.
+Discord **Manage Server** (`MANAGE_GUILD`) authorizes application installation.
 The **Official Community Server** selector normally requires Discord **Administrator** on the corresponding server unless an internal override applies.
 Do not assume every Discord administrator can select a server until the portal control confirms access for their account.
 
@@ -34,7 +35,7 @@ Before changing setup, record:
 - Current **Official Community Server**.
 - Citizen iD bot presence in that server.
 - Citizen iD bot permissions.
-- Highest Citizen iD bot role and roles below it.
+- Citizen iD bot role, target roles, and the representative member's highest role.
 - First feature and representative test member.
 
 This record gives support a before-and-after comparison if setup fails.
@@ -47,14 +48,18 @@ Connect Asteria Rescue to Asteria Hub, then verify one feature path end to end.
 
 1. Open Asteria Rescue in the Community Portal.
 2. Edit community settings.
-3. Find **Official Community Server** and its trusted add-app control.
+3. Find the icon beside **Official Community Server** with tooltip **Invite Citizen iD bot to your Discord server**.
 
 ### Install Citizen iD
 
-1. Use the add-app control to open Discord authorization.
+1. Use **Invite Citizen iD bot to your Discord server** to open Discord authorization.
 2. Confirm the application name is Citizen iD.
-3. Choose **Add to server**.
-4. Authorize requested permissions only after confirming the application and intended server.
+3. Confirm the Discord account has **Manage Server** (`MANAGE_GUILD`) in Asteria Hub.
+4. Decide whether the planned feature requires bot **Manage Roles** or **Manage Nicknames** before authorizing.
+5. Choose **Add to server**.
+6. Review the permission summary Discord presents.
+7. Stop if the application, server, or permission request is unexpected.
+8. Authorize only after those checks pass.
 
 Do not reuse an unverified invite link.
 
@@ -67,15 +72,18 @@ Do not reuse an unverified invite link.
 5. Select **Save changes**.
 
 Fresh installation makes Asteria Hub eligible to appear in the mutual-guild selector after Discord and portal state refresh.
+If Asteria Hub is absent, refresh community settings once.
+Then confirm you used the same linked Discord account, Citizen iD is present in Asteria Hub, and that account can still see the server.
+If Asteria Hub remains absent, use a private Citizen iD support path instead of reinstalling blindly.
 
 ::: info Screenshot placement
 **Purpose:** Show the trusted Discord authorization step and exact server selection used in the walkthrough.
 
-**Required contents:** Show the Citizen iD application identity, **Add to server**, Asteria Hub in the server picker, and requested permission summary.
+**Required contents:** Show the Citizen iD application identity, **Add to server**, Asteria Hub in the server picker, and the permission summary presented by Discord.
 
 **Crop and focus:** Focus on the Discord authorization card, server picker, and permission summary instead of the full browser or Discord shell.
 
-**Annotations:** Call out application identity, installation context, selected server, and requested permissions.
+**Annotations:** Call out application identity, installation context, selected server, and the displayed permission summary without implying a fixed permission list.
 
 **Proposed caption:** Confirm Citizen iD and Asteria Hub before authorizing the application.
 
@@ -83,6 +91,8 @@ Fresh installation makes Asteria Hub eligible to appear in the mutual-guild sele
 :::
 
 Use a demo server or redact server IDs, account details, and unrelated server names before publishing this screenshot.
+After **Save changes**, confirm the read-only **Official Community Server** field displays Asteria Hub.
+Do not depend on an unverified success toast.
 
 ### Confirm Bot Presence
 
@@ -95,10 +105,13 @@ Confirm the bot has **Manage Roles** for role assignments or **Manage Nicknames*
 Grant only permissions required by enabled features.
 Portal-tab access uses the reader's permissions separately from these bot execution permissions.
 
+To grant bot permissions, open Discord **Server Settings** > **Roles** > the Citizen iD bot role, open **Permissions**, enable the permission required by the chosen feature, and save the role.
+
 ### Check Role Hierarchy
 
 Place Citizen iD's highest bot role above every role it must assign or remove and every member whose nickname it must change.
 Discord blocks targets at or above the bot's highest role and protects the server owner.
+To move it, open Discord **Server Settings** > **Roles**, drag the Citizen iD bot role above the target roles and the test member's highest role, then save the role order.
 
 ### Open Bot Configuration
 
@@ -123,9 +136,13 @@ Discord blocks targets at or above the bot's highest role and protects the serve
 
 ### Test One Member
 
-Follow the selected feature guide and test one representative non-admin member before wider rollout.
+This first walkthrough tests bot-managed **Roles** or **Nicknames** only.
+Choose an informed, consenting representative non-admin member before any live test.
+Follow the selected bot-managed feature guide and test that member before wider rollout.
 Verify the expected result in Discord.
 Do not treat portal access or a successful preview as proof that Discord accepted a live role or nickname change.
+
+Discord **Linked Roles** are a separate optional member-claim flow covered later.
 
 ## Choose Feature Path
 
@@ -140,7 +157,7 @@ Use the current tab state to choose a supported path without assuming unavailabl
 
 ### Role Assignments
 
-Use [Role Assignments](/community-admins/role-assignments) to configure templates, preview representative members, review audit evidence, and request role resync.
+Use [Role Assignments](/community-admins/role-assignments) to configure bot-managed **Roles** templates, preview representative members, review audit evidence, and request role resync.
 The bot assigns these roles directly when Citizen iD rules and Discord execution checks pass.
 
 ### Nickname Management
@@ -174,7 +191,8 @@ Separate portal access from Discord execution before diagnosing a locked tab or 
 ### Portal Access
 
 Your Discord account currently needs **Manage Roles** to open **Roles** and **Nicknames**, unless Citizen iD applies an internal override.
-If you have **Manage Roles** but a tab remains locked, contact Citizen iD support because internal access state is not visible to community administrators.
+Before support, confirm **Bot Configuration** names Asteria Hub, the same linked Discord account still shares that server with Citizen iD, and five minutes have passed since the latest reader permission or server-state change.
+If those checks pass but a tab remains locked, contact Citizen iD support because internal access state is not visible to community administrators.
 
 The Nicknames interface may mention **Manage Nicknames**, but current portal access checks use your **Manage Roles** permission.
 The bot separately needs **Manage Nicknames** for live nickname changes.
@@ -286,7 +304,7 @@ Keep linked-role rollout separate because Discord uses a member-claim flow inste
 
 ### Select Test Members
 
-Choose one representative non-admin member for the happy path and one member near a permission, hierarchy, or account-state boundary.
+Choose one informed, consenting representative non-admin member for the happy path and one informed, consenting member near a permission, hierarchy, or account-state boundary.
 Do not use the server owner as the only test because Discord protects that target.
 
 ### Notify Members
@@ -308,7 +326,8 @@ Diagnose server selection and portal access before bot execution and hierarchy.
 
 Confirm Asteria Hub is selected under **Official Community Server** and in **Bot Configuration**.
 Confirm Citizen iD is installed in that same server.
-If the server is absent from the selector, verify your administrator access and Discord server visibility.
+If the server is absent from the selector, refresh community settings once, then verify the same linked Discord account, bot presence, Discord **Administrator**, and server visibility.
+If it remains absent, use private Citizen iD support instead of reinstalling blindly.
 
 ### Bot Missing
 
@@ -320,6 +339,7 @@ Do not configure automation until bot presence is confirmed.
 
 Verify your Discord account has **Manage Roles**.
 Confirm **Bot Configuration** still names Asteria Hub because tab locks inspect reader and selected-server state, not the bot's live execution permissions.
+Confirm the same linked Discord account and Citizen iD bot are both present in Asteria Hub.
 Wait up to five minutes for recent permission changes to appear, then refresh **Bot Configuration**.
 If the tab remains locked, contact Citizen iD support because internal access state is not visible to community administrators.
 
