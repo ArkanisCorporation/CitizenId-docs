@@ -117,15 +117,17 @@ Follow the actual product workflow:
 13. Before re-sync, notify members, arrange support coverage, check permissions and hierarchy, record UTC start, and set a local observation deadline such as 15 minutes that is explicitly not an SLA.
 14. Select **Re-sync on server** only after representative results, including fallback, match expectations.
 15. In **Re-sync User Nicknames**, confirm that `Asteria Hub` is named, then select **Re-sync**.
-16. State that eligible human members are processed while bots and webhooks are skipped.
-17. Explain that re-sync has no completion signal or admin-visible audit entry.
-18. Until the observation deadline, inspect the same representative members and do not start another re-sync while changes appear.
-19. At the deadline, troubleshoot or escalate with UTC time and evidence instead of waiting indefinitely or retrying blindly.
+16. State that server-wide re-sync requests processing for human server members while bots and webhooks are skipped.
+17. Explain that some failures can stop processing before every human member is reached, so the guide must not promise all humans are processed.
+18. Explain that re-sync has no completion signal or admin-visible audit entry.
+19. Until the observation deadline, inspect the same representative members and do not start another re-sync while changes appear.
+20. At the deadline, troubleshoot or escalate with UTC time and evidence instead of waiting indefinitely or retrying blindly.
 
 State clearly that the template editor has no separate draft or final-save step.
 Every field add, remove, reorder, and formatting save changes the stored template immediately.
-The server-wide resync is a separate action that asks Citizen iD to process eligible human members and may take time.
+The server-wide resync is a separate action that requests processing for human server members and may take time.
 Bots and webhooks are skipped.
+Some failures can stop processing before every human member is reached, so never promise all humans are processed.
 New joins and other nickname-refresh events can use the stored template before that resync.
 
 ## Example Results

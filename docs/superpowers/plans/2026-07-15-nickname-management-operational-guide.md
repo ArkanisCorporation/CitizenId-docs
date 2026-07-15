@@ -25,7 +25,7 @@ Treat administrator **Manage Roles** as the portal-access requirement unless an 
 State that nickname resolution does not consult public-discovery or privacy settings and may disclose configured RSI or organization fields in public Discord nicknames.
 Document global Discord display name then username composition fallback, unlinked preview errors, and the live limitation that may preserve an existing custom server nickname.
 Document that **Content Casing** is currently ineffective, normalization lowercases and works, and field order is left to right with visual wrapping on narrow screens.
-Document null-field formatting omission, empty-string formatting emission, eligible-human re-sync scope, skipped bots and webhooks, and the lack of a completion signal.
+Document null-field formatting omission, empty-string formatting emission, re-sync requests for human server members, skipped bots and webhooks, possible failure before every human is reached, and the lack of a completion signal.
 Create renderable `::: info Screenshot placement` blocks instead of adding screenshot, illustration, or Mermaid assets.
 Every placement block must include purpose, required contents, crop and focus, annotations, proposed caption, and alt-text intent.
 Do not add dependencies or modify application code.
@@ -99,7 +99,8 @@ Expect empty **Result parts** and global Discord display name, else username, in
 Do not use an unlinked ID for fallback preview because it errors.
 Notify members about enforced naming and player-controlled fields.
 Notify members that selected RSI or organization data may become public Discord nickname content regardless of privacy settings.
-Explain that the server-wide operation processes eligible humans, skips bots and webhooks, has no completion signal, and requires a bounded observation deadline rather than repeated resync.
+Explain that the server-wide operation requests processing for human server members, skips bots and webhooks, may stop before every human is reached, has no completion signal, and requires a bounded observation deadline rather than repeated resync.
+Never promise that all human members are processed.
 
 - [ ] **Step 7: Add troubleshooting**
 

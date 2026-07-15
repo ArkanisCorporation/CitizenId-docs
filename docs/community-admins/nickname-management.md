@@ -49,8 +49,9 @@ Adding, removing, or reordering a field changes the stored template immediately,
 New joins and other nickname-refresh events can use the changed template before you run a server-wide re-sync.
 :::
 
-**Re-sync on server** is a separate action that asks Citizen iD to process human server members and may take time.
+**Re-sync on server** is a separate action that requests processing for human server members and may take time.
 It skips bots and webhooks.
+Some failures can stop processing before every human member is reached, so re-sync does not guarantee that all human members are processed.
 
 ## Set First Template
 
@@ -141,7 +142,8 @@ In **Re-sync User Nicknames**, confirm the dialog names `Asteria Hub` and explai
 :::
 
 Select **Re-sync**.
-The re-sync processes human server members and skips bots and webhooks.
+The re-sync requests processing for human server members and skips bots and webhooks.
+Some failures can stop processing before every human member is reached.
 It provides no completion signal or admin-visible audit entry.
 
 ### Confirm Result
@@ -202,7 +204,8 @@ See Discord's [guild member modification](https://docs.discord.com/developers/re
 
 Template edits persist as they are made, but existing members are not necessarily updated at the same moment.
 New joins and other refresh events may use the stored template before a manual re-sync.
-A server-wide re-sync processes human server members separately and skips bots and webhooks.
+A server-wide re-sync requests processing for human server members separately and skips bots and webhooks.
+Some failures can stop processing before every human member is reached, so do not treat the request as a guarantee that all humans were processed.
 It has no completion signal or admin-visible audit entry.
 
 ## Common Templates
@@ -341,7 +344,8 @@ Shorten formatting or remove a lower-priority field if important text is being t
 ### Resync Delayed
 
 A server-wide re-sync may take time and is separate from saving the template.
-It processes human server members, skips bots and webhooks, and provides no completion signal.
+It requests processing for human server members, skips bots and webhooks, and provides no completion signal.
+Some failures can stop processing before every human member is reached.
 Until the local observation deadline, inspect the same representative members and do not start another re-sync while changes are appearing.
 At the deadline, check permissions, hierarchy, owner protection, and fallback comparison behavior, then escalate with the UTC start and evidence instead of retrying blindly.
 
