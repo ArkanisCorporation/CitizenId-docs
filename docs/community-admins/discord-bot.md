@@ -5,238 +5,350 @@ description: Bot setup, permissions, configuration tabs, and synchronization exp
 
 # Discord Bot
 
-The Citizen iD Discord bot connects community configuration to Discord server behavior.
-It is the bridge between Citizen iD account facts and the Discord features your community chooses to enable.
+Connect a community to its Discord server, verify permissions and hierarchy, then test one feature with one member before broader rollout.
+This walkthrough uses the replaceable examples Asteria Rescue, Asteria Hub, and `RSI Verified`.
 
-The bot can support Discord linked-role setup, role assignment automation, nickname automation, moderation-related configuration, and resync operations.
-Discord still controls server permissions, role hierarchy, linked-role user interface, nickname limits, and server-owner protection.
+## Before You Start
 
-**Diagram: Bot responsibility boundary.**
-Community admins configure the bot, Citizen iD evaluates the rule, and Discord decides whether the requested server change is allowed.
+Prepare access and choose one first outcome before changing Discord or Citizen iD.
 
-**what should be on the screenshot/diagram:** A boundary diagram showing the community admin, Citizen iD bot tabs, Discord server permissions, managed roles, managed nicknames, and blocked Discord outcomes.
+### Confirm Admin Access
 
-```mermaid
-flowchart TD
-  admin(["Community admin"])
-  portal["Portal"]
-  features[["Enabled features"]]
-  state[/Account<br/>and Discord/]
-  discord[/"Discord server"/]
-  linked["Linked roles"]
-  requirement["Discord req."]
-  authorize{"Player auth?"}
-  metadata[/Metadata/]
-  sync["Role/name sync"]
-  gate{"Discord OK?"}
-  claim(("Member<br/>claimed role"))
-  applied(("Role/name set"))
-  evidence[(Evidence)]
+Confirm you can edit Asteria Rescue community settings in Citizen iD and administer Asteria Hub in Discord.
+Discord server installation requires server-level authorization.
+The **Official Community Server** selector normally requires Discord **Administrator** on the corresponding server unless an internal override applies.
+Do not assume every Discord administrator can select a server until the portal control confirms access for their account.
 
-  admin ==> portal
-  portal ==> features
-  features --> linked
-  linked --> requirement
-  state --> authorize
-  authorize ==>|Yes| metadata
-  authorize -. "No" .-> evidence
-  requirement --> claim
-  metadata --> claim
-  discord --> claim
+### Choose First Feature
 
-  features --> sync
-  sync --> gate
-  state --> gate
-  discord --> gate
-  gate ==>|Yes| applied
-  gate -. "No" .-> evidence
-  applied -. "Logs" .-> evidence
+Choose either bot-managed **Roles** or **Nicknames** as the first feature.
+Starting with one feature keeps permission, hierarchy, and result failures easier to isolate.
 
-  class admin actor;
-  class portal,discord context;
-  class features service;
-  class authorize,gate decision;
-  class linked,requirement,sync action;
-  class state,metadata,evidence data;
-  class claim,applied success;
-```
+Use [Role Assignments](/community-admins/role-assignments) for automated Discord roles.
+Use [Nickname Management](/community-admins/nickname-management) for automated server nicknames.
 
-Read the diagram as a permission flow.
-Bot-managed role and nickname paths are separate from Discord linked roles.
-Citizen iD can request a Discord role or nickname change only after your configuration says the member should receive it.
-Discord can still refuse that requested change because the bot lacks permission, the bot role is too low, the member is protected by role hierarchy, or the requested nickname does not fit Discord rules.
-Linked roles use a different Discord claim flow.
-Citizen iD supplies metadata, and the player claims the role in Discord.
+### Record Current State
 
-## First Bot Setup Path
+Before changing setup, record:
 
-Use this order after the community record points at the correct official Discord server:
+- Current **Official Community Server**.
+- Citizen iD bot presence in that server.
+- Citizen iD bot permissions.
+- Highest Citizen iD bot role and roles below it.
+- First feature and representative test member.
 
-1. Start from the trusted Citizen iD bot install path.
-2. Choose the exact Discord server selected on the community record.
-3. Confirm the Discord application name before authorizing the install.
-4. Grant the permissions needed for the features you plan to use.
-5. Move the Citizen iD bot role above every Discord role it should assign or every member group whose nickname it should manage.
-6. Return to the Community Portal and confirm the General, Roles, Nicknames, and Moderation areas can see the expected server.
-7. Configure one feature at a time, then preview or resync before telling members the feature is live.
+This record gives support a before-and-after comparison if setup fails.
 
-## Setup Expectations
+## Connect Your Server
 
-Install the official Citizen iD bot only through the trusted Citizen iD install path or the official Discord application link provided by Citizen iD.
-During the Discord install flow, confirm the application name and choose the exact server you administer.
+Connect Asteria Rescue to Asteria Hub, then verify one feature path end to end.
 
-Grant the Discord permissions required by the features you plan to use.
-Role automation needs role-management ability.
-Nickname automation needs nickname-management ability.
-Linked roles also require Discord-side role configuration by a server admin.
+### Open Community Settings
 
-Place the bot role high enough in the Discord role hierarchy for managed roles and members.
-The bot cannot manage roles above itself.
-The bot cannot manage protected members such as the server owner or members whose highest role outranks the bot.
+1. Open Asteria Rescue in the Community Portal.
+2. Edit community settings.
+3. Find **Official Community Server** and its trusted add-app control.
 
-Return to Citizen iD and configure the bot from the community portal.
+### Install Citizen iD
 
-<ImageStepper
-  title="Existing Discord bot installation screens"
-  note="what should be on the screenshot/diagram: Current production screenshots for the official bot invite, server picker, requested permissions, and Discord role hierarchy with the Citizen iD role above managed roles."
-  :items="[
-    {
-      src: '/images/discord-bot-install.png',
-      alt: 'Discord bot installation dialog for Citizen iD.',
-      title: 'Install bot',
-      caption: 'Shows the Discord-side installation dialog used to add the Citizen iD bot.',
-      description: 'Start from the official bot invite path and confirm that the request names the expected Citizen iD application before continuing.'
-    },
-    {
-      src: '/images/discord-bot-install-server.png',
-      alt: 'Discord bot installation server selection dialog.',
-      title: 'Choose server',
-      caption: 'Shows the Discord server selection step during bot installation.',
-      description: 'Select the community server you administer, because the bot can only manage the server where it is installed and permitted.'
-    },
-    {
-      src: '/images/discord-bot-server-roles.png',
-      alt: 'Discord server roles page showing role ordering priority.',
-      title: 'Check hierarchy',
-      caption: 'Shows the Discord role hierarchy that affects whether the bot can manage roles and nicknames.',
-      description: 'Place the Citizen iD bot role above roles it must assign or members whose nicknames it must manage.'
-    }
-  ]"
-/>
+1. Use the add-app control to open Discord authorization.
+2. Confirm the application name is Citizen iD.
+3. Choose **Add to server**.
+4. Authorize requested permissions only after confirming the application and intended server.
 
-After install, check these setup facts before enabling automation:
+Do not reuse an unverified invite link.
 
-1. The bot is installed in the same server selected as the community's official Discord server.
-2. The bot has the Discord permissions required by the enabled features.
-3. The bot role is above every Discord role it should assign or remove.
-4. The bot role is high enough to manage nicknames for the intended members.
-5. The admins configuring Citizen iD also understand the Discord-side role hierarchy.
+### Select Asteria Hub
 
-## Configuration Areas
+1. Select Asteria Hub in Discord's server picker.
+2. Complete Discord authorization.
+3. Return to Asteria Rescue community settings.
+4. Select Asteria Hub from the mutual-guild list under **Official Community Server**.
+5. Select **Save changes**.
 
-The community bot configuration is organized around General, Roles, Nicknames, and Moderation.
+Fresh installation makes Asteria Hub eligible to appear in the mutual-guild selector after Discord and portal state refresh.
 
-The General area is for broad bot and server context.
-The Roles area is for role assignment templates, preview, audit, and role-related resync.
-The Nicknames area is for nickname template fields and server nickname resync.
-The Moderation area is for moderation-related configuration when available.
+::: info Screenshot placement
+**Purpose:** Show the trusted Discord authorization step and exact server selection used in the walkthrough.
 
-**what should be on the screenshot/diagram:** A current Citizen iD community portal screenshot showing the General, Roles, Nicknames, and Moderation tabs with the selected official Discord server visible.
+**Required contents:** Show the Citizen iD application identity, **Add to server**, Asteria Hub in the server picker, and requested permission summary.
 
-Role, permission, and server-state changes in Discord usually take a few minutes to become visible in Citizen iD.
-Some server or bot state can remain stale longer.
-If you just moved a role, granted a permission, or installed the bot, wait briefly, try the relevant preview or resync action, and escalate only if the portal still contradicts the Discord state after about twenty minutes.
+**Crop and focus:** Focus on the Discord authorization card, server picker, and permission summary instead of the full browser or Discord shell.
 
-::: tip Permission checklist
-When a tab reports a permission problem, check both sides.
-Your Discord user may need permission to manage that feature, and the bot may also need permission to apply changes on the server.
+**Annotations:** Call out application identity, installation context, selected server, and requested permissions.
+
+**Proposed caption:** Confirm Citizen iD and Asteria Hub before authorizing the application.
+
+**Alt-text intent:** Communicate which application is being authorized, which server receives it, and where requested permissions are reviewed.
 :::
 
-Admins with Discord role-management permission can request a manual role update through the bot command surface.
-Members who believe their roles are out of sync should report the affected server, role, and time to community staff so an admin can check audit evidence and resync safely.
+Use a demo server or redact server IDs, account details, and unrelated server names before publishing this screenshot.
 
-## Linked Role Setup
+### Confirm Bot Presence
 
-Linked roles are Discord roles that players claim through Discord's own linked-role interface.
-Citizen iD supplies account metadata to Discord, but the player still returns to Discord to claim the role.
-Do not describe linked roles as roles directly assigned by Citizen iD.
+Open Asteria Hub and confirm Citizen iD appears as a server member.
+If Citizen iD is missing, do not continue to feature configuration.
 
-Linked-role setup has two parts.
-Admins configure the Discord role requirement.
-Members then use Discord's linked-role claim interface to connect or authorize Citizen iD and claim the role.
+### Check Bot Permissions
 
-<ImageStepper
-  title="Existing Discord linked role setup screens"
-  note="what should be on the screenshot/diagram: Current Discord screenshots showing People or Roles settings, the Links tab, Add requirement, Citizen iD as the connected app, and the linked-role requirement selector."
-  :items="[
-    {
-      src: '/images/discord-bot-server-role-links.png',
-      alt: 'Discord server settings page showing role links.',
-      title: 'Open role links',
-      caption: 'Shows the Discord server settings area where role links are managed.',
-      description: 'Use this area when configuring a Discord role that players can claim after Citizen iD metadata confirms the requirement.'
-    },
-    {
-      src: '/images/discord-bot-server-role-add-link.png',
-      alt: 'Discord dialog for adding a role link connection.',
-      title: 'Add connection',
-      caption: 'Shows the connection dialog used when adding Citizen iD as a linked-role provider.',
-      description: 'Choose the Citizen iD connection only for roles whose claim requirement should be backed by Citizen iD account state.'
-    },
-    {
-      src: '/images/discord-bot-server-role-configure-link.png',
-      alt: 'Discord linked role requirements configuration dialog.',
-      title: 'Configure requirement',
-      caption: 'Shows the requirement selection step for a Discord linked role.',
-      description: 'Select requirements that match the access rule you want players to satisfy before Discord allows the role claim.'
-    }
-  ]"
-/>
+Confirm the bot has **Manage Roles** for role assignments or **Manage Nicknames** for nickname automation.
+Grant only permissions required by enabled features.
+Portal-tab access uses the reader's permissions separately from these bot execution permissions.
 
-The admin setup path is:
+### Check Role Hierarchy
 
-1. Open Discord server settings.
-2. Open the role that players should be able to claim.
-3. Use the role Links or requirements area.
-4. Add Citizen iD as the connected application requirement.
-5. Choose the Citizen iD-backed requirement that matches the access rule.
-6. Save the Discord role configuration.
-7. Tell members how to open Discord linked roles, connect or authorize Citizen iD when prompted, return to Discord, and claim the role.
+Place Citizen iD's highest bot role above every role it must assign or remove and every member whose nickname it must change.
+Discord blocks targets at or above the bot's highest role and protects the server owner.
 
-You can include Discord's `<id:linked-roles>` message link in member instructions when that helps members open the linked-role menu directly.
+### Open Bot Configuration
 
-**what should be on the screenshot/diagram:** A member-facing Discord announcement that says which linked role to claim, where to open Linked Roles, what Citizen iD account state is required, and that the final claim happens in Discord.
+1. Return to the Asteria Rescue community page.
+2. Open **Bot Configuration**.
+3. Confirm the selected-server label names Asteria Hub.
+4. Open **Roles** or **Nicknames**.
 
-Linked roles are different from bot-managed role assignments.
-Linked roles are claimed through Discord's own linked-role interface.
-Bot-managed role assignments are applied by the Citizen iD bot according to templates configured in Citizen iD.
-If a linked role does not apply, check the Discord linked-role requirement, the member's Citizen iD account link, and Discord's claim screen before troubleshooting bot role assignment templates.
+::: info Screenshot placement
+**Purpose:** Show the selected server and current feature tabs after connection succeeds.
 
-## Troubleshooting
+**Required contents:** Show **Bot Configuration**, the Asteria Hub selected-server label, **General**, **Roles**, **Nicknames**, and **Moderation**, plus an unavailable state for **General** or **Moderation**.
 
-When the bot appears installed but automation does not work, check the cause in this order:
+**Crop and focus:** Focus on the configuration header, selected server, tabs, and unavailable message.
 
-1. The community record points to the correct official Discord server.
-2. The bot is present in that server.
-3. Discord has finished reflecting recent permission and hierarchy changes.
-4. The bot role is above the roles or members it must manage.
-5. The Citizen iD feature tab is enabled and configured.
-6. The affected player has a Citizen iD account linked to the expected Discord account.
-7. The role assignment or nickname template has the data it needs.
+**Annotations:** Call out Asteria Hub, available **Roles** and **Nicknames** paths, and unavailable **General** and **Moderation** areas.
 
-::: details Details for bot support reports
+**Proposed caption:** Asteria Hub is selected, with Roles and Nicknames available for supported configuration.
 
-Include:
-
-- The community slug.
-- The Discord server name and ID if available.
-- The affected role or nickname.
-- The affected member.
-- The UTC time of the failed or unexpected change.
-- Whether the bot role is above the target role or member.
-- Whether the relevant tab showed a permission warning.
-- Whether a manual resync was attempted.
-
-Do not post bot tokens, private Discord messages, or unrelated member data in public support channels.
-
+**Alt-text intent:** Communicate the selected server, four visible tabs, and which feature areas are available or unavailable.
 :::
+
+### Test One Member
+
+Follow the selected feature guide and test one representative non-admin member before wider rollout.
+Verify the expected result in Discord.
+Do not treat portal access or a successful preview as proof that Discord accepted a live role or nickname change.
+
+## Choose Feature Path
+
+Use the current tab state to choose a supported path without assuming unavailable areas work.
+
+| Area | Current state | Use |
+| --- | --- | --- |
+| **General** | Unavailable | Displays **This feature is not yet available.** |
+| **Roles** | Available with portal permission | Configure bot-managed role assignment templates, preview, resync, and audit. |
+| **Nicknames** | Available with portal permission | Configure nickname template, preview, and server resync. |
+| **Moderation** | Unavailable | Displays **This feature is not yet available.** |
+
+### Role Assignments
+
+Use [Role Assignments](/community-admins/role-assignments) to configure templates, preview representative members, review audit evidence, and request role resync.
+The bot assigns these roles directly when Citizen iD rules and Discord execution checks pass.
+
+### Nickname Management
+
+Use [Nickname Management](/community-admins/nickname-management) to configure nickname fields, preview results, and request server nickname resync.
+Discord permissions, hierarchy, owner protection, and nickname rules still control live changes.
+
+### Linked Roles
+
+Configure Discord linked roles in Discord **Server Settings**, not in a dedicated available Citizen iD tab.
+Discord owns role requirements and member claims, while Citizen iD supplies connection metadata after member authorization.
+
+### Unavailable Areas
+
+**General** and **Moderation** currently display **This feature is not yet available.**
+Do not plan operations around those areas until the interface changes.
+
+## Understand Permissions
+
+Separate portal access from Discord execution before diagnosing a locked tab or rejected action.
+
+| Layer | Owner | Effect |
+| --- | --- | --- |
+| Community access | Citizen iD | Controls whether you can edit the community record and open bot configuration. |
+| Server selection | Discord plus Citizen iD | Requires bot installation, server visibility, and portal selector access. |
+| Tab access | Citizen iD using current Discord state | **Roles** and **Nicknames** currently check your Discord **Manage Roles** permission unless an internal override applies. |
+| Bot action | Discord | Bot needs **Manage Roles** or **Manage Nicknames** for the requested action. |
+| Hierarchy | Discord | Bot can affect only roles and members below its highest role. |
+| Protected target | Discord | Server owner and equal-or-higher role targets remain outside bot control. |
+
+### Portal Access
+
+Your Discord account currently needs **Manage Roles** to open **Roles** and **Nicknames**, unless Citizen iD applies an internal override.
+If you have **Manage Roles** but a tab remains locked, contact Citizen iD support because internal access state is not visible to community administrators.
+
+The Nicknames interface may mention **Manage Nicknames**, but current portal access checks use your **Manage Roles** permission.
+The bot separately needs **Manage Nicknames** for live nickname changes.
+
+### Bot Permissions
+
+Bot-managed role assignments require the bot's **Manage Roles** permission.
+Nickname automation requires the bot's **Manage Nicknames** permission.
+These bot permissions do not grant your account portal access.
+
+### Role Hierarchy
+
+Discord permits the bot to affect only roles and members below its highest role.
+Place the Citizen iD bot role above `RSI Verified`, `Rescue Pilot`, and representative member roles it must manage.
+
+::: info Screenshot placement
+**Purpose:** Show the Discord hierarchy boundary that controls role and nickname execution.
+
+**Required contents:** Show Discord **Server Settings** > **Roles** with the Citizen iD bot role above `RSI Verified`, `Rescue Pilot`, and representative member roles.
+
+**Crop and focus:** Focus on the ordered role list from the Citizen iD bot role through manageable roles and the first blocked equal-or-higher region.
+
+**Annotations:** Call out the bot's highest role, manageable roles below it, and blocked roles at or above it.
+
+**Proposed caption:** Citizen iD can manage only roles and members below its highest Discord role.
+
+**Alt-text intent:** Communicate the vertical role order and which roles or members fall inside or outside bot control.
+:::
+
+Use a demo server or redact unrelated role and member names before publishing this screenshot.
+
+### Discord Protection
+
+The bot cannot manage the server owner.
+The bot also cannot manage a member whose highest role is equal to or above the bot's highest role.
+Discord owns these protections even when Citizen iD configuration and preview are correct.
+
+### Cache Timing
+
+Recent role and permission changes may take up to five minutes to appear in **Bot Configuration** because of internal caching.
+Treat five minutes as the portal reflection boundary, not a resync completion promise.
+Feature preview and resync actions do not refresh this permission cache.
+After five minutes, refresh the portal and recheck the selected server, reader permission, bot permission, and hierarchy.
+
+## Configure Linked Roles
+
+Create `RSI Verified` as an opt-in Discord linked role using Citizen iD metadata.
+
+### Choose Claim Role
+
+1. Open **Server Settings** in Asteria Hub.
+2. Open **Roles**.
+3. Choose or create `RSI Verified`.
+4. Open the role's **Links** tab.
+
+Discord owns the role, requirement set, and final member claim.
+
+### Add Citizen iD
+
+Add Citizen iD as the connection provider for `RSI Verified`.
+Members must authorize the Citizen iD connection before Citizen iD can supply linked-role metadata.
+
+### Set Requirements
+
+Choose the requirement that Citizen iD reports a verified RSI account, then save the linked-role configuration.
+If one linked role has multiple requirements, the member must pass all of them.
+
+::: info Screenshot placement
+**Purpose:** Show the Discord-owned linked-role requirement for the `RSI Verified` example.
+
+**Required contents:** Show the `RSI Verified` role's **Links** tab, Citizen iD connection, verified-RSI requirement, and save control.
+
+**Crop and focus:** Focus on the role name, connection provider, requirement editor, and save action.
+
+**Annotations:** Call out Citizen iD as provider, verified-RSI requirement, save control, and expected member-claim outcome.
+
+**Proposed caption:** Discord uses Citizen iD metadata to evaluate the `RSI Verified` linked-role requirement.
+
+**Alt-text intent:** Communicate which role is configured, which provider supplies metadata, which requirement must pass, and where the configuration is saved.
+:::
+
+### Publish Instructions
+
+Tell members:
+
+- Which role to claim.
+- Which Citizen iD account state is required.
+- How to authorize the Citizen iD connection.
+- Where to open Discord **Linked Roles**.
+- Where to report a failed claim.
+
+Do not describe Citizen iD bot as directly assigning this linked role.
+The member opts in and claims it through Discord.
+
+### Verify Member Claim
+
+Test with one eligible non-admin member.
+Confirm the member authorizes Citizen iD, opens Discord **Linked Roles**, and claims `RSI Verified`.
+Use a non-admin because administrators may bypass channel visibility gates.
+
+## Safe Rollout
+
+Expand only after one supported feature works for representative members.
+
+### Start One Feature
+
+Enable either bot-managed roles or nicknames first.
+Keep linked-role rollout separate because Discord uses a member-claim flow instead of bot assignment.
+
+### Select Test Members
+
+Choose one representative non-admin member for the happy path and one member near a permission, hierarchy, or account-state boundary.
+Do not use the server owner as the only test because Discord protects that target.
+
+### Notify Members
+
+Tell members what changes, when testing starts, which account state matters, and where to report problems.
+For linked roles, explain that members must authorize and claim the role themselves.
+
+### Monitor Results
+
+Record expected and visible Discord state for the same representative members.
+Record UTC time, selected server, feature, portal state, bot permission, and hierarchy.
+Use feature-specific preview, audit, or resync evidence without inventing a completion signal.
+
+## Troubleshoot Bot Setup
+
+Diagnose server selection and portal access before bot execution and hierarchy.
+
+### Wrong Server
+
+Confirm Asteria Hub is selected under **Official Community Server** and in **Bot Configuration**.
+Confirm Citizen iD is installed in that same server.
+If the server is absent from the selector, verify your administrator access and Discord server visibility.
+
+### Bot Missing
+
+Return to the trusted add-app control and confirm the Discord authorization targeted Asteria Hub.
+Check Asteria Hub's member list for Citizen iD.
+Do not configure automation until bot presence is confirmed.
+
+### Tab Locked
+
+Verify your Discord account has **Manage Roles**.
+Confirm **Bot Configuration** still names Asteria Hub because tab locks inspect reader and selected-server state, not the bot's live execution permissions.
+Wait up to five minutes for recent permission changes to appear, then refresh **Bot Configuration**.
+If the tab remains locked, contact Citizen iD support because internal access state is not visible to community administrators.
+
+Do not use the bot's permissions or hierarchy to diagnose your portal access.
+
+### Action Rejected
+
+Confirm the bot has **Manage Roles** for role changes or **Manage Nicknames** for nickname changes.
+Check that the target role or member is below the bot's highest role and is not the server owner.
+Then use the relevant [Role Assignments](/community-admins/role-assignments) or [Nickname Management](/community-admins/nickname-management) troubleshooting path.
+
+### State Looks Stale
+
+Allow up to five minutes for recent role and permission changes to appear in the portal.
+Refresh **Bot Configuration** and compare its server and permission state with Discord.
+Five minutes is a cache boundary, not a promise that role or nickname resync has completed.
+
+### Support Evidence
+
+Collect privacy-safe evidence:
+
+- Community slug and Asteria Hub server ID.
+- Selected **Official Community Server** and **Bot Configuration** server label.
+- Affected feature and representative member.
+- Your relevant Discord permission.
+- Bot permissions and highest role position.
+- Expected and visible Discord result.
+- UTC time of setup, permission change, test, and resync request.
+- Whether five minutes passed after the latest permission or role change.
+
+Redact unrelated server names, member details, account data, and tokens from screenshots.
+Send evidence through private support paths described in [Maintenance And Support](/community-admins/maintenance-and-support).
