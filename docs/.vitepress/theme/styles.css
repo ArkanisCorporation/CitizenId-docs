@@ -56,6 +56,13 @@
   --cid-mermaid-cluster-fill: #22252c;
   --cid-mermaid-cluster-stroke: #4b5563;
   --cid-mermaid-cluster-text: #edede8;
+  --cid-mermaid-text: #edede8;
+  --cid-mermaid-actor-stroke: #60a5fa;
+  --cid-mermaid-context-stroke: #a5b4fc;
+  --cid-mermaid-data-stroke: #6ee7b7;
+  --cid-mermaid-success-stroke: #6ee7b7;
+  --cid-mermaid-caution-stroke: #fcd34d;
+  --cid-mermaid-blocked-stroke: #fca5a5;
 }
 
 .vp-doc figure.cid-illustration {
@@ -889,47 +896,32 @@
   margin-left: 0;
 }
 
-.vp-doc .cid-mermaid .treeView .nodeLabel,
-.vp-doc .cid-mermaid .treeView .nodeLabel p,
-.vp-doc .cid-mermaid .treeView .nodeLabel span,
-.vp-doc .cid-mermaid .treeView .nodeLabel div {
-  color: var(--cid-mermaid-text) !important;
+.vp-doc .cid-mermaid .tree-view text.treeView-node-label {
+  fill: var(--cid-mermaid-text) !important;
 }
 
-.vp-doc .cid-mermaid .treeView .node.context rect,
-.vp-doc .cid-mermaid .treeView .node.context path {
-  fill: var(--cid-mermaid-context-fill) !important;
-  stroke: var(--cid-mermaid-context-stroke) !important;
+.vp-doc .cid-mermaid .tree-view text.treeView-node-label.context {
+  fill: var(--cid-mermaid-context-stroke) !important;
 }
 
-.vp-doc .cid-mermaid .treeView .node.data rect,
-.vp-doc .cid-mermaid .treeView .node.data path {
-  fill: var(--cid-mermaid-data-fill) !important;
-  stroke: var(--cid-mermaid-data-stroke) !important;
+.vp-doc .cid-mermaid .tree-view text.treeView-node-label.data {
+  fill: var(--cid-mermaid-data-stroke) !important;
 }
 
-.vp-doc .cid-mermaid .treeView .node.actor rect,
-.vp-doc .cid-mermaid .treeView .node.actor path {
-  fill: var(--cid-mermaid-actor-fill) !important;
-  stroke: var(--cid-mermaid-actor-stroke) !important;
+.vp-doc .cid-mermaid .tree-view text.treeView-node-label.actor {
+  fill: var(--cid-mermaid-actor-stroke) !important;
 }
 
-.vp-doc .cid-mermaid .treeView .node.success rect,
-.vp-doc .cid-mermaid .treeView .node.success path {
-  fill: var(--cid-mermaid-success-fill) !important;
-  stroke: var(--cid-mermaid-success-stroke) !important;
+.vp-doc .cid-mermaid .tree-view text.treeView-node-label.success {
+  fill: var(--cid-mermaid-success-stroke) !important;
 }
 
-.vp-doc .cid-mermaid .treeView .node.caution rect,
-.vp-doc .cid-mermaid .treeView .node.caution path {
-  fill: var(--cid-mermaid-caution-fill) !important;
-  stroke: var(--cid-mermaid-caution-stroke) !important;
+.vp-doc .cid-mermaid .tree-view text.treeView-node-label.caution {
+  fill: var(--cid-mermaid-caution-stroke) !important;
 }
 
-.vp-doc .cid-mermaid .treeView .node.blocked rect,
-.vp-doc .cid-mermaid .treeView .node.blocked path {
-  fill: var(--cid-mermaid-blocked-fill) !important;
-  stroke: var(--cid-mermaid-blocked-stroke) !important;
+.vp-doc .cid-mermaid .tree-view text.treeView-node-label.blocked {
+  fill: var(--cid-mermaid-blocked-stroke) !important;
 }
 
 .vp-doc .cid-abbr {
