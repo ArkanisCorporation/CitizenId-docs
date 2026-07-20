@@ -67,7 +67,7 @@ Developer-configurable fields are:
 | Allowed Redirect URIs | Enter each exact callback record. | Use HTTPS for web callbacks and no wildcard, fragment, user-information component, or open redirector. |
 | Post-Logout Redirect URIs | Enter the exact fixture value when specified. | A stored value is configuration, not proof that discovery exposes an end-session endpoint. |
 
-Redirect forms have different platform boundaries.
+Each redirect value is a Uniform Resource Identifier (URI), and redirect forms have different platform boundaries.
 A claimed-HTTPS native redirect requires an HTTPS origin and platform association controlled by the application publisher.
 A loopback redirect is for a native desktop listener and should use the loopback interface according to the client platform's tested flow.
 A private-use scheme is an application-specific redirect such as Asteria Mobile's `com.example.invalid.asteria.mobile:/oauth/callback`, but another installed application may try to claim the same scheme.
@@ -202,7 +202,7 @@ Separate stored values from granted permissions and tested behavior.
 | Trigger | Visible result | Record saved | Safe retry | Member effect | Privacy-safe evidence |
 | --- | --- | --- | --- | --- | --- |
 | Missing or invalid required field | The portal displays its validation message. | No | Correct only the named field and save again. | None | Exact message and redacted field names. |
-| Unsafe or duplicate redirect | The portal displays the redirect validation result where validation rejects it. | No or unchanged | Replace it with the exact safe fixture URI and save once. | None | URI shape using `.invalid`, without query data. |
+| Unsafe or duplicate redirect | The portal displays the redirect validation result where validation rejects it. | No or unchanged | Replace it with the exact safe fixture <Abbr term="URI" /> and save once. | None | <Abbr term="URI" /> shape using `.invalid`, without query data. |
 | Asteria Rescue is unavailable | The expected community cannot be selected. | No | Complete the community-admin handoff or contact support. | None | Environment and missing community name. |
 | One-time secret is lost | The secret cannot be retrieved after the dialog closes. | Yes | Use [Reset Secret](#reset-secret) before any deployment. | None | Application name and confirmation that the value was not retained. |
 
@@ -311,7 +311,7 @@ The application grid can show a `Native` / `Public` record with no secret and th
 | --- | --- | --- | --- | --- | --- |
 | Discovery omits secretless authentication | `none` is absent from token-endpoint authentication methods. | Yes | Keep `Capability pending` and contact support. | No native sign-in is offered. | Issuer, discovery field name, and dated value set. |
 | Secretless redemption fails | Token endpoint returns the bounded test error. | Yes | Stop testing and report the redacted response. | Authorization cannot complete. | Status, error code, correlation data, and no authorization code or token. |
-| Redirect is not safely claimed | Platform validation or callback routing fails. | Yes | Fix the platform association or choose a standards-compliant redirect form, then update the exact record. | Authorization cannot return safely. | Platform, URI shape, and redacted result. |
+| Redirect is not safely claimed | Platform validation or callback routing fails. | Yes | Fix the platform association or choose a standards-compliant redirect form, then update the exact record. | Authorization cannot return safely. | Platform, <Abbr term="URI" /> shape, and redacted result. |
 
 ## Register Service
 
