@@ -2,12 +2,15 @@ import type { App } from 'vue'
 import { useData, useRoute, useRouter } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { defineComponent, h, nextTick, onMounted, onUnmounted, watch } from 'vue'
+import Abbr from './components/Abbr.vue'
+import AbbreviationGlossary from './components/AbbreviationGlossary.vue'
 import DiagramLegend from './components/DiagramLegend.vue'
 import FlexGrid from './components/FlexGrid.vue'
 import GridItem from './components/GridItem.vue'
 import ImageFigure from './components/ImageFigure.vue'
 import ImageStepper from './components/ImageStepper.vue'
 import MermaidDiagram from './components/MermaidDiagram.vue'
+import ScenarioContext from './components/ScenarioContext.vue'
 import Tabs from './components/Tabs.vue'
 import './styles.css'
 import 'uno.css'
@@ -213,12 +216,15 @@ export default {
   ...DefaultTheme,
   Layout: MermaidAwareLayout,
   enhanceApp({ app }: { app: App }) {
+    app.component('Abbr', Abbr)
+    app.component('AbbreviationGlossary', AbbreviationGlossary)
     app.component('DiagramLegend', DiagramLegend)
     app.component('FlexGrid', FlexGrid)
     app.component('GridItem', GridItem)
     app.component('ImageFigure', ImageFigure)
     app.component('ImageStepper', ImageStepper)
     app.component('MermaidDiagram', MermaidDiagram)
+    app.component('ScenarioContext', ScenarioContext)
     app.component('Tabs', Tabs)
   },
 }
