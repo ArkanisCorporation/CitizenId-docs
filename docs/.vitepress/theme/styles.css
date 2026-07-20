@@ -852,8 +852,13 @@
   gap: 1rem;
 }
 
+.vp-doc .cid-scenario-context__grid > * {
+  min-width: 0;
+}
+
 .vp-doc .cid-scenario-context__table-wrap {
   margin-top: 0.45rem;
+  max-width: 100%;
   overflow-x: auto;
 }
 
