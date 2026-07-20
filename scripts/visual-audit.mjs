@@ -28,6 +28,11 @@ const pages = [
   { slug: 'nickname-management', path: '/community-admins/nickname-management' },
   { slug: 'branding-assets', path: '/community-admins/branding-assets' },
   { slug: 'maintenance-and-support', path: '/community-admins/maintenance-and-support' },
+  { slug: 'community-developers', path: '/community-developers/' },
+  { slug: 'developer-access', path: '/community-developers/access' },
+  { slug: 'developer-client-types', path: '/community-developers/client-types' },
+  { slug: 'developer-applications', path: '/community-developers/applications' },
+  { slug: 'developer-terms', path: '/community-developers/terms' },
 ]
 
 const viewports = [
