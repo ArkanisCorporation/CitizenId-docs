@@ -21,7 +21,7 @@ Developers request the Integrator product role before managing applications.
 
 Developer terms acceptance is part of that request flow.
 
-See [Request Integrator Access](/community-developers/request-integrator-access).
+See [Get Access](/community-developers/access).
 
 ## Required Agreements
 

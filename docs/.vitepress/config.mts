@@ -293,12 +293,13 @@ function sidebarCommunityAdmins() {
 function sidebarCommunityDevelopers() {
   return [
     {
-      text: 'Getting Started',
+      text: 'Start',
       collapsed: false,
       items: [
-        { text: 'Community Developer Guide', link: '/community-developers/' },
-        { text: 'Request Integrator Access', link: '/community-developers/request-integrator-access' },
-        { text: 'Applications', link: '/community-developers/applications' },
+        { text: 'Developer Guide', link: '/community-developers/' },
+        { text: 'Get Access', link: '/community-developers/access' },
+        { text: 'Choose Client', link: '/community-developers/client-types' },
+        { text: 'Register App', link: '/community-developers/applications' },
       ],
     },
     {
@@ -309,6 +310,13 @@ function sidebarCommunityDevelopers() {
         { text: 'Scopes And Claims', link: '/community-developers/scopes-and-claims' },
         { text: 'Tokens And Revocation', link: '/community-developers/tokens-and-revocation' },
         { text: 'API Reference', link: '/community-developers/api-reference' },
+      ],
+    },
+    {
+      text: 'Reference',
+      collapsed: false,
+      items: [
+        { text: 'Terms', link: '/community-developers/terms' },
       ],
     },
   ]
